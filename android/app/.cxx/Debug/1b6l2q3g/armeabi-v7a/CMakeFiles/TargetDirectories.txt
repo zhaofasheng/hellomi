@@ -1,0 +1,2 @@
+/Users/parthsakariya/Downloads/Xitij_Project/tingle_app/android/app/.cxx/Debug/1b6l2q3g/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/parthsakariya/Downloads/Xitij_Project/tingle_app/android/app/.cxx/Debug/1b6l2q3g/armeabi-v7a/CMakeFiles/rebuild_cache.dir

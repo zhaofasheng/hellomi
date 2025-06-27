@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "339822122231",
+    "project_id": "halomi-5314a",
+    "storage_bucket": "halomi-5314a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339822122231:android:7bd0cce65b9ddecaf4aff2",
+        "android_client_info": {
+          "package_name": "com.halomi.video.chatlive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339822122231-oke40el0jk1h8qaksjspmb4bvmkfgf26.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.halomi.video.chatlive",
+            "certificate_hash": "fc8edcc0f175e476faf76aaf7c19313abce0de8b"
+          }
+        },
+        {
+          "client_id": "339822122231-7nns0nc40ektra492d585kg9vfi1h2a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFhmVqRRR-2kFlXpWnUxgPxH02notCCU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339822122231-7nns0nc40ektra492d585kg9vfi1h2a4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "339822122231-304jd6c2bk9cedpinn1r7sr0d5h0ib72.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.halomi.video.chat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

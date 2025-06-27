@@ -1,0 +1,73 @@
+class SocketEvents {
+  static const String messageSent = "messageSent";
+  static const String messageSeen = "messageSeen";
+
+  static const String callStarted = "callStarted";
+  static const String incomingCall = "incomingCall";
+  static const String initiateCall = "initiateCall";
+  static const String handleCallResponse = "handleCallResponse";
+  static const String callRejectedByReceiver = "callRejectedByReceiver";
+  static const String callAcceptedByReceiver = "callAcceptedByReceiver";
+  static const String callDisconnected = "callDisconnected";
+  static const String cancelOngoingCall = "cancelOngoingCall";
+  static const String callEnded = "callEnded";
+  static const String callCoinDeduction = "callCoinDeduction";
+  static const String insufficientCoins = "insufficientCoins";
+  static const String callTerminationFailed = "callTerminationFailed";
+  static const String callProcessFailed = "callProcessFailed";
+  static const String callCancelFailed = "callCancelFailed";
+
+  static const String joinLiveRoom = "joinLiveRoom";
+  static const String resumeLiveBroadcast = "resumeLiveBroadcast";
+  static const String countLiveJoin = "countLiveJoin";
+  static const String liveViewersList = "liveViewersList";
+  static const String reduceLiveJoiners = "reduceLiveJoiners";
+  static const String broadcastLiveComment = "broadcastLiveComment";
+  static const String giftToLiveStream = "giftToLiveStream";
+  static const String fetchLiveGifts = "fetchLiveGifts";
+  static const String endLiveStream = "endLiveStream";
+
+  static const String hostJoinAudioRoom = "hostJoinAudioRoom";
+  static const String hostLeaveAudioRoom = "hostLeaveAudioRoom";
+  static const String seatUpdate = "seatUpdate";
+  static const String requestToJoinAudioRoom = "requestToJoinAudioRoom";
+  static const String inviteToJoinRoom = "inviteToJoinRoom";
+  static const String audioRoomInviteRevoked = "audioRoomInviteRevoked";
+  static const String participantAdded = "participantAdded";
+  static const String participantRemoved = "participantRemoved";
+  static const String seatLocked = "seatLocked";
+  static const String seatMuted = "seatMuted";
+  static const String hostSeatMuted = "hostSeatMuted";
+  static const String participantSpeaking = "participantSpeaking";
+  static const String seatCountModified = "seatCountModified";
+  static const String addToBlockedList = "addToBlockedList";
+  static const String notifyBlockedUser = "notifyBlockedUser";
+  static const String removeFromBlockedList = "removeFromBlockedList";
+  static const String giftInAudioRoom = "giftInAudioRoom";
+  static const String broadcastReaction = "broadcastReaction";
+  static const String seatedUsersUpdate = "seatedUsersUpdate";
+  static const String pkRequest = "pkRequest";
+  static const String pkRequestReceived = "pkRequestReceived";
+  static const String pkAnswer = "pkAnswer";
+  static const String pkGift = "pkGift";
+  static const String topGiftersUpdate = "topGiftersUpdate";
+  static const String pkEnd = "pkEnd";
+  static const String pkRankUpdate = "pkRankUpdate";
+  static const String updateHostGifterStats = "updateHostGifterStats";
+  static const String fireEntryEffect = "fireEntryEffect";
+  static const String updateLiveTheme = "updateLiveTheme";
+  static const String themeUpdated = "themeUpdated";
+  static const String liveRoomCoinUpdate = "liveRoomCoinUpdate";
+  static const String topLiveStreamGifter = "topLiveStreamGifter";
+  static const String broadcastTopGifter = "broadcastTopGifter";
+  static const String luckyGiftWin = "luckyGiftWin";
+  static const String proHighValueGift = "proHighValueGift";
+  static const String highCoinWinBroadcast = "highCoinWinBroadcast";
+  static const String fetchSingleLiveUser = "fetchSingleLiveUser";
+  static const String singleLiveUserResponse = "singleLiveUserResponse";
+
+  static const String error = "error";
+  static const String connectTimeout = "connect_timeout";
+  static const String connectError = "connect_error";
+  static const String disconnect = "disconnect";
+}

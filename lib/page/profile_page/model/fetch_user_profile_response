@@ -1,0 +1,100 @@
+{
+  "status": true,
+  "message": "User profile retrieved successfully.",
+  "user": {
+    "_id": "68380ba05e75544d76b1f53b",
+    "name": "Liam Smith",
+    "userName": "@liamsmith_8502",
+    "gender": "male",
+    "bio": "",
+    "age": 18,
+    "image": "storage/defaultphoto/1747635280551.jpg",
+    "isProfilePicBanned": false,
+    "countryFlagImage": "🇮🇳",
+    "country": "india",
+    "uniqueId": "31415686",
+    "coin": 99971997,
+    "receivedGifts": 1,
+    "wealthLevel": {
+      "_id": "6808cf021c1a7826fc58f159",
+      "levelImage": "storage/1745407747014.png"
+    },
+    "activeAvtarFrame": {
+      "_id": "6808d08b1c1a7826fc58f2dc",
+      "type": 1,
+      "image": "storage/1745408139458.png"
+    },
+    "isVerified": false,
+    "role": [
+      1
+    ],
+    "agencyId": "",
+    "agencyOwnerId": "",
+    "totalFollowers": 0,
+
+    "totalFollowing": 0,
+    "totalFriends": 0,
+    "totalVisitors": 0
+  }
+}
+
+
+
+// New Model => wealthLevel
+
+
+{
+  "status": true,
+  "message": "User profile retrieved successfully.",
+  "user": {
+    "_id": "68380ba05e75544d76b1f53b",
+    "name": "Liam Smith",
+    "userName": "@liamsmith_8502",
+    "gender": "male",
+    "bio": "",
+    "age": 18,
+    "image": "storage/defaultphoto/1747635280551.jpg",
+    "isProfilePicBanned": false,
+    "countryFlagImage": "🇮🇳",
+    "country": "india",
+    "uniqueId": "31415686",
+    "coin": 99971997,
+    "receivedCoins":222,
+    "receivedGifts": 1,
+    "wealthLevel": {
+          "_id": "6808cdfe1c1a7826fc58eea5",
+          "level": 1,
+          "levelName": "Bronze",
+          "levelImage": "storage/1745407486527.png",
+          "coinThreshold": 2000,
+          "permissions": {
+            "liveStreaming": true,
+            "freeCall": false,
+            "redeemCashout": false,
+            "uploadSocialPost": false,
+            "uploadVideo": false
+          }
+        },
+    "activeAvtarFrame": {
+      "_id": "6808d08b1c1a7826fc58f2dc",
+      "type": 1,
+      "image": "storage/1745408139458.png"
+    },
+    "isVerified": false,
+    "role": [
+      1
+    ],
+    "agencyId": "",
+    "agencyOwnerId": "",
+    "totalFollowers": 0,
+
+    "totalFollowing": 0,
+    "totalFriends": 0,
+    "totalVisitors": 0
+  }
+}
+
+
+
+
+

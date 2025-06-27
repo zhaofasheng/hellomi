@@ -1,0 +1,139 @@
+// DOCUMENTATION
+
+// LOGIN TYPE => MOBILE_NO: 1,GOOGLE: 2,QUICK: 3, EMAIL: 4,
+
+// MESSAGE_TYPE => TEXT: 1, IMAGE: 2, VIDEO_CALL: 3,
+
+//  LIVE_TYPE => 1.NORMAL_LIVE 2.AUDIO_LIVE 3.PK_LIVE
+
+// HISTORY_TYPE =>  LOGIN_BONUS: 1, PURCHASE_THEME: 2, PURCHASE_AVTAR_FRAME: 3, PURCHASE_RIDE: 4, PRIVATE_CALL: 5, LIVE_GIFT_RECEIVED: 6, COIN_PLAN_PURCHASE: 7,
+
+// MUTE => 0.NONE 1.MUTE 2.UN_MUTE 3.MUTE_BY_HOST_TO_USER
+
+// AUDIO_LIVE_TYPE => 1. PRIVATE 2.PUBLIC
+
+// COMMENT TYPE => 1.COMMENT 2.ROOM_NAME 3.WELCOME 4. EMOJI
+
+// MESSAGE TYPE => ALL,ONLINE,UNREAD
+
+//
+// exports.LOGIN_TYPE = {
+// MOBILENO: 1,
+// GOOGLE: 2,
+// QUICK: 3,
+// EMAIL_PASSWORD: 4,
+// };
+//
+// exports.IMAGE_TYPE = {
+// IMAGE: 1,
+// GIF: 2,
+// SVGA: 3,
+// };
+//
+// exports.IMAGE_VIDEO_TYPE = {
+// LINK: 1,
+// FILE: 2,
+// };
+//
+// exports.GIFT_TYPE = {
+// IMAGE: 1,
+// GIF: 2,
+// SVGA: 3,
+// };
+//
+// exports.HISTORY_TYPE = {
+// LOGINBONUS: 1,
+// PURCHASE_THEME: 2,
+// PURCHASE_AVTARFRAME: 3,
+// PURCHASE_RIDE: 4,
+// PRIVATE_CALL: 5,
+// LIVE_GIFT: 6,
+// COIN_PLAN_PURCHASE: 7,
+// WITHDRAWAL: 8,
+// AGENCY_EARN_COMMISSION: 9,
+// REFERRAL_REWARD: 10,
+// COIN_PURCHASE_FROM_COINTRADER: 11,
+// TEENPATTI_GAME: 12,
+// FERRYWHEEL_GAME: 13,
+// CASINO_GAME: 14,
+// };
+//
+// exports.STATUS_OF_HELP = {
+// PENDING: 1,
+// SOLVED: 2,
+// };
+//
+// exports.MESSAGE_TYPE = {
+// TEXT: 1,
+// IMAGE: 2,
+// VIDEO_CALL: 3,
+// AUDIO: 4,
+// };
+//
+// exports.CALL_TYPE = {
+// DEFAULT: 0,
+// RECEIVED: 1,
+// DECLINED: 2,
+// MISCALLED: 3,
+// };
+//
+// exports.WITHDRAWAL_PERSON = {
+// AGENCY: 1,
+// HOST: 2,
+// USER: 3,
+// };
+//
+// exports.WITHDRAWAL_STATUS = {
+// DEFAULT: 0,
+// PENDING: 1,
+// ACCEPTED: 2,
+// DECLINED: 3,
+// };
+//
+// exports.TYPE_OF_REPORT = {
+// VIDEO: 1,
+// POST: 2,
+// USERTOUSER: 3,
+// };
+//
+// exports.STATUS_OF_REPORT = {
+// PENDING: 1,
+// SOLVED: 2,
+// };
+//
+// exports.VALIDITY_TYPE = {
+// DAY: 1,
+// MONTH: 2,
+// YEAR: 3,
+// };
+//
+// exports.ITEM_TYPE = {
+// THEME: 1,
+// AVTARFRAME: 2,
+// RIDE: 3,
+// };
+//
+// exports.RIDE_TYPE = {
+// IMAGE: 1,
+// GIF: 2,
+// SVGA: 3,
+// };
+//
+// exports.AVTAR_FRAME_TYPE = {
+// IMAGE: 1,
+// GIF: 2,
+// SVGA: 3,
+// };
+//
+// exports.ROLE_TYPE = {
+// USER: 1,
+// HOST: 2,
+// AGENCY: 3,
+// COINTRADER: 4,
+// };
+//
+// exports.HOST_APPLICATION_TYPE = {
+// PENDING: 1,
+// APPROVED: 2,
+// REJECTED: 3,
+// };
