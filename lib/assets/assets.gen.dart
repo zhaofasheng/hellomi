@@ -1677,6 +1677,10 @@ class $AssetsImagesGen {
   AssetGenImage get partyNomer =>
       const AssetGenImage('assets/images/party_nomer.png');
 
+  /// File path: assets/images/splash_screen.png
+  AssetGenImage get splashScreen =>
+      const AssetGenImage('assets/images/splash_screen.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     dongtaiChoice,
@@ -1767,6 +1771,7 @@ class $AssetsImagesGen {
     mineNomer,
     partyChoice,
     partyNomer,
+    splashScreen,
   ];
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:tingle/assets/assets.gen.dart';
 import 'package:tingle/custom/widget/custom_preload_images.dart';
 import 'package:tingle/page/splash_screen_page/controller/splash_screen_controller.dart';
 import 'package:tingle/utils/assets.dart';
@@ -18,12 +19,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
     controller.onPrecacheAllImage(context);
 
     return Scaffold(
-      body: Image.asset(
-        AppAssets.imgSplashScreen,
-        fit: BoxFit.cover,
-        height: Get.height,
-        width: Get.width,
-      ),
+      body: Assets.images.splashScreen.image(width: Get.width,height: Get.height,fit: BoxFit.cover),
     );
   }
 }
