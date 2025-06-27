@@ -15,7 +15,6 @@ import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/database.dart';
-import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/platform_device_id.dart';
 import 'package:tingle/utils/utils.dart';
 import 'branch_io/branch_io_services.dart';
