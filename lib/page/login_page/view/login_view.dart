@@ -15,10 +15,10 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.dark);
     return Scaffold(
-      body: Stack(
+      body: SafeArea(top: false,child: Stack(
         alignment: Alignment.center,
         children: [
-          const CustomLightBackgroundWidget(),
+          const CustomLightBackgroundWidget(isLogin: true,),
           GetBuilder<LoginController>(
             builder: (controller) => SizedBox(
               height: Get.height,
@@ -45,7 +45,7 @@ class LoginView extends GetView<LoginController> {
             ),
           ),
         ],
-      ),
+      ),),
     );
   }
 }

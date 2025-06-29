@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
-
 class TitleWidget extends StatelessWidget {
   const TitleWidget({
     super.key,
@@ -23,40 +23,42 @@ class TitleWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        (MediaQuery.of(context).viewPadding.top + 30).height,
+        SizedBox(height: MediaQuery.of(context).viewPadding.top + 40),
         Container(
           width: Get.width,
           alignment: Alignment.center,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // 头像
               Container(
-                height: 65,
-                width: 65,
+                height: iconSize,
+                width: iconSize,
                 alignment: Alignment.center,
                 decoration: const BoxDecoration(color: AppColor.transparent),
                 child: Image.asset(
                   image,
                   width: iconSize,
+                  height: iconSize,
                   cacheHeight: 120,
                   cacheWidth: 120,
                 ),
               ),
-              20.width,
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: AppFontStyle.styleW900(AppColor.black, 30),
-                    ),
-                    Text(
-                      subtitle,
-                      style: AppFontStyle.styleW500(AppColor.black, 14),
-                    ),
-                  ],
-                ),
+
+              SizedBox(height: 10), // 间距
+
+              // 标题
+              Text(
+                title,
+                style: AppFontStyle.styleW900(AppColor.black, 30),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 0), // 间距
+              // 副标题
+              Text(
+                subtitle,
+                style: AppFontStyle.styleW500(HexColor('#86868F'), 14),
+                textAlign: TextAlign.center,
               ),
             ],
           ),

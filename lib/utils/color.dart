@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 
 abstract class AppColor {
   static const white = Color(0xFFFFFFFF);
@@ -88,7 +89,7 @@ abstract class AppColor {
   static const color_11 = Color(0xFFECD7FF);
   static const color_12 = Color(0xFFFFD7FE);
 
-  static const primaryGradient = LinearGradient(colors: [Color(0xFF9E53FF), Color(0xFF6A3CCF)]);
+  static final primaryGradient = LinearGradient(colors: [HexColor('#49F2C4'), HexColor('#00E4A6')]);
 
   static const pinkPurpleGradient = LinearGradient(colors: [Color(0xFFF108F5), Color(0xFF9718FF)]);
   static const lightDarkPinkGradient = LinearGradient(colors: [Color(0xFFFF0073), Color(0xFFFF0A37)], begin: Alignment.centerLeft, end: Alignment.centerRight);

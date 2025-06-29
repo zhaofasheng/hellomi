@@ -30,6 +30,7 @@ class PartyController extends GetxController {
 
   bool isLoadingParty = false;
   bool isLoadingFollow = false;
+  bool hasInit = false;
 
   bool isLoadingPagination = false;
   FetchLiveUserModel? fetchLiveUserModel;
@@ -66,7 +67,11 @@ class PartyController extends GetxController {
   void onChangeTab(int value) {
     selectedTabIndex = value;
     update([AppConstant.onChangeTab]);
+    if(hasInit == true){
+      return;
+    }
     onRefresh(delay: 0);
+    hasInit = true;
   }
 
   void onChangeCountry({required String value}) {

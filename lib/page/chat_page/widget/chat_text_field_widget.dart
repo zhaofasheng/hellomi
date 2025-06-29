@@ -112,7 +112,7 @@ class ChatTextFieldWidget extends GetView<ChatController> {
                 height: 50,
                 width: 50,
                 padding: const EdgeInsets.only(bottom: 3),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   gradient: AppColor.primaryGradient,
                   shape: BoxShape.circle,
                 ),

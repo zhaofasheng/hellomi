@@ -34,7 +34,7 @@ class ContinueButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: callback,
       child: Container(
-        height: height ?? 60,
+        height: height ?? 50,
         width: Get.width,
         alignment: Alignment.center,
         padding: padding ?? const EdgeInsets.symmetric(horizontal: 8),

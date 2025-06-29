@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
@@ -11,6 +12,8 @@ import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
+
+import '../../../assets/assets.gen.dart';
 
 class StreamPkItemWidget extends StatelessWidget {
   const StreamPkItemWidget({super.key, required this.indexData, required this.callback});
@@ -46,17 +49,19 @@ class StreamPkItemWidget extends StatelessWidget {
                         Container(
                           height: 55,
                           width: 55,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: const BoxDecoration(
-                            color: AppColor.transparent,
+                          padding: const EdgeInsets.all(2), // 边框宽度
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
+                            color: HexColor('#00E4A6'), // 边框颜色
                           ),
-                          child: PreviewProfileImageWidget(
-                            image: (indexData.isFake ?? true)
-                                ? (indexData.pkThumbnails?.isEmpty ?? true)
-                                    ? ""
-                                    : indexData.pkThumbnails?.first
-                                : indexData.image ?? "",
+                          child: ClipOval(
+                            child: PreviewProfileImageWidget(
+                              image: (indexData.isFake ?? true)
+                                  ? (indexData.pkThumbnails?.isEmpty ?? true)
+                                  ? ""
+                                  : indexData.pkThumbnails?.first
+                                  : indexData.image ?? "",
+                            ),
                           ),
                         ),
                         5.height,
@@ -68,10 +73,10 @@ class StreamPkItemWidget extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(AppAssets.icYellowWin, width: 35),
+                            Assets.images.pkWinImg.image(width: 35),
                             Text(
                               "x${CustomFormatNumber.onConvert(indexData.localGiftCount ?? 0)}",
-                              style: AppFontStyle.styleW900(AppColor.pink, 14),
+                              style: AppFontStyle.styleW900(HexColor('#00E4A6'), 14),
                             ),
                           ],
                         ),
@@ -85,8 +90,8 @@ class StreamPkItemWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset(AppAssets.imgRandomPk, width: 100),
-                        Image.asset(AppAssets.icYellowVs, width: 100),
+                        Assets.images.pkTitleImg.image(width: 100),
+                        Assets.images.pkVsImg.image(width: 100),
                         const Offstage(),
                       ],
                     ),
@@ -99,18 +104,22 @@ class StreamPkItemWidget extends StatelessWidget {
                         Container(
                           height: 55,
                           width: 55,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: const BoxDecoration(
-                            color: AppColor.transparent,
+                          padding: const EdgeInsets.all(2), // 控制边框宽度
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
+                            color: HexColor('#FFD45B'), // 边框颜色
                           ),
-                          child: PreviewProfileImageWidget(
-                              image: indexData.isFake ?? true
+                          child: ClipOval(
+                            child: PreviewProfileImageWidget(
+                              image: (indexData.isFake ?? true)
                                   ? (indexData.pkThumbnails?.isEmpty ?? true)
-                                      ? ""
-                                      : indexData.pkThumbnails?.last
-                                  : indexData.host2Image),
+                                  ? ""
+                                  : indexData.pkThumbnails?.last
+                                  : indexData.host2Image,
+                            ),
+                          ),
                         ),
+
                         5.height,
                         Text(
                           // indexData.host2Name ?? "",
@@ -123,10 +132,10 @@ class StreamPkItemWidget extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(AppAssets.icYellowWin, width: 35),
+                            Assets.images.pkWinImg.image(width: 35),
                             Text(
                               "x${CustomFormatNumber.onConvert(indexData.remoteGiftCount ?? 0)}",
-                              style: AppFontStyle.styleW900(AppColor.pink, 14),
+                              style: AppFontStyle.styleW900(HexColor('#00E4A6'), 14),
                             ),
                           ],
                         ),

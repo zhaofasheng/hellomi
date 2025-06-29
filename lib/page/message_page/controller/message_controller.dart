@@ -20,7 +20,7 @@ class MessageController extends GetxController {
   FetchMessageUserModel? fetchMessageUserModel;
   bool isPagination = false;
   List<MessageData> messageUsers = [];
-
+  bool hasInit = false;
   bool isStartAnimation = false;
 
   @override
@@ -35,12 +35,18 @@ class MessageController extends GetxController {
       onChangeMessageType(0);
     }
   }
-
   void onChangeMessageType(int value) {
+    if (selectedMessageType == value && hasInit) {
+      return;
+    }
+
     selectedMessageType = value;
     update([AppConstant.onChangeMessageType]);
+
     onRefresh(millisecondsDelay: 0);
+    hasInit = true;
   }
+
 
   Future<void> onRefresh({required int millisecondsDelay}) async {
     isLoading = true;

@@ -14,7 +14,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.dark);
     return Scaffold(
-      body: Container(
+      body: SafeArea(top: false,child: Container(
         height: Get.height,
         width: Get.width,
         decoration: BoxDecoration(
@@ -68,7 +68,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
             ],
           ),
         ),
-      ),
+      ),),
     );
   }
 }

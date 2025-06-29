@@ -1049,6 +1049,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/laowo.png
   AssetGenImage get laowo => const AssetGenImage('assets/icons/laowo.png');
 
+  /// File path: assets/icons/pk_flash_img.png
+  AssetGenImage get pkFlashImg =>
+      const AssetGenImage('assets/icons/pk_flash_img.png');
+
   /// File path: assets/icons/rank_level_1.webp
   AssetGenImage get rankLevel1 =>
       const AssetGenImage('assets/icons/rank_level_1.webp');
@@ -1315,6 +1319,7 @@ class $AssetsIconsGen {
     icYellowVs,
     icYellowWin,
     laowo,
+    pkFlashImg,
     rankLevel1,
     rankLevel2,
     rankLevel3,
@@ -1328,6 +1333,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/background_img.png
+  AssetGenImage get backgroundImg =>
+      const AssetGenImage('assets/images/background_img.png');
+
   /// File path: assets/images/dongtai_choice.png
   AssetGenImage get dongtaiChoice =>
       const AssetGenImage('assets/images/dongtai_choice.png');
@@ -1339,6 +1348,22 @@ class $AssetsImagesGen {
   /// File path: assets/images/fans_ranking_bg.webp
   AssetGenImage get fansRankingBg =>
       const AssetGenImage('assets/images/fans_ranking_bg.webp');
+
+  /// File path: assets/images/google_login_img.png
+  AssetGenImage get googleLoginImg =>
+      const AssetGenImage('assets/images/google_login_img.png');
+
+  /// File path: assets/images/ground_com_img.png
+  AssetGenImage get groundComImg =>
+      const AssetGenImage('assets/images/ground_com_img.png');
+
+  /// File path: assets/images/ground_like_img.png
+  AssetGenImage get groundLikeImg =>
+      const AssetGenImage('assets/images/ground_like_img.png');
+
+  /// File path: assets/images/ground_share_img.png
+  AssetGenImage get groundShareImg =>
+      const AssetGenImage('assets/images/ground_share_img.png');
 
   /// File path: assets/images/ic_live_choice.png
   AssetGenImage get icLiveChoice =>
@@ -1653,6 +1678,34 @@ class $AssetsImagesGen {
   AssetGenImage get imgYouWin =>
       const AssetGenImage('assets/images/img_you_win.webp');
 
+  /// File path: assets/images/login_back_img.png
+  AssetGenImage get loginBackImg =>
+      const AssetGenImage('assets/images/login_back_img.png');
+
+  /// File path: assets/images/login_email_img.png
+  AssetGenImage get loginEmailImg =>
+      const AssetGenImage('assets/images/login_email_img.png');
+
+  /// File path: assets/images/login_passwd_img.png
+  AssetGenImage get loginPasswdImg =>
+      const AssetGenImage('assets/images/login_passwd_img.png');
+
+  /// File path: assets/images/main_choice_more_img.png
+  AssetGenImage get mainChoiceMoreImg =>
+      const AssetGenImage('assets/images/main_choice_more_img.png');
+
+  /// File path: assets/images/main_record_img.png
+  AssetGenImage get mainRecordImg =>
+      const AssetGenImage('assets/images/main_record_img.png');
+
+  /// File path: assets/images/main_search_img.png
+  AssetGenImage get mainSearchImg =>
+      const AssetGenImage('assets/images/main_search_img.png');
+
+  /// File path: assets/images/main_up_live_img.png
+  AssetGenImage get mainUpLiveImg =>
+      const AssetGenImage('assets/images/main_up_live_img.png');
+
   /// File path: assets/images/message_choice.png
   AssetGenImage get messageChoice =>
       const AssetGenImage('assets/images/message_choice.png');
@@ -1677,15 +1730,40 @@ class $AssetsImagesGen {
   AssetGenImage get partyNomer =>
       const AssetGenImage('assets/images/party_nomer.png');
 
+  /// File path: assets/images/pk_line_img.png
+  AssetGenImage get pkLineImg =>
+      const AssetGenImage('assets/images/pk_line_img.png');
+
+  /// File path: assets/images/pk_title_img.png
+  AssetGenImage get pkTitleImg =>
+      const AssetGenImage('assets/images/pk_title_img.png');
+
+  /// File path: assets/images/pk_vs_img.png
+  AssetGenImage get pkVsImg =>
+      const AssetGenImage('assets/images/pk_vs_img.png');
+
+  /// File path: assets/images/pk_win_img.png
+  AssetGenImage get pkWinImg =>
+      const AssetGenImage('assets/images/pk_win_img.png');
+
+  /// File path: assets/images/socket_login_img.png
+  AssetGenImage get socketLoginImg =>
+      const AssetGenImage('assets/images/socket_login_img.png');
+
   /// File path: assets/images/splash_screen.png
   AssetGenImage get splashScreen =>
       const AssetGenImage('assets/images/splash_screen.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
+    backgroundImg,
     dongtaiChoice,
     dongtaiNomer,
     fansRankingBg,
+    googleLoginImg,
+    groundComImg,
+    groundLikeImg,
+    groundShareImg,
     icLiveChoice,
     icLiveNomer,
     imgActivityBg,
@@ -1765,12 +1843,24 @@ class $AssetsImagesGen {
     imgYouAreBattleWinner,
     imgYouLose,
     imgYouWin,
+    loginBackImg,
+    loginEmailImg,
+    loginPasswdImg,
+    mainChoiceMoreImg,
+    mainRecordImg,
+    mainSearchImg,
+    mainUpLiveImg,
     messageChoice,
     messageNomer,
     mineChoice,
     mineNomer,
     partyChoice,
     partyNomer,
+    pkLineImg,
+    pkTitleImg,
+    pkVsImg,
+    pkWinImg,
+    socketLoginImg,
     splashScreen,
   ];
 }

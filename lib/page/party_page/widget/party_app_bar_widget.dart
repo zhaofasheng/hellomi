@@ -10,6 +10,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class PartyAppBarWidget extends StatelessWidget {
   const PartyAppBarWidget({super.key});
 
@@ -54,7 +56,7 @@ class PartyAppBarWidget extends StatelessWidget {
                                 child: Align(
                                   child: Text(
                                     tabTitles[index],
-                                    style: controller.selectedTabIndex == index ? AppFontStyle.styleW700(AppColor.white, 18) : AppFontStyle.styleW600(AppColor.white.withValues(alpha: 0.6), 15),
+                                    style: controller.selectedTabIndex == index ? AppFontStyle.styleW700(AppColor.black, 18) : AppFontStyle.styleW600(AppColor.black.withValues(alpha: 0.6), 15),
                                   ),
                                 ),
                               ),
@@ -65,7 +67,7 @@ class PartyAppBarWidget extends StatelessWidget {
                                   height: 3,
                                   width: 15,
                                   decoration: BoxDecoration(
-                                    color: AppColor.white,
+                                    color: AppColor.black,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
@@ -94,7 +96,7 @@ class PartyAppBarWidget extends StatelessWidget {
                 color: AppColor.transparent,
                 shape: BoxShape.circle,
               ),
-              child: Image.asset(AppAssets.icSearch, width: 30),
+              child: Assets.images.mainSearchImg.image(width: 30),
             ),
           ),
           5.width,
@@ -111,7 +113,7 @@ class PartyAppBarWidget extends StatelessWidget {
                 color: AppColor.transparent,
                 shape: BoxShape.circle,
               ),
-              child: Image.asset(AppAssets.icCup, width: 30),
+              child: Assets.images.mainRecordImg.image(width: 30),
             ),
           ),
         ],

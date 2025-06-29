@@ -68,7 +68,7 @@ class FeedController extends GetxController {
   PageController pageController = PageController();
 
   int currentIndex = 0;
-
+  bool hasInit = false;
   List<VideoData> videos = [];
   bool isLoading = false;
   FetchVideoModel? fetchVideoModel;
@@ -97,6 +97,10 @@ class FeedController extends GetxController {
     selectedTab = value;
     selectedTab == 1 ? Utils.onChangeExtendBody(true) : Utils.onChangeExtendBody(false);
     update([AppConstant.onChangeTab]);
+    if(hasInit == true){
+      return;
+    }
+    hasInit = true;
     onGetTabWiseData();
   }
 

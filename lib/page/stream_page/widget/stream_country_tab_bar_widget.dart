@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+import 'package:tingle/assets/assets.gen.dart';
 import 'package:tingle/common/function/country_services.dart';
 import 'package:tingle/common/widget/scroll_fade_effect_widget.dart';
 import 'package:tingle/page/stream_page/controller/stream_controller.dart';
@@ -66,7 +67,7 @@ class StreamCountryTabBarWidget extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: AppColor.transparent,
                     ),
-                    child: Image.asset(AppAssets.icMenu, width: 20),
+                    child: Assets.images.mainChoiceMoreImg.image(width: 30),
                   ),
                 ),
               ),
@@ -100,21 +101,21 @@ class CountyItemWidget extends StatelessWidget {
         margin: const EdgeInsets.only(right: 10),
         padding: const EdgeInsets.only(left: 15, right: 10),
         decoration: BoxDecoration(
-          color: isSelected ? AppColor.primary : AppColor.white.withValues(alpha: 0.15),
+          color: isSelected ? AppColor.white : AppColor.white.withValues(alpha: 0.6),
           borderRadius: BorderRadius.circular(100),
-          border: isSelected ? Border.all(color: AppColor.white) : Border.all(color: AppColor.transparent),
+          border: Border.all(color: AppColor.transparent),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               flag,
-              style: AppFontStyle.styleW500(AppColor.white, 14),
+              style: AppFontStyle.styleW500(AppColor.black, 14),
             ),
             8.width,
             Text(
               title,
-              style: isSelected ? AppFontStyle.styleW600(AppColor.white, 13) : AppFontStyle.styleW500(AppColor.white, 12),
+              style: isSelected ? AppFontStyle.styleW600(AppColor.black, 13) : AppFontStyle.styleW500(AppColor.black, 12),
             ),
             8.width,
           ],

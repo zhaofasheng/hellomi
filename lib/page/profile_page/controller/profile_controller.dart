@@ -19,11 +19,16 @@ class ProfileController extends GetxController with GetTickerProviderStateMixin 
 
   ReceivePort? _receivePort;
   Isolate? _isolate;
+  bool hasInit = false;
 
   @override
   void onInit() {
     Utils.showLog("Profile Controller Init Success");
-    onGetProfile();
+
+    if(hasInit == false){
+      onGetProfile();
+      hasInit = true;
+    }
     super.onInit();
   }
 

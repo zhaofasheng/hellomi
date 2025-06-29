@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/page/feed_page/controller/feed_controller.dart';
 import 'package:tingle/utils/color.dart';
@@ -33,21 +34,29 @@ class FeedSquareTabBarWidget extends StatelessWidget {
                   margin: const EdgeInsets.only(right: 15),
                   alignment: Alignment.center,
                   color: AppColor.transparent,
-                  child: SizedBox(
+                  child: Container(
                     height: 24,
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      color: controller.selectedSquareTab == index
+                          ? HexColor('#B300E4A6')
+                          : Colors.transparent, // ❌ 未选中透明
+                      borderRadius: BorderRadius.circular(12), // 圆角
+                    ),
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(
                         squareTabs[index],
                         style: controller.selectedSquareTab == index
-                            ? AppFontStyle.styleW700(AppColor.primary, 18)
-                            : AppFontStyle.styleW600(
-                                AppColor.white.withValues(alpha: 0.7),
-                                15,
-                              ),
+                            ? AppFontStyle.styleW400(AppColor.white, 14)
+                            : AppFontStyle.styleW400(
+                          AppColor.black, // 写法优化
+                          14,
+                        ),
                       ),
                     ),
-                  ),
+                  )
+
                 ),
               );
             },

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
+import 'package:tingle/assets/assets.gen.dart';
 import 'package:tingle/page/login_page/controller/login_controller.dart';
 import 'package:tingle/page/login_page/screen/phone_authentication_screen.dart';
 import 'package:tingle/page/login_page/widget/google_button_widget.dart';
@@ -20,38 +22,83 @@ class LoginOtherAuthWidget extends StatelessWidget {
       builder: (controller) => Column(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GoogleAndPhoneButtonWidget(
-                image: AppAssets.icMobile,
-                iconSize: 24,
-                title: EnumLocal.txtMobile.name.tr,
-                callback: () => Get.to(PhoneAuthenticationScreen()),
+              GestureDetector(
+                onTap: (){
+                  Get.to(PhoneAuthenticationScreen());
+                },
+                child: Container(
+                  width: 75,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20), // 圆角半径
+                    border: Border.all(
+                      color: HexColor('#EBEBEB'), // 边框颜色
+                      width: 1,           // 边框宽度
+                    ),
+                  ),
+                  child:Center(
+                    child: Assets.icons.icMobile.image(width: 24,height: 24),
+                  ),
+                ),
               ),
               10.width,
-              GoogleAndPhoneButtonWidget(
-                image: AppAssets.icGoogle,
-                iconSize: 24,
-                title: EnumLocal.txtGoogle.name.tr,
-                callback: () => controller.onGoogleLogin(),
+              GestureDetector(
+                onTap: (){
+                  controller.onGoogleLogin();
+                },
+                child: Container(
+                  width: 75,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20), // 圆角半径
+                    border: Border.all(
+                      color: HexColor('#EBEBEB'), // 边框颜色
+                      width: 1,           // 边框宽度
+                    ),
+                  ),
+                  child:Center(
+                    child: Assets.images.googleLoginImg.image(width: 24,height: 24),
+                  ),
+                ),
+              ),
+              10.width,
+              GestureDetector(
+                onTap: (){
+                  controller.onQuickLogin();
+                },
+                child: Container(
+                  width: 75,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20), // 圆角半径
+                    border: Border.all(
+                      color: HexColor('#EBEBEB'), // 边框颜色
+                      width: 1,           // 边框宽度
+                    ),
+                  ),
+                  child:Center(
+                    child: Assets.images.socketLoginImg.image(width: 24,height: 24),
+                  ),
+                ),
               ),
             ],
-          ),
-          15.height,
-          LoginButtonWidget(
-            image: AppAssets.icQuick,
-            title: EnumLocal.txtQuickLogIn.name.tr,
-            iconSize: 22,
-            callback: () => controller.onQuickLogin(),
           ),
           10.height,
           GetBuilder<LoginController>(
             id: ApiParams.onChangeIsCheckedConditions,
-            builder: (controller) => GestureDetector(
+            builder: (controller) => Center(child: GestureDetector(
               onTap: () => controller.onChangeIsCheckedConditions(),
               child: Container(
                 height: 40,
                 color: AppColor.transparent,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       height: 20,
@@ -63,22 +110,26 @@ class LoginOtherAuthWidget extends StatelessWidget {
                       ),
                       child: controller.isCheckedConditions
                           ? Container(
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColor.black,
-                              ),
-                            )
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColor.black,
+                        ),
+                      )
                           : Offstage(),
                     ),
                     10.width,
-                    Text(
-                      EnumLocal.txtIHaveAcceptAllTermsAndCondition.name.tr,
-                      style: AppFontStyle.styleW500(AppColor.black, 14),
+                    Flexible(
+                      child: Text(
+                        EnumLocal.txtIHaveAcceptAllTermsAndCondition.name.tr,
+                        style: AppFontStyle.styleW500(AppColor.black, 14),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ],
                 ),
               ),
-            ),
+            ),),
           ),
           15.height,
         ],
@@ -86,38 +137,3 @@ class LoginOtherAuthWidget extends StatelessWidget {
     );
   }
 }
-
-// TODO => Privacy Policy Text
-
-// RichText(
-//   text: TextSpan(
-//     text: EnumLocal.txtTermsAndCondition.name.tr,
-//     style: const TextStyle(
-//       color: AppColor.grayText,
-//       fontSize: 15,
-//       fontWeight: FontWeight.w600,
-//       decoration: TextDecoration.underline,
-//     ),
-//     children: [
-//       TextSpan(
-//         text: " ${EnumLocal.txtAnd.name.tr} ",
-//         style: const TextStyle(
-//           color: AppColor.black,
-//           fontSize: 14,
-//           fontWeight: FontWeight.w400,
-//           decoration: TextDecoration.none,
-//         ),
-//       ),
-//       TextSpan(
-//         text: EnumLocal.txtPrivacyPolicy.name.tr,
-//         style: const TextStyle(
-//           color: AppColor.secondary,
-//           fontSize: 15,
-//           fontWeight: FontWeight.w600,
-//           decoration: TextDecoration.underline,
-//         ),
-//       ),
-//     ],
-//   ),
-// ),
-// 30.height,

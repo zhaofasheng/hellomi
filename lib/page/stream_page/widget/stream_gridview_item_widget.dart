@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/common/function/country_flag_icon.dart';
@@ -65,10 +66,18 @@ class StreamGridviewItemWidget extends StatelessWidget {
                 left: 10,
                 top: 10,
                 child: Container(
+                  height: 20,
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                   decoration: BoxDecoration(
-                    color: AppColor.black.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: LinearGradient(
+                      colors: [
+                        HexColor('#00E4A6'), // 起始颜色
+                        HexColor('#00C2FF'), // 结束颜色，可替换为你想要的颜色
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
                   ),
                   child: Row(
                     children: [
@@ -87,16 +96,14 @@ class StreamGridviewItemWidget extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 0.5,
-                right: 0.5,
+                top: 10,
+                right: 10,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+                  height: 20,
+                  padding: EdgeInsets.symmetric(vertical: 0,horizontal: 4),
                   decoration: BoxDecoration(
-                    color: AppColor.black.withValues(alpha: 0.2),
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(15),
-                      topRight: Radius.circular(16),
-                    ),
+                    color: AppColor.white.withValues(alpha: 0.5),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Row(
                     children: [
@@ -104,11 +111,13 @@ class StreamGridviewItemWidget extends StatelessWidget {
                         liveType == 1
                             ? AppAssets.icLiveIcon
                             : liveType == 2
-                                ? AppAssets.icAudioRoomIcon
-                                : AppAssets.icPkIcon,
+                            ? AppAssets.icAudioRoomIcon
+                            : AppAssets.icPkIcon,
                         width: 15,
+                        color: liveType == 3 ? null : Colors.black,
                       ),
-                      5.width,
+
+                      3.width,
                       Text(
                         liveType == 1
                             ? EnumLocal.txtLive.name.tr
@@ -117,7 +126,7 @@ class StreamGridviewItemWidget extends StatelessWidget {
                                 : liveType == 3
                                     ? EnumLocal.txtPkBattle.name.tr
                                     : "",
-                        style: AppFontStyle.styleW500(AppColor.white, 10),
+                        style: AppFontStyle.styleW500(AppColor.black, 10),
                       ),
                     ],
                   ),
@@ -179,6 +188,8 @@ class StreamGridviewItemWidget extends StatelessWidget {
                                     style: AppFontStyle.styleW700(AppColor.white, 11),
                                   ),
                                 ),
+                                3.width,
+                                PreviewCountryFlagIcon(flag: countryFlag),
                                 Visibility(
                                   visible: isVerify,
                                   child: Padding(
@@ -201,13 +212,7 @@ class StreamGridviewItemWidget extends StatelessWidget {
                         ),
                       ),
                       10.width,
-                      PreviewCountryFlagIcon(flag: countryFlag),
-                      // Text(
-                      //   CountryFlagIcon.onShow(countryFlag),
-                      //   maxLines: 1,
-                      //   overflow: TextOverflow.ellipsis,
-                      //   style: AppFontStyle.styleW700(AppColor.black, 20),
-                      // ),
+
                     ],
                   ),
                 ),

@@ -57,7 +57,7 @@ android {
     }
     buildTypes {
         debug {
-            signingConfig = signingConfigs.release  // 使用 debug 签名配置
+              // 使用 debug 签名配置
         }
         release {
             signingConfig = signingConfigs.release

@@ -26,7 +26,7 @@ class FillProfileView extends GetView<FillProfileController> {
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.dark);
     return Scaffold(
-      body: Stack(
+      body: SafeArea(top: false,child: Stack(
         children: [
           const CustomLightBackgroundWidget(),
           SizedBox(
@@ -70,9 +70,9 @@ class FillProfileView extends GetView<FillProfileController> {
                                         child: controller.pickImage != null
                                             ? Image.file(File(controller.pickImage ?? ""), fit: BoxFit.cover)
                                             : PreviewProfileImageWidget(
-                                                image: FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.image ?? "",
-                                                isBanned: FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.isProfilePicBanned ?? false,
-                                              ),
+                                          image: FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.image ?? "",
+                                          isBanned: FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.isProfilePicBanned ?? false,
+                                        ),
                                       ),
                                     ),
                                     Align(
@@ -113,58 +113,58 @@ class FillProfileView extends GetView<FillProfileController> {
                               height: 20,
                               width: 20,
                               child: Obx(
-                                () => Center(
+                                    () => Center(
                                   child: controller.isCheckingUserName.value
                                       ? Padding(
-                                          padding: const EdgeInsets.all(15),
-                                          child: CircularProgressIndicator(color: AppColor.primary, strokeWidth: 3),
-                                        )
+                                    padding: const EdgeInsets.all(15),
+                                    child: CircularProgressIndicator(color: AppColor.primary, strokeWidth: 3),
+                                  )
                                       : controller.isValidUserName == null
-                                          ? Offstage()
-                                          : controller.isValidUserName == true
-                                              ? Icon(
-                                                  Icons.done_all,
-                                                  color: AppColor.green,
-                                                )
-                                              : Image.asset(AppAssets.icClose, color: Colors.red, height: 20, width: 20),
+                                      ? Offstage()
+                                      : controller.isValidUserName == true
+                                      ? Icon(
+                                    Icons.done_all,
+                                    color: AppColor.green,
+                                  )
+                                      : Image.asset(AppAssets.icClose, color: Colors.red, height: 20, width: 20),
                                 ),
                               ),
                             ),
                           ),
                           FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.loginType == 4 || FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.loginType == 2
                               ? Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    20.height,
-                                    CustomTextFieldWidget(
-                                      enabled: false,
-                                      textColor: AppColor.primary,
-                                      fillColor: AppColor.primary.withValues(alpha: 0.06),
-                                      title: EnumLocal.txtEmail.name.tr,
-                                      hintText: EnumLocal.txtEnterEmail.name.tr,
-                                      keyboardType: TextInputType.emailAddress,
-                                      controller: controller.emailController,
-                                    ),
-                                  ],
-                                )
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              20.height,
+                              CustomTextFieldWidget(
+                                enabled: false,
+                                textColor: AppColor.primary,
+                                fillColor: AppColor.primary.withValues(alpha: 0.06),
+                                title: EnumLocal.txtEmail.name.tr,
+                                hintText: EnumLocal.txtEnterEmail.name.tr,
+                                keyboardType: TextInputType.emailAddress,
+                                controller: controller.emailController,
+                              ),
+                            ],
+                          )
                               : Offstage(),
                           FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.loginType == 1
                               ? Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    20.height,
-                                    CustomTextFieldWidget(
-                                      enabled: false,
-                                      textColor: AppColor.primary,
-                                      fillColor: AppColor.primary.withValues(alpha: 0.06),
-                                      title: EnumLocal.txtPhoneNo.name.tr,
-                                      hintText: EnumLocal.txtEnterYourPhoneNumber.name.tr,
-                                      keyboardType: TextInputType.phone,
-                                      controller: controller.phoneController,
-                                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                    ),
-                                  ],
-                                )
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              20.height,
+                              CustomTextFieldWidget(
+                                enabled: false,
+                                textColor: AppColor.primary,
+                                fillColor: AppColor.primary.withValues(alpha: 0.06),
+                                title: EnumLocal.txtPhoneNo.name.tr,
+                                hintText: EnumLocal.txtEnterYourPhoneNumber.name.tr,
+                                keyboardType: TextInputType.phone,
+                                controller: controller.phoneController,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                              ),
+                            ],
+                          )
                               : Offstage(),
                           20.height,
                           CustomTextFieldWidget(
@@ -313,7 +313,7 @@ class FillProfileView extends GetView<FillProfileController> {
             ),
           ),
         ],
-      ),
+      )),
     );
   }
 }

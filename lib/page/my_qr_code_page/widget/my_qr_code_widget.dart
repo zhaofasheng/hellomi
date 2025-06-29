@@ -15,7 +15,7 @@ class QrCodeItemUi extends StatelessWidget {
       child: Container(
         height: 50,
         width: 52,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: AppColor.primaryGradient,
           shape: BoxShape.circle,
         ),

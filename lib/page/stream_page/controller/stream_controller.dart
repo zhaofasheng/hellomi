@@ -61,6 +61,12 @@ class StreamController extends GetxController {
   ReceivePort? _receivePort;
   Isolate? _isolate;
 
+  bool hasLoadedExplore = false;
+  bool hasLoadedNew = false;
+  bool hasLoadedPk = false;
+  bool hasLoadedFollow = false;
+
+
   @override
   void onInit() {
     exploreScrollController.addListener(onExplorePagination);
@@ -92,8 +98,35 @@ class StreamController extends GetxController {
   void onChangeTab(int value) {
     selectedTabIndex = value;
     update([AppConstant.onChangeTab]);
-    onRefresh();
+
+    switch (value) {
+      case 0:
+        if (!hasLoadedExplore) {
+          onRefresh();
+          hasLoadedExplore = true;
+        }
+        break;
+      case 1:
+        if (!hasLoadedNew) {
+          onRefresh();
+          hasLoadedNew = true;
+        }
+        break;
+      case 2:
+        if (!hasLoadedPk) {
+          onRefresh();
+          hasLoadedPk = true;
+        }
+        break;
+      case 3:
+        if (!hasLoadedFollow) {
+          onRefresh();
+          hasLoadedFollow = true;
+        }
+        break;
+    }
   }
+
 
   void onChangeCountry(String value) {
     selectedCountry = selectedCountry == value ? null : value;
@@ -220,24 +253,6 @@ class StreamController extends GetxController {
     }
   }
 
-  // Future<List<LiveUserList>> onGetLiveUser({required int startPagination, required String liveType}) async {
-  //   final uid = FirebaseUid.onGet() ?? "";
-  //   final token = await FirebaseAccessToken.onGet() ?? "";
-  //
-  //   fetchLiveUserModel = await FetchLiveUserApi.callApi(
-  //     token: token,
-  //     uid: uid,
-  //     liveType: liveType,
-  //     country: selectedCountry,
-  //     startPage: startPagination,
-  //   );
-  //
-  //   List<LiveUserList> data = fetchLiveUserModel?.liveUserList ?? [];
-  //
-  //   Utils.showLog("Live User Pagination Data Length Type => $liveType => ${data.length}");
-  //
-  //   return fetchLiveUserModel?.liveUserList ?? [];
-  // }
 
   Future<List<LiveUserList>> onGetLiveUser({required int startPagination, required String liveType}) async {
     try {

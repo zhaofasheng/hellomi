@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
 import 'package:tingle/common/widget/rendom_name_setter_widget.dart';
@@ -26,7 +27,7 @@ class FakePartyItemWidget extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         border: Border.all(color: AppColor.white),
-        color: CustomRandomLightColor.onGet(),
+        color: AppColor.white,
         borderRadius: BorderRadius.circular(23),
       ),
       child: Row(
@@ -71,12 +72,12 @@ class FakePartyItemWidget extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                   decoration: BoxDecoration(
-                    color: AppColor.primary.withValues(alpha: 0.15),
+                    color: HexColor('#F5F5F5'),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Text(
                     liveUser.roomName ?? "",
-                    style: AppFontStyle.styleW600(AppColor.primary, 10),
+                    style: AppFontStyle.styleW600(Colors.black, 10),
                   ),
                 ),
                 8.height,
@@ -128,21 +129,17 @@ class FakePartyItemWidget extends StatelessWidget {
                     5.width,
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-                      decoration: BoxDecoration(
-                        color: AppColor.black.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
                       child: Row(
                         children: [
                           Image.asset(
                             AppAssets.icLiveWave,
                             width: 12,
-                            color: AppColor.white,
+                            color: AppColor.black,
                           ),
                           5.width,
                           Text(
                             CustomFormatNumber.onConvert(liveUser.view ?? 0),
-                            style: AppFontStyle.styleW600(AppColor.white, 10),
+                            style: AppFontStyle.styleW600(AppColor.black, 10),
                           ),
                         ],
                       ),

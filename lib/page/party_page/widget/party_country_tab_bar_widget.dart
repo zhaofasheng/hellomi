@@ -13,6 +13,8 @@ import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class PartyCountryTabBarWidget extends StatelessWidget {
   const PartyCountryTabBarWidget({super.key});
 
@@ -67,7 +69,7 @@ class PartyCountryTabBarWidget extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: AppColor.transparent,
                     ),
-                    child: Image.asset(AppAssets.icMenu, width: 20),
+                    child: Assets.images.mainChoiceMoreImg.image(width: 25),
                   ),
                 ),
               ),

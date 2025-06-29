@@ -11,6 +11,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class StreamAppBarWidget extends StatelessWidget {
   const StreamAppBarWidget({super.key});
 
@@ -92,7 +94,7 @@ class StreamAppBarWidget extends StatelessWidget {
                 color: AppColor.transparent,
                 shape: BoxShape.circle,
               ),
-              child: Image.asset(AppAssets.icSearch, width: 30),
+              child: Assets.images.mainSearchImg.image(width: 30,height: 30),
             ),
           ),
           5.width,
@@ -109,7 +111,7 @@ class StreamAppBarWidget extends StatelessWidget {
                 color: AppColor.transparent,
                 shape: BoxShape.circle,
               ),
-              child: Image.asset(AppAssets.icCup, width: 30),
+              child: Assets.images.mainRecordImg.image(width: 30),
             ),
           ),
         ],

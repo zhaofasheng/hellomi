@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/widget/no_data_found_widget.dart';
 import 'package:tingle/page/feed_page/controller/feed_controller.dart';
@@ -41,8 +42,7 @@ class FeedSquareTopicsTabWidget extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         margin: const EdgeInsets.only(right: 10),
                         decoration: BoxDecoration(
-                          color: controller.selectedHashtagIndex == index ? AppColor.primary : AppColor.white.withValues(alpha: 0.2),
-                          border: Border.all(color: AppColor.white.withValues(alpha: controller.selectedHashtagIndex == index ? 1 : 0.7)),
+                          border: Border.all(color: controller.selectedHashtagIndex == index ? HexColor('#B300E4A6'):HexColor('#B3A8A8AC')),
                           borderRadius: BorderRadius.circular(100),
                         ),
                         child: Row(
@@ -51,7 +51,7 @@ class FeedSquareTopicsTabWidget extends StatelessWidget {
                             5.width,
                             Text(
                               indexData.hashTag ?? "",
-                              style: AppFontStyle.styleW600(controller.selectedHashtagIndex == index ? AppColor.white : AppColor.lightGreyPurple, 12),
+                              style: AppFontStyle.styleW600(AppColor.black, 12),
                             ),
                           ],
                         ),

@@ -1,36 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tingle/assets/assets.gen.dart';
 
 class CustomLightBackgroundWidget extends StatelessWidget {
-  const CustomLightBackgroundWidget({super.key});
+  const CustomLightBackgroundWidget({super.key, this.isLogin = false});
 
+  final bool isLogin;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
-        height: Get.height,
-        width: Get.width,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF787DFF).withValues(alpha: 0.5),
-              Color(0xFFA2AAFF).withValues(alpha: 0.5),
-              Color(0xFFF0EFFF).withValues(alpha: 0.5),
-              Color(0xFFF0EFFF),
-              Color(0xFFFFFFFF),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-      ),
-    );
+      child: Stack(
+        children: [
+          Assets.images.backgroundImg.image(width: Get.width,height: Get.height,fit: BoxFit.cover),
+          if(isLogin) Assets.images.loginBackImg.image(width: Get.width,fit: BoxFit.cover),
 
-    //   Image.asset(
-    //   AppAssets.imgLightBg,
-    //   fit: BoxFit.cover,
-    //   height: Get.height,
-    //   width: Get.width,
-    // );
+        ],
+      )
+    );
   }
 }

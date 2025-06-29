@@ -26,6 +26,8 @@ class BottomBarController extends GetxController {
 
   int selectedTabIndex = 0;
 
+
+
   List bottomBarPages = [
     const StreamView(),
     const PartyView(),

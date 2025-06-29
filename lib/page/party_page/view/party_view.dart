@@ -13,6 +13,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class PartyView extends GetView<PartyController> {
   const PartyView({super.key});
 
@@ -34,30 +36,10 @@ class PartyView extends GetView<PartyController> {
                 Utils.showToast(text: EnumLocal.txtTopUpYourBalanceToReachTheNext.name.tr);
               }
             },
-            child: Container(
+            child: SizedBox(
               height: 45,
-              width: 115,
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              decoration: BoxDecoration(
-                gradient: AppColor.coinPinkGradient,
-                border: Border.all(color: AppColor.white),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(AppAssets.icGoLive, width: 25),
-                  8.width,
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2),
-                    child: Text(
-                      EnumLocal.txtParty.name.tr,
-                      style: AppFontStyle.styleW700(AppColor.white, 14),
-                    ),
-                  ),
-                ],
-              ),
+              width: 45,
+              child: Assets.images.mainUpLiveImg.image(width: 45,height: 45),
             ),
           ),
         ),

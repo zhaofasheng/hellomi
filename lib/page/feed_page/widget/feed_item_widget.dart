@@ -1,5 +1,6 @@
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:readmore/readmore.dart';
@@ -30,6 +31,8 @@ import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
+
+import '../../../assets/assets.gen.dart';
 
 class FeedItemWidget extends StatefulWidget {
   const FeedItemWidget({super.key, this.post});
@@ -167,7 +170,6 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
               width: Get.width,
               padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
               decoration: BoxDecoration(
-                color: AppColor.colorBorder.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
               ),
               child: Row(
@@ -178,7 +180,7 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
                     padding: (widget.post?.avtarFrame?.trim().isEmpty ?? true) ? const EdgeInsets.all(2) : EdgeInsets.zero,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: (widget.post?.avtarFrame?.trim().isEmpty ?? true) ? Border.all(color: AppColor.secondary) : null,
+                      border: (widget.post?.avtarFrame?.trim().isEmpty ?? true) ? Border.all(color: HexColor('#00E4A6')) : null,
                     ),
                     child: Container(
                       clipBehavior: Clip.antiAlias,
@@ -207,7 +209,7 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
                                 widget.post?.name ?? "",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: AppFontStyle.styleW700(AppColor.black, 15),
+                                style: AppFontStyle.styleW500(HexColor('#242630'), 14),
                               ),
                             ),
                             Visibility(
@@ -230,7 +232,7 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
                                 height: 18,
                                 padding: const EdgeInsets.symmetric(horizontal: 8),
                                 decoration: BoxDecoration(
-                                  color: AppColor.purple,
+                                  color: HexColor('#FF6792'),
                                   borderRadius: BorderRadius.circular(100),
                                 ),
                                 child: Row(
@@ -299,7 +301,7 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
               ),
             ),
           ),
-          15.height,
+          5.height,
           SizedBox(
             height: Get.width / 2,
             child: ListView.builder(
@@ -329,7 +331,7 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
               ),
             ),
           ),
-          15.height,
+          5.height,
           Visibility(
             visible: widget.post?.caption?.trim().isNotEmpty ?? false,
             child: Padding(
@@ -349,13 +351,6 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
                       moreStyle: AppFontStyle.styleW500(AppColor.primary, 15),
                     ),
                   ),
-                  // 10.width,
-                  // Image.asset(AppAssets.icTranslation, width: 15),
-                  // 5.width,
-                  // Text(
-                  //   EnumLocal.txtTranslation.name.tr,
-                  //   style: AppFontStyle.styleW500(AppColor.secondary, 12),
-                  // ),
                 ],
               ),
             ),
@@ -377,14 +372,14 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
                           margin: EdgeInsets.only(bottom: 3),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: AppColor.secondary.withValues(alpha: 0.5), width: 1),
+                            color: HexColor('#F5F5F5'),
                           ),
                           child: Text.rich(
                             TextSpan(
                               children: [
                                 TextSpan(
                                   text: widget.post?.hashTag?[index] ?? "",
-                                  style: AppFontStyle.styleW500(AppColor.secondary, 12),
+                                  style: AppFontStyle.styleW500(HexColor('#86868F'), 12),
                                 ),
                               ],
                             ),
@@ -396,10 +391,9 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
               ),
             ),
           ),
-          10.height,
-          Container(
+          0.height,
+          SizedBox(
             height: 60,
-            color: AppColor.colorBorder.withValues(alpha: 0.3),
             width: Get.width,
             child: Row(
               children: [
@@ -407,6 +401,7 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
                 Obx(
                   () => IconButtonWidget(
                     icon: isLike.value ? AppAssets.icLikeFill : AppAssets.icLikeBorder,
+                    customIcon:isLike.value?null: Assets.images.groundLikeImg.image(width: 24),
                     count: likeCount.value,
                     iconSize: 25,
                     callback: onToggleLike,
@@ -415,6 +410,7 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
                 Obx(
                   () => IconButtonWidget(
                     icon: AppAssets.icCommentBorder,
+                    customIcon: Assets.images.groundComImg.image(width: 24),
                     count: commentCount.value,
                     iconSize: 24,
                     callback: onClickComment,
@@ -423,6 +419,7 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
                 Obx(
                   () => IconButtonWidget(
                     icon: AppAssets.icShareBorder,
+                    customIcon: Assets.images.groundShareImg.image(width: 24),
                     count: shareCount.value,
                     iconSize: 22,
                     callback: onClickShare,
@@ -432,7 +429,7 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
                 10.width,
                 Text(
                   widget.post?.time ?? "",
-                  style: AppFontStyle.styleW500(AppColor.secondary, 13),
+                  style: AppFontStyle.styleW400(HexColor('86868F'), 12),
                 ),
                 15.width,
               ],
@@ -443,7 +440,6 @@ class _FeedItemWidgetState extends State<FeedItemWidget> {
     );
   }
 }
-
 class IconButtonWidget extends StatelessWidget {
   const IconButtonWidget({
     super.key,
@@ -451,9 +447,11 @@ class IconButtonWidget extends StatelessWidget {
     required this.count,
     required this.iconSize,
     required this.callback,
+    this.customIcon,
   });
 
-  final String icon;
+  final String icon; // ✅ 保持必传
+  final Widget? customIcon;
   final int count;
   final double iconSize;
   final Callback callback;
@@ -470,18 +468,20 @@ class IconButtonWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(icon, width: iconSize),
+            customIcon ?? Image.asset(icon, width: iconSize), // ✅ 优先展示 customIcon
+
             8.width,
+
             (count < 1000)
                 ? AnimatedFlipCounter(
-                    duration: Duration(milliseconds: 500),
-                    value: count, // pass in a value like 2014
-                    textStyle: AppFontStyle.styleW600(AppColor.secondary, 15),
-                  )
+              duration: const Duration(milliseconds: 500),
+              value: count,
+              textStyle: AppFontStyle.styleW600(AppColor.secondary, 15),
+            )
                 : Text(
-                    CustomFormatNumber.onConvert(count),
-                    style: AppFontStyle.styleW600(AppColor.secondary, 15),
-                  ),
+              CustomFormatNumber.onConvert(count),
+              style: AppFontStyle.styleW600(AppColor.secondary, 15),
+            ),
           ],
         ),
       ),
@@ -489,70 +489,4 @@ class IconButtonWidget extends StatelessWidget {
   }
 }
 
-// void onToggleLike() async {
-//   // UI को तुरंत अपडेट करें
-//   isLike.value ? likeCount-- : likeCount++;
-//   isLike.value = !isLike.value;
-//
-//   final uid = FirebaseUid.onGet() ?? "";
-//   final token = await FirebaseAccessToken.onGet() ?? "";
-//   final postId = widget.post?.id ?? "";
-//
-//   // ऑफ़लाइन केस के लिए Workmanager का उपयोग करें
-//   await Workmanager().registerOneOffTask(
-//     "like_${DateTime.now().microsecondsSinceEpoch}", // यूनिक टास्क आईडी
-//     "likePostTask", // टास्क नाम (नीचे डिफाइन किया गया)
-//     inputData: {
-//       'token': token,
-//       'uid': uid,
-//       'postId': postId,
-//     },
-//     constraints: Constraints(
-//       networkType: NetworkType.connected, // केवल इंटरनेट कनेक्ट होने पर चले
-//     ),
-//   );
-//
-//   // अगर इंटरनेट कनेक्टेड है तो तुरंत API कॉल करें
-//   if (InternetConnection.isConnect.value) {
-//     await LikePostApi.callApi(token: token, uid: uid, postId: postId);
-//   }
-// }
 
-// void onToggleLike() async {
-//   try {
-//     // UI को तुरंत अपडेट करें
-//     isLike.value ? likeCount-- : likeCount++;
-//     isLike.value = !isLike.value;
-//
-//     final uid = FirebaseUid.onGet() ?? "";
-//     final token = await FirebaseAccessToken.onGet() ?? "";
-//     final postId = widget.post?.id ?? "";
-//
-//     // सीधे API कॉल करें (इंटरनेट कनेक्शन होने पर)
-//     if (InternetConnection.isConnect.value) {
-//       await LikePostApi.callApi(token: token, uid: uid, postId: postId);
-//     } else {
-//       // ऑफलाइन केस के लिए Workmanager का उपयोग करें
-//       await Workmanager().registerOneOffTask(
-//         "like_${DateTime.now().millisecondsSinceEpoch}", // यूनिक ID
-//         "likePostTask",
-//         inputData: {
-//           'token': token,
-//           'uid': uid,
-//           'postId': postId,
-//         },
-//         constraints: Constraints(
-//           networkType: NetworkType.connected,
-//         ),
-//         backoffPolicy: BackoffPolicy.linear,
-//         backoffPolicyDelay: Duration(seconds: 10),
-//       );
-//     }
-//   } catch (e) {
-//     // एरर हैंडलिंग
-//     print('Like Error: $e');
-//     // UI को रोलबैक करें
-//     isLike.value = !isLike.value;
-//     isLike.value ? likeCount++ : likeCount--;
-//   }
-// }

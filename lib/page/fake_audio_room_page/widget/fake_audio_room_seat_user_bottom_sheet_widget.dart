@@ -113,7 +113,7 @@ class FakeAudioRoomSeatUserBottomSheetWidget {
                           child: Column(
                             children: [
                               Container(
-                                decoration: const BoxDecoration(
+                                decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   gradient: AppColor.primaryGradient,
                                 ),
