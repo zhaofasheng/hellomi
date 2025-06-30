@@ -10,6 +10,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class CoinAndPointDetailsWidget extends GetView<ProfileController> {
   const CoinAndPointDetailsWidget({super.key});
 
@@ -32,14 +34,6 @@ class CoinAndPointDetailsWidget extends GetView<ProfileController> {
                 controller.scrollController.jumpTo(0.0);
               }),
             ),
-            // 12.width,
-            // ItemWidget(
-            //   title: EnumLocal.txtMyPoints.name.tr,
-            //   count: 186940,
-            //   image: AppAssets.icMyPoint,
-            //   gradient: AppColor.pinkPurpleGradient,
-            //   callback: () {},
-            // ),
           ],
         ),
       ),
@@ -68,51 +62,39 @@ class ItemWidget extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: callback,
-        child: Container(
+        child: SizedBox(
           height: 72,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          decoration: BoxDecoration(
-            gradient: gradient,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: AppColor.white,
-              width: 1.5,
-            ),
-          ),
-          child: Row(
+          child: Stack(
             children: [
-              Image.asset(image, width: 48),
-              15.width,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Stack(
-                    children: [
-                      Text(
-                        EnumLocal.txtAvailableMyCoins.name.tr,
-                        style: AppFontStyle.styleW600(AppColor.white.withValues(alpha: 0.8), 10),
-                      ),
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        child: Container(
-                          height: 1,
-                          color: AppColor.white.withValues(alpha: 0.8),
+              Assets.images.mineYbBack.image(height: 72),
+              Container(
+                padding: EdgeInsets.all(12),
+                child: Row(
+                  children: [
+                    Assets.images.mineYb.image(width: 56),
+                    15.width,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          (count).toStringAsFixed(2),
+                          style: AppFontStyle.styleW900(AppColor.white, 22),
                         ),
-                      ),
-                    ],
-                  ),
-                  8.height,
-                  Text(
-                    (count).toStringAsFixed(2),
-                    style: AppFontStyle.styleW900(AppColor.white, 18),
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Image.asset(AppAssets.icDoubleArrowRight, width: 20),
+
+                        0.height,
+                        Text(
+                          EnumLocal.txtAvailableMyCoins.name.tr,
+                          style: AppFontStyle.styleW600(AppColor.white.withValues(alpha: 0.8), 12),
+                        ),
+
+                      ],
+                    ),
+                    const Spacer(),
+                    Assets.images.mineWhiteRight.image(width: 20),
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -120,62 +102,3 @@ class ItemWidget extends StatelessWidget {
     );
   }
 }
-
-// class ItemWidget extends StatelessWidget {
-//   const ItemWidget({
-//     super.key,
-//     required this.title,
-//     required this.count,
-//     required this.image,
-//     required this.gradient,
-//     required this.callback,
-//   });
-//
-//   final String title;
-//   final int count;
-//   final String image;
-//   final Gradient gradient;
-//   final Callback callback;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Expanded(
-//       child: GestureDetector(
-//         onTap: callback,
-//         child: Container(
-//           height: 72,
-//           padding: const EdgeInsets.symmetric(horizontal: 12),
-//           decoration: BoxDecoration(
-//             gradient: gradient,
-//             borderRadius: BorderRadius.circular(16),
-//             border: Border.all(
-//               color: AppColor.white,
-//               width: 1.5,
-//             ),
-//           ),
-//           child: Row(
-//             children: [
-//               Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   Text(
-//                     "$title >>",
-//                     style: AppFontStyle.styleW600(AppColor.white, 10),
-//                   ),
-//                   11.height,
-//                   Text(
-//                     CustomFormatNumber.onConvert(count),
-//                     style: AppFontStyle.styleW900(AppColor.white, 18),
-//                   ),
-//                 ],
-//               ),
-//               const Spacer(),
-//               Image.asset(image, width: 52),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

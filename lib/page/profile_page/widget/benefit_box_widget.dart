@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+import 'package:tingle/assets/assets.gen.dart';
 import 'package:tingle/page/profile_page/controller/profile_controller.dart';
 import 'package:tingle/routes/app_routes.dart';
 import 'package:tingle/utils/assets.dart';
@@ -21,13 +23,6 @@ class BenefitBoxWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppColor.secondary.withValues(alpha: 0.08),
-            blurRadius: 2,
-            spreadRadius: 3,
-          ),
-        ],
       ),
       child: GetBuilder<ProfileController>(builder: (logic) {
         return Column(
@@ -37,8 +32,9 @@ class BenefitBoxWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ItemWidget(
+                  imageWidget: Assets.images.minePh.image(width: 29),
                   title: EnumLocal.txtRanking.name.tr,
-                  gradient: AppColor.rankingGradient,
+                  color: HexColor('#FFEDD4'),
                   image: AppAssets.icRankingIcon,
                   callback: () => Get.toNamed(AppRoutes.rankingPage)?.then((value) {
                     Utils.onChangeStatusBar(brightness: Brightness.dark);
@@ -46,8 +42,9 @@ class BenefitBoxWidget extends StatelessWidget {
                   }),
                 ),
                 ItemWidget(
+                  imageWidget: Assets.images.mineShop.image(width: 29),
                   title: EnumLocal.txtMyStore.name.tr,
-                  gradient: AppColor.storeGradient,
+                  color: HexColor('#FFDAD2'),
                   image: AppAssets.icMyStoreIcon,
                   callback: () => Get.toNamed(AppRoutes.storePage)?.then((value) {
                     logic.scrollController.jumpTo(0.0);
@@ -55,14 +52,16 @@ class BenefitBoxWidget extends StatelessWidget {
                   }),
                 ),
                 ItemWidget(
+                  imageWidget: Assets.images.minePackage.image(width: 29),
                   title: EnumLocal.txtBackpack.name.tr,
-                  gradient: AppColor.fansClubGradient,
+                  color: HexColor('#71ACFF'),
                   image: AppAssets.icBackpackColor,
                   callback: () => Get.toNamed(AppRoutes.backpackPage),
                 ),
                 ItemWidget(
+                  imageWidget: Assets.images.mineTuijian.image(width: 29),
                   title: EnumLocal.txtReferral.name.tr,
-                  gradient: AppColor.rewardGradient,
+                  color: HexColor('#93FADC'),
                   image: AppAssets.icReferralIcon,
                   iconSize: 29,
                   callback: () => Get.toNamed(AppRoutes.referralPage),
@@ -101,17 +100,17 @@ class ItemWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.image,
-    required this.gradient,
     required this.callback,
-    this.iconSize,
+    this.iconSize, this.imageWidget, required this.color,
   });
 
   final String title;
 
   final String image;
-  final Gradient gradient;
   final Callback callback;
   final double? iconSize;
+  final Widget? imageWidget;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -125,18 +124,11 @@ class ItemWidget extends StatelessWidget {
               width: 54,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                gradient: gradient,
+                color: color,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(width: 1, color: AppColor.white),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColor.secondary.withValues(alpha: 0.05),
-                    spreadRadius: 2,
-                    blurRadius: 2,
-                  ),
-                ],
               ),
-              child: Image.asset(
+              child:imageWidget ?? Image.asset(
                 image,
                 width: iconSize ?? 26,
               ),
@@ -144,7 +136,7 @@ class ItemWidget extends StatelessWidget {
             5.height,
             Text(
               title,
-              style: AppFontStyle.styleW600(AppColor.lightGreyPurple, 11),
+              style: AppFontStyle.styleW600(AppColor.black, 11),
             )
           ],
         ),

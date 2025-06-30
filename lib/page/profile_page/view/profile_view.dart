@@ -13,6 +13,8 @@ import 'package:tingle/routes/app_routes.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
 
@@ -25,7 +27,7 @@ class ProfileView extends GetView<ProfileController> {
     return Scaffold(
       body: Stack(
         children: [
-          const CustomLightBackgroundWidget(),
+          const CustomLightBackgroundWidget(isMine: true,),
           SizedBox(
             height: Get.height,
             width: Get.width,
@@ -43,11 +45,18 @@ class ProfileView extends GetView<ProfileController> {
                               controller: controller.scrollController,
                               child: Column(
                                 children: [
-                                  12.height,
-                                  const ProfileDetailsWidget(),
-                                  15.height,
-                                  const ConnectionDetailsWidget(),
-                                  15.height,
+                                  SizedBox(
+                                    height: Get.width / 375 * 350 - MediaQuery.of(context).padding.top - kToolbarHeight,
+                                    child: Column(
+                                      children: [
+                                        12.height,
+                                        const ProfileDetailsWidget(),
+                                        10.height,
+                                        const ConnectionDetailsWidget(),
+                                      ],
+                                    ),
+                                  ),
+                                  20.height,
                                   const CoinAndPointDetailsWidget(),
                                   15.height,
                                   const BenefitBoxWidget(),

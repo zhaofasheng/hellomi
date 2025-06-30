@@ -1743,13 +1743,71 @@ class $AssetsImagesGen {
   AssetGenImage get messageNomer =>
       const AssetGenImage('assets/images/message_nomer.png');
 
+  /// File path: assets/images/mine_about.png
+  AssetGenImage get mineAbout =>
+      const AssetGenImage('assets/images/mine_about.png');
+
+  /// File path: assets/images/mine_back_img.png
+  AssetGenImage get mineBackImg =>
+      const AssetGenImage('assets/images/mine_back_img.png');
+
   /// File path: assets/images/mine_choice.png
   AssetGenImage get mineChoice =>
       const AssetGenImage('assets/images/mine_choice.png');
 
+  /// File path: assets/images/mine_edit.png
+  AssetGenImage get mineEdit =>
+      const AssetGenImage('assets/images/mine_edit.png');
+
+  /// File path: assets/images/mine_help.png
+  AssetGenImage get mineHelp =>
+      const AssetGenImage('assets/images/mine_help.png');
+
+  /// File path: assets/images/mine_levle.png
+  AssetGenImage get mineLevle =>
+      const AssetGenImage('assets/images/mine_levle.png');
+
+  /// File path: assets/images/mine_main_request.png
+  AssetGenImage get mineMainRequest =>
+      const AssetGenImage('assets/images/mine_main_request.png');
+
   /// File path: assets/images/mine_nomer.png
   AssetGenImage get mineNomer =>
       const AssetGenImage('assets/images/mine_nomer.png');
+
+  /// File path: assets/images/mine_package.png
+  AssetGenImage get minePackage =>
+      const AssetGenImage('assets/images/mine_package.png');
+
+  /// File path: assets/images/mine_ph.png
+  AssetGenImage get minePh => const AssetGenImage('assets/images/mine_ph.png');
+
+  /// File path: assets/images/mine_qr_code.png
+  AssetGenImage get mineQrCode =>
+      const AssetGenImage('assets/images/mine_qr_code.png');
+
+  /// File path: assets/images/mine_set.png
+  AssetGenImage get mineSet =>
+      const AssetGenImage('assets/images/mine_set.png');
+
+  /// File path: assets/images/mine_shop.png
+  AssetGenImage get mineShop =>
+      const AssetGenImage('assets/images/mine_shop.png');
+
+  /// File path: assets/images/mine_tuijian.png
+  AssetGenImage get mineTuijian =>
+      const AssetGenImage('assets/images/mine_tuijian.png');
+
+  /// File path: assets/images/mine_white_right.png
+  AssetGenImage get mineWhiteRight =>
+      const AssetGenImage('assets/images/mine_white_right.png');
+
+  /// File path: assets/images/mine_yb.png
+  AssetGenImage get mineYb => const AssetGenImage('assets/images/mine_yb.png');
+
+  /// File path: assets/images/mine_yb_back.png
+  AssetGenImage get mineYbBack =>
+      const AssetGenImage('assets/images/mine_yb_back.png');
 
   /// File path: assets/images/party_choice.png
   AssetGenImage get partyChoice =>
@@ -1895,8 +1953,23 @@ class $AssetsImagesGen {
     mainUpLiveImg,
     messageChoice,
     messageNomer,
+    mineAbout,
+    mineBackImg,
     mineChoice,
+    mineEdit,
+    mineHelp,
+    mineLevle,
+    mineMainRequest,
     mineNomer,
+    minePackage,
+    minePh,
+    mineQrCode,
+    mineSet,
+    mineShop,
+    mineTuijian,
+    mineWhiteRight,
+    mineYb,
+    mineYbBack,
     partyChoice,
     partyNomer,
     pkLineImg,

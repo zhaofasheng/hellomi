@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+import 'package:tingle/assets/assets.gen.dart';
 import 'package:tingle/page/profile_page/controller/profile_controller.dart';
 import 'package:tingle/routes/app_routes.dart';
 import 'package:tingle/utils/assets.dart';
@@ -25,13 +27,6 @@ class GeneralSettingWidget extends GetView<ProfileController> {
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppColor.secondary.withOpacity(0.08),
-            blurRadius: 2,
-            spreadRadius: 2,
-          ),
-        ],
       ),
       child: GridView(
         padding: EdgeInsets.zero,
@@ -48,6 +43,7 @@ class GeneralSettingWidget extends GetView<ProfileController> {
             ItemWidget(
               title: EnumLocal.txtHostRequest.name.tr,
               image: AppAssets.icHostRequest,
+              imageWidget: Assets.images.mineMainRequest.image(width: 26),
               callback: () => Get.toNamed(AppRoutes.hostRequestPage),
             ),
 
@@ -108,11 +104,13 @@ class GeneralSettingWidget extends GetView<ProfileController> {
           ItemWidget(
             title: EnumLocal.txtLevel.name.tr,
             image: AppAssets.icLevelIcon,
+            imageWidget: Assets.images.mineLevle.image(width: 26),
             callback: () => Get.toNamed(AppRoutes.levelPage),
           ),
           ItemWidget(
             title: EnumLocal.txtMyQRCode.name.tr,
             image: AppAssets.icMyQr,
+            imageWidget: Assets.images.mineQrCode.image(width: 26),
             callback: () {
               Get.toNamed(AppRoutes.myQrCodePage)?.then((value) {
                 Utils.onChangeStatusBar(brightness: Brightness.dark);
@@ -123,6 +121,7 @@ class GeneralSettingWidget extends GetView<ProfileController> {
           ItemWidget(
             title: EnumLocal.txtHelp.name.tr,
             image: AppAssets.icHelpIcon,
+            imageWidget: Assets.images.mineHelp.image(width: 26),
             callback: () => Get.toNamed(AppRoutes.helpPage)?.then((value) {
               Utils.onChangeStatusBar(brightness: Brightness.dark);
               controller.scrollController.jumpTo(0.0);
@@ -131,11 +130,13 @@ class GeneralSettingWidget extends GetView<ProfileController> {
           if (!Utils.isDemoApp)
             ItemWidget(
               title: EnumLocal.txtAboutUs.name.tr,
+              imageWidget: Assets.images.mineAbout.image(width: 26),
               image: AppAssets.icAboutUsIcon,
               callback: () => Get.toNamed(AppRoutes.aboutUsPage),
             ),
           ItemWidget(
             title: EnumLocal.txtSettings.name.tr,
+            imageWidget: Assets.images.mineSet.image(width: 26),
             image: AppAssets.icSettingIcon,
             callback: () => Get.toNamed(AppRoutes.settingPage),
           ),
@@ -150,12 +151,12 @@ class ItemWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.image,
-    required this.callback,
+    required this.callback, this.imageWidget,
   });
 
   final String title;
   final String image;
-
+  final Widget? imageWidget;
   final Callback callback;
 
   @override
@@ -171,10 +172,10 @@ class ItemWidget extends StatelessWidget {
               width: 54,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: AppColor.secondary.withValues(alpha: 0.07),
+                color: HexColor('#F8F8F8'),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.asset(
+              child: imageWidget ?? Image.asset(
                 image,
                 width: 26,
               ),
@@ -185,7 +186,7 @@ class ItemWidget extends StatelessWidget {
               child: Text(
                 title,
                 textAlign: TextAlign.center,
-                style: AppFontStyle.styleW500(AppColor.lightGreyPurple, 11),
+                style: AppFontStyle.styleW500(AppColor.black, 11),
               ),
             )
           ],

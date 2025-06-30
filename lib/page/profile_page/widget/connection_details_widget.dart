@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/custom/function/custom_format_number.dart';
@@ -22,17 +23,7 @@ class ConnectionDetailsWidget extends StatelessWidget {
         height: 74,
         width: Get.width,
         margin: const EdgeInsets.symmetric(horizontal: 15),
-        decoration: BoxDecoration(
-          color: AppColor.white.withValues(alpha: 0.5),
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-              color: AppColor.secondary.withValues(alpha: 0.1),
-              blurRadius: 2,
-              spreadRadius: 2,
-            ),
-          ],
-        ),
+        // ✅ 去掉 decoration（无背景、无圆角、无阴影）
         child: Row(
           children: [
             ItemWidget(
@@ -45,11 +36,6 @@ class ConnectionDetailsWidget extends StatelessWidget {
                 });
               },
             ),
-            VerticalDivider(
-              color: AppColor.grayText.withValues(alpha: 0.3),
-              indent: 15,
-              endIndent: 15,
-            ),
             ItemWidget(
               title: EnumLocal.txtFollow.name.tr,
               count: (controller.fetchUserProfileModel?.user?.totalFollowing ?? 0).toInt(),
@@ -60,11 +46,6 @@ class ConnectionDetailsWidget extends StatelessWidget {
                 });
               },
             ),
-            VerticalDivider(
-              color: AppColor.grayText.withValues(alpha: 0.3),
-              indent: 15,
-              endIndent: 15,
-            ),
             ItemWidget(
               title: EnumLocal.txtFollowers.name.tr,
               count: (controller.fetchUserProfileModel?.user?.totalFollowers ?? 0).toInt(),
@@ -74,11 +55,6 @@ class ConnectionDetailsWidget extends StatelessWidget {
                   controller.scrollController.jumpTo(0.0);
                 });
               },
-            ),
-            VerticalDivider(
-              color: AppColor.grayText.withValues(alpha: 0.3),
-              indent: 15,
-              endIndent: 15,
             ),
             ItemWidget(
               title: EnumLocal.txtVisitors.name.tr,
@@ -115,12 +91,12 @@ class ItemWidget extends StatelessWidget {
           children: [
             Text(
               CustomFormatNumber.onConvert(count),
-              style: AppFontStyle.styleW700(AppColor.greyBlue, 14),
+              style: AppFontStyle.styleW700(AppColor.black, 14),
             ),
-            10.height,
+            5.height,
             Text(
               title,
-              style: AppFontStyle.styleW500(AppColor.grayText, 10),
+              style: AppFontStyle.styleW500(HexColor('#86868F'), 12),
             ),
           ],
         ),

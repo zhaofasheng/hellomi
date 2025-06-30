@@ -15,15 +15,13 @@ class ProfileAppBarWidget extends StatelessWidget {
       alignment: Alignment.center,
       width: Get.width,
       color: AppColor.transparent,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            EnumLocal.txtMyProfile.name.tr,
-            style: AppFontStyle.styleW700(AppColor.black, 20),
-          ),
-        ],
+      child: Center(
+        child: Text(
+          EnumLocal.txtMyProfile.name.tr,
+          style: AppFontStyle.styleW700(AppColor.black, 18),
+        ),
       ),
+
     );
   }
 }
