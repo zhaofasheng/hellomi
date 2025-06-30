@@ -34,7 +34,7 @@ class ProfileView extends GetView<ProfileController> {
                 const ProfileAppBarWidget(),
                 GetBuilder<ProfileController>(
                   id: AppConstant.onGetProfile,
-                  builder: (controller) => controller.isLoading
+                  builder: (controller) => (controller.isLoading && !controller.hasInit)
                       ? ProfileShimmerWidget()
                       : Expanded(
                           child: RefreshIndicator(

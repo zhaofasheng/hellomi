@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/function/format_message_time.dart';
 import 'package:tingle/common/widget/loading_widget.dart';
@@ -9,6 +10,10 @@ import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
+
+import '../../../assets/assets.gen.dart';
+import '../../../common/widget/preview_network_image_widget.dart';
+import '../../../utils/database.dart';
 
 class SenderAudioWidget extends StatefulWidget {
   const SenderAudioWidget({super.key, required this.id, required this.audio, required this.time});
@@ -92,110 +97,93 @@ class _SenderAudioWidgetState extends State<SenderAudioWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Container(
-          height: 75,
-          width: Get.width / 1.6,
-          margin: EdgeInsets.only(bottom: 15),
-          decoration: BoxDecoration(
-            gradient: AppColor.primaryGradient,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(5),
-              topRight: Radius.circular(5),
-              bottomLeft: Radius.circular(5),
-            ),
-          ),
-          child: Stack(
-            alignment: Alignment.center,
+    final user = Database.fetchLoginUserProfile()?.user;
+    return Padding(
+      padding: const EdgeInsets.only(right: 10, bottom: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start, // ✅ 顶部对齐
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          /// 气泡 + 时间
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Container(
-                height: 75,
-                width: Get.width / 1.6,
-                margin: EdgeInsets.only(left: 6, right: 6, top: 6, bottom: 15),
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                clipBehavior: Clip.antiAlias,
+                constraints: const BoxConstraints(minHeight: 44, minWidth: 180),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
-                  color: AppColor.white.withValues(alpha: 0.9),
-                  borderRadius: BorderRadius.circular(0),
+                  color: AppColor.primary,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(22),
+                    topRight: Radius.zero,
+                    bottomLeft: Radius.circular(22),
+                    bottomRight: Radius.circular(22),
+                  ),
                 ),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Obx(
-                      () => isLoading.value
-                          ? Padding(
-                              padding: EdgeInsets.only(right: 2.5, top: 5, bottom: 5),
-                              child: LoadingWidget(size: 30),
-                            )
-                          : GestureDetector(
-                              onTap: () => isPlaying.value ? onPauseAudio() : onPlayAudio(),
-                              child: Image.asset(isPlaying.value ? AppAssets.icPause : AppAssets.icPlay, color: AppColor.primary, width: 25),
-                            ),
-                    ),
-                    8.width,
-                    Expanded(
-                      child: Obx(
-                        () => SliderTheme(
-                          data: SliderThemeData(
-                            overlayShape: SliderComponentShape.noOverlay,
-                            activeTrackColor: AppColor.primary,
-                            thumbColor: AppColor.primary,
-                            thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10),
-                            trackHeight: 5,
-                          ),
-                          child: Slider(
-                            min: 0,
-                            max: audioDuration.value.toDouble(),
-                            value: audioCurrentDuration.value.toDouble(),
-                            onChanged: (value) {
-                              audioPlayer.seek(Duration(seconds: value.toInt()));
-                            },
-                          ),
-                        ),
+                    Obx(() => isLoading.value
+                        ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
                       ),
-                    ),
-                    3.width,
-                    Container(
-                      height: 40,
-                      width: 40,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColor.primary,
-                      ),
+                    )
+                        : GestureDetector(
+                      onTap: () => isPlaying.value ? onPauseAudio() : onPlayAudio(),
                       child: Image.asset(
-                        AppAssets.icMicOn,
+                        isPlaying.value ? AppAssets.icPause : AppAssets.icPlay,
                         width: 20,
-                        color: AppColor.white,
+                        height: 20,
+                        color: Colors.white,
                       ),
-                    ),
+                    )),
+                    const SizedBox(width: 8),
+                    Center(child: Assets.images.chatEqImg.image(height: 20)),
+                    const SizedBox(width: 8),
+                    Obx(() => Text(
+                      CustomFormatAudioTime.convertShort(
+                        isPlaying.value ? audioCurrentDuration.value : audioDuration.value,
+                      ),
+                      style: AppFontStyle.styleW500(Colors.white, 12),
+                    )),
                   ],
                 ),
               ),
-              Positioned(
-                bottom: 20,
-                right: 70,
-                child: Obx(
-                  () => Text(
-                    CustomFormatAudioTime.convert(audioCurrentDuration.value),
-                    style: AppFontStyle.styleW500(AppColor.primary, 9),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 3,
-                right: 8,
-                child: Text(
-                  FormatMessageTime.onConvert(widget.time),
-                  style: AppFontStyle.styleW500(AppColor.white, 8),
-                ),
+              const SizedBox(height: 4),
+              Text(
+                FormatMessageTime.onConvert(widget.time),
+                style: AppFontStyle.styleW500(HexColor('#A8A8AC'), 8),
               ),
             ],
           ),
-        ),
-      ],
+
+          const SizedBox(width: 5),
+
+          /// 头像部分
+          Container(
+            height: 30,
+            width: 30,
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: AppColor.secondary),
+            ),
+            child: Container(
+              clipBehavior: Clip.antiAlias,
+              decoration: const BoxDecoration(shape: BoxShape.circle),
+              child: PreviewProfileImageWidget(
+                image: user?.image ?? "",
+                isBanned: user?.isProfilePicBanned ?? false,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

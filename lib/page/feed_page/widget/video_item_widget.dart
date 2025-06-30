@@ -1,6 +1,7 @@
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:readmore/readmore.dart';
@@ -31,9 +32,12 @@ import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
+import 'package:tingle/utils/net_logger.dart';
 import 'package:tingle/utils/utils.dart';
 import 'package:vibration/vibration.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../../assets/assets.gen.dart';
 
 class VideoItemWidget extends StatefulWidget {
   const VideoItemWidget({
@@ -238,52 +242,6 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
     }
   }
 
-  Future<void> initializeVideoPlayer() async {
-    try {
-      String videoPath = (widget.videoData.videoUrl ?? "");
-
-      // videoPlayerController = VideoPlayerController.networkUrl(Uri.parse("https://codderlab.blr1.digitaloceanspaces.com/loopbox/Lag%20Ja%20Gale%20Episode%201%2018%20Web%20Series%20ULLU.mp4"));
-      videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(Api.baseUrl + videoPath));
-
-      await videoPlayerController?.initialize();
-
-      if (videoPlayerController != null && (videoPlayerController?.value.isInitialized ?? false)) {
-        chewieController = ChewieController(
-          videoPlayerController: videoPlayerController!,
-          looping: true,
-          allowedScreenSleep: false,
-          allowMuting: false,
-          showControlsOnInitialize: false,
-          showControls: false,
-          maxScale: 1,
-        );
-
-        if (chewieController != null) {
-          isVideoLoading.value = false;
-          (widget.index == widget.currentIndex && Utils.isCurrentlyVideoPage.value) ? onPlayVideo() : null; // Use => First Time Video Playing...
-        } else {
-          isVideoLoading.value = true;
-        }
-
-        videoPlayerController?.addListener(
-          () {
-            // Use => If Video Buffering then show loading....
-            (videoPlayerController?.value.isBuffering ?? false) ? isBuffering.value = true : isBuffering.value = false;
-
-            if (Utils.isCurrentlyVideoPage.value == false) {
-              onStopVideo(); // Use => On Change Routes...
-            }
-          },
-        );
-      }
-
-      Utils.showLog(">>>> Reels Video Initialization Success => ${widget.index}");
-    } catch (e) {
-      onDisposeVideoPlayer();
-      Utils.showLog("Reels Video Initialization Failed !!! ${widget.index} => $e");
-    }
-  }
-
   void onStopVideo() {
     isPlaying.value = false;
     videoPlayerController?.pause();
@@ -329,7 +287,51 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
       Utils.showLog(">>>> On Dispose VideoPlayer Error => $e");
     }
   }
+  Future<void> initializeVideoPlayer() async {
+    try {
+      String videoPath = (widget.videoData.videoUrl ?? "");
 
+      //videoPlayerController = VideoPlayerController.networkUrl(Uri.parse("https://hlapi.halomi.la/storage/1750823677384.mp4"));
+      videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(Api.baseUrl + videoPath));
+
+      await videoPlayerController?.initialize();
+
+      if (videoPlayerController != null && (videoPlayerController?.value.isInitialized ?? false)) {
+        chewieController = ChewieController(
+          videoPlayerController: videoPlayerController!,
+          looping: true,
+          allowedScreenSleep: false,
+          allowMuting: false,
+          showControlsOnInitialize: false,
+          showControls: false,
+          maxScale: 1,
+        );
+
+        if (chewieController != null) {
+          isVideoLoading.value = false;
+          (widget.index == widget.currentIndex && Utils.isCurrentlyVideoPage.value) ? onPlayVideo() : null; // Use => First Time Video Playing...
+        } else {
+          isVideoLoading.value = true;
+        }
+
+        videoPlayerController?.addListener(
+              () {
+            // Use => If Video Buffering then show loading....
+            (videoPlayerController?.value.isBuffering ?? false) ? isBuffering.value = true : isBuffering.value = false;
+
+            if (Utils.isCurrentlyVideoPage.value == false) {
+              onStopVideo(); // Use => On Change Routes...
+            }
+          },
+        );
+      }
+
+      Utils.showLog(">>>> Reels Video Initialization Success => ${widget.index}");
+    } catch (e) {
+      onDisposeVideoPlayer();
+      Utils.showLog("Reels Video Initialization Failed !!! ${widget.index} => $e");
+    }
+  }
   @override
   Widget build(BuildContext context) {
     if (widget.index == widget.currentIndex) {
@@ -341,8 +343,9 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
       isVideoLoading.value == false ? videoPlayerController?.seekTo(Duration.zero) : null;
       onStopVideo(); // Stop Previous Video On Scrolling...
     }
-
-    return Container(
+    return Padding(
+      padding: EdgeInsets.only(bottom: widget.isInsertBottomBarSpace ? kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom : 0,),
+      child: Container(
       height: Get.height,
       width: Get.width,
       color: AppColor.black,
@@ -353,73 +356,73 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
             width: Get.width,
             color: AppColor.transparent,
             child: Obx(
-              () => isVideoLoading.value
+                  () => isVideoLoading.value
                   ? Align(alignment: Alignment.bottomCenter, child: LinearProgressIndicator(color: AppColor.primary))
                   : GestureDetector(
-                      onTap: onClickVideo,
-                      child: SizedBox.expand(
-                        child: FittedBox(
-                          fit: BoxFit.cover,
-                          child: SizedBox(
-                            width: videoPlayerController?.value.size.width ?? 0,
-                            height: videoPlayerController?.value.size.height ?? 0,
-                            child: Chewie(controller: chewieController!),
-                          ),
-                        ),
-                      ),
+                onTap: onClickVideo,
+                child: SizedBox.expand(
+                  child: FittedBox(
+                    fit: BoxFit.cover,
+                    child: SizedBox(
+                      width: videoPlayerController?.value.size.width ?? 0,
+                      height: videoPlayerController?.value.size.height ?? 0,
+                      child: Chewie(controller: chewieController!),
                     ),
+                  ),
+                ),
+              ),
             ),
           ),
           (widget.videoData.isBanned ?? false)
               ? Container(
-                  color: AppColor.black,
+            color: AppColor.black,
+            height: Get.height,
+            width: Get.width,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
                   height: Get.height,
                   width: Get.width,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      SizedBox(
-                        height: Get.height,
-                        width: Get.width,
-                        child: PreviewPostImageWidget(
-                          isBanned: true,
-                          image: widget.videoData.videoImage,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Image.asset(
-                        AppAssets.icNone,
-                        height: 150,
-                        width: 150,
-                        color: AppColor.red,
-                      ),
-                    ],
+                  child: PreviewPostImageWidget(
+                    isBanned: true,
+                    image: widget.videoData.videoImage,
+                    fit: BoxFit.cover,
                   ),
-                )
-              : Obx(
-                  () => isShowIcon.value
-                      ? Align(
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                            onTap: onClickPlayPause,
-                            child: Container(
-                              height: 70,
-                              width: 70,
-                              padding: EdgeInsets.only(left: isPlaying.value ? 0 : 3),
-                              decoration: BoxDecoration(color: AppColor.black.withValues(alpha: 0.2), shape: BoxShape.circle),
-                              child: Center(
-                                child: Image.asset(
-                                  isPlaying.value ? AppAssets.icPause : AppAssets.icPlay,
-                                  width: 26,
-                                  height: 26,
-                                  color: AppColor.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      : const Offstage(),
                 ),
+                Image.asset(
+                  AppAssets.icNone,
+                  height: 150,
+                  width: 150,
+                  color: AppColor.red,
+                ),
+              ],
+            ),
+          )
+              : Obx(
+                () => isShowIcon.value
+                ? Align(
+              alignment: Alignment.center,
+              child: GestureDetector(
+                onTap: onClickPlayPause,
+                child: Container(
+                  height: 70,
+                  width: 70,
+                  padding: EdgeInsets.only(left: isPlaying.value ? 0 : 3),
+                  decoration: BoxDecoration(color: AppColor.black.withValues(alpha: 0.2), shape: BoxShape.circle),
+                  child: Center(
+                    child: Image.asset(
+                      isPlaying.value ? AppAssets.icPause : AppAssets.icPlay,
+                      width: 26,
+                      height: 26,
+                      color: AppColor.white,
+                    ),
+                  ),
+                ),
+              ),
+            )
+                : const Offstage(),
+          ),
           Positioned(
             top: 0,
             child: Container(
@@ -467,107 +470,110 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
           ),
           Positioned(
             right: 15,
-            child: Container(
-              padding: EdgeInsets.only(top: 30, bottom: widget.isInsertBottomBarSpace ? 65 : 40),
-              height: Get.height,
-              child: Column(
-                children: [
-                  const Spacer(),
-                  Obx(
-                    () => SizedBox(
-                      height: 40,
-                      width: 40,
-                      child: Center(
-                        child: AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
-                          height: toggleLikeIconAnimation.value ? 15 : 50,
-                          width: toggleLikeIconAnimation.value ? 15 : 50,
-                          alignment: Alignment.center,
-                          child: IconButtonWidget(
-                            icon: AppAssets.icLikeFill,
-                            callback: onToggleLike,
-                            iconSize: 32,
-                            iconColor: isLike.value ? AppColor.red : AppColor.white,
-                          ),
+            top: 30,
+            bottom: widget.isInsertBottomBarSpace
+                ? (kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom + 10)
+                : 40,
+            child: Column(
+              children: [
+                const Spacer(),
+                Obx(
+                      () => SizedBox(
+                    height: 30,
+                    width: 30,
+                    child: Center(
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        height: toggleLikeIconAnimation.value ? 15 : 50,
+                        width: toggleLikeIconAnimation.value ? 15 : 50,
+                        alignment: Alignment.center,
+                        child: IconButtonWidget(
+                          icon: AppAssets.icLikeFill,
+                          callback: onToggleLike,
+                          iconSize: 24,
+                          iconColor: isLike.value ? AppColor.red : AppColor.white,
                         ),
                       ),
                     ),
                   ),
-                  Obx(
-                    () => AnimatedFlipCounter(
-                      duration: Duration(milliseconds: 500),
-                      value: likeCount.value,
-                      textStyle: AppFontStyle.styleW700(AppColor.white, 14),
-                    ),
+                ),
+                Obx(
+                      () => AnimatedFlipCounter(
+                    duration: Duration(milliseconds: 500),
+                    value: likeCount.value,
+                    textStyle: AppFontStyle.styleW700(AppColor.white, 12),
                   ),
-                  12.height,
-                  IconButtonWidget(
-                    icon: AppAssets.icCommentFill,
-                    callback: onClickComment,
-                    iconSize: 30,
-                    iconColor: AppColor.white,
+                ),
+                12.height,
+                IconButtonWidget(
+                  customWidget: Assets.images.videoComImg.image(width: 28,height: 28),
+                  icon: AppAssets.icCommentFill,
+                  callback: onClickComment,
+                  iconSize: 28,
+                  iconColor: AppColor.white,
+                ),
+                Obx(
+                      () => AnimatedFlipCounter(
+                    duration: Duration(milliseconds: 500),
+                    value: commentCount.value,
+                    textStyle: AppFontStyle.styleW700(AppColor.white, 12),
                   ),
-                  Obx(
-                    () => AnimatedFlipCounter(
-                      duration: Duration(milliseconds: 500),
-                      value: commentCount.value,
-                      textStyle: AppFontStyle.styleW700(AppColor.white, 14),
-                    ),
+                ),
+                12.height,
+                IconButtonWidget(
+                  icon: AppAssets.icShareArrow,
+                  callback: onClickShare,
+                  iconSize: 28,
+                  iconColor: AppColor.white,
+                ),
+                Obx(
+                      () => AnimatedFlipCounter(
+                    duration: Duration(milliseconds: 500),
+                    value: shareCount.value,
+                    textStyle: AppFontStyle.styleW700(AppColor.white, 12),
                   ),
-                  12.height,
-                  IconButtonWidget(
-                    icon: AppAssets.icShareArrow,
-                    callback: onClickShare,
-                    iconSize: 30,
-                    iconColor: AppColor.white,
+                ),
+                12.height,
+                IconButtonWidget(
+                  customWidget: Assets.icons.videoMoreImg.image(width: 28, height: 28),
+                  icon: AppAssets.icCircleVert,
+                  callback: onClickMore,
+                  iconSize: 28,
+                  iconColor: AppColor.white,
+                ),
+                20.height,
+                GestureDetector(
+                  onTap: onClickMusic,
+                  child: Container(
+                    color: AppColor.transparent,
+                    height: 50,
+                    width: 50,
+                    child: animation != null
+                        ? Stack(
+                      alignment: Alignment.center,
+                      clipBehavior: Clip.none,
+                      children: [
+                        RotationTransition(turns: animation!, child: Image.asset(AppAssets.icMusicDish)),
+                        RotationTransition(
+                          turns: animation!,
+                          child: Container(
+                            width: 30,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(shape: BoxShape.circle),
+                            child: PreviewProfileImageWidget(),
+                          ),
+                        ),
+                        Positioned(
+                          right: 4,
+                          bottom: -4,
+                          child: Image.asset(AppAssets.icMusic, width: 20),
+                        ),
+                      ],
+                    )
+                        : const Offstage(),
                   ),
-                  Obx(
-                    () => AnimatedFlipCounter(
-                      duration: Duration(milliseconds: 500),
-                      value: shareCount.value,
-                      textStyle: AppFontStyle.styleW700(AppColor.white, 14),
-                    ),
-                  ),
-                  12.height,
-                  IconButtonWidget(
-                    icon: AppAssets.icCircleVert,
-                    callback: onClickMore,
-                    iconSize: 30,
-                    iconColor: AppColor.white,
-                  ),
-                  20.height,
-                  GestureDetector(
-                    onTap: onClickMusic,
-                    child: Container(
-                        color: AppColor.transparent,
-                        height: 50,
-                        width: 50,
-                        child: animation != null
-                            ? Stack(
-                                alignment: Alignment.center,
-                                clipBehavior: Clip.none,
-                                children: [
-                                  RotationTransition(turns: animation!, child: Image.asset(AppAssets.icMusicDish)),
-                                  RotationTransition(
-                                    turns: animation!,
-                                    child: Container(
-                                      width: 30,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(shape: BoxShape.circle),
-                                      child: PreviewProfileImageWidget(),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    right: 4,
-                                    bottom: -4,
-                                    child: Image.asset(AppAssets.icMusic, width: 20),
-                                  ),
-                                ],
-                              )
-                            : Offstage()),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Positioned(
@@ -650,7 +656,7 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
                                       Visibility(
                                         visible: Database.loginUserId != widget.videoData.userId,
                                         child: Obx(
-                                          () => GestureDetector(
+                                              () => GestureDetector(
                                             onTap: onToggleFollow,
                                             child: SizedBox(
                                               width: 100,
@@ -661,7 +667,7 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
                                                     height: 28,
                                                     padding: EdgeInsets.symmetric(horizontal: 10),
                                                     decoration: BoxDecoration(
-                                                      color: isFollow.value ? AppColor.transparent : AppColor.primary,
+                                                      color: isFollow.value ? AppColor.transparent : HexColor('#00E4A6'),
                                                       border: isFollow.value ? Border.all(color: AppColor.white) : null,
                                                       borderRadius: BorderRadius.circular(100),
                                                     ),
@@ -721,7 +727,7 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
                             widget.videoData.hashTag?.join(', ') ?? "",
                             trimMode: TrimMode.Line,
                             trimLines: 2,
-                            style: AppFontStyle.styleW500(AppColor.blue, 12),
+                            style: AppFontStyle.styleW500(HexColor('#00E4A6'), 12),
                             colorClickableText: AppColor.primary,
                             trimCollapsedText: EnumLocal.txtShowMore.name.tr,
                             trimExpandedText: EnumLocal.txtShowLess.name.tr,
@@ -789,23 +795,26 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
           ),
         ],
       ),
+    ),
     );
+
   }
 }
-
 class IconButtonWidget extends StatelessWidget {
   const IconButtonWidget({
     super.key,
-    required this.icon,
     required this.callback,
-    required this.iconSize,
-    required this.iconColor,
+    this.icon,
+    this.iconSize = 24,
+    this.iconColor = AppColor.black,
+    this.customWidget,
   });
 
-  final String icon;
+  final String? icon;
   final double iconSize;
   final Color iconColor;
   final Callback callback;
+  final Widget? customWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -814,12 +823,20 @@ class IconButtonWidget extends StatelessWidget {
       child: Container(
         height: 40,
         width: 40,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: AppColor.transparent,
         ),
         child: Center(
-          child: Image.asset(icon, height: iconSize, width: iconSize, color: iconColor),
+          child: customWidget ??
+              (icon != null
+                  ? Image.asset(
+                icon!,
+                height: iconSize,
+                width: iconSize,
+                color: iconColor,
+              )
+                  : const SizedBox()),
         ),
       ),
     );

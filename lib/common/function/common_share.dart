@@ -19,7 +19,7 @@ class CommonShare {
     try {
       Utils.showLog("SHARE ITEM ID => $id");
 
-      Get.dialog(const LoadingWidget(color: AppColor.primary), barrierDismissible: false); // Start Loading...
+      Get.dialog(LoadingWidget(color: AppColor.primary), barrierDismissible: false); // Start Loading...
 
       Utils.showLog("Loading 1 $title");
 
@@ -47,7 +47,7 @@ class CommonShare {
     try {
       Utils.showLog("SHARE TEXT => $text");
 
-      Get.dialog(const LoadingWidget(color: AppColor.primary), barrierDismissible: false); // Start Loading...
+      Get.dialog(LoadingWidget(color: AppColor.primary), barrierDismissible: false); // Start Loading...
 
       await Share.share(text);
 

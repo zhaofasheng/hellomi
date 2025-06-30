@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
 import 'package:tingle/page/fake_other_user_profile_bottom_sheet/view/fake_other_user_profile_bottom_sheet.dart';
@@ -27,7 +28,7 @@ class FakeChatAppBarWidget {
         width: Get.width,
         decoration: BoxDecoration(color: AppColor.white, boxShadow: [
           BoxShadow(
-            color: AppColor.secondary.withValues(alpha: 0.1),
+            color: HexColor('#00E4A6').withValues(alpha: 0.1),
             blurRadius: 2,
             spreadRadius: 2,
           )

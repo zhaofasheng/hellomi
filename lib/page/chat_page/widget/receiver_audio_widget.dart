@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/function/format_message_time.dart';
 import 'package:tingle/common/widget/loading_widget.dart';
@@ -10,12 +11,24 @@ import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+import '../../../common/widget/preview_network_image_widget.dart';
+
 class ReceiverAudioWidget extends StatefulWidget {
-  const ReceiverAudioWidget({super.key, required this.id, required this.audio, required this.time});
+  const ReceiverAudioWidget({
+    super.key,
+    required this.id,
+    required this.audio,
+    required this.time,
+    required this.receiverImage,
+    required this.receiverImageIsBanned,
+  });
 
   final String id;
   final String audio;
   final String time;
+  final String receiverImage;
+  final bool receiverImageIsBanned;
 
   @override
   State<ReceiverAudioWidget> createState() => _ReceiverAudioWidgetState();
@@ -64,8 +77,9 @@ class _ReceiverAudioWidgetState extends State<ReceiverAudioWidget> {
           onPauseAudio();
         }
       });
+
       audioPlayer.onPlayerComplete.listen(
-        (event) async {
+            (event) async {
           audioCurrentDuration.value = 0;
           onPauseAudio();
           await audioPlayer.play(UrlSource(widget.audio));
@@ -79,7 +93,6 @@ class _ReceiverAudioWidgetState extends State<ReceiverAudioWidget> {
 
   void onPlayAudio() async {
     isPlaying.value = true;
-
     audioPlayer.resume();
     controller.currentPlayAudioId = widget.id;
   }
@@ -87,126 +100,92 @@ class _ReceiverAudioWidgetState extends State<ReceiverAudioWidget> {
   void onPauseAudio() {
     isPlaying.value = false;
     audioPlayer.pause();
-
-    // audioPlayer.source
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: EdgeInsets.only(bottom: 15),
-          decoration: BoxDecoration(
-            color: AppColor.white,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(5),
-              topRight: Radius.circular(5),
-              bottomRight: Radius.circular(5),
-            ),
-          ),
-          child: Container(
-            height: 75,
-            width: Get.width / 1.6,
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, bottom: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          // 🟡 左侧头像
+          Container(
+            height: 30,
+            width: 30,
+            padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
-              color: AppColor.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(5),
-                topRight: Radius.circular(5),
-                bottomRight: Radius.circular(5),
+              shape: BoxShape.circle,
+              border: Border.all(color: AppColor.secondary),
+            ),
+            child: ClipOval(
+              child: PreviewProfileImageWidget(
+                image: widget.receiverImage,
+                isBanned: widget.receiverImageIsBanned,
               ),
             ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  height: 75,
-                  width: Get.width / 1.6,
-                  margin: EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 15),
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    color: AppColor.colorBorder.withValues(alpha: 0.6),
-                  ),
-                  child: Row(
-                    children: [
-                      Obx(
-                        () => isLoading.value
-                            ? Padding(
-                                padding: EdgeInsets.only(right: 2.5, top: 5, bottom: 5),
-                                child: LoadingWidget(size: 30),
-                              )
-                            : GestureDetector(
-                                onTap: () => isPlaying.value ? onPauseAudio() : onPlayAudio(),
-                                child: Image.asset(isPlaying.value ? AppAssets.icPause : AppAssets.icPlay, color: AppColor.primary, width: 25),
-                              ),
-                      ),
-                      8.width,
-                      Expanded(
-                        child: Obx(
-                          () => SliderTheme(
-                            data: SliderThemeData(
-                              overlayShape: SliderComponentShape.noOverlay,
-                              activeTrackColor: AppColor.primary,
-                              thumbColor: AppColor.primary,
-                              inactiveTrackColor: AppColor.primary.withValues(alpha: 0.08),
-                              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10),
-                              trackHeight: 5,
-                            ),
-                            child: Slider(
-                              min: 0,
-                              max: audioDuration.value.toDouble(),
-                              value: audioCurrentDuration.value.toDouble(),
-                              onChanged: (value) {
-                                audioPlayer.seek(Duration(seconds: value.toInt()));
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                      3.width,
-                      Container(
-                        height: 40,
-                        width: 40,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColor.primary,
-                        ),
-                        child: Image.asset(
-                          AppAssets.icMicOn,
-                          width: 20,
-                          color: AppColor.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  bottom: 20,
-                  right: 70,
-                  child: Obx(
-                    () => Text(
-                      CustomFormatAudioTime.convert(audioCurrentDuration.value),
-                      style: AppFontStyle.styleW500(AppColor.primary, 9),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 3,
-                  right: 8,
-                  child: Text(
-                    FormatMessageTime.onConvert(widget.time),
-                    style: AppFontStyle.styleW500(AppColor.black, 8),
-                  ),
-                ),
-              ],
-            ),
           ),
-        ),
-      ],
+          const SizedBox(width: 5),
+
+          // 🟩 语音条 + 时间
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                constraints: const BoxConstraints(minHeight: 44, minWidth: 180),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.zero,
+                    topRight: Radius.circular(22),
+                    bottomLeft: Radius.circular(22),
+                    bottomRight: Radius.circular(22),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Obx(() => isLoading.value
+                        ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.black54,
+                      ),
+                    )
+                        : GestureDetector(
+                      onTap: () => isPlaying.value ? onPauseAudio() : onPlayAudio(),
+                      child: Image.asset(
+                        isPlaying.value ? AppAssets.icPause : AppAssets.icPlay,
+                        width: 20,
+                        height: 20,
+                        color: Colors.black,
+                      ),
+                    )),
+                    const SizedBox(width: 8),
+                    Center(child: Assets.images.chatEqImg.image(height: 20)),
+                    const SizedBox(width: 8),
+                    Obx(() => Text(
+                      CustomFormatAudioTime.convertShort(
+                        isPlaying.value ? audioCurrentDuration.value : audioDuration.value,
+                      ),
+                      style: AppFontStyle.styleW500(Colors.black87, 12),
+                    )),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                FormatMessageTime.onConvert(widget.time),
+                style: AppFontStyle.styleW500(HexColor('#999999'), 8),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

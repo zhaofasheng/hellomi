@@ -118,7 +118,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     });
     super.didChangeDependencies();
   }
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -130,7 +129,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       translations: AppLanguages(),
       fallbackLocale: const Locale(AppConstant.languageEn, AppConstant.countryCodeEn),
       locale: const Locale(AppConstant.languageEn),
-      // home: HomeScreen(),
       unknownRoute: GetPage(
         name: AppRoutes.splashScreenPage,
         page: () => const SplashScreenView(),
@@ -139,15 +137,18 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       builder: (context, child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(
-            textScaler: const TextScaler.linear(1.0),
+            textScaler: const TextScaler.linear(1.0), // 禁止系统字体缩放影响布局
           ),
-          child: Scaffold(
-            body: Stack(
-              children: [
-                child ?? const SizedBox(),
-                ShowReceivedBanner.onShowSenderDetails(),
-              ],
-            ),
+          child: Stack(
+            children: [
+              child ?? const SizedBox(), // 主页面内容
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: ShowReceivedBanner.onShowSenderDetails(), // 顶部悬浮 Banner
+              ),
+            ],
           ),
         );
       },

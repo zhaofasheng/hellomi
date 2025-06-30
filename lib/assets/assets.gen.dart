@@ -1081,6 +1081,10 @@ class $AssetsIconsGen {
   AssetGenImage get thirdRankSeatFrame =>
       const AssetGenImage('assets/icons/third_rank_seat_frame.webp');
 
+  /// File path: assets/icons/video_more_img.png
+  AssetGenImage get videoMoreImg =>
+      const AssetGenImage('assets/icons/video_more_img.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     appLogo,
@@ -1327,6 +1331,7 @@ class $AssetsIconsGen {
     secondRankSeatFrame,
     thirdRankEmptyFrame,
     thirdRankSeatFrame,
+    videoMoreImg,
   ];
 }
 
@@ -1336,6 +1341,30 @@ class $AssetsImagesGen {
   /// File path: assets/images/background_img.png
   AssetGenImage get backgroundImg =>
       const AssetGenImage('assets/images/background_img.png');
+
+  /// File path: assets/images/chat_camram.png
+  AssetGenImage get chatCamram =>
+      const AssetGenImage('assets/images/chat_camram.png');
+
+  /// File path: assets/images/chat_eq_img.png
+  AssetGenImage get chatEqImg =>
+      const AssetGenImage('assets/images/chat_eq_img.png');
+
+  /// File path: assets/images/chat_more.png
+  AssetGenImage get chatMore =>
+      const AssetGenImage('assets/images/chat_more.png');
+
+  /// File path: assets/images/chat_sendimg.png
+  AssetGenImage get chatSendimg =>
+      const AssetGenImage('assets/images/chat_sendimg.png');
+
+  /// File path: assets/images/chat_video.png
+  AssetGenImage get chatVideo =>
+      const AssetGenImage('assets/images/chat_video.png');
+
+  /// File path: assets/images/chat_yuyin_img.png
+  AssetGenImage get chatYuyinImg =>
+      const AssetGenImage('assets/images/chat_yuyin_img.png');
 
   /// File path: assets/images/dongtai_choice.png
   AssetGenImage get dongtaiChoice =>
@@ -1754,9 +1783,23 @@ class $AssetsImagesGen {
   AssetGenImage get splashScreen =>
       const AssetGenImage('assets/images/splash_screen.png');
 
+  /// File path: assets/images/video_com_img.png
+  AssetGenImage get videoComImg =>
+      const AssetGenImage('assets/images/video_com_img.png');
+
+  /// File path: assets/images/video_gs_img.png
+  AssetGenImage get videoGsImg =>
+      const AssetGenImage('assets/images/video_gs_img.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     backgroundImg,
+    chatCamram,
+    chatEqImg,
+    chatMore,
+    chatSendimg,
+    chatVideo,
+    chatYuyinImg,
     dongtaiChoice,
     dongtaiNomer,
     fansRankingBg,
@@ -1862,6 +1905,8 @@ class $AssetsImagesGen {
     pkWinImg,
     socketLoginImg,
     splashScreen,
+    videoComImg,
+    videoGsImg,
   ];
 }
 

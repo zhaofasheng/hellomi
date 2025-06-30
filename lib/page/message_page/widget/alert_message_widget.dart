@@ -97,7 +97,7 @@ class AlertMessageWidget extends StatelessWidget {
                         visible: messageCount != null && messageCount != 0,
                         child: Container(
                           padding: const EdgeInsets.all(8),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: AppColor.primary,
                             shape: BoxShape.circle,
                           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/function/format_message_time.dart';
 import 'package:tingle/utils/assets.dart';
@@ -54,7 +55,7 @@ class ReceiverVideoCallWidget extends StatelessWidget {
                       child: Image.asset(
                         AppAssets.icVideoOn,
                         width: 24,
-                        color: AppColor.pink,
+                        color: HexColor('#00E4A6'),
                       ),
                     ),
                     10.width,
@@ -74,7 +75,7 @@ class ReceiverVideoCallWidget extends StatelessWidget {
                                   : type == 3
                                       ? EnumLocal.txtMiscalled.name.tr
                                       : "",
-                          style: AppFontStyle.styleW600(AppColor.grayText, 13),
+                          style: AppFontStyle.styleW600(HexColor('#00E4A6'), 13),
                         ),
                       ],
                     ),
@@ -86,7 +87,7 @@ class ReceiverVideoCallWidget extends StatelessWidget {
                 right: 12,
                 child: Text(
                   FormatMessageTime.onConvert(time),
-                  style: AppFontStyle.styleW500(AppColor.secondary, 10),
+                  style: AppFontStyle.styleW500(HexColor('#A8A8AC'), 10),
                 ),
               ),
             ],

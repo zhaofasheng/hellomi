@@ -42,6 +42,7 @@ class FakeChatController extends GetxController {
   ScrollController scrollController = ScrollController();
   TextEditingController messageController = TextEditingController();
 
+  final RxBool isShowMorePanel = false.obs;
   // SEND FILE ON CHAT
 
   SendFileToChatModel? sendFileToChatModel;
@@ -151,6 +152,17 @@ class FakeChatController extends GetxController {
       update([AppConstant.onFetchUserChat]);
       messageController.clear();
     }
+  }
+
+  ///选择图片或者拍照
+  Future<void> choiceImage() async {
+    final imagePath = await CustomImagePicker.pickImage(ImageSource.gallery);
+    if (imagePath != null) onSendImage(imagePath);
+  }
+
+  Future<void> choiceCameraImage() async {
+    final imagePath = await CustomImagePicker.pickImage(ImageSource.camera);
+    if (imagePath != null) onSendImage(imagePath);
   }
 
   Future<void> onClickImage(BuildContext context) async {

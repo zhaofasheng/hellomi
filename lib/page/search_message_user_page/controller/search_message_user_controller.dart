@@ -5,6 +5,7 @@ import 'package:tingle/firebase/authentication/firebase_uid.dart';
 import 'package:tingle/page/search_message_user_page/api/fetch_search_message_user_api.dart';
 import 'package:tingle/page/search_message_user_page/model/fetch_search_message_user_model.dart';
 import 'package:tingle/utils/constant.dart';
+import 'package:tingle/utils/net_logger.dart';
 
 class SearchMessageUserController extends GetxController {
   ScrollController scrollController = ScrollController();
@@ -43,6 +44,7 @@ class SearchMessageUserController extends GetxController {
   Future<void> onClearSearch() async {
     searchController.clear();
     onFetchMessageUser();
+    NetLogger.logCustom('哈哈', '搜索');
     update([AppConstant.onFetchMessageUser]);
   }
 }

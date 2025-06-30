@@ -7,8 +7,8 @@ abstract class AppColor {
   static const transparent = Color(0x00000000);
   static const colorScaffold = Color(0xffFBFCFF);
 
-  static const primary = Color(0xFF9848FF);
-  static const secondary = Color(0xFF9D9AC4);
+  static final primary = HexColor('#00E4A6');
+  static final secondary = HexColor('#00E4A6');
 
   static final baseColor = Color(0xffCBDBFF).withValues(alpha: 0.6);
   static final highlightColor = Color(0xffe3e7f6);

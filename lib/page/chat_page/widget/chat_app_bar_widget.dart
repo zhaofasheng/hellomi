@@ -89,25 +89,25 @@ class ChatAppBarWidget {
                           ],
                         ),
                       ),
-                      GetBuilder<ChatController>(
-                        builder: (controller) => GestureDetector(
-                          onTap: () {
-                            final profileController = Get.find<ProfileController>();
-                            if (Utils.isDemoApp || profileController.fetchUserProfileModel?.user?.wealthLevel?.permissions?.freeCall == true) {
-                              controller.onClickVideoCall();
-                            } else {
-                              Utils.showToast(text: EnumLocal.txtTopUpYourBalanceToReachTheNext.name.tr);
-                            }
-                          },
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            alignment: Alignment.center,
-                            decoration: const BoxDecoration(shape: BoxShape.circle),
-                            child: Image.asset(AppAssets.icVideoCallBorder, color: AppColor.black, width: 25),
-                          ),
-                        ),
-                      ),
+                      // GetBuilder<ChatController>(
+                      //   builder: (controller) => GestureDetector(
+                      //     onTap: () {
+                      //       final profileController = Get.find<ProfileController>();
+                      //       if (Utils.isDemoApp || profileController.fetchUserProfileModel?.user?.wealthLevel?.permissions?.freeCall == true) {
+                      //         controller.onClickVideoCall();
+                      //       } else {
+                      //         Utils.showToast(text: EnumLocal.txtTopUpYourBalanceToReachTheNext.name.tr);
+                      //       }
+                      //     },
+                      //     child: Container(
+                      //       height: 40,
+                      //       width: 40,
+                      //       alignment: Alignment.center,
+                      //       decoration: const BoxDecoration(shape: BoxShape.circle),
+                      //       child: Image.asset(AppAssets.icVideoCallBorder, color: AppColor.black, width: 25),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

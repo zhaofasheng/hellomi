@@ -48,7 +48,7 @@ class StripeService {
 
         SetupPaymentSheetParameters setupPaymentSheetParameters = SetupPaymentSheetParameters(
           paymentIntentClientSecret: result.clientSecret,
-          appearance: const PaymentSheetAppearance(colors: PaymentSheetAppearanceColors(primary: AppColor.primary)),
+          appearance: PaymentSheetAppearance(colors: PaymentSheetAppearanceColors(primary: AppColor.primary)),
           applePay: PaymentSheetApplePay(merchantCountryCode: Utils.countryCode),
           googlePay: PaymentSheetGooglePay(merchantCountryCode: Utils.countryCode, testEnv: isTest),
           merchantDisplayName: Database.fetchLoginUserProfile()?.user?.name ?? "",

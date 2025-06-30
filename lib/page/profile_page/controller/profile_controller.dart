@@ -26,9 +26,9 @@ class ProfileController extends GetxController with GetTickerProviderStateMixin 
     Utils.showLog("Profile Controller Init Success");
 
     if(hasInit == false){
-      onGetProfile();
       hasInit = true;
     }
+    onGetProfile();
     super.onInit();
   }
 

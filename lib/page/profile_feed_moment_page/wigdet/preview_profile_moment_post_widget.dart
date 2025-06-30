@@ -61,7 +61,7 @@ class _FullScreenPostPreviewState extends State<FullScreenPostPreview> {
                     imageUrl: Api.baseUrl + post!.url!,
                     width: Get.width,
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => const Center(
+                    placeholder: (context, url) => Center(
                         child: CircularProgressIndicator(
                       color: AppColor.primary,
                       strokeWidth: 2.0,

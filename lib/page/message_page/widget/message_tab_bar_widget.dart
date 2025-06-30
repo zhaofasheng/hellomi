@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/page/message_page/controller/message_controller.dart';
@@ -67,16 +68,15 @@ class MessageTabItemWidget extends StatelessWidget {
         margin: const EdgeInsets.only(right: 10),
         padding: const EdgeInsets.only(left: 18, right: 10),
         decoration: BoxDecoration(
-          color: isSelected ? AppColor.primary : AppColor.white.withValues(alpha: 0.5),
+          color: isSelected ? HexColor('#00E4A6') : Colors.transparent,
           borderRadius: BorderRadius.circular(100),
-          border: isSelected ? Border.all(color: AppColor.white) : null,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               title,
-              style: isSelected ? AppFontStyle.styleW600(AppColor.white, 14) : AppFontStyle.styleW500(AppColor.primary, 14),
+              style: isSelected ? AppFontStyle.styleW600(AppColor.white, 14) : AppFontStyle.styleW500(AppColor.black, 14),
             ),
             count != null
                 ? Container(

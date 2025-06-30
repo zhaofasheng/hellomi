@@ -47,29 +47,6 @@ class MessageView extends GetView<MessageController> {
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  // AlertMessageWidget(
-                                  //   title: "Official Announcement",
-                                  //   subTitle: "Official Announcement- Beware of Scams",
-                                  //   image: AppAssets.icAnnouncement,
-                                  //   imageSize: 26,
-                                  //   color: AppColor.primary,`
-                                  //   dateTime: "09:20",
-                                  //   messageCount: 8,
-                                  //   gradient: AppColor.announcementGradient,
-                                  //   callback: () {},
-                                  // ),
-                                  // AlertMessageWidget(
-                                  //   title: "Account Security Center",
-                                  //   subTitle: "The system has detected that your account...",
-                                  //   color: AppColor.red,
-                                  //   image: AppAssets.icSecurity,
-
-                                  //   imageSize: 24,
-                                  //   dateTime: "09:20",
-                                  //   messageCount: 8,
-                                  //   gradient: AppColor.securityGradient,
-                                  //   callback: () {},
-                                  // ),
                                   GetBuilder<MessageController>(
                                     id: AppConstant.onFetchMessageUser,
                                     builder: (controller) => controller.isLoading

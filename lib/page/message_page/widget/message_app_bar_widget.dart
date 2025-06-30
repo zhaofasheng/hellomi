@@ -31,46 +31,35 @@ class MessageAppBarWidget extends StatelessWidget {
           Container(
             height: 50,
             color: AppColor.transparent,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Stack(
+              alignment: Alignment.center,
               children: [
-                Text(
-                  EnumLocal.txtMessage.name.tr,
-                  style: AppFontStyle.styleW700(AppColor.black, 20),
+                Center(
+                  child: Text(
+                    EnumLocal.txtMessage.name.tr,
+                    style: AppFontStyle.styleW700(AppColor.black, 20),
+                  ),
                 ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () => Get.toNamed(AppRoutes.searchMessageUserPage),
-                  child: Container(
-                    height: 40,
-                    width: 40,
-                    alignment: Alignment.center,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColor.transparent,
-                    ),
-                    child: Image.asset(
-                      AppAssets.icSearch,
-                      width: 28,
-                      color: AppColor.black,
+                Positioned(
+                  right: 0,
+                  child: GestureDetector(
+                    onTap: () => Get.toNamed(AppRoutes.searchMessageUserPage),
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColor.transparent,
+                      ),
+                      child: Image.asset(
+                        AppAssets.icSearch,
+                        width: 28,
+                        color: AppColor.black,
+                      ),
                     ),
                   ),
                 ),
-                // 5.width,
-                // Container(
-                //   height: 40,
-                //   width: 40,
-                //   alignment: Alignment.center,
-                //   decoration: const BoxDecoration(
-                //     shape: BoxShape.circle,
-                //     color: AppColor.transparent,
-                //   ),
-                //   child: Image.asset(
-                //     AppAssets.icHorizontalVert,
-                //     width: 22,
-                //     color: AppColor.black,
-                //   ),
-                // ),
               ],
             ),
           ),

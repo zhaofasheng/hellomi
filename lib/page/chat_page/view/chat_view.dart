@@ -125,7 +125,7 @@ class ChatView extends GetView<ChatController> {
                                                         ? ReceiverAudioWidget(
                                                             id: indexData.id ?? "",
                                                             audio: Api.baseUrl + (indexData.audio ?? ""),
-                                                            time: indexData.createdAt ?? "",
+                                                            time: indexData.createdAt ?? "", receiverImage: controller.image, receiverImageIsBanned: controller.isBanned,
                                                           )
                                                         : Offstage();
                                   },

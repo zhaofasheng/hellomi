@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tingle/utils/color.dart';
 
@@ -12,7 +13,7 @@ class LoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SpinKitCircle(
-        color: color ?? AppColor.primary,
+        color: color ?? HexColor('#00E4A6'),
         size: size ?? 60,
       ),
     );

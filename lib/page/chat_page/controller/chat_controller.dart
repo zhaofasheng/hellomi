@@ -31,6 +31,10 @@ import 'package:vibration/vibration.dart';
 
 class ChatController extends GetxController {
   // GET ARGUMENT FROM [MESSAGE_PAGE, SEARCH_PAGE]
+  final RxBool isShowMorePanel = false.obs;
+  var isVoiceMode = false.obs;
+  var isRecording = false.obs;
+
 
   String roomId = "";
   String receiverUserId = "";
@@ -177,6 +181,16 @@ class ChatController extends GetxController {
       );
       messageController.clear();
     }
+  }
+
+  Future<void> choiceImage() async {
+    final imagePath = await CustomImagePicker.pickImage(ImageSource.gallery);
+    if (imagePath != null) onSendImage(imagePath);
+  }
+
+  Future<void> choiceCameraImage() async {
+    final imagePath = await CustomImagePicker.pickImage(ImageSource.camera);
+    if (imagePath != null) onSendImage(imagePath);
   }
 
   Future<void> onClickImage(BuildContext context) async {

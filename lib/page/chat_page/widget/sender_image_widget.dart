@@ -7,7 +7,12 @@ import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/font_style.dart';
 
 class SenderImageWidget extends StatelessWidget {
-  const SenderImageWidget({super.key, required this.image, required this.time, required this.isBanned});
+  const SenderImageWidget({
+    super.key,
+    required this.image,
+    required this.time,
+    required this.isBanned,
+  });
 
   final String image;
   final String time;
@@ -15,86 +20,71 @@ class SenderImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Container(
-          margin: EdgeInsets.only(bottom: 15),
-          decoration: BoxDecoration(
-            color: AppColor.transparent,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Container(
-            height: 200,
-            width: Get.width / 2.5,
-            decoration: BoxDecoration(
-              color: AppColor.transparent,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Stack(
-              clipBehavior: Clip.antiAlias,
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  height: 250,
-                  width: Get.width / 2.5,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
+    final user = Database.fetchLoginUserProfile()?.user;
+
+    return Padding(
+      padding: const EdgeInsets.only(right: 10, bottom: 15),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          // 图片 + 时间
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  // 可选：图片预览操作
+                },
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20), // 右上角直角
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                  child: Container(
+                    width: Get.width / 2.5,
+                    height: 200,
                     color: AppColor.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: PreviewPostImageWidget(image: image, fit: BoxFit.cover, isBanned: isBanned),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: LayoutBuilder(builder: (context, box) {
-                    return Container(
-                      height: box.maxHeight / 4,
-                      width: box.maxWidth,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-                        gradient: LinearGradient(
-                          colors: [AppColor.transparent, AppColor.black.withValues(alpha: 0.5)],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                        ),
-                      ),
-                    );
-                  }),
-                ),
-                Positioned(
-                  bottom: 8,
-                  right: 15,
-                  child: Text(
-                    FormatMessageTime.onConvert(time),
-                    style: AppFontStyle.styleW500(AppColor.white, 10),
+                    child: PreviewPostImageWidget(
+                      image: image,
+                      fit: BoxFit.cover,
+                      isBanned: isBanned,
+                    ),
                   ),
                 ),
-              ],
+              ),
+              const SizedBox(height: 4),
+              Text(
+                FormatMessageTime.onConvert(time),
+                style: AppFontStyle.styleW500(AppColor.white, 10),
+              ),
+            ],
+          ),
+
+          const SizedBox(width: 5),
+
+          // 用户头像
+          Container(
+            height: 30,
+            width: 30,
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: AppColor.secondary),
+            ),
+            child: Container(
+              clipBehavior: Clip.antiAlias,
+              decoration: const BoxDecoration(shape: BoxShape.circle),
+              child: PreviewProfileImageWidget(
+                image: user?.image ?? "",
+                isBanned: user?.isProfilePicBanned ?? false,
+              ),
             ),
           ),
-        ),
-        Container(
-          height: 30,
-          width: 30,
-          padding: const EdgeInsets.all(2),
-          margin: EdgeInsets.only(left: 5, bottom: 15),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: AppColor.secondary),
-          ),
-          child: Container(
-            clipBehavior: Clip.antiAlias,
-            decoration: const BoxDecoration(shape: BoxShape.circle),
-            child: PreviewProfileImageWidget(
-              image: Database.fetchLoginUserProfile()?.user?.image ?? "",
-              isBanned: Database.fetchLoginUserProfile()?.user?.isProfilePicBanned ?? false,
-            ),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

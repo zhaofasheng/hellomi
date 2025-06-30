@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tingle/page/bottom_bar_page/controller/bottom_bar_controller.dart';
@@ -24,7 +26,7 @@ class BottomBarView extends StatelessWidget {
             );
           },
         ),
-        bottomNavigationBar: SafeArea(top: false,child: const BottomBarWidget(),),
+        bottomNavigationBar:Platform.isIOS?BottomBarWidget() : SafeArea(child: BottomBarWidget()),
       ),
     );
   }

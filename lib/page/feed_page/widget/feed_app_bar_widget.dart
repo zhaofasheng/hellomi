@@ -22,7 +22,7 @@ class FeedAppBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List tabs = [EnumLocal.txtSquare.name.tr, EnumLocal.txtVideo.name.tr, EnumLocal.txtFollow.name.tr];
+    List tabs = [EnumLocal.txtVideo.name.tr,EnumLocal.txtSquare.name.tr,  EnumLocal.txtFollow.name.tr];
     return Container(
       color: AppColor.transparent,
       height: MediaQuery.of(context).viewPadding.top + 55,
@@ -59,7 +59,7 @@ class FeedAppBarWidget extends StatelessWidget {
                                   alignment: Alignment.center,
                                   child: Text(
                                     tabs[index],
-                                    style: controller.selectedTab == index ? AppFontStyle.styleW700(controller.selectedTab == 1 ? AppColor.white :AppColor.black, 18) : AppFontStyle.styleW600(controller.selectedTab == 1? AppColor.white.withValues(alpha: 0.6): AppColor.black.withValues(alpha: 0.6), 15),
+                                    style: controller.selectedTab == index ? AppFontStyle.styleW700(controller.selectedTab == 0 ? AppColor.white :AppColor.black, 18) : AppFontStyle.styleW600(controller.selectedTab == 0? AppColor.white.withValues(alpha: 0.6): AppColor.black.withValues(alpha: 0.6), 15),
                                   ),
                                 ),
                               ),
@@ -70,7 +70,7 @@ class FeedAppBarWidget extends StatelessWidget {
                                   height: 3,
                                   width: 15,
                                   decoration: BoxDecoration(
-                                    color: AppColor.black,
+                                    color:controller.selectedTab == 0 ? AppColor.white : AppColor.black,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
@@ -101,13 +101,13 @@ class FeedAppBarWidget extends StatelessWidget {
                   color: AppColor.transparent,
                   shape: BoxShape.circle,
                 ),
-                child: Image.asset(AppAssets.icSearch, width: 28,color: controller.selectedTab == 1 ? AppColor.white:AppColor.black,),
+                child: Image.asset(AppAssets.icSearch, width: 28,color: controller.selectedTab == 0 ? AppColor.white:AppColor.black,),
               ),
             ),
             5.width,
             GestureDetector(
               onTap: () async {
-                if (controller.selectedTab == 1) {
+                if (controller.selectedTab == 0) {
                   final profileController = Get.find<ProfileController>();
                   if (Utils.isDemoApp || profileController.fetchUserProfileModel?.user?.wealthLevel?.permissions?.uploadVideo == true) {
                     Utils.isCurrentlyVideoPage.value = false;
@@ -145,7 +145,7 @@ class FeedAppBarWidget extends StatelessWidget {
                   color: AppColor.transparent,
                   shape: BoxShape.circle,
                 ),
-                child: Image.asset(AppAssets.icBoxPlus, width: 25,color: controller.selectedTab == 1 ? AppColor.white:AppColor.black,),
+                child: Image.asset(AppAssets.icBoxPlus, width: 25,color: controller.selectedTab == 0 ? AppColor.white:AppColor.black,),
               ),
             ),
           ],

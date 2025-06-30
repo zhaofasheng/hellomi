@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
@@ -87,6 +88,28 @@ class MessageUserWidget extends StatelessWidget {
                           child: Image.asset(AppAssets.icAuthoriseIcon, width: 16),
                         ),
                       ),
+                      3.width,
+                      Visibility(
+                        visible: messageCount != null && messageCount != 0,
+                        child: Container(
+                          height: 18,
+                          padding: const EdgeInsets.symmetric(horizontal: 4), // 文字左右间距
+                          constraints: const BoxConstraints(
+                            minWidth: 18, // 最小宽度为 20
+                          ),
+                          decoration: BoxDecoration(
+                            color: HexColor('#00E4A6'),
+                            borderRadius: BorderRadius.circular(9), // 胶囊形圆角
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            messageCount.toString(),
+                            maxLines: 1,
+                            style: AppFontStyle.styleW600(AppColor.white, 10),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   3.height,
@@ -94,31 +117,8 @@ class MessageUserWidget extends StatelessWidget {
                     subTitle,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: AppFontStyle.styleW500(AppColor.lightGreyPurple, 11),
+                    style: AppFontStyle.styleW500(HexColor('#A8A8AC'), 11),
                   ),
-
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.start,
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: [
-                  //     Expanded(
-                  //       child: Text(
-                  //         subTitle,
-                  //         maxLines: 1,
-                  //         overflow: TextOverflow.ellipsis,
-                  //         style: AppFontStyle.styleW500(AppColor.lightGreyPurple, 12),
-                  //       ),
-                  //     ),
-                  //     10.width,
-                  //     Visibility(
-                  //       visible: dateTime != null,
-                  //       child: Text(
-                  //         dateTime!,
-                  //         style: AppFontStyle.styleW600(AppColor.lightGreyPurple, 12),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
                 ],
               ),
             ),
@@ -128,26 +128,10 @@ class MessageUserWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Visibility(
-                  visible: messageCount != null && messageCount != 0,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: const BoxDecoration(
-                      color: AppColor.primary,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Text(
-                      messageCount.toString(),
-                      maxLines: 1,
-                      style: AppFontStyle.styleW600(AppColor.white, 12),
-                    ),
-                  ),
-                ),
-                5.height,
-                Visibility(
                   visible: dateTime != null,
                   child: Text(
                     dateTime!,
-                    style: AppFontStyle.styleW600(AppColor.lightGreyPurple, 10),
+                    style: AppFontStyle.styleW600(HexColor('#A8A8AC'), 10),
                   ),
                 ),
               ],

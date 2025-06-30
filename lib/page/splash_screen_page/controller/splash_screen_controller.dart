@@ -16,36 +16,25 @@ import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/utils.dart';
-
 class SplashScreenController extends GetxController {
   @override
   void onInit() {
     Utils.showLog("App Start... 11");
     init();
-
     super.onInit();
   }
 
   Future<void> init() async {
     await FetchUserProfileImagesApi.callApi();
-
     BranchIoServices.onListenBranchIoLinks();
-
     await splashScreen();
   }
 
   Future<void> splashScreen() async {
     Timer(
       const Duration(milliseconds: 100),
-      () async {
-        if (Database.isNewUser) {
-          Get.offAllNamed(AppRoutes.onBoardingPage);
-        } else {
-          await BannerServices.onGetTypeWiseBanner(bannerType: 2); // Splash Banner
-          await BannerServices.onGetTypeWiseBanner(bannerType: 3); // Home Banner
-
-          await onGetProfile();
-        }
+          () async {
+        await onGetProfile();
       },
     );
   }
@@ -63,29 +52,29 @@ class SplashScreenController extends GetxController {
           if (FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.isBlock == true) {
             Utils.showToast(text: EnumLocal.txtYouAreBlockedByAdmin.name.tr);
           } else {
-            BannerServices.splashBannerList.isNotEmpty ? Get.offAndToNamed(AppRoutes.splashBannerPage) : Get.offAllNamed(AppRoutes.bottomBarPage);
+            Get.offAllNamed(AppRoutes.bottomBarPage);
           }
         } else {
           Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
+          Get.offAllNamed(AppRoutes.loginPage);
         }
       } else if (FetchSettingApi.fetchSettingModel?.message == "User not found in the database.") {
         Utils.showToast(text: EnumLocal.txtUserNotExist.name.tr);
         Database.onLogOut();
+        Get.offAllNamed(AppRoutes.loginPage);
       } else {
         Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
+        Get.offAllNamed(AppRoutes.loginPage);
       }
     } else {
       Database.onLogOut();
+      Get.offAllNamed(AppRoutes.loginPage);
     }
   }
 
   Future<void> onPrecacheAllImage(BuildContext context) async {
     await Future.wait([
-      precacheImage(AssetImage(AppAssets.imgOnBoarding_1), context),
-      precacheImage(AssetImage(AppAssets.imgOnBoarding_2), context),
-      precacheImage(AssetImage(AppAssets.imgOnBoarding_3), context),
       precacheImage(AssetImage(AppAssets.icLogo), context),
-      precacheImage(AssetImage(AppAssets.imgReferralBg), context),
     ]);
   }
 }

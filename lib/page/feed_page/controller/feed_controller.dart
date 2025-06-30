@@ -25,7 +25,7 @@ class FeedController extends GetxController {
   // *******************************************  MAIN TAB *******************************************
   int selectedTab = 0;
 
-  List pages = [FeedSquareTabWidget(), FeedVideoTabWidget(), FeedFollowTabWidget()];
+  List pages = [ FeedVideoTabWidget(),FeedSquareTabWidget(), FeedFollowTabWidget()];
 
   // *******************************************  SQUARE TAB *******************************************
 
@@ -68,7 +68,9 @@ class FeedController extends GetxController {
   PageController pageController = PageController();
 
   int currentIndex = 0;
-  bool hasInit = false;
+  bool hasLoadedMoment = false;
+  bool hasLoadedVideo = false;
+  bool hasLoadedFollow = false;
   List<VideoData> videos = [];
   bool isLoading = false;
   FetchVideoModel? fetchVideoModel;
@@ -95,32 +97,31 @@ class FeedController extends GetxController {
 
   Future<void> onChangeTab(int value) async {
     selectedTab = value;
-    selectedTab == 1 ? Utils.onChangeExtendBody(true) : Utils.onChangeExtendBody(false);
+    selectedTab == 0 ? Utils.onChangeExtendBody(true) : Utils.onChangeExtendBody(false);
     update([AppConstant.onChangeTab]);
-    if(hasInit == true){
-      return;
+
+    switch (selectedTab) {
+      case 1:
+        if (!hasLoadedMoment) {
+          hasLoadedMoment = true;
+          await onRefreshMoment();
+        }
+        break;
+      case 0:
+        if (!hasLoadedVideo) {
+          hasLoadedVideo = true;
+          await onRefreshVideos();
+        }
+        break;
+      case 2:
+        if (!hasLoadedFollow) {
+          hasLoadedFollow = true;
+          await onRefreshFollowPost();
+        }
+        break;
     }
-    hasInit = true;
-    onGetTabWiseData();
   }
 
-  Future<void> onGetTabWiseData() async {
-    switch (selectedTab) {
-      case 0:
-        {
-          onRefreshMoment();
-        }
-      case 1:
-        {
-          onRefreshVideos();
-        }
-      case 2:
-        {
-          onRefreshFollowPost();
-        }
-      default:
-    }
-  }
 
   // *******************************************  SQUARE TAB *******************************************
 
