@@ -8,6 +8,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class ReferralAppBarWidget extends GetView<ReferralController> {
   const ReferralAppBarWidget({super.key});
 
@@ -54,11 +56,7 @@ class ReferralAppBarWidget extends GetView<ReferralController> {
               alignment: Alignment.center,
               padding: EdgeInsets.only(right: 5),
               decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.transparent),
-              child: Image.asset(
-                AppAssets.icHistory,
-                width: 25,
-                color: AppColor.white,
-              ),
+              child: Assets.images.tuijianHistory.image(width: 24,height: 24),
             ),
           ),
         ],

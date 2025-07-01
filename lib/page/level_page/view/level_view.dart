@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/widget/loading_widget.dart';
 import 'package:tingle/common/widget/no_data_found_widget.dart';
@@ -17,6 +18,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class LevelView extends GetView<LevelController> {
   const LevelView({super.key});
 
@@ -28,7 +31,7 @@ class LevelView extends GetView<LevelController> {
     return GetBuilder<LevelController>(
       id: AppConstant.onGetLevel,
       builder: (controller) => Scaffold(
-        backgroundColor: AppColor.white,
+        backgroundColor: HexColor('#F5F5F5'),
         body: Stack(
           children: [
             SizedBox(
@@ -39,12 +42,13 @@ class LevelView extends GetView<LevelController> {
                     height: 300,
                     width: Get.width,
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(20),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
                       ),
-                      image: DecorationImage(
-                        image: AssetImage(AppAssets.imgLevelBg),
+                      child: Assets.images.mineBackImg.image(
+                        width: Get.width,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -75,7 +79,7 @@ class LevelView extends GetView<LevelController> {
                                 margin: const EdgeInsets.all(2),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: Border.all(color: AppColor.white, width: 2),
+                                  border: Border.all(color: HexColor('#00E4A6'), width: 2),
                                 ),
                                 child: Container(
                                   height: 115,
@@ -118,35 +122,69 @@ class LevelView extends GetView<LevelController> {
                                   color: AppColor.white,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
-                                child: Table(
-                                  border: TableBorder.all(
-                                    color: AppColor.secondary.withValues(alpha: 0.5),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  columnWidths: const {
-                                    0: FlexColumnWidth(1),
-                                    1: FlexColumnWidth(2),
-                                  },
+                                child: Stack(
                                   children: [
-                                    // Header row
-                                    TableRow(
-                                      decoration: BoxDecoration(
-                                        color: controller.levelList.isEmpty ? AppColor.transparent : AppColor.grayText.withValues(alpha: 0.1),
-                                        borderRadius: BorderRadius.vertical(
-                                          top: Radius.circular(20),
-                                        ),
-                                      ),
-                                      children: [
-                                        headerCell(EnumLocal.txtLevel.name.tr),
-                                        headerCell(EnumLocal.txtCoinsRequiredToUpgrade.name.tr),
-                                      ],
-                                    ),
-                                    ...controller.levelList.map(
-                                      (element) => TableRow(
+                                    // 主体内容区域
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                                      child: Column(
                                         children: [
-                                          levelCell(element.levelImage ?? ""),
-                                          dataCell(element.coinThreshold ?? 0),
+                                          // 表头
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 12),
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: headerCell(EnumLocal.txtLevel.name.tr),
+                                                ),
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: headerCell(EnumLocal.txtCoinsRequiredToUpgrade.name.tr),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          _tableDivider(),
+
+                                          // 内容行（最后一行不画底部分割线）
+                                          ...List.generate(controller.levelList.length, (index) {
+                                            final element = controller.levelList[index];
+                                            final isLast = index == controller.levelList.length - 1;
+
+                                            return Column(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 1,
+                                                        child: levelCell(element.levelImage ?? ""),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child: dataCell(element.coinThreshold ?? 0),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                if (!isLast) _tableDivider(), // ✅ 只添加非最后一行的横线
+                                              ],
+                                            );
+                                          }),
                                         ],
+                                      ),
+                                    ),
+
+                                    // ✅ 竖向分割线（1/3位置 + 内边距10）
+                                    Positioned(
+                                      left: (Get.width - 30) * (1 / 3), // 30 = 左右 padding 各15
+                                      top: 10,
+                                      bottom: 10,
+                                      child: Container(
+                                        width: 1,
+                                        color: HexColor('#EBEBEB'),
                                       ),
                                     ),
                                   ],
@@ -166,12 +204,22 @@ class LevelView extends GetView<LevelController> {
   }
 }
 
+Widget _tableDivider() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 10),
+    child: Container(
+      height: 1,
+      color: HexColor('#EBEBEB'),
+    ),
+  );
+}
+
 Widget headerCell(String text) {
   return Padding(
     padding: const EdgeInsets.all(12.0),
     child: Text(
       text,
-      style: AppFontStyle.styleW600(AppColor.grayText, 13),
+      style: AppFontStyle.styleW600(AppColor.black, 13),
       textAlign: TextAlign.center,
     ),
   );
@@ -190,7 +238,7 @@ Widget dataCell(int value) {
     child: Text(
       value.toString(),
       textAlign: TextAlign.center,
-      style: AppFontStyle.styleW600(AppColor.grayText, 11),
+      style: AppFontStyle.styleW600(AppColor.black, 11),
     ),
   );
 }
@@ -210,7 +258,7 @@ class ProgressBar extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 6,
+              height: 8,
               width: Get.width,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
@@ -244,18 +292,18 @@ class ProgressBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 RichText(
-                  text: TextSpan(text: EnumLocal.txtTopUpCoin.name.tr, style: AppFontStyle.styleW500(AppColor.white, 12), children: [
+                  text: TextSpan(text: EnumLocal.txtTopUpCoin.name.tr, style: AppFontStyle.styleW500(HexColor('#86868F'), 12), children: [
                     TextSpan(
                       text: current.toString(),
-                      style: AppFontStyle.styleW700(AppColor.white, 12),
+                      style: AppFontStyle.styleW700(AppColor.black, 12),
                     ),
                   ]),
                 ),
                 RichText(
-                  text: TextSpan(text: EnumLocal.txtTheDistanceToUpgrade.name.tr, style: AppFontStyle.styleW500(AppColor.white, 12), children: [
+                  text: TextSpan(text: EnumLocal.txtTheDistanceToUpgrade.name.tr, style: AppFontStyle.styleW500(HexColor('#86868F'), 12), children: [
                     TextSpan(
                       text: next.toString(),
-                      style: AppFontStyle.styleW700(AppColor.white, 12),
+                      style: AppFontStyle.styleW700(AppColor.black, 12),
                     ),
                   ]),
                 ),

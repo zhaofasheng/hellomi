@@ -19,6 +19,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class EditProfileView extends GetView<EditProfileController> {
   const EditProfileView({super.key});
 
@@ -28,7 +30,7 @@ class EditProfileView extends GetView<EditProfileController> {
     return Scaffold(
       body:SafeArea(top: false,child:  Stack(
         children: [
-          const CustomLightBackgroundWidget(),
+          const CustomLightBackgroundWidget(isLogin: true,),
           SizedBox(
             height: Get.height,
             width: Get.width,
@@ -98,14 +100,14 @@ class EditProfileView extends GetView<EditProfileController> {
                           ),
                           30.height,
                           CustomTextFieldWidget(
-                            title: EnumLocal.txtEnterYourName.name.tr,
+                            leftImage: Assets.images.loginName.image(width: 24,height: 24),
                             hintText: EnumLocal.txtEnterYourName.name.tr,
                             keyboardType: TextInputType.name,
                             controller: controller.nameController,
                           ),
                           20.height,
                           CustomTextFieldWidget(
-                            title: EnumLocal.txtEnterUserName.name.tr,
+                            leftImage: Assets.images.loginSubName.image(width: 24,height: 24),
                             hintText: EnumLocal.txtEnterUserName.name.tr,
                             keyboardType: TextInputType.emailAddress,
                             controller: controller.userNameController,
@@ -134,7 +136,7 @@ class EditProfileView extends GetView<EditProfileController> {
                           ),
                           20.height,
                           CustomTextFieldWidget(
-                            title: EnumLocal.txtEnterAge.name.tr,
+                            leftImage: Assets.images.loginAge.image(width: 24,height: 24),
                             hintText: EnumLocal.txtEnterAge.name.tr,
                             keyboardType: TextInputType.number,
                             controller: controller.ageController,
@@ -181,7 +183,7 @@ class EditProfileView extends GetView<EditProfileController> {
                           20.height,
                           Text(
                             EnumLocal.txtCountry.name.tr,
-                            style: AppFontStyle.styleW500(AppColor.grayText, 14),
+                            style: AppFontStyle.styleW500(AppColor.black, 14),
                           ),
                           5.height,
                           GetBuilder<EditProfileController>(
@@ -195,7 +197,7 @@ class EditProfileView extends GetView<EditProfileController> {
                           20.height,
                           Text(
                             EnumLocal.txtSelectGender.name.tr,
-                            style: AppFontStyle.styleW500(AppColor.grayText, 14),
+                            style: AppFontStyle.styleW500(AppColor.black, 14),
                           ),
                           5.height,
                           GetBuilder<EditProfileController>(
@@ -203,6 +205,7 @@ class EditProfileView extends GetView<EditProfileController> {
                             builder: (controller) => Row(
                               children: [
                                 GenderButtonWidget(
+                                  imageWidget: Assets.images.loginMan.image(width: 24,height: 24),
                                   title: EnumLocal.txtMale.name.tr,
                                   image: AppAssets.imgMale,
                                   isSelected: controller.isMale,
@@ -210,6 +213,7 @@ class EditProfileView extends GetView<EditProfileController> {
                                 ),
                                 15.width,
                                 GenderButtonWidget(
+                                  imageWidget: Assets.images.loginWoman.image(width: 24,height: 24),
                                   title: EnumLocal.txtFemale.name.tr,
                                   image: AppAssets.imgFemale,
                                   isSelected: !controller.isMale,

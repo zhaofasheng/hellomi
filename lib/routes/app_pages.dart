@@ -134,6 +134,7 @@ import 'package:tingle/page/video_call_ringing_page/binding/video_call_ringing_b
 import 'package:tingle/page/video_call_ringing_page/view/video_call_ringing_view.dart';
 import 'package:tingle/page/withdraw_page/binding/withdraw_binding.dart';
 import 'package:tingle/page/withdraw_page/view/withdraw_view.dart';
+import '../page/login_page/controller/login_controller.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -152,7 +153,9 @@ class AppPages {
     GetPage(
       name: AppRoutes.loginPage,
       page: () => const LoginView(),
-      binding: LoginBinding(),
+      binding: BindingsBuilder(() {
+        Get.put(LoginController());
+      }),
     ),
     GetPage(
       name: AppRoutes.fillProfilePage,

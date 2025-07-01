@@ -22,17 +22,19 @@ class CoinAndPointDetailsWidget extends GetView<ProfileController> {
       builder: (controller) => Container(
         color: AppColor.transparent,
         margin: const EdgeInsets.symmetric(horizontal: 15),
-        child: Row(
+        child: Row( // ✅ Expanded 需要 Row 或 Column
           children: [
-            ItemWidget(
-              title: EnumLocal.txtMyCoins.name.tr,
-              count: (controller.fetchUserProfileModel?.user?.coin ?? 0).toInt(),
-              image: AppAssets.icMyCoin,
-              gradient: AppColor.orangeYellowGradient,
-              callback: () => Get.toNamed(AppRoutes.coinHistoryPage)?.then((value) {
-                Utils.onChangeStatusBar(brightness: Brightness.dark);
-                controller.scrollController.jumpTo(0.0);
-              }),
+            Expanded(
+              child: ItemWidget(
+                title: EnumLocal.txtMyCoins.name.tr,
+                count: (controller.fetchUserProfileModel?.user?.coin ?? 0).toInt(),
+                image: AppAssets.icMyCoin,
+                gradient: AppColor.orangeYellowGradient,
+                callback: () => Get.toNamed(AppRoutes.coinHistoryPage)?.then((value) {
+                  Utils.onChangeStatusBar(brightness: Brightness.dark);
+                  controller.scrollController.jumpTo(0.0);
+                }),
+              ),
             ),
           ],
         ),
@@ -40,6 +42,7 @@ class CoinAndPointDetailsWidget extends GetView<ProfileController> {
     );
   }
 }
+
 
 class ItemWidget extends StatelessWidget {
   const ItemWidget({
@@ -59,46 +62,46 @@ class ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: callback,
-        child: SizedBox(
-          height: 72,
-          child: Stack(
-            children: [
-              Assets.images.mineYbBack.image(height: 72),
-              Container(
-                padding: EdgeInsets.all(12),
-                child: Row(
-                  children: [
-                    Assets.images.mineYb.image(width: 56),
-                    15.width,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          (count).toStringAsFixed(2),
-                          style: AppFontStyle.styleW900(AppColor.white, 22),
+    return GestureDetector(
+      onTap: callback,
+      child: SizedBox(
+        height: 72,
+        child: Stack(
+          children: [
+            Assets.images.mineYbBack.image(height: 72),
+            Container(
+              padding: const EdgeInsets.all(12),
+              child: Row(
+                children: [
+                  Assets.images.mineYb.image(width: 56),
+                  15.width,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        count.toStringAsFixed(2),
+                        style: AppFontStyle.styleW900(AppColor.white, 22),
+                      ),
+                      const SizedBox(height: 0),
+                      Text(
+                        EnumLocal.txtAvailableMyCoins.name.tr,
+                        style: AppFontStyle.styleW600(
+                          AppColor.white.withOpacity(0.8),
+                          12,
                         ),
-
-                        0.height,
-                        Text(
-                          EnumLocal.txtAvailableMyCoins.name.tr,
-                          style: AppFontStyle.styleW600(AppColor.white.withValues(alpha: 0.8), 12),
-                        ),
-
-                      ],
-                    ),
-                    const Spacer(),
-                    Assets.images.mineWhiteRight.image(width: 20),
-                  ],
-                ),
-              )
-            ],
-          ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  Assets.images.mineWhiteRight.image(width: 20),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
   }
 }
+

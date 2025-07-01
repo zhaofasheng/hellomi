@@ -3,8 +3,9 @@ import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/utils/color.dart';
 
 class QrCodeItemUi extends StatelessWidget {
-  const QrCodeItemUi({super.key, required this.icon, required this.callback});
+  const QrCodeItemUi({super.key, required this.icon, required this.callback, this.imageWidget});
 
+  final Widget? imageWidget;
   final String icon;
   final Callback callback;
 
@@ -20,7 +21,7 @@ class QrCodeItemUi extends StatelessWidget {
           shape: BoxShape.circle,
         ),
         child: Center(
-          child: Image.asset(icon, height: 24, width: 24, color: AppColor.white),
+          child:imageWidget ?? Image.asset(icon, height: 24, width: 24, color: AppColor.white),
         ),
       ),
     );

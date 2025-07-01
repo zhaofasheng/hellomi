@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
@@ -8,6 +9,8 @@ import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
+
+import '../../../assets/assets.gen.dart';
 
 class RankingUserListTileWidget extends StatelessWidget {
   const RankingUserListTileWidget({
@@ -39,6 +42,19 @@ class RankingUserListTileWidget extends StatelessWidget {
   final bool isVerified;
   final Callback callback;
 
+  Widget _buildTopRankImage(int rank) {
+    switch (rank) {
+      case 1:
+        return Assets.images.rich1.image(width: 25, height: 25);
+      case 2:
+        return Assets.images.rich2.image(width: 25, height: 25);
+      case 3:
+        return Assets.images.rice3.image(width: 25, height: 25);
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -49,7 +65,7 @@ class RankingUserListTileWidget extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 10, left: 15, right: 15),
         padding: const EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-          color: AppColor.colorBorder.withValues(alpha: 0.5),
+          color: HexColor('#00E4A6').withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Row(
@@ -57,20 +73,13 @@ class RankingUserListTileWidget extends StatelessWidget {
             SizedBox(
               width: 25,
               child: (index + 1) <= 3
-                  ? Image.asset(
-                      (index + 1) == 1
-                          ? AppAssets.rankLevel_1
-                          : (index + 1) == 2
-                              ? AppAssets.rankLevel_2
-                              : AppAssets.rankLevel_3,
-                      height: 25,
-                    )
+                  ? _buildTopRankImage(index + 1)
                   : Center(
-                      child: Text(
-                        (index + 1).toString(),
-                        style: AppFontStyle.styleW700(AppColor.black, 15),
-                      ),
-                    ),
+                child: Text(
+                  (index + 1).toString(),
+                  style: AppFontStyle.styleW700(AppColor.black, 15),
+                ),
+              ),
             ),
             15.width,
             Container(
@@ -150,30 +159,24 @@ class RankingUserListTileWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-                  decoration: BoxDecoration(
-                    color: AppColor.lightYellow.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Row(
-                    children: [
-                      Image.asset(AppAssets.icCoinStar, width: 18),
-                      3.width,
-                      Text(
-                        CustomFormatNumber.onConvert(coin),
-                        style: AppFontStyle.styleW700(AppColor.lightYellow, 12),
-                      ),
-                      5.width,
-                    ],
-                  ),
-                ),
-                15.height,
-              ],
-            ),
+           Container(
+             padding: EdgeInsets.only(left: 5,right: 5,top: 3,bottom: 3),
+             decoration: BoxDecoration(
+               color: HexColor('#FFB200').withOpacity(0.2),
+               borderRadius: BorderRadius.circular(999), // ✅ 完全圆角
+             ),
+             child: Row(
+               children: [
+                 Image.asset(AppAssets.icCoinStar, width: 18),
+                 3.width,
+                 Text(
+                   CustomFormatNumber.onConvert(coin),
+                   style: AppFontStyle.styleW700(AppColor.lightYellow, 12),
+                 ),
+                 5.width,
+               ],
+             ),
+           ),
           ],
         ),
       ),

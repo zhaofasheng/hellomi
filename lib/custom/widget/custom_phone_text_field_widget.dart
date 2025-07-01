@@ -45,6 +45,7 @@ class CustomPhoneTextFieldWidget extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
 
   RxBool isobsure = false.obs;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -52,14 +53,14 @@ class CustomPhoneTextFieldWidget extends StatelessWidget {
       children: [
         title != null
             ? Column(
-                children: [
-                  Text(
-                    title!,
-                    style: AppFontStyle.styleW500(AppColor.grayText, 14),
-                  ),
-                  5.height,
-                ],
-              )
+          children: [
+            Text(
+              title!,
+              style: AppFontStyle.styleW500(AppColor.grayText, 14),
+            ),
+            5.height,
+          ],
+        )
             : const Offstage(),
         IntlPhoneField(
           controller: controller,
@@ -67,22 +68,39 @@ class CustomPhoneTextFieldWidget extends StatelessWidget {
             filled: true,
             fillColor: AppColor.white,
             contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
-            focusedErrorBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColor.red, width: 1.4), borderRadius: BorderRadius.circular(15)),
-            errorBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColor.colorBorder, width: 1), borderRadius: BorderRadius.circular(15)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColor.colorBorder, width: 1), borderRadius: BorderRadius.circular(15)),
-            disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColor.colorBorder, width: 1), borderRadius: BorderRadius.circular(15)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColor.colorBorder, width: 1), borderRadius: BorderRadius.circular(15)),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
+            ),
             counterText: "",
             hintText: hintText,
-            hintStyle: AppFontStyle.styleW500(AppColor.secondary, 15),
-            border: OutlineInputBorder(borderSide: BorderSide(color: AppColor.colorBorder, width: 1), borderRadius: BorderRadius.circular(15)),
+            hintStyle: AppFontStyle.styleW500(const Color(0xFF86868F), 15),
           ),
           initialCountryCode: "IN",
-          // onChanged: onChange,
-          // onCountryChanged: onCountryChanged,
-
+          onChanged: onChange,
           onCountryChanged: onCountryChanged,
         ),
+
       ],
     );
   }

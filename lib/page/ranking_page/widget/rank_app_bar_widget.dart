@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/page/ranking_page/controller/ranking_controller.dart';
 import 'package:tingle/utils/assets.dart';
@@ -12,8 +13,10 @@ class RankAppBarWidget extends GetView<RankingController> {
 
   @override
   Widget build(BuildContext context) {
+    final topPadding = MediaQuery.of(context).viewPadding.top;
+
     return Container(
-      margin: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
+      margin: EdgeInsets.only(top: topPadding),
       child: SizedBox(
         height: 40,
         width: Get.width,
@@ -25,7 +28,10 @@ class RankAppBarWidget extends GetView<RankingController> {
                 height: 45,
                 width: 45,
                 alignment: Alignment.center,
-                decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.transparent),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColor.transparent,
+                ),
                 child: Image.asset(
                   AppAssets.icArrowLeft,
                   width: 10,
@@ -34,30 +40,33 @@ class RankAppBarWidget extends GetView<RankingController> {
               ),
             ),
             Expanded(
-              child: TabBar(
-                controller: controller.tabController,
-                labelColor: AppColor.white,
-                labelStyle: AppFontStyle.styleW600(AppColor.transparent, 17),
-                unselectedLabelColor: AppColor.white.withValues(alpha: 0.5),
-                indicatorSize: TabBarIndicatorSize.label,
-                indicatorWeight: 2,
-                indicatorPadding: const EdgeInsets.only(top: 36, right: 10, left: 0),
-                dividerColor: AppColor.transparent,
-                indicator: const BoxDecoration(
-                  color: AppColor.white,
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
+              child: Container(
+                height: 36,
+                margin: const EdgeInsets.only(right: 45),
+                padding: const EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                  color: AppColor.white.withOpacity(0.4), // 外层灰/白背景
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                tabs: <Tab>[
-                  Tab(
-                    text: EnumLocal.txtRich.name.tr,
+                child: TabBar(
+                  controller: controller.tabController,
+                  indicator: BoxDecoration(
+                    color: AppColor.white, // 选中项的背景色
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  Tab(
-                    text: EnumLocal.txtGift.name.tr,
-                  ),
-                ],
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  labelColor: AppColor.black, // 选中项的文字颜色
+                  unselectedLabelColor: HexColor('#A8A8AC'), // 未选中文字颜色
+                  labelStyle: AppFontStyle.styleW600(AppColor.black, 15),
+                  unselectedLabelStyle: AppFontStyle.styleW500(AppColor.white.withOpacity(0.6), 15),
+                  dividerColor: AppColor.transparent,
+                  tabs: [
+                    Tab(text: EnumLocal.txtRich.name.tr),
+                    Tab(text: EnumLocal.txtGift.name.tr),
+                  ],
+                ),
               ),
             ),
-            45.width,
           ],
         ),
       ),

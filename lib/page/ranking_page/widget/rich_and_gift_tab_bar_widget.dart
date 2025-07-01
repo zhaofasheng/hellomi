@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/page/ranking_page/controller/ranking_controller.dart';
@@ -17,8 +18,12 @@ class RichTabBarWidget extends StatelessWidget {
       id: AppConstant.onChangeRichTabBar,
       builder: (controller) => Container(
         height: 40,
-        width: Get.width,
-        color: AppColor.transparent,
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 4),
+        decoration: BoxDecoration(
+          color: AppColor.white.withOpacity(0.1), // 背景色
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -27,13 +32,13 @@ class RichTabBarWidget extends StatelessWidget {
               isSelected: controller.selectedRichTabIndex == 0,
               callback: () => controller.onChangeRichTabBar(0),
             ),
-            15.width,
+            10.width,
             _TabItemWidget(
               title: EnumLocal.txtWeekly.name.tr,
               isSelected: controller.selectedRichTabIndex == 1,
               callback: () => controller.onChangeRichTabBar(1),
             ),
-            15.width,
+            10.width,
             _TabItemWidget(
               title: EnumLocal.txtMonthly.name.tr,
               isSelected: controller.selectedRichTabIndex == 2,
@@ -55,8 +60,12 @@ class GiftTabBarWidget extends StatelessWidget {
       id: AppConstant.onChangeGiftTabBar,
       builder: (controller) => Container(
         height: 40,
-        width: Get.width,
-        color: AppColor.transparent,
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 4),
+        decoration: BoxDecoration(
+          color: AppColor.white.withOpacity(0.1), // 背景色
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -65,19 +74,54 @@ class GiftTabBarWidget extends StatelessWidget {
               isSelected: controller.selectedGiftTabIndex == 0,
               callback: () => controller.onChangeGiftTabBar(0),
             ),
-            15.width,
+            10.width,
             _TabItemWidget(
               title: EnumLocal.txtWeekly.name.tr,
               isSelected: controller.selectedGiftTabIndex == 1,
               callback: () => controller.onChangeGiftTabBar(1),
             ),
-            15.width,
+            10.width,
             _TabItemWidget(
               title: EnumLocal.txtMonthly.name.tr,
               isSelected: controller.selectedGiftTabIndex == 2,
               callback: () => controller.onChangeGiftTabBar(2),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TabItemWidget extends StatelessWidget {
+  const _TabItemWidget({
+    super.key,
+    required this.title,
+    required this.isSelected,
+    required this.callback,
+  });
+
+  final String title;
+  final bool isSelected;
+  final VoidCallback callback;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: callback,
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 200),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColor.white : AppColor.white.withOpacity(0.4),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Text(
+          title,
+          style: AppFontStyle.styleW500(
+            isSelected ? AppColor.primary : HexColor('#A8A8AC'),
+            13,
+          ),
         ),
       ),
     );
@@ -116,38 +160,6 @@ class GiftSubTabBarWidget extends StatelessWidget {
   }
 }
 
-class _TabItemWidget extends StatelessWidget {
-  const _TabItemWidget({
-    super.key,
-    required this.title,
-    required this.isSelected,
-    required this.callback,
-  });
-
-  final String title;
-  final bool isSelected;
-  final Callback callback;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: callback,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
-          color: AppColor.white.withValues(alpha: 0.2),
-          border: Border.all(color: isSelected ? AppColor.white : AppColor.transparent),
-        ),
-        child: Text(
-          title,
-          style: AppFontStyle.styleW500(AppColor.white, 13),
-        ),
-      ),
-    );
-  }
-}
-
 class _SubTabItemWidget extends StatelessWidget {
   const _SubTabItemWidget({
     super.key,
@@ -168,12 +180,11 @@ class _SubTabItemWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: isSelected ? AppColor.white : AppColor.transparent,
-          border: Border.all(color: isSelected ? AppColor.transparent : AppColor.white),
+          color: isSelected ? AppColor.white :  AppColor.white.withOpacity(0.4),
         ),
         child: Text(
           title,
-          style: AppFontStyle.styleW500(isSelected ? AppColor.primary : AppColor.white, 13),
+          style: AppFontStyle.styleW500(isSelected ? AppColor.primary : HexColor('#A8A8AC'), 13),
         ),
       ),
     );

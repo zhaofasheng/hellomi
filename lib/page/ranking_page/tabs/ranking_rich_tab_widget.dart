@@ -19,18 +19,13 @@ class RankingRichTabWidget extends StatelessWidget {
         children: [
           20.height,
           RichTabBarWidget(),
-          20.height,
           Expanded(
             child: Container(
               height: Get.height,
               width: Get.width,
               clipBehavior: Clip.antiAlias,
-              margin: EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
                 color: AppColor.white,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(30),
-                ),
               ),
               child: GetBuilder<RankingController>(
                 id: AppConstant.onChangeRichTabBar,

@@ -5,7 +5,6 @@ import 'package:tingle/common/function/format_message_time.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/font_style.dart';
-
 class ReceiverMessageWidget extends StatelessWidget {
   const ReceiverMessageWidget({
     super.key,
@@ -46,17 +45,18 @@ class ReceiverMessageWidget extends StatelessWidget {
               ),
             ),
           ),
-          // 消息内容
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+
+          // 消息气泡 + 时间（用 Stack 包裹）
+          Stack(
             children: [
+              // 消息内容容器
               Container(
                 constraints: BoxConstraints(maxWidth: Get.width * 0.6),
                 padding: const EdgeInsets.only(left: 12, right: 38, top: 6, bottom: 15),
                 decoration: const BoxDecoration(
                   color: AppColor.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(0),         // 左上角直角
+                    topLeft: Radius.circular(0),
                     topRight: Radius.circular(10),
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10),
@@ -67,16 +67,14 @@ class ReceiverMessageWidget extends StatelessWidget {
                   style: AppFontStyle.styleW400(AppColor.black, 16),
                 ),
               ),
+
               // 时间戳
               Positioned(
                 bottom: 3,
                 right: 10,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 4, left: 8),
-                  child: Text(
-                    FormatMessageTime.onConvert(time),
-                    style: AppFontStyle.styleW500(HexColor('#A8A8AC'), 10),
-                  ),
+                child: Text(
+                  FormatMessageTime.onConvert(time),
+                  style: AppFontStyle.styleW500(HexColor('#A8A8AC'), 10),
                 ),
               ),
             ],
@@ -86,3 +84,4 @@ class ReceiverMessageWidget extends StatelessWidget {
     );
   }
 }
+

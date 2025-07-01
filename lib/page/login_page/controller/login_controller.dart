@@ -516,6 +516,7 @@ class LoginController extends GetxController {
     forgotPasswordEmailController.text = emailController.text.trim();
     emailController.clear();
     passwordController.clear();
+
     Get.to(ForgotPasswordScreen());
   }
 

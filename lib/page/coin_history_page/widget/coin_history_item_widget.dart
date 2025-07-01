@@ -8,6 +8,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class HistoryItemUi extends StatelessWidget {
   const HistoryItemUi({
     super.key,
@@ -37,7 +39,6 @@ class HistoryItemUi extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppColor.colorBorder),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -50,11 +51,8 @@ class HistoryItemUi extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColor.white,
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(
-                color: AppColor.colorBorder.withValues(alpha: 0.6),
-              ),
             ),
-            child: Center(child: Image.asset(AppAssets.icMyCoin, width: 32)),
+            child: Center(child: Assets.images.tuijianGold.image(width: 24,height: 24)),
           ),
           10.width,
           Expanded(

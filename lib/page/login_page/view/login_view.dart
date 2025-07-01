@@ -13,6 +13,7 @@ class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
   @override
   Widget build(BuildContext context) {
+
     Utils.onChangeStatusBar(brightness: Brightness.dark);
     return Scaffold(
       body: SafeArea(top: false,child: Stack(

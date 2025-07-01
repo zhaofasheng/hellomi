@@ -13,42 +13,62 @@ import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../custom/widget/custom_light_background_widget.dart';
+import '../../level_page/widget/level_app_bar_widget.dart';
+
 class RechargeCoinView extends GetView<RechargeCoinController> {
   const RechargeCoinView({super.key});
 
   @override
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.dark);
+
     return Scaffold(
       backgroundColor: AppColor.white,
-      appBar: SimpleAppBarWidget.onShow(context: context, title: EnumLocal.txtTopUpCoins.name.tr),
-      body: GetBuilder<RechargeCoinController>(
-        id: AppConstant.onGetCoinPlan,
-        builder: (controller) => controller.isLoading
-            ? RechargeCoinShimmerWidget()
-            : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            15.height,
-                            CoinBoxWidget(),
-                            PaymentGatewayWidget(),
-                            PurchaseCoinWidget(),
-                          ],
-                        ),
+      body: SafeArea(top: false,child: Stack(
+        children: [
+          /// 背景图（可只铺顶部区域）
+          const CustomLightBackgroundWidget(),
+
+          /// 正文内容
+          Column(
+            children: [
+              /// 自定义 AppBar
+              LevelAppBarWidget(title: EnumLocal.txtTopUpCoins.name.tr),
+
+              /// 页面主体内容
+              Expanded(
+                child: GetBuilder<RechargeCoinController>(
+                  id: AppConstant.onGetCoinPlan,
+                  builder: (controller) {
+                    if (controller.isLoading) {
+                      return RechargeCoinShimmerWidget();
+                    }
+
+                    return SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          15.height,
+                          CoinBoxWidget(),
+                          15.height,
+                          PurchaseCoinWidget(),
+                          15.height,
+                          PaymentGatewayWidget(),
+
+                          30.height,
+                        ],
                       ),
-                    ),
-                    // AgreementWidget(),
-                  ],
+                    );
+                  },
                 ),
               ),
-      ),
+            ],
+          ),
+        ],
+      )),
     );
   }
 }

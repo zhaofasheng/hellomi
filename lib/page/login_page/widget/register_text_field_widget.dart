@@ -9,6 +9,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class RegisterTextFieldWidget extends StatelessWidget {
   const RegisterTextFieldWidget({super.key});
 
@@ -30,14 +32,14 @@ class RegisterTextFieldWidget extends StatelessWidget {
           ),
           40.height,
           CustomTextFieldWidget(
-            title: EnumLocal.txtEnterYourName.name.tr,
+            leftImage: Assets.images.loginName.image(width: 24,height: 24),
             hintText: EnumLocal.txtEnterYourName.name.tr,
             keyboardType: TextInputType.text,
             controller: controller.registrationNameController,
           ),
           20.height,
           CustomTextFieldWidget(
-            title: EnumLocal.txtEnterEmail.name.tr,
+            leftImage: Assets.images.loginSubName.image(width: 24,height: 24),
             hintText: EnumLocal.txtEnterEmail.name.tr,
             keyboardType: TextInputType.text,
             controller: controller.registrationEmailController,
@@ -46,7 +48,7 @@ class RegisterTextFieldWidget extends StatelessWidget {
           GetBuilder<LoginController>(
             id: ApiParams.password,
             builder: (controller) => CustomTextFieldWidget(
-              title: EnumLocal.txtEnterPassword.name.tr,
+              leftImage: Assets.images.loginRock.image(width: 24,height: 24),
               hintText: EnumLocal.txtEnterPassword.name.tr,
               keyboardType: TextInputType.name,
               controller: controller.registrationPasswordController,
@@ -59,7 +61,7 @@ class RegisterTextFieldWidget extends StatelessWidget {
           GetBuilder<LoginController>(
             id: ApiParams.password,
             builder: (controller) => CustomTextFieldWidget(
-              title: EnumLocal.txtConfirmPassword.name.tr,
+              leftImage: Assets.images.loginRock.image(width: 24,height: 24),
               hintText: EnumLocal.txtConfirmPassword.name.tr,
               keyboardType: TextInputType.name,
               controller: controller.registrationConfirmPasswordController,

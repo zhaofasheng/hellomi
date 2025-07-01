@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/custom/function/custom_format_number.dart';
@@ -32,9 +33,9 @@ class PurchaseCoinWidget extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 15,
-              mainAxisSpacing: 15,
-              mainAxisExtent: 200,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              mainAxisExtent: 130,
             ),
             itemBuilder: (BuildContext context, int index) {
               final indexData = controller.coinPlans[index];
@@ -72,31 +73,20 @@ class _ItemWidget extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              border: Border.all(color: AppColor.orange, width: 1),
+              color: AppColor.white,
               borderRadius: BorderRadius.circular(26),
             ),
             child: Column(
               children: [
-                12.height,
-                Center(
-                  child: Image.asset(AppAssets.icMyCoin, width: 58),
-                ),
-                10.height,
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: AppColor.orange.withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Text(
-                    "${CustomFormatNumber.onConvert(coin)} ${EnumLocal.txtCoin.name.tr}",
-                    style: AppFontStyle.styleW700(AppColor.orange.withValues(alpha: 0.6), 11),
-                  ),
+                15.height,
+                Text(
+                  "${CustomFormatNumber.onConvert(coin)} ${EnumLocal.txtCoin.name.tr}",
+                  style: AppFontStyle.styleW700(AppColor.black, 11),
                 ),
                 8.height,
                 Text(
                   "${Utils.currencySymbol} ${CustomFormatNumber.onConvert(amount.toInt())}",
-                  style: AppFontStyle.styleW900(AppColor.orange, 20),
+                  style: AppFontStyle.styleW900(HexColor('#A8A8AC'), 20),
                 ),
                 8.height,
                 GestureDetector(
@@ -104,18 +94,18 @@ class _ItemWidget extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      gradient: AppColor.orangeYellowGradient,
+                      color: HexColor('#09E6AA'),
                     ),
-                    height: 42,
+                    height: 36,
                     width: Get.width,
-                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.symmetric(horizontal: 15),
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             EnumLocal.txtPayNow.name.tr,
-                            style: AppFontStyle.styleW700(AppColor.white, 15),
+                            style: AppFontStyle.styleW500(AppColor.white, 15),
                           ),
                         ],
                       ),
@@ -135,7 +125,7 @@ class _ItemWidget extends StatelessWidget {
                 child: Container(
                   height: 18,
                   width: 100,
-                  decoration: BoxDecoration(gradient: AppColor.orangeYellowGradient),
+                  decoration: BoxDecoration(color: HexColor('#09E6AA')),
                   child: Center(
                     child: Text(
                       EnumLocal.txtMostPopularPlan.name.tr,

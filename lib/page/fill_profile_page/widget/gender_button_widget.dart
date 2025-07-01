@@ -6,10 +6,11 @@ import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
 class GenderButtonWidget extends StatelessWidget {
-  const GenderButtonWidget({super.key, required this.title, required this.image, required this.isSelected, required this.callback});
+  const GenderButtonWidget({super.key, required this.title, required this.image, required this.isSelected, required this.callback, this.imageWidget});
 
   final String title;
   final String image;
+  final Widget? imageWidget;
   final bool isSelected;
   final Callback callback;
 
@@ -23,19 +24,16 @@ class GenderButtonWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           decoration: BoxDecoration(
             color: AppColor.white,
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(
-              color: AppColor.secondary.withValues(alpha:0.2),
-            ),
+            borderRadius: BorderRadius.circular(20),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset(image, width: 35),
-              15.width,
+              imageWidget ?? Image.asset(image, width: 35),
+              10.width,
               Text(
                 title,
-                style: AppFontStyle.styleW600(AppColor.black, 15),
+                style: AppFontStyle.styleW500(AppColor.black, 15),
               ),
               const Spacer(),
               CustomRadioButtonWidget(

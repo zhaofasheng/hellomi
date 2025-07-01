@@ -14,6 +14,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class CoinBoxWidget extends StatelessWidget {
   const CoinBoxWidget({super.key});
 
@@ -32,10 +34,7 @@ class CoinBoxWidget extends StatelessWidget {
             fit: StackFit.expand,
             alignment: Alignment.center,
             children: [
-              Image.asset(
-                AppAssets.imgCoinPlanBg,
-                fit: BoxFit.cover,
-              ),
+              Assets.images.jinbiBack.image(fit: BoxFit.cover),
               Positioned(
                 top: 15,
                 child: SizedBox(
@@ -56,7 +55,7 @@ class CoinBoxWidget extends StatelessWidget {
                                   width: 120,
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
-                                    color: AppColor.black.withValues(alpha: 0.3),
+                                    color: AppColor.white.withValues(alpha: 0.3),
                                     borderRadius: BorderRadius.circular(100),
                                   ),
                                   child: Text(
@@ -68,11 +67,7 @@ class CoinBoxWidget extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Image.asset(
-                                      AppAssets.icMyCoin,
-                                      height: 45,
-                                      width: 45,
-                                    ),
+                                    Assets.images.tuijianGold.image(width: 45),
                                     10.width,
                                     Obx(
                                       () => Text(
@@ -82,13 +77,6 @@ class CoinBoxWidget extends StatelessWidget {
                                           fontWeight: FontWeight.w900,
                                           color: AppColor.white,
                                           fontFamily: AppConstant.appFontBold,
-                                          shadows: [
-                                            Shadow(
-                                              offset: Offset(2, 2),
-                                              blurRadius: 2,
-                                              color: Colors.black.withValues(alpha: 0.3),
-                                            ),
-                                          ],
                                         ),
                                       ),
                                     ),
@@ -107,30 +95,19 @@ class CoinBoxWidget extends StatelessWidget {
                                 }
                               },
                               child: Container(
-                                height: 35,
-                                width: 110,
+                                height: 32,
+                                width: 100,
                                 alignment: Alignment.center,
                                 padding: const EdgeInsets.symmetric(horizontal: 10),
                                 decoration: BoxDecoration(
                                   color: AppColor.white,
                                   borderRadius: BorderRadius.circular(100),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColor.black.withValues(alpha: 0.3),
-                                      blurRadius: 2,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
+
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset(
-                                      AppAssets.icWithdraw,
-                                      height: 18,
-                                      width: 18,
-                                      color: AppColor.orange,
-                                    ),
+                                    Assets.images.getJinbi.image(width: 24,height:24),
                                     5.width,
                                     Text(
                                       EnumLocal.txtWithdraw.name.tr,

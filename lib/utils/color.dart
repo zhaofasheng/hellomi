@@ -65,7 +65,7 @@ abstract class AppColor {
   static const darkGray = Color(0xFF757575);
   static const extraLightGray = Color(0xFFFAFAFA);
   static const deepLightGray = Color(0xFFBABABA);
-  static const grayText = Color(0xFF8175BB);
+  static const grayText = Color(0xFFA8A8AC);
   static const deepViolet = Color(0xFF250523);
   static const purpleGray = Color(0xFFB7B5C6);
   static const daiLogAppbar = Color(0xFFF8F8FC);

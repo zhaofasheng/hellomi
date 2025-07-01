@@ -1366,6 +1366,21 @@ class $AssetsImagesGen {
   AssetGenImage get chatYuyinImg =>
       const AssetGenImage('assets/images/chat_yuyin_img.png');
 
+  /// File path: assets/images/code_background.png
+  AssetGenImage get codeBackground =>
+      const AssetGenImage('assets/images/code_background.png');
+
+  /// File path: assets/images/code_dh.png
+  AssetGenImage get codeDh => const AssetGenImage('assets/images/code_dh.png');
+
+  /// File path: assets/images/code_download.png
+  AssetGenImage get codeDownload =>
+      const AssetGenImage('assets/images/code_download.png');
+
+  /// File path: assets/images/code_unn.png
+  AssetGenImage get codeUnn =>
+      const AssetGenImage('assets/images/code_unn.png');
+
   /// File path: assets/images/dongtai_choice.png
   AssetGenImage get dongtaiChoice =>
       const AssetGenImage('assets/images/dongtai_choice.png');
@@ -1377,6 +1392,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/fans_ranking_bg.webp
   AssetGenImage get fansRankingBg =>
       const AssetGenImage('assets/images/fans_ranking_bg.webp');
+
+  /// File path: assets/images/get_jinbi.png
+  AssetGenImage get getJinbi =>
+      const AssetGenImage('assets/images/get_jinbi.png');
 
   /// File path: assets/images/google_login_img.png
   AssetGenImage get googleLoginImg =>
@@ -1707,17 +1726,65 @@ class $AssetsImagesGen {
   AssetGenImage get imgYouWin =>
       const AssetGenImage('assets/images/img_you_win.webp');
 
+  /// File path: assets/images/jinbi_back.png
+  AssetGenImage get jinbiBack =>
+      const AssetGenImage('assets/images/jinbi_back.png');
+
+  /// File path: assets/images/login_age.png
+  AssetGenImage get loginAge =>
+      const AssetGenImage('assets/images/login_age.png');
+
   /// File path: assets/images/login_back_img.png
   AssetGenImage get loginBackImg =>
       const AssetGenImage('assets/images/login_back_img.png');
+
+  /// File path: assets/images/login_down_pop.png
+  AssetGenImage get loginDownPop =>
+      const AssetGenImage('assets/images/login_down_pop.png');
+
+  /// File path: assets/images/login_email.png
+  AssetGenImage get loginEmail =>
+      const AssetGenImage('assets/images/login_email.png');
 
   /// File path: assets/images/login_email_img.png
   AssetGenImage get loginEmailImg =>
       const AssetGenImage('assets/images/login_email_img.png');
 
+  /// File path: assets/images/login_man.png
+  AssetGenImage get loginMan =>
+      const AssetGenImage('assets/images/login_man.png');
+
+  /// File path: assets/images/login_name.png
+  AssetGenImage get loginName =>
+      const AssetGenImage('assets/images/login_name.png');
+
+  /// File path: assets/images/login_no_show.png
+  AssetGenImage get loginNoShow =>
+      const AssetGenImage('assets/images/login_no_show.png');
+
   /// File path: assets/images/login_passwd_img.png
   AssetGenImage get loginPasswdImg =>
       const AssetGenImage('assets/images/login_passwd_img.png');
+
+  /// File path: assets/images/login_rock.png
+  AssetGenImage get loginRock =>
+      const AssetGenImage('assets/images/login_rock.png');
+
+  /// File path: assets/images/login_show.png
+  AssetGenImage get loginShow =>
+      const AssetGenImage('assets/images/login_show.png');
+
+  /// File path: assets/images/login_sub_name.png
+  AssetGenImage get loginSubName =>
+      const AssetGenImage('assets/images/login_sub_name.png');
+
+  /// File path: assets/images/login_tuijian.png
+  AssetGenImage get loginTuijian =>
+      const AssetGenImage('assets/images/login_tuijian.png');
+
+  /// File path: assets/images/login_woman.png
+  AssetGenImage get loginWoman =>
+      const AssetGenImage('assets/images/login_woman.png');
 
   /// File path: assets/images/main_choice_more_img.png
   AssetGenImage get mainChoiceMoreImg =>
@@ -1817,6 +1884,24 @@ class $AssetsImagesGen {
   AssetGenImage get partyNomer =>
       const AssetGenImage('assets/images/party_nomer.png');
 
+  /// File path: assets/images/pay_apple.png
+  AssetGenImage get payApple =>
+      const AssetGenImage('assets/images/pay_apple.png');
+
+  /// File path: assets/images/pay_newPay.png
+  AssetGenImage get payNewPay =>
+      const AssetGenImage('assets/images/pay_newPay.png');
+
+  /// File path: assets/images/pay_no.png
+  AssetGenImage get payNo => const AssetGenImage('assets/images/pay_no.png');
+
+  /// File path: assets/images/pay_stripe.png
+  AssetGenImage get payStripe =>
+      const AssetGenImage('assets/images/pay_stripe.png');
+
+  /// File path: assets/images/pay_yes.png
+  AssetGenImage get payYes => const AssetGenImage('assets/images/pay_yes.png');
+
   /// File path: assets/images/pk_line_img.png
   AssetGenImage get pkLineImg =>
       const AssetGenImage('assets/images/pk_line_img.png');
@@ -1833,6 +1918,15 @@ class $AssetsImagesGen {
   AssetGenImage get pkWinImg =>
       const AssetGenImage('assets/images/pk_win_img.png');
 
+  /// File path: assets/images/rice3.png
+  AssetGenImage get rice3 => const AssetGenImage('assets/images/rice3.png');
+
+  /// File path: assets/images/rich_1.png
+  AssetGenImage get rich1 => const AssetGenImage('assets/images/rich_1.png');
+
+  /// File path: assets/images/rich_2.png
+  AssetGenImage get rich2 => const AssetGenImage('assets/images/rich_2.png');
+
   /// File path: assets/images/socket_login_img.png
   AssetGenImage get socketLoginImg =>
       const AssetGenImage('assets/images/socket_login_img.png');
@@ -1840,6 +1934,30 @@ class $AssetsImagesGen {
   /// File path: assets/images/splash_screen.png
   AssetGenImage get splashScreen =>
       const AssetGenImage('assets/images/splash_screen.png');
+
+  /// File path: assets/images/tuijian_back.png
+  AssetGenImage get tuijianBack =>
+      const AssetGenImage('assets/images/tuijian_back.png');
+
+  /// File path: assets/images/tuijian_code.png
+  AssetGenImage get tuijianCode =>
+      const AssetGenImage('assets/images/tuijian_code.png');
+
+  /// File path: assets/images/tuijian_copy.png
+  AssetGenImage get tuijianCopy =>
+      const AssetGenImage('assets/images/tuijian_copy.png');
+
+  /// File path: assets/images/tuijian_gold.png
+  AssetGenImage get tuijianGold =>
+      const AssetGenImage('assets/images/tuijian_gold.png');
+
+  /// File path: assets/images/tuijian_history.png
+  AssetGenImage get tuijianHistory =>
+      const AssetGenImage('assets/images/tuijian_history.png');
+
+  /// File path: assets/images/tuijian_share.png
+  AssetGenImage get tuijianShare =>
+      const AssetGenImage('assets/images/tuijian_share.png');
 
   /// File path: assets/images/video_com_img.png
   AssetGenImage get videoComImg =>
@@ -1858,9 +1976,14 @@ class $AssetsImagesGen {
     chatSendimg,
     chatVideo,
     chatYuyinImg,
+    codeBackground,
+    codeDh,
+    codeDownload,
+    codeUnn,
     dongtaiChoice,
     dongtaiNomer,
     fansRankingBg,
+    getJinbi,
     googleLoginImg,
     groundComImg,
     groundLikeImg,
@@ -1944,9 +2067,21 @@ class $AssetsImagesGen {
     imgYouAreBattleWinner,
     imgYouLose,
     imgYouWin,
+    jinbiBack,
+    loginAge,
     loginBackImg,
+    loginDownPop,
+    loginEmail,
     loginEmailImg,
+    loginMan,
+    loginName,
+    loginNoShow,
     loginPasswdImg,
+    loginRock,
+    loginShow,
+    loginSubName,
+    loginTuijian,
+    loginWoman,
     mainChoiceMoreImg,
     mainRecordImg,
     mainSearchImg,
@@ -1972,12 +2107,26 @@ class $AssetsImagesGen {
     mineYbBack,
     partyChoice,
     partyNomer,
+    payApple,
+    payNewPay,
+    payNo,
+    payStripe,
+    payYes,
     pkLineImg,
     pkTitleImg,
     pkVsImg,
     pkWinImg,
+    rice3,
+    rich1,
+    rich2,
     socketLoginImg,
     splashScreen,
+    tuijianBack,
+    tuijianCode,
+    tuijianCopy,
+    tuijianGold,
+    tuijianHistory,
+    tuijianShare,
     videoComImg,
     videoGsImg,
   ];

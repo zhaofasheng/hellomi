@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/utils/color.dart';
@@ -22,8 +23,7 @@ class CountryTextFieldWidget extends StatelessWidget {
         padding: const EdgeInsets.only(left: 20),
         decoration: BoxDecoration(
           color: AppColor.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: AppColor.secondary.withValues(alpha: 0.2)),
+          borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
           children: [
@@ -39,7 +39,7 @@ class CountryTextFieldWidget extends StatelessWidget {
             Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Icon(Icons.keyboard_arrow_down_rounded, color: AppColor.secondary),
+              child: Icon(Icons.keyboard_arrow_down_rounded, color: HexColor('#D2D6DB')),
             ),
             10.width,
           ],

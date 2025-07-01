@@ -6,7 +6,9 @@ import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
 class LevelAppBarWidget extends StatelessWidget {
-  const LevelAppBarWidget({super.key});
+  final String title;
+
+  const LevelAppBarWidget({super.key, this.title = "Level"});
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +28,22 @@ class LevelAppBarWidget extends StatelessWidget {
               height: 45,
               width: 45,
               alignment: Alignment.center,
-              decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.transparent),
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColor.transparent,
+              ),
               child: Image.asset(
                 AppAssets.icArrowLeft,
-                color: AppColor.white,
+                color: AppColor.black,
                 width: 10,
               ),
             ),
           ),
           Text(
-            "Level",
-            style: AppFontStyle.styleW700(AppColor.white, 18),
+            title,
+            style: AppFontStyle.styleW700(AppColor.black, 18),
           ),
-          45.width,
+          const SizedBox(width: 45), // 与左侧按钮宽度对齐
         ],
       ),
     );

@@ -9,6 +9,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class PaymentGatewayWidget extends StatelessWidget {
   const PaymentGatewayWidget({super.key});
 
@@ -25,64 +27,85 @@ class PaymentGatewayWidget extends StatelessWidget {
             style: AppFontStyle.styleW700(AppColor.black, 16),
           ),
           15.height,
-          (Utils.isShowStripePaymentMethod || Utils.isShowRazorPayPaymentMethod || Utils.isShowInAppPurchasePaymentMethod || Utils.isShowFlutterWavePaymentMethod)
-              ? SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      _ItemWidget(
-                        icon: AppAssets.icStripeLogo,
-                        iconSize: 40,
-                        boxWidth: 80,
-                        isSelected: controller.selectedPaymentIndex == 0,
-                        callback: () => controller.onChangePayment(0),
-                        visible: Utils.isShowStripePaymentMethod,
-                      ),
-                      _ItemWidget(
-                        icon: AppAssets.icRazorpayLogo,
-                        iconSize: 75,
-                        boxWidth: 110,
-                        margin: EdgeInsets.only(left: 15),
-                        isSelected: controller.selectedPaymentIndex == 1,
-                        callback: () => controller.onChangePayment(1),
-                        visible: Utils.isShowStripePaymentMethod,
-                      ),
-                      _ItemWidget(
-                        icon: AppAssets.icFlutterWaveLogo,
-                        iconSize: 120,
-                        boxWidth: 140,
-                        margin: EdgeInsets.only(left: 15),
-                        isSelected: controller.selectedPaymentIndex == 2,
-                        callback: () => controller.onChangePayment(2),
-                        visible: Utils.isShowFlutterWavePaymentMethod,
-                      ),
-                      _ItemWidget(
-                        icon: AppAssets.icInAppPurchaseLogo,
-                        iconSize: 120,
-                        boxWidth: 140,
-                        margin: EdgeInsets.only(left: 15),
-                        isSelected: controller.selectedPaymentIndex == 3,
-                        callback: () => controller.onChangePayment(3),
-                        visible: Utils.isShowInAppPurchasePaymentMethod,
-                      ),
-                    ],
-                  ),
-                )
-              : Container(
-                  height: 50,
-                  width: Get.width,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: AppColor.colorBorder.withValues(alpha: 0.5),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    EnumLocal.txtPaymentGatewayNotAvailable.name.tr,
-                    style: AppFontStyle.styleW600(AppColor.grayText, 13),
-                  ),
-                ),
+          Column(
+            children: [
+              _ListItemWidget(
+                icon: Assets.images.payNewPay.image(width: 32,height: 32),
+                title: 'newpay', // 替换成 EnumLocal.txtNewPay.tr 如有定义
+                isSelected: controller.selectedPaymentIndex == 0,
+                onTap: () => controller.onChangePayment(0),
+                visible: true,
+              ),
+              _ListItemWidget(
+                icon: Assets.images.payStripe.image(width: 32,height: 32),
+                title: 'stripe',
+                isSelected: controller.selectedPaymentIndex == 1,
+                onTap: () => controller.onChangePayment(1),
+                visible: Utils.isShowStripePaymentMethod,
+              ),
+              _ListItemWidget(
+                icon: Assets.images.payApple.image(width: 32,height: 32),
+                title: 'Appple pay', // 替换成 EnumLocal.txtApplePay.tr 如有定义
+                isSelected: controller.selectedPaymentIndex == 2,
+                onTap: () => controller.onChangePayment(2),
+                visible: Utils.isShowInAppPurchasePaymentMethod,
+              ),
+            ],
+          ),
           15.height,
         ],
+      ),
+    );
+  }
+}
+
+class _ListItemWidget extends StatelessWidget {
+  const _ListItemWidget({
+    required this.icon,
+    required this.title,
+    required this.isSelected,
+    required this.onTap,
+    required this.visible,
+  });
+
+  final Widget icon;
+  final String title;
+  final bool isSelected;
+  final VoidCallback onTap;
+  final bool visible;
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: true,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          height: 55,
+          margin: const EdgeInsets.symmetric(vertical: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          decoration: BoxDecoration(
+            color: AppColor.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: isSelected ? AppColor.primary : AppColor.colorBorder.withOpacity(0.3),
+              width: isSelected ? 1.5 : 1,
+            ),
+          ),
+          child: Row(
+            children: [
+              icon,
+              12.width,
+              Expanded(
+                child: Text(
+                  title,
+                  style: AppFontStyle.styleW500(AppColor.black, 14),
+                ),
+              ),
+          isSelected ? Assets.images.payYes.image(width: 24,height: 24) : Assets.images.payNo.image(width: 24,height: 24),
+            ],
+          ),
+        ),
       ),
     );
   }

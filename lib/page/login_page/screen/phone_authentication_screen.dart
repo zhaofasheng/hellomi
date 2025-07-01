@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/custom/widget/custom_light_background_widget.dart';
 import 'package:tingle/custom/widget/custom_phone_text_field_widget.dart';
@@ -46,13 +47,12 @@ class PhoneAuthenticationScreen extends GetView<LoginController> {
                             ),
                             Text(
                               EnumLocal.txtLetsGetStartedEnter.name.tr,
-                              style: AppFontStyle.styleW400(AppColor.black, 14),
+                              style: AppFontStyle.styleW400(HexColor('#86868F'), 14),
                             ),
                             30.height,
                             GetBuilder<LoginController>(
                               id: ApiParams.onPhoneNumber,
                               builder: (controller) => CustomPhoneTextFieldWidget(
-                                title: EnumLocal.txtPhoneNumber.name.tr,
                                 hintText: EnumLocal.txtEnterYourPhoneNumber.name.tr,
                                 controller: controller.phoneNumberController,
                                 keyboardType: TextInputType.phone,
@@ -77,12 +77,12 @@ class PhoneAuthenticationScreen extends GetView<LoginController> {
           ],
         ),
         backgroundColor: AppColor.white,
-        bottomNavigationBar: AppButtonUi(
+        bottomNavigationBar: SafeArea(top: false,child: AppButtonUi(
           title: EnumLocal.txtSubmit.name.tr,
           gradient: AppColor.primaryGradient,
           margin: const EdgeInsets.all(15),
           callback: () => controller.onPhoneSendOtp(),
-        ),
+        ),)
       ),
     );
   }

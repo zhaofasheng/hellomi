@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/custom/widget/custom_light_background_widget.dart';
 import 'package:tingle/custom/widget/custom_text_field_widget.dart';
@@ -10,6 +11,9 @@ import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
+
+import '../../../assets/assets.gen.dart';
+import '../../../utils/common_input_field.dart';
 
 class ForgotPasswordScreen extends GetView<LoginController> {
   const ForgotPasswordScreen({super.key});
@@ -44,16 +48,17 @@ class ForgotPasswordScreen extends GetView<LoginController> {
                           ),
                           Text(
                             EnumLocal.txtDotWorryItHappens.name.tr,
-                            style: AppFontStyle.styleW400(AppColor.black, 14),
+                            style: AppFontStyle.styleW400(HexColor('#86868F'), 14),
                           ),
                           30.height,
-                          CustomTextFieldWidget(
-                            title: EnumLocal.txtEnterEmail.name.tr,
-                            hintText: EnumLocal.txtEnterEmail.name.tr,
+                          CommonInputField(
                             controller: controller.forgotPasswordEmailController,
+                            hintText: EnumLocal.txtEnterEmail.name.tr,
+                            iconWidget: Assets.images.loginEmailImg.image(width: 24,height: 24),
                             keyboardType: TextInputType.text,
-                            suffixIcon: const Offstage(),
+                            hintTextColor: HexColor('#D2D6DB'),
                           ),
+
                           20.height
                         ],
                       ),
@@ -66,13 +71,13 @@ class ForgotPasswordScreen extends GetView<LoginController> {
         ],
       ),
       backgroundColor: AppColor.white,
-      bottomNavigationBar: AppButtonUi(
+      bottomNavigationBar: SafeArea(top: false,child: AppButtonUi(
         gradient: AppColor.primaryGradient,
         title: EnumLocal.txtVerify.name.tr,
         height: 60,
         margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
         callback: () => controller.onForgotPassword(),
-      ),
+      )),
     );
   }
 }

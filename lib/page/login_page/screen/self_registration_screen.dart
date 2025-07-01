@@ -41,12 +41,12 @@ class SelfRegistrationScreen extends GetView<LoginController> {
         ),
       ),
       backgroundColor: AppColor.white,
-      bottomNavigationBar: AppButtonUi(
-          title: EnumLocal.txtSubmit.name.tr,
-          gradient: AppColor.primaryGradient,
-          margin: const EdgeInsets.all(15),
-          callback: () => controller.onRegisterUser(),
-        ),
+      bottomNavigationBar: SafeArea(top: false,child: AppButtonUi(
+        title: EnumLocal.txtSubmit.name.tr,
+        gradient: AppColor.primaryGradient,
+        margin: const EdgeInsets.all(15),
+        callback: () => controller.onRegisterUser(),
+      ),)
 
     );
   }

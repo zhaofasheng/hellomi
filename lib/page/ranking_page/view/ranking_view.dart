@@ -7,6 +7,8 @@ import 'package:tingle/page/ranking_page/widget/rank_app_bar_widget.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../custom/widget/custom_light_background_widget.dart';
+
 class RankingView extends StatelessWidget {
   const RankingView({super.key});
 
@@ -15,18 +17,10 @@ class RankingView extends StatelessWidget {
     Utils.onChangeStatusBar(brightness: Brightness.light);
     return Scaffold(
       backgroundColor: AppColor.transparent,
-      body: Stack(
+      body: SafeArea(top:false,child: Stack(
         fit: StackFit.expand,
         children: [
-          Container(
-            height: Get.height,
-            width: Get.width,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xff3B85F6), Color(0xffA239F9)],
-              ),
-            ),
-          ),
+          const CustomLightBackgroundWidget(),
           GetBuilder<RankingController>(
             builder: (controller) => Column(
               children: [
@@ -45,7 +39,7 @@ class RankingView extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      )),
     );
   }
 }
