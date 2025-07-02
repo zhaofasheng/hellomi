@@ -18,37 +18,129 @@ class RichTabBarWidget extends StatelessWidget {
       id: AppConstant.onChangeRichTabBar,
       builder: (controller) => Container(
         height: 40,
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        padding: EdgeInsets.symmetric(horizontal: 4),
+        padding: const EdgeInsets.all(0),
         decoration: BoxDecoration(
-          color: AppColor.white.withOpacity(0.1), // 背景色
+          color: AppColor.white.withOpacity(0.1), // 背景半透明
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(3, (index) {
+            final titles = [
+              EnumLocal.txtDaily.name.tr,
+              EnumLocal.txtWeekly.name.tr,
+              EnumLocal.txtMonthly.name.tr,
+            ];
+            return Expanded(
+              child: _TabItemWidget(
+                title: titles[index],
+                isSelected: controller.selectedRichTabIndex == index,
+                callback: () => controller.onChangeRichTabBar(index),
+              ),
+            );
+          }),
+        ),
+      ),
+    );
+  }
+}
+
+class _TabItemWidget extends StatelessWidget {
+  final String title;
+  final bool isSelected;
+  final VoidCallback callback;
+
+  const _TabItemWidget({
+    required this.title,
+    required this.isSelected,
+    required this.callback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: callback,
+      child: SizedBox(
+        height: 60,
+        child: Stack(
+          clipBehavior: Clip.none, // 允许撇出弧形
+          alignment: Alignment.center,
           children: [
-            _TabItemWidget(
-              title: EnumLocal.txtDaily.name.tr,
-              isSelected: controller.selectedRichTabIndex == 0,
-              callback: () => controller.onChangeRichTabBar(0),
-            ),
-            10.width,
-            _TabItemWidget(
-              title: EnumLocal.txtWeekly.name.tr,
-              isSelected: controller.selectedRichTabIndex == 1,
-              callback: () => controller.onChangeRichTabBar(1),
-            ),
-            10.width,
-            _TabItemWidget(
-              title: EnumLocal.txtMonthly.name.tr,
-              isSelected: controller.selectedRichTabIndex == 2,
-              callback: () => controller.onChangeRichTabBar(2),
+            if (isSelected)
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: CustomPaint(
+                  size: const Size(double.infinity, 60),
+                  painter: _TabBackgroundPainter(color: Colors.white),
+                ),
+              ),
+            Center(
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: isSelected ? Colors.green : Colors.grey,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+class _TabBackgroundPainter extends CustomPainter {
+  final Color color;
+
+  _TabBackgroundPainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    final double arcHeight = 28.0;
+    final double arcWidth = 64.0;
+    final double topRadius = 16.0;
+
+    final path = Path();
+
+    // 左上圆角起点
+    path.moveTo(0, topRadius);
+    path.quadraticBezierTo(0, 0, topRadius, 0); // 左上角圆角
+
+    // 顶部直线到右上角
+    path.lineTo(size.width - topRadius, 0);
+    path.quadraticBezierTo(size.width, 0, size.width, topRadius); // 右上角圆角
+
+    // 右边线到底部前
+    path.lineTo(size.width, size.height - arcHeight);
+
+    // 右底角向外撇（撇）
+    path.quadraticBezierTo(
+      size.width + arcWidth, size.height + arcHeight,
+      size.width - arcWidth, size.height + arcHeight,
+    );
+
+    // 左底角向外撇（捺）
+    path.lineTo(arcWidth, size.height + arcHeight);
+    path.quadraticBezierTo(
+      -arcWidth, size.height + arcHeight,
+      0, size.height - arcHeight,
+    );
+
+    path.lineTo(0, topRadius); // 关闭路径
+    path.close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
 class GiftTabBarWidget extends StatelessWidget {
@@ -69,19 +161,19 @@ class GiftTabBarWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _TabItemWidget(
+            _GiftTabItemWidget(
               title: EnumLocal.txtDaily.name.tr,
               isSelected: controller.selectedGiftTabIndex == 0,
               callback: () => controller.onChangeGiftTabBar(0),
             ),
             10.width,
-            _TabItemWidget(
+            _GiftTabItemWidget(
               title: EnumLocal.txtWeekly.name.tr,
               isSelected: controller.selectedGiftTabIndex == 1,
               callback: () => controller.onChangeGiftTabBar(1),
             ),
             10.width,
-            _TabItemWidget(
+            _GiftTabItemWidget(
               title: EnumLocal.txtMonthly.name.tr,
               isSelected: controller.selectedGiftTabIndex == 2,
               callback: () => controller.onChangeGiftTabBar(2),
@@ -93,8 +185,8 @@ class GiftTabBarWidget extends StatelessWidget {
   }
 }
 
-class _TabItemWidget extends StatelessWidget {
-  const _TabItemWidget({
+class _GiftTabItemWidget extends StatelessWidget {
+  const _GiftTabItemWidget({
     super.key,
     required this.title,
     required this.isSelected,

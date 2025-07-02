@@ -19,6 +19,7 @@ import 'package:tingle/payment/stripe/stripe_service.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/enums.dart';
+import 'package:tingle/utils/net_logger.dart';
 import 'package:tingle/utils/utils.dart';
 
 class RechargeCoinController extends GetxController implements IAPCallback {
@@ -28,7 +29,9 @@ class RechargeCoinController extends GetxController implements IAPCallback {
   FetchCoinPlanModel? fetchCoinPlanModel;
 
   int? selectedPaymentIndex;
+  int? selectedProductIndex;
   bool isAllowAgreement = false;
+  BuildContext? currentContext;
 
   CreateCoinPlanHistoryModel? createCoinPlanHistoryModel;
 
@@ -77,19 +80,25 @@ class RechargeCoinController extends GetxController implements IAPCallback {
   void onClickPayNow({required int index, required BuildContext context}) async {
     switch (selectedPaymentIndex) {
       case 0:
-        onClickStripePay(index: index);
-        break;
-      case 1:
         onClickRazorPay(index: index);
         break;
+      case 1:
+        onClickStripePay(index: index);
+        break;
       case 2:
-        onClickFlutterWave(index: index, context: context);
+        onClickInAppPurchase(index: index);
         break;
       case 3:
-        onClickInAppPurchase(index: index);
+        onClickFlutterWave(index: index, context: context);
       default:
         Utils.showToast(text: EnumLocal.txtPleaseSelectPaymentGateway.name.tr);
     }
+  }
+
+  void onChoiceProduct({required int index, required BuildContext context}) async {
+    selectedProductIndex = index;
+    currentContext = context;
+    update([AppConstant.onGetCoinPlan]);
   }
 
   void onClickStripePay({required int index}) async {

@@ -23,7 +23,7 @@ class GeneralSettingWidget extends GetView<ProfileController> {
       width: Get.width,
       height: 240,
       margin: const EdgeInsets.symmetric(horizontal: 15),
-      padding: const EdgeInsets.only(bottom: 15, left: 15, right: 15, top: 30),
+      padding: const EdgeInsets.only(bottom: 8, left: 15, right: 15, top: 8),
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(20),
@@ -99,6 +99,7 @@ class GeneralSettingWidget extends GetView<ProfileController> {
             ItemWidget(
               title: EnumLocal.txtCoinTrading.name.tr,
               image: AppAssets.icCoinTradingIcon,
+              imageWidget: Assets.images.yiongbiJy.image(width: 26),
               callback: () => Get.toNamed(AppRoutes.coinSellerPage),
             ),
           ItemWidget(

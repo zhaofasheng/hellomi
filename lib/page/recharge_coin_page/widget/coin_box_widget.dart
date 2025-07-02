@@ -94,28 +94,28 @@ class CoinBoxWidget extends StatelessWidget {
                                   Utils.showToast(text: EnumLocal.txtTopUpYourBalanceToReachTheNext.name.tr);
                                 }
                               },
-                              child: Container(
-                                height: 32,
-                                width: 100,
-                                alignment: Alignment.center,
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
-                                decoration: BoxDecoration(
-                                  color: AppColor.white,
-                                  borderRadius: BorderRadius.circular(100),
-
+                              child: IntrinsicWidth(
+                                child: Container(
+                                  height: 32,
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    color: AppColor.white,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Assets.images.getJinbi.image(width: 24, height: 24),
+                                      5.width,
+                                      Text(
+                                        EnumLocal.txtWithdraw.name.tr,
+                                        style: AppFontStyle.styleW700(AppColor.orange, 13),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Assets.images.getJinbi.image(width: 24,height:24),
-                                    5.width,
-                                    Text(
-                                      EnumLocal.txtWithdraw.name.tr,
-                                      style: AppFontStyle.styleW700(AppColor.orange, 13),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              )
                             ),
                           ],
                         ),

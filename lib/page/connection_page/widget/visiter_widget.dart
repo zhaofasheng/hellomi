@@ -17,64 +17,73 @@ class VisitorsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ConnectionController>(
-        id: AppConstant.onChangeFollowUpdate,
-        builder: (controller) => SizedBox(
-              width: Get.width,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  5.height,
-                  Container(
-                    width: max(255, Get.width * 0.6),
-                    decoration: BoxDecoration(
-                      color: AppColor.lightGrayBg,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    alignment: Alignment.center,
-                    child: TabBar(
-                      padding: EdgeInsets.zero,
-                      isScrollable: false,
-                      controller: controller.visitTabController,
-                      indicator: BoxDecoration(
-                        color: AppColor.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      unselectedLabelColor: AppColor.secondary,
-                      labelColor: AppColor.black,
-                      dividerColor: Colors.transparent,
-                      labelPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                      indicatorPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
-                      overlayColor: WidgetStatePropertyAll(AppColor.transparent),
-                      onTap: (value) {},
-                      tabAlignment: TabAlignment.center,
-                      tabs: [
-                        Tab(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
-                              EnumLocal.txtMyVisitors.name.tr,
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
-                              EnumLocal.txtWhoIHaveVisited.name.tr,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+      id: AppConstant.onChangeFollowUpdate,
+      builder: (controller) => SizedBox(
+        width: Get.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            5.height,
+            Center(
+              child: IntrinsicWidth(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  decoration: BoxDecoration(
+                    color: AppColor.lightGrayBg,
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  Expanded(
-                    child: TabBarView(controller: controller.visitTabController, children: [
-                      MyVisitorWidget(),
-                      HaveVisitedWidget(),
-                    ]),
-                  )
+                  alignment: Alignment.center,
+                  child: TabBar(
+                    isScrollable: true,
+                    controller: controller.visitTabController,
+                    indicator: BoxDecoration(
+                      color: AppColor.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    unselectedLabelColor: AppColor.secondary,
+                    labelColor: AppColor.black,
+                    dividerColor: Colors.transparent,
+                    labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    indicatorPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                    overlayColor: WidgetStatePropertyAll(AppColor.transparent),
+                    onTap: (value) {},
+                    tabAlignment: TabAlignment.center,
+                    tabs: [
+                      Tab(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(
+                            EnumLocal.txtMyVisitors.name.tr,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                      Tab(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(
+                            EnumLocal.txtWhoIHaveVisited.name.tr,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: controller.visitTabController,
+                children: const [
+                  MyVisitorWidget(),
+                  HaveVisitedWidget(),
                 ],
               ),
-            ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

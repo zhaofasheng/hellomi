@@ -147,7 +147,6 @@ class RankingUserListTileWidget extends StatelessWidget {
                       ),
                       5.width,
                       SizedBox(
-                        width: 40,
                         height: 20,
                         child: PreviewLevelImageWidget(
                           image: wealthLevelImage,

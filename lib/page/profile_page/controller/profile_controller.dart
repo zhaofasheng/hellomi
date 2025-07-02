@@ -16,7 +16,8 @@ class ProfileController extends GetxController with GetTickerProviderStateMixin 
   FetchUserProfileModel? fetchUserProfileModel;
   ScrollController scrollController = ScrollController();
   bool isLoading = false;
-
+  final GlobalKey _contentKey = GlobalKey();
+  double _bgHeight = 0.0;
   ReceivePort? _receivePort;
   Isolate? _isolate;
   bool hasInit = false;

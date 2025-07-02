@@ -1381,6 +1381,14 @@ class $AssetsImagesGen {
   AssetGenImage get codeUnn =>
       const AssetGenImage('assets/images/code_unn.png');
 
+  /// File path: assets/images/daili_demo.png
+  AssetGenImage get dailiDemo =>
+      const AssetGenImage('assets/images/daili_demo.png');
+
+  /// File path: assets/images/demo_host.png
+  AssetGenImage get demoHost =>
+      const AssetGenImage('assets/images/demo_host.png');
+
   /// File path: assets/images/dongtai_choice.png
   AssetGenImage get dongtaiChoice =>
       const AssetGenImage('assets/images/dongtai_choice.png');
@@ -1396,6 +1404,13 @@ class $AssetsImagesGen {
   /// File path: assets/images/get_jinbi.png
   AssetGenImage get getJinbi =>
       const AssetGenImage('assets/images/get_jinbi.png');
+
+  /// File path: assets/images/go_live.png
+  AssetGenImage get goLive => const AssetGenImage('assets/images/go_live.png');
+
+  /// File path: assets/images/go_party.png
+  AssetGenImage get goParty =>
+      const AssetGenImage('assets/images/go_party.png');
 
   /// File path: assets/images/google_login_img.png
   AssetGenImage get googleLoginImg =>
@@ -1876,6 +1891,18 @@ class $AssetsImagesGen {
   AssetGenImage get mineYbBack =>
       const AssetGenImage('assets/images/mine_yb_back.png');
 
+  /// File path: assets/images/number_one.png
+  AssetGenImage get numberOne =>
+      const AssetGenImage('assets/images/number_one.png');
+
+  /// File path: assets/images/number_three.png
+  AssetGenImage get numberThree =>
+      const AssetGenImage('assets/images/number_three.png');
+
+  /// File path: assets/images/number_two.png
+  AssetGenImage get numberTwo =>
+      const AssetGenImage('assets/images/number_two.png');
+
   /// File path: assets/images/party_choice.png
   AssetGenImage get partyChoice =>
       const AssetGenImage('assets/images/party_choice.png');
@@ -1898,6 +1925,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/pay_stripe.png
   AssetGenImage get payStripe =>
       const AssetGenImage('assets/images/pay_stripe.png');
+
+  /// File path: assets/images/pay_tuijian.png
+  AssetGenImage get payTuijian =>
+      const AssetGenImage('assets/images/pay_tuijian.png');
 
   /// File path: assets/images/pay_yes.png
   AssetGenImage get payYes => const AssetGenImage('assets/images/pay_yes.png');
@@ -1967,6 +1998,14 @@ class $AssetsImagesGen {
   AssetGenImage get videoGsImg =>
       const AssetGenImage('assets/images/video_gs_img.png');
 
+  /// File path: assets/images/video_liwu.png
+  AssetGenImage get videoLiwu =>
+      const AssetGenImage('assets/images/video_liwu.png');
+
+  /// File path: assets/images/yiongbi_jy.png
+  AssetGenImage get yiongbiJy =>
+      const AssetGenImage('assets/images/yiongbi_jy.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     backgroundImg,
@@ -1980,10 +2019,14 @@ class $AssetsImagesGen {
     codeDh,
     codeDownload,
     codeUnn,
+    dailiDemo,
+    demoHost,
     dongtaiChoice,
     dongtaiNomer,
     fansRankingBg,
     getJinbi,
+    goLive,
+    goParty,
     googleLoginImg,
     groundComImg,
     groundLikeImg,
@@ -2105,12 +2148,16 @@ class $AssetsImagesGen {
     mineWhiteRight,
     mineYb,
     mineYbBack,
+    numberOne,
+    numberThree,
+    numberTwo,
     partyChoice,
     partyNomer,
     payApple,
     payNewPay,
     payNo,
     payStripe,
+    payTuijian,
     payYes,
     pkLineImg,
     pkTitleImg,
@@ -2129,6 +2176,8 @@ class $AssetsImagesGen {
     tuijianShare,
     videoComImg,
     videoGsImg,
+    videoLiwu,
+    yiongbiJy,
   ];
 }
 

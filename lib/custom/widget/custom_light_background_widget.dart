@@ -16,7 +16,7 @@ class CustomLightBackgroundWidget extends StatelessWidget {
           Assets.images.backgroundImg.image(width: Get.width,height: Get.height,fit: BoxFit.cover),
           if(isLogin) Assets.images.loginBackImg.image(width: Get.width,fit: BoxFit.cover),
 
-          if(isMine) Assets.images.mineBackImg.image(width: Get.width,fit: BoxFit.cover),
+          // if(isMine) Assets.images.mineBackImg.image(width: Get.width,fit: BoxFit.cover),
         ],
       )
     );

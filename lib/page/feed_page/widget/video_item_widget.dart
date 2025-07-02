@@ -469,7 +469,7 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
             ),
           ),
           Positioned(
-            right: 15,
+            right: 10,
             top: 30,
             bottom: widget.isInsertBottomBarSpace
                 ? (kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom + 10)
@@ -477,6 +477,13 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
             child: Column(
               children: [
                 const Spacer(),
+                GestureDetector(
+                  onTap: (){
+                    //礼物打赏
+                  },
+                  child: Assets.images.videoLiwu.image(width: 25),
+                ),
+                12.height,
                 Obx(
                       () => SizedBox(
                     height: 30,

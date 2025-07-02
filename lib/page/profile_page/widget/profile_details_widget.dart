@@ -48,8 +48,8 @@ class ProfileDetailsWidget extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                   children: [
                     Container(
-                      height: 68,
-                      width: 68,
+                      height: 90,
+                      width: 90,
                       padding: const EdgeInsets.all(1), // 内边距用于模拟边框宽度
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,

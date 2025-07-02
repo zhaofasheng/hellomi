@@ -22,7 +22,7 @@ class CoinAndPointDetailsWidget extends GetView<ProfileController> {
       builder: (controller) => Container(
         color: AppColor.transparent,
         margin: const EdgeInsets.symmetric(horizontal: 15),
-        child: Row( // ✅ Expanded 需要 Row 或 Column
+        child: Row(
           children: [
             Expanded(
               child: ItemWidget(
@@ -42,7 +42,6 @@ class CoinAndPointDetailsWidget extends GetView<ProfileController> {
     );
   }
 }
-
 
 class ItemWidget extends StatelessWidget {
   const ItemWidget({
@@ -64,41 +63,50 @@ class ItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: callback,
-      child: SizedBox(
-        height: 72,
-        child: Stack(
-          children: [
-            Assets.images.mineYbBack.image(height: 72),
-            Container(
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                children: [
-                  Assets.images.mineYb.image(width: 56),
-                  15.width,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        count.toStringAsFixed(2),
-                        style: AppFontStyle.styleW900(AppColor.white, 22),
-                      ),
-                      const SizedBox(height: 0),
-                      Text(
-                        EnumLocal.txtAvailableMyCoins.name.tr,
-                        style: AppFontStyle.styleW600(
-                          AppColor.white.withOpacity(0.8),
-                          12,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Assets.images.mineWhiteRight.image(width: 20),
-                ],
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20), // 与图片圆角匹配
+        child: Container(
+          height: 72,
+          width: double.infinity,
+          color: Colors.transparent, // 避免 Container 默认背景
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.asset(
+                Assets.images.mineYbBack.path,
+                fit: BoxFit.cover,
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  children: [
+                    Assets.images.mineYb.image(width: 56),
+                    15.width,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          count.toStringAsFixed(2),
+                          style: AppFontStyle.styleW900(AppColor.white, 22),
+                        ),
+                        const SizedBox(height: 0),
+                        Text(
+                          EnumLocal.txtAvailableMyCoins.name.tr,
+                          style: AppFontStyle.styleW600(
+                            AppColor.white.withOpacity(0.8),
+                            12,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    Assets.images.mineWhiteRight.image(width: 20),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

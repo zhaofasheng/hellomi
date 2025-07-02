@@ -44,22 +44,34 @@ class ReferralView extends GetView<ReferralController> {
                   // 左上角文案
                   Container(
                     width: Get.width,
-                    padding: const EdgeInsets.only(left: 15, right: 15, top: 120),
+                    padding: const EdgeInsets.only(left: 15, right: 15, top: 90),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          EnumLocal.txtJoinMemberGetCoin.name.tr,
-                          style: AppFontStyle.styleW700(AppColor.white, 24),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: Get.width * 2 / 3+10,  // 限制最大宽度为屏幕的2/3
+                          ),
+                          child: Text(
+                            EnumLocal.txtJoinMemberGetCoin.name.tr,
+                            style: AppFontStyle.styleW700(AppColor.white, 24),
+                            softWrap: true,  // 自动换行，默认true，可以省略
+                          ),
                         ),
-                        10.height,
-                        Text(
-                          EnumLocal.txtTheMoreYouInviteTheMoreRewardsYouWillGet.name.tr,
-                          style: AppFontStyle.styleW500(AppColor.white, 14),
+                        const SizedBox(height: 10),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: Get.width * 2 / 3+10,
+                          ),
+                          child: Text(
+                            EnumLocal.txtTheMoreYouInviteTheMoreRewardsYouWillGet.name.tr,
+                            style: AppFontStyle.styleW500(AppColor.white, 14),
+                            softWrap: true,
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                  )
                 ],
               ),
             ],

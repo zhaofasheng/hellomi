@@ -15,6 +15,7 @@ import 'package:tingle/utils/utils.dart';
 
 import '../../../custom/widget/custom_light_background_widget.dart';
 import '../../level_page/widget/level_app_bar_widget.dart';
+import '../../preview_created_reels_page/widget/preview_created_reels_widget.dart';
 
 class RechargeCoinView extends GetView<RechargeCoinController> {
   const RechargeCoinView({super.key});
@@ -29,7 +30,6 @@ class RechargeCoinView extends GetView<RechargeCoinController> {
         children: [
           /// 背景图（可只铺顶部区域）
           const CustomLightBackgroundWidget(),
-
           /// 正文内容
           Column(
             children: [
@@ -68,6 +68,23 @@ class RechargeCoinView extends GetView<RechargeCoinController> {
             ],
           ),
         ],
+      )),
+      bottomNavigationBar: SafeArea(top: false,child: Visibility(
+        visible: controller.isLoading == false,
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: AppButtonUi(
+            fontSize: 16,
+            gradient: AppColor.primaryGradient,
+            title: EnumLocal.txtPayNow.name.tr,
+            callback: (){
+              if(controller.currentContext != null){
+                controller.onClickPayNow(index: controller.selectedProductIndex ?? 0, context: controller.currentContext!);
+              }
+
+            },
+          ),
+        ),
       )),
     );
   }

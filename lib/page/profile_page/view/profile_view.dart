@@ -33,7 +33,7 @@ class ProfileView extends GetView<ProfileController> {
             width: Get.width,
             child: Column(
               children: [
-                const ProfileAppBarWidget(),
+
                 GetBuilder<ProfileController>(
                   id: AppConstant.onGetProfile,
                   builder: (controller) => (controller.isLoading && !controller.hasInit)
@@ -46,21 +46,37 @@ class ProfileView extends GetView<ProfileController> {
                               child: Column(
                                 children: [
                                   SizedBox(
-                                    height: Get.width / 375 * 350 - MediaQuery.of(context).padding.top - kToolbarHeight,
-                                    child: Column(
+                                    width: double.infinity,
+                                    height: Get.width / 375 * 350-20,// - MediaQuery.of(context).padding.top - kToolbarHeight+8,
+                                    child: Stack(
                                       children: [
-                                        12.height,
-                                        const ProfileDetailsWidget(),
-                                        10.height,
-                                        const ConnectionDetailsWidget(),
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(20),
+                                            bottomRight: Radius.circular(20),
+                                          ),
+                                          child: Image.asset(
+                                            Assets.images.mineBackImg.path,
+                                            fit: BoxFit.cover,
+                                            width: double.infinity,
+                                            height: Get.width / 375 * 350-20,
+                                          ),
+                                        ),
+                                        Column(
+                                          children: [
+                                            (MediaQuery.of(context).viewPadding.top + 50).height,
+                                            const ProfileDetailsWidget(),
+                                          ],
+                                        ),
+                                        Positioned(left: 0,right: 0,bottom: 0,child: const ConnectionDetailsWidget(),),
                                       ],
                                     ),
                                   ),
-                                  20.height,
+                                  8.height,
                                   const CoinAndPointDetailsWidget(),
-                                  15.height,
+                                  8.height,
                                   const BenefitBoxWidget(),
-                                  15.height,
+                                  8.height,
                                   const GeneralSettingWidget(),
                                   15.height,
                                 ],
@@ -72,6 +88,7 @@ class ProfileView extends GetView<ProfileController> {
               ],
             ),
           ),
+          const ProfileAppBarWidget(),
         ],
       ),
     );

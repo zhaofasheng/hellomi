@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/custom/widget/custom_dark_background_widget.dart';
 import 'package:tingle/page/profile_page/controller/profile_controller.dart';
@@ -32,10 +33,29 @@ class StreamView extends GetView<StreamController> {
             Utils.showToast(text: EnumLocal.txtTopUpYourBalanceToReachTheNext.name.tr);
           }
         },
-        child: SizedBox(
+        child: Container(
           height: 45,
-          width: 45,
-          child: Assets.images.mainUpLiveImg.image(width: 45,height: 45),
+          width: 115,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [HexColor('#7FEEF1'), HexColor('#00E4A6'), HexColor('#FFFFCE')]),
+            border: Border.all(color: AppColor.white),
+            borderRadius: BorderRadius.circular(100),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Assets.images.goLive.image(width: 25),
+              8.width,
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Text(
+                  EnumLocal.txtGoLive.name.tr,
+                  style: AppFontStyle.styleW700(AppColor.white, 14),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       body: Stack(
