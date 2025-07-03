@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ import 'page/splash_screen_page/binding/splash_screen_binding.dart';
 import 'page/splash_screen_page/view/splash_screen_view.dart';
 import 'utils/internet_connection.dart';
 
+
 void main() async {
   Utils.showLog("App Start... Check 1");
 
@@ -34,7 +36,7 @@ void main() async {
 
   Utils.showLog("App Start... Check 3");
 
-  await 500.milliseconds.delay(); // THIS USE TO IOS WHITE SCREEN
+  await Future.delayed(const Duration(milliseconds: 500)); // THIS USE TO IOS WHITE SCREEN
 
   InternetConnection.init();
   await Firebase.initializeApp();
@@ -52,21 +54,51 @@ void main() async {
   await onSecureScreen();
 
   final identity = await PlatformDeviceId.getDeviceId;
-  final fcmToken = await FirebaseMessaging.instance.getToken();
+  String? fcmToken;
 
-  Utils.showLog("App Start... Check 6");
+  // 第一次尝试获取 FCM Token
+  try {
+    final connectivityResultList = await Connectivity().checkConnectivity();
+    if (connectivityResultList.isNotEmpty &&
+        connectivityResultList.first != ConnectivityResult.none) {
+      fcmToken = await FirebaseMessaging.instance.getToken();
+      Utils.showLog("✅ 首次尝试 FCM Token 成功: $fcmToken");
+    } else {
+      Utils.showLog("⚠️ 无网络，等待网络恢复后重试获取 FCM Token");
+    }
+  } catch (e) {
+    Utils.showLog("❌ 首次尝试获取 FCM Token 异常: $e");
+  }
 
-  Utils.showLog("Device Id => $identity");
-  //Utils.showLog("FCM Token => $fcmToken");
+  // 如果第一次获取失败，监听网络变化，首次连网后再获取
+  if (fcmToken == null) {
+    Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> results) async {
+      if (results.isNotEmpty &&
+          results.first != ConnectivityResult.none &&
+          fcmToken == null) {
+        try {
+          fcmToken = await FirebaseMessaging.instance.getToken();
+          Utils.showLog("✅ 网络恢复后 FCM Token 获取成功: $fcmToken");
 
-  if (identity != null && fcmToken != null) {
-    await Database.init(identity, fcmToken);
+          if (identity != null && fcmToken != null) {
+            await Database.init(identity, fcmToken!);
+          }
+        } catch (e) {
+          Utils.showLog("❌ 网络恢复后获取 FCM Token 异常: $e");
+        }
+      }
+    });
+  } else {
+    if (identity != null) {
+      await Database.init(identity, fcmToken);
+    }
   }
 
   Utils.showLog("App Start... Check 7");
 
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

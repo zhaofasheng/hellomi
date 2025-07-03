@@ -7,18 +7,54 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:339822122231:android:e23296ad0137f223f4aff2",
+        "mobilesdk_app_id": "1:339822122231:android:15cfeae23be80674f4aff2",
         "android_client_info": {
-          "package_name": "com.halomi.video.chat"
+          "package_name": "com.halomi.video.chathappylive"
         }
       },
       "oauth_client": [
         {
-          "client_id": "339822122231-6r7ev3qqvrkbu5nj04f4vl77md36iou0.apps.googleusercontent.com",
+          "client_id": "339822122231-7nns0nc40ektra492d585kg9vfi1h2a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFhmVqRRR-2kFlXpWnUxgPxH02notCCU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339822122231-7nns0nc40ektra492d585kg9vfi1h2a4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "339822122231-304jd6c2bk9cedpinn1r7sr0d5h0ib72.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.halomi.video.chat"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339822122231:android:7bd0cce65b9ddecaf4aff2",
+        "android_client_info": {
+          "package_name": "com.halomi.video.chatlive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339822122231-oke40el0jk1h8qaksjspmb4bvmkfgf26.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.halomi.video.chat",
-            "certificate_hash": "3c1a1daebe41c20622eb6de28f0a4f1fa3aa8159"
+            "package_name": "com.halomi.video.chatlive",
+            "certificate_hash": "fc8edcc0f175e476faf76aaf7c19313abce0de8b"
           }
         },
         {
@@ -37,6 +73,13 @@
             {
               "client_id": "339822122231-7nns0nc40ektra492d585kg9vfi1h2a4.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "339822122231-304jd6c2bk9cedpinn1r7sr0d5h0ib72.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.halomi.video.chat"
+              }
             }
           ]
         }

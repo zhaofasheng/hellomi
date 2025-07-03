@@ -69,8 +69,8 @@ class RechargeCoinView extends GetView<RechargeCoinController> {
           ),
         ],
       )),
-      bottomNavigationBar: SafeArea(top: false,child: Visibility(
-        visible: controller.isLoading == false,
+      bottomNavigationBar: SafeArea(child: Visibility(
+        visible: true,
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: AppButtonUi(
