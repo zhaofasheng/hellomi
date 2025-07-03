@@ -4,12 +4,13 @@ import 'package:tingle/custom/function/custom_format_number.dart';
 import 'package:tingle/page/coin_seller_page/controller/coin_seller_controller.dart';
 import 'package:tingle/page/coin_seller_page/widget/coin_seller_history_widget.dart';
 import 'package:tingle/utils/api_params.dart';
-import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
+
+import '../../../assets/assets.gen.dart';
 
 class CoinTradingBoxWidget extends GetView<CoinSellerController> {
   const CoinTradingBoxWidget({super.key});
@@ -29,10 +30,7 @@ class CoinTradingBoxWidget extends GetView<CoinSellerController> {
             fit: StackFit.expand,
             alignment: Alignment.center,
             children: [
-              Image.asset(
-                AppAssets.imgCoinPlanBg,
-                fit: BoxFit.cover,
-              ),
+              Assets.images.jinbiBack.image(fit: BoxFit.cover),
               Positioned(
                 top: 15,
                 child: SizedBox(
@@ -50,7 +48,7 @@ class CoinTradingBoxWidget extends GetView<CoinSellerController> {
                               width: 110,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: AppColor.black.withValues(alpha: 0.3),
+                                color: AppColor.white.withValues(alpha: 0.3),
                                 borderRadius: BorderRadius.circular(100),
                               ),
                               child: Text(
@@ -76,7 +74,7 @@ class CoinTradingBoxWidget extends GetView<CoinSellerController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset(AppAssets.icMyCoin, height: 45, width: 45),
+                            Assets.images.tuijianGold.image(width: 45,),
                             10.width,
                             GetBuilder<CoinSellerController>(
                               id: ApiParams.onGetCoinSellerHistory,
@@ -109,27 +107,15 @@ class CoinTradingBoxWidget extends GetView<CoinSellerController> {
                                 decoration: BoxDecoration(
                                   color: AppColor.white,
                                   borderRadius: BorderRadius.circular(100),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColor.black.withValues(alpha: 0.3),
-                                      blurRadius: 2,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset(
-                                      AppAssets.icHistory,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                      color: AppColor.orange,
-                                    ),
+                                    Assets.images.ybjioayiHistory.image(width: 20),
                                     4.width,
                                     Text(
                                       EnumLocal.txtHistory.name.tr,
-                                      style: AppFontStyle.styleW700(AppColor.orange, 16),
+                                      style: AppFontStyle.styleW500(AppColor.orange, 14),
                                     ),
                                   ],
                                 ).paddingSymmetric(horizontal: 10),

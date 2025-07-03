@@ -8,6 +8,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class PreviewProfileWealthLevelWidget extends GetView<PreviewUserProfileController> {
   const PreviewProfileWealthLevelWidget({super.key});
 
@@ -25,10 +27,7 @@ class PreviewProfileWealthLevelWidget extends GetView<PreviewUserProfileControll
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            AppAssets.imgLiveStreamLevelBg,
-            fit: BoxFit.cover,
-          ),
+          Assets.images.jinbiBack.image(height: 80,fit: BoxFit.cover),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Row(

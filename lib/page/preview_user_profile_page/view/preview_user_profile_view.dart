@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/page/preview_user_profile_page/controller/preview_user_profile_controller.dart';
 import 'package:tingle/page/preview_user_profile_page/shimmer/preview_user_profile_shimmer_widget.dart';
@@ -19,6 +20,7 @@ class PreviewUserProfileView extends GetView<PreviewUserProfileController> {
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.light);
     return Scaffold(
+      backgroundColor: HexColor('#F5F5F5'),
       body: GetBuilder<PreviewUserProfileController>(
         id: AppConstant.onGetProfile,
         builder: (controller) => controller.isLoading
@@ -29,7 +31,7 @@ class PreviewUserProfileView extends GetView<PreviewUserProfileController> {
                     onRefresh: () async => controller.init(),
                     color: AppColor.primary,
                     backgroundColor: AppColor.white,
-                    child: SingleChildScrollView(
+                    child: SafeArea(top: false,child: SingleChildScrollView(
                       child: SizedBox(
                         height: Get.height + 1,
                         width: Get.width,
@@ -44,22 +46,22 @@ class PreviewUserProfileView extends GetView<PreviewUserProfileController> {
                                 PreviewProfileDetailsWidget(),
                                 15.height,
                                 PreviewProfileTabBarWidget(),
-                                15.height,
+
                                 GetBuilder<PreviewUserProfileController>(
                                   id: AppConstant.onChangeTab,
                                   builder: (controller) => controller.selectedTabIndex == 0
                                       ? PreviewProfileDataTabWidget()
                                       : controller.selectedTabIndex == 1
-                                          ? PreviewProfileMomentsTabWidget()
-                                          : PreviewProfileWonMomTabWidget(),
+                                      ? PreviewProfileMomentsTabWidget()
+                                      : PreviewProfileWonMomTabWidget(),
                                 ),
-                                15.height,
+                                55.height,
                               ],
                             ),
                           ),
                         ),
                       ),
-                    ),
+                    )),
                   ),
                   Positioned(
                     top: 0,

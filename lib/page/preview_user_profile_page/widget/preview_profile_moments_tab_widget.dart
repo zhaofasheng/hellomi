@@ -24,7 +24,7 @@ class PreviewProfileMomentsTabWidget extends StatelessWidget {
           : controller.userPosts.isEmpty
               ? SizedBox(
                   height: Get.width,
-                  child: NoDataFoundWidget(),
+                  child: NoDataFoundWidget(backColor: AppColor.white,),
                 )
               : GridView.builder(
                   shrinkWrap: true,
@@ -49,7 +49,7 @@ class PreviewProfileMomentsTabWidget extends StatelessWidget {
                       child: Container(
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
-                          color: AppColor.colorBorder.withValues(alpha: 0.5),
+                          color: AppColor.white,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: LayoutBuilder(

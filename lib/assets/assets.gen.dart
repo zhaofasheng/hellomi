@@ -1381,6 +1381,10 @@ class $AssetsImagesGen {
   AssetGenImage get codeUnn =>
       const AssetGenImage('assets/images/code_unn.png');
 
+  /// File path: assets/images/cop_id_img.png
+  AssetGenImage get copIdImg =>
+      const AssetGenImage('assets/images/cop_id_img.png');
+
   /// File path: assets/images/daili_demo.png
   AssetGenImage get dailiDemo =>
       const AssetGenImage('assets/images/daili_demo.png');
@@ -1396,6 +1400,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/dongtai_nomer.png
   AssetGenImage get dongtaiNomer =>
       const AssetGenImage('assets/images/dongtai_nomer.png');
+
+  /// File path: assets/images/edit_img.png
+  AssetGenImage get editImg =>
+      const AssetGenImage('assets/images/edit_img.png');
 
   /// File path: assets/images/fans_ranking_bg.webp
   AssetGenImage get fansRankingBg =>
@@ -2002,6 +2010,10 @@ class $AssetsImagesGen {
   AssetGenImage get videoLiwu =>
       const AssetGenImage('assets/images/video_liwu.png');
 
+  /// File path: assets/images/ybjioayi_history.png
+  AssetGenImage get ybjioayiHistory =>
+      const AssetGenImage('assets/images/ybjioayi_history.png');
+
   /// File path: assets/images/yiongbi_jy.png
   AssetGenImage get yiongbiJy =>
       const AssetGenImage('assets/images/yiongbi_jy.png');
@@ -2019,10 +2031,12 @@ class $AssetsImagesGen {
     codeDh,
     codeDownload,
     codeUnn,
+    copIdImg,
     dailiDemo,
     demoHost,
     dongtaiChoice,
     dongtaiNomer,
+    editImg,
     fansRankingBg,
     getJinbi,
     goLive,
@@ -2177,6 +2191,7 @@ class $AssetsImagesGen {
     videoComImg,
     videoGsImg,
     videoLiwu,
+    ybjioayiHistory,
     yiongbiJy,
   ];
 }

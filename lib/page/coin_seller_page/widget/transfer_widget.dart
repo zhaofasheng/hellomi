@@ -12,6 +12,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class TransferWidget extends GetView<CoinSellerController> {
   const TransferWidget({super.key});
 
@@ -118,11 +120,7 @@ class TransferWidget extends GetView<CoinSellerController> {
           hintText: EnumLocal.txtPleaseEnterCoins.name.tr,
           prefixIcon: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              AppAssets.icMyCoin,
-              height: 10,
-              width: 10,
-            ),
+            child: Assets.images.tuijianGold.image(width: 24,)
           ),
         ),
       ],

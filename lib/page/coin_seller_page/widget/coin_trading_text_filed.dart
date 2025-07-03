@@ -42,17 +42,13 @@ class CoinTradingTextFiled extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        title != null
-            ? Column(
-                children: [
-                  Text(
-                    title!,
-                    style: AppFontStyle.styleW500(AppColor.grayText, 14),
-                  ),
-                  5.height,
-                ],
-              )
-            : const Offstage(),
+        if (title != null) ...[
+          Text(
+            title!,
+            style: AppFontStyle.styleW500(AppColor.black, 14),
+          ),
+          5.height,
+        ],
         TextFormField(
           keyboardType: keyboardType,
           controller: controller,
@@ -66,33 +62,33 @@ class CoinTradingTextFiled extends StatelessWidget {
           onEditingComplete: onEditingComplete,
           decoration: InputDecoration(
             filled: true,
-            fillColor: AppColor.textFiledBgColor,
+            fillColor: Colors.white, // ✅ 背景白色
             hintText: hintText,
+            hintStyle: AppFontStyle.styleW500(AppColor.darkGray, 15), // ✅ 深灰色 hint
+            contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColor.transparent),
-              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(20), // ✅ 圆角 20
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(20),
             ),
             suffixIcon: suffixIcon,
             suffix: suffix,
             prefixIcon: prefixIcon,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColor.transparent),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColor.transparent),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColor.primary.withValues(alpha: 0.5)),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColor.red.withValues(alpha: 0.5)),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            hintStyle: AppFontStyle.styleW500(AppColor.secondary, 15),
           ),
         ),
       ],

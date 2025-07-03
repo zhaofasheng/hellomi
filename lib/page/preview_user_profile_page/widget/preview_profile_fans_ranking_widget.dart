@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
 import 'package:tingle/page/fans_ranking_page/controller/fans_ranking_controller.dart';
@@ -25,7 +26,7 @@ class PreviewProfileFansRankingWidget extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 15),
         padding: EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
-          color: AppColor.colorBorder.withValues(alpha: 0.5),
+          color: HexColor('#F5F5F5'),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Row(

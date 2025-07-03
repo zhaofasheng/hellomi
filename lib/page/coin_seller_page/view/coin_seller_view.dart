@@ -11,6 +11,9 @@ import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../custom/widget/custom_light_background_widget.dart';
+import '../../level_page/widget/level_app_bar_widget.dart';
+
 class CoinSellerView extends GetView<CoinSellerController> {
   const CoinSellerView({super.key});
 
@@ -20,40 +23,54 @@ class CoinSellerView extends GetView<CoinSellerController> {
       id: AppConstant.onGetCoinSellerProfile,
       builder: (controller) => Scaffold(
         backgroundColor: AppColor.backgroundColor,
-        appBar: SimpleAppBarWidget.onShow(context: context, title: EnumLocal.txtCoinTrading.name.tr),
-        body: Padding(
-          padding: const EdgeInsets.all(15),
-          child: controller.isLoading
-              ? CoinSellerShimmerWidget()
-              : RefreshIndicator(
-                  onRefresh: () async => controller.init(),
-                  child: LayoutBuilder(
-                    builder: (context, box) => SingleChildScrollView(
-                      child: SizedBox(
-                        height: box.maxHeight + 1,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CoinTradingBoxWidget(),
-                              TransferWidget(),
-                            ],
-                          ),
+        body: SafeArea(
+          top: false,
+          child: Stack(
+            children: [
+              const CustomLightBackgroundWidget(),
+              Column(
+                children: [
+                  LevelAppBarWidget(title: EnumLocal.txtCoinTrading.name.tr),
+                  Expanded( // ✅ 关键：撑满剩余区域
+                    child: controller.isLoading
+                        ? const Padding(
+                      padding: EdgeInsets.all(15),
+                      child: CoinSellerShimmerWidget(),
+                    )
+                        : RefreshIndicator(
+                      onRefresh: () async => controller.init(),
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsets.all(15),
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            CoinTradingBoxWidget(),
+                            SizedBox(height: 15),
+                            TransferWidget(),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                ),
+                ],
+              ),
+            ],
+          ),
         ),
-        bottomNavigationBar: Visibility(
-          visible: controller.isLoading == false,
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: AppButtonUi(
-              fontSize: 16,
-              gradient: AppColor.primaryGradient,
-              title: EnumLocal.txtTransferNow.name.tr,
-              callback: () => Utils.isDemoApp ? Utils.showToast(text: "This is Demo App") : controller.onClickTransfer(),
+        bottomNavigationBar: SafeArea(
+          child: Visibility(
+            visible: controller.isLoading == false,
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: AppButtonUi(
+                fontSize: 16,
+                gradient: AppColor.primaryGradient,
+                title: EnumLocal.txtTransferNow.name.tr,
+                callback: () => Utils.isDemoApp
+                    ? Utils.showToast(text: "This is Demo App")
+                    : controller.onClickTransfer(),
+              ),
             ),
           ),
         ),

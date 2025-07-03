@@ -6,29 +6,33 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 
 class NoDataFoundWidget extends StatelessWidget {
-  const NoDataFoundWidget({super.key, this.title, this.iconSize, this.titleSize, this.color});
+  const NoDataFoundWidget({super.key, this.title, this.iconSize, this.titleSize, this.color, this.backColor});
 
   final String? title;
   final double? iconSize;
   final double? titleSize;
   final Color? color;
+  final Color? backColor;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            height: iconSize ?? 200,
-            width: iconSize ?? 200,
-            AppAssets.imgNoDataFoundPlaceHolder,
-          ),
-          Text(
-            title ?? EnumLocal.txtNoDataFound.name.tr,
-            style: AppFontStyle.styleW600(color ?? AppColor.grayText, titleSize ?? 14),
-          ),
-        ],
+    return Container(
+      color: backColor,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              height: iconSize ?? 200,
+              width: iconSize ?? 200,
+              AppAssets.imgNoDataFoundPlaceHolder,
+            ),
+            Text(
+              title ?? EnumLocal.txtNoDataFound.name.tr,
+              style: AppFontStyle.styleW600(color ?? AppColor.grayText, titleSize ?? 14),
+            ),
+          ],
+        ),
       ),
     );
   }

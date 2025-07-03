@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/api/fetch_setting_api.dart';
 import 'package:tingle/common/widget/custom_capitalize_first_letter.dart';
@@ -10,6 +11,8 @@ import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
+
+import '../../../assets/assets.gen.dart';
 
 class RadioItem extends StatelessWidget {
   const RadioItem({super.key, required this.isSelected});
@@ -115,16 +118,15 @@ class EnterCoinFieldUi extends GetView<WithdrawController> {
       children: [
         Text(
           EnumLocal.txtEnterCoin.name.tr,
-          style: AppFontStyle.styleW500(AppColor.grayText, 14),
+          style: AppFontStyle.styleW500(AppColor.black, 14),
         ),
         5.height,
         Container(
           height: 54,
           width: Get.width,
           decoration: BoxDecoration(
-            color: AppColor.colorBorder.withValues(alpha: 0.2),
+            color: AppColor.white,
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: AppColor.colorBorder.withValues(alpha: 0.6)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -133,14 +135,7 @@ class EnterCoinFieldUi extends GetView<WithdrawController> {
               Container(
                 height: 54,
                 width: 60,
-                decoration: BoxDecoration(
-                  gradient: AppColor.primaryGradient,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(14),
-                    bottomLeft: Radius.circular(14),
-                  ),
-                ),
-                child: Center(child: Image.asset(AppAssets.icMyCoin, width: 28)),
+                child: Center(child: Assets.images.tuijianGold.image(width: 24)),
               ),
               15.width,
               Expanded(
@@ -154,7 +149,7 @@ class EnterCoinFieldUi extends GetView<WithdrawController> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: EnumLocal.txtEnterWithdrawCoin.name.tr,
-                    hintStyle: AppFontStyle.styleW500(AppColor.secondary, 14),
+                    hintStyle: AppFontStyle.styleW500(HexColor('#86868F'), 14),
                   ),
                 ),
               ),

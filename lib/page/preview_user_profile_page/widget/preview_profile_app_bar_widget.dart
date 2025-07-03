@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tingle/assets/assets.gen.dart';
 import 'package:tingle/page/preview_user_profile_page/controller/preview_user_profile_controller.dart';
 import 'package:tingle/routes/app_routes.dart';
 import 'package:tingle/utils/assets.dart';
@@ -59,11 +60,7 @@ class PreviewProfileAppBarWidget extends StatelessWidget {
                   width: 45,
                   alignment: Alignment.center,
                   decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.transparent),
-                  child: Image.asset(
-                    AppAssets.icEditPen,
-                    color: controller.isShowAppBar ? AppColor.black : AppColor.white,
-                    width: 25,
-                  ),
+                  child: Assets.images.editImg.image(width: 25),
                 ),
               ),
             ),

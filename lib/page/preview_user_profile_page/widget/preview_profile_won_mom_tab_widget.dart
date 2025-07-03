@@ -23,7 +23,7 @@ class PreviewProfileWonMomTabWidget extends StatelessWidget {
           : controller.userVideos.isEmpty
               ? SizedBox(
                   height: Get.width,
-                  child: NoDataFoundWidget(),
+                  child: NoDataFoundWidget(backColor: AppColor.white,),
                 )
               : GridView.builder(
                   shrinkWrap: true,
@@ -41,9 +41,10 @@ class PreviewProfileWonMomTabWidget extends StatelessWidget {
                     return GestureDetector(
                       onTap: () => controller.onClickVideo(index),
                       child: Container(
+
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
-                          color: AppColor.colorBorder.withValues(alpha: 0.5),
+                          color: AppColor.white,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: LayoutBuilder(builder: (context, box) {
