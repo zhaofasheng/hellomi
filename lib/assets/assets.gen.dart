@@ -1781,6 +1781,42 @@ class $AssetsImagesGen {
   AssetGenImage get jinbiBack =>
       const AssetGenImage('assets/images/jinbi_back.png');
 
+  /// File path: assets/images/live_game.png
+  AssetGenImage get liveGame =>
+      const AssetGenImage('assets/images/live_game.png');
+
+  /// File path: assets/images/live_gift.png
+  AssetGenImage get liveGift =>
+      const AssetGenImage('assets/images/live_gift.png');
+
+  /// File path: assets/images/live_like.png
+  AssetGenImage get liveLike =>
+      const AssetGenImage('assets/images/live_like.png');
+
+  /// File path: assets/images/live_look_num.png
+  AssetGenImage get liveLookNum =>
+      const AssetGenImage('assets/images/live_look_num.png');
+
+  /// File path: assets/images/live_msg.png
+  AssetGenImage get liveMsg =>
+      const AssetGenImage('assets/images/live_msg.png');
+
+  /// File path: assets/images/live_phlop.png
+  AssetGenImage get livePhlop =>
+      const AssetGenImage('assets/images/live_phlop.png');
+
+  /// File path: assets/images/live_pk_time.png
+  AssetGenImage get livePkTime =>
+      const AssetGenImage('assets/images/live_pk_time.png');
+
+  /// File path: assets/images/live_right.png
+  AssetGenImage get liveRight =>
+      const AssetGenImage('assets/images/live_right.png');
+
+  /// File path: assets/images/live_seat.png
+  AssetGenImage get liveSeat =>
+      const AssetGenImage('assets/images/live_seat.png');
+
   /// File path: assets/images/login_age.png
   AssetGenImage get loginAge =>
       const AssetGenImage('assets/images/login_age.png');
@@ -2153,6 +2189,15 @@ class $AssetsImagesGen {
     imgYouLose,
     imgYouWin,
     jinbiBack,
+    liveGame,
+    liveGift,
+    liveLike,
+    liveLookNum,
+    liveMsg,
+    livePhlop,
+    livePkTime,
+    liveRight,
+    liveSeat,
     loginAge,
     loginBackImg,
     loginDownPop,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
+import 'package:tingle/assets/assets.gen.dart';
 import 'package:tingle/common/function/convert_second_to_time.dart';
 import 'package:tingle/common/widget/loading_widget.dart';
 import 'package:tingle/page/fake_other_user_profile_bottom_sheet/view/fake_other_user_profile_bottom_sheet.dart';
@@ -74,7 +76,7 @@ class FakePkCameraWidget extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          70.height,
+                                          (70+MediaQuery.of(context).padding.bottom).height,
                                         ],
                                       ),
                                     ),
@@ -96,6 +98,7 @@ class FakePkCameraWidget extends StatelessWidget {
                                         fit: StackFit.expand,
                                         alignment: Alignment.center,
                                         children: [
+                                          ///PK的俩左右直播视图
                                           SizedBox(
                                             height: 300,
                                             width: Get.width,
@@ -111,17 +114,22 @@ class FakePkCameraWidget extends StatelessWidget {
                                             child: Container(
                                               height: 25,
                                               alignment: Alignment.center,
-                                              padding: EdgeInsets.symmetric(horizontal: 10),
-                                              decoration: BoxDecoration(
-                                                color: AppColor.black.withValues(alpha: 0.5),
-                                                borderRadius: BorderRadius.vertical(bottom: Radius.circular(8)),
-                                              ),
-                                              child: GetBuilder<FakeLiveController>(
-                                                id: AppConstant.onChangePkTime,
-                                                builder: (controller) => Text(
-                                                  "Cutdown : ${ConvertSecondToTime.onConvert(controller.fakeLiveModel?.pkCountTime ?? 0)}",
-                                                  style: AppFontStyle.styleW600(AppColor.white, 8),
-                                                ),
+
+                                              child: Stack(
+                                                children: [
+                                                  Assets.images.livePkTime.image(height: 25),
+                                                  Positioned.fill(
+                                                    child: Center(
+                                                      child: GetBuilder<FakeLiveController>(
+                                                        id: AppConstant.onChangePkTime,
+                                                        builder: (controller) => Text(
+                                                          "Cutdown : ${ConvertSecondToTime.onConvert(controller.fakeLiveModel?.pkCountTime ?? 0)}",
+                                                          style: AppFontStyle.styleW600(AppColor.white, 8),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
@@ -145,9 +153,9 @@ class FakePkCameraWidget extends StatelessWidget {
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
                                             colors: [
-                                              AppColor.blue.withValues(alpha: 0.5),
+                                              HexColor('#00E4A6').withValues(alpha: 0.5),
                                               AppColor.black,
-                                              AppColor.pink.withValues(alpha: 0.9),
+                                              HexColor('#FFC85B').withValues(alpha: 0.9),
                                             ],
                                           ),
                                         ),
@@ -426,73 +434,3 @@ class U1CameraWidget extends GetView<FakeLiveController> {
     );
   }
 }
-
-// class UserCameraWidget extends StatelessWidget {
-//   const UserCameraWidget({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetBuilder<FakeLiveController>(
-//       id: AppConstant.onEventHandler,
-//       builder: (controller) => Stack(
-//         children: [
-//           Positioned(
-//             top: controller.fakeLiveModel?.isChannelMediaRelay == true ? 120 : 0,
-//             child: Container(
-//               height: controller.fakeLiveModel?.isChannelMediaRelay == true ? (Get.width / 1.8) : Get.height,
-//               width: Get.width,
-//               child: Row(
-//                 children: [
-//                   Expanded(
-//                     child: U1CameraWidget(),
-//                   ),
-//                   Visibility(
-//                     visible: controller.fakeLiveModel?.isChannelMediaRelay == true,
-//                     child: Expanded(
-//                       child: H2CameraWidget(),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class HostCameraWidget extends StatelessWidget {
-//   const HostCameraWidget({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetBuilder<FakeLiveController>(
-//       id: AppConstant.onEventHandler,
-//       builder: (controller) => Stack(
-//         children: [
-//           Positioned(
-//             top: controller.fakeLiveModel?.isChannelMediaRelay == true ? 120 : 0,
-//             child: Container(
-//               height: controller.fakeLiveModel?.isChannelMediaRelay == true ? (Get.width / 1.8) : Get.height,
-//               width: Get.width,
-//               child: Row(
-//                 children: [
-//                   Expanded(
-//                     child: H1CameraWidget(),
-//                   ),
-//                   Visibility(
-//                     visible: controller.fakeLiveModel?.isChannelMediaRelay == true,
-//                     child: Expanded(
-//                       child: H2CameraWidget(),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

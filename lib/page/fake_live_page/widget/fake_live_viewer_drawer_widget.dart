@@ -16,7 +16,7 @@ class FakeLiveViewerDrawerWidget extends GetView<FakeLiveController> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
+      padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top,),
       child: Drawer(
         width: 250,
         shape: RoundedRectangleBorder(

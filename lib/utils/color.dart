@@ -97,7 +97,7 @@ abstract class AppColor {
   static const lightYellowOrangeGradient = LinearGradient(colors: [Color(0xFFFED74C), Color(0xFFFE7E3F)]);
   static const lightOrangeYellowGradient = LinearGradient(colors: [Color(0xFFFF8317), Color(0xFFFF9A03)]);
   static const bluePurpleGradient = LinearGradient(colors: [Color(0xFF0C85FF), Color(0xFF4D33FA)]);
-  static const coinPinkGradient = LinearGradient(colors: [Color(0xFFFF5F5D), Color(0xFFFF349A), Color(0xFFFF6B5A)]);
+  static const coinPinkGradient = LinearGradient(colors: [Color(0xFFFF5900), Color(0xFFFFDA62)]);
 
   static const announcementGradient = LinearGradient(colors: [Color(0xFF9447FF), Color(0xFF8B0FE9)]);
   static const securityGradient = LinearGradient(colors: [Color(0xFFFF5B3E), Color(0xFFFF2528)]);
@@ -109,7 +109,7 @@ abstract class AppColor {
   static const inviteGradient = LinearGradient(colors: [Color(0xFFFFE7EA), Color(0xFFFFE1E6)]);
   static const fansClubGradient = LinearGradient(colors: [Color(0xFFFFE4F3), Color(0xFFFFE6F4)]);
   static const authoriseGradient = LinearGradient(colors: [Color(0xFFEAEBFF), Color(0xFFD0E2FF)]);
-  static const audioRoomGradient = LinearGradient(colors: [Color(0xFF310059), Color(0xFF4F0628)]);
+  static const audioRoomGradient = LinearGradient(colors: [Color(0xFF343A3E), Color(0xFF091628),Color(0xFF061428)]);
   static const inUseGradient = LinearGradient(colors: [Color(0xFFF108F5), Color(0xFF9718FF)]);
 
   static const monthHottestGradient = LinearGradient(

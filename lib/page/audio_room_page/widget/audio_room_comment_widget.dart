@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
@@ -147,7 +148,7 @@ class LiveCommentTextWidget extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: AppFontStyle.styleW500(AppColor.lightBlue, 11),
+                    style: AppFontStyle.styleW500(HexColor('#00E3A5'), 11),
                   ),
                   3.height,
                   Container(

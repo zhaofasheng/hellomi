@@ -19,6 +19,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class FakeLiveAppBarWidget extends StatelessWidget {
   const FakeLiveAppBarWidget({super.key});
 
@@ -64,7 +66,6 @@ class FakeLiveAppBarWidget extends StatelessWidget {
                               width: 35,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: Border.all(color: AppColor.white),
                               ),
                               child: Container(
                                 height: 35,
@@ -93,11 +94,12 @@ class FakeLiveAppBarWidget extends StatelessWidget {
                                       ),
                                     ],
                                   ),
+                                  ///观看人数
                                   Row(
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.only(right: 5),
-                                        child: Image.asset(AppAssets.icShow, width: 16),
+                                        child: Assets.images.liveLookNum.image(width: 16),
                                       ),
                                       Flexible(
                                         child: Text(
@@ -112,6 +114,7 @@ class FakeLiveAppBarWidget extends StatelessWidget {
                                 ],
                               ),
                             ),
+                            ///是否关注
                             Visibility(
                               visible: controller.fakeLiveModel?.isHost == false,
                               child: GetBuilder<FakeLiveController>(
@@ -124,7 +127,7 @@ class FakeLiveAppBarWidget extends StatelessWidget {
                                     margin: EdgeInsets.only(left: 8),
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(color: controller.fakeLiveModel?.isFollow == true ? AppColor.white : AppColor.primary, shape: BoxShape.circle, border: Border.all(color: controller.fakeLiveModel?.isFollow == true ? AppColor.white : AppColor.primary)),
-                                    child: Image.asset(
+                                    child:controller.fakeLiveModel?.isFollow == false?Assets.images.liveLike.image(width: 30) : Image.asset(
                                       controller.fakeLiveModel?.isFollow == true ? AppAssets.icFollowing : AppAssets.icFollow,
                                       color: controller.fakeLiveModel?.isFollow == false ? AppColor.white : AppColor.primary,
                                       width: 22,
@@ -175,7 +178,8 @@ class FakeLiveAppBarWidget extends StatelessWidget {
                                             isBanned: indexData?.isProfilePicBanned,
                                           ),
                                         ),
-                                        frameImage.isEmpty ? SizedBox() : Image.asset(frameImage, height: 40, width: 40),
+                                        ///头像标识，暂无图片资源，屏蔽暂时
+                                        //frameImage.isEmpty ? SizedBox() : Image.asset(frameImage, height: 40, width: 40),
                                       ],
                                     ),
                                   ),
@@ -218,7 +222,7 @@ class FakeLiveAppBarWidget extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        Image.asset(AppAssets.icCoinStar, width: 18),
+                        Assets.images.tuijianGold.image(width: 16),
                         3.width,
                         Text(
                           CustomFormatNumber.onConvert(Random.secure().nextInt(100000)),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/widget/icon_button_widget.dart';
 import 'package:tingle/page/audio_room_page/widget/game_bottom_sheet_widget.dart';
@@ -10,6 +11,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 //ignore: must_be_immutable
 class FakeCommentTextFieldWidget extends GetView<FakeLiveController> {
   FakeCommentTextFieldWidget({super.key, this.ispklive});
@@ -18,7 +21,7 @@ class FakeCommentTextFieldWidget extends GetView<FakeLiveController> {
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.light);
 
-    return Container(
+    return SafeArea(child: Container(
       width: Get.width,
       decoration: ispklive == false ? BoxDecoration(color: AppColor.transparent) : BoxDecoration(gradient: AppColor.audioRoomGradient),
       padding: EdgeInsets.all(20),
@@ -30,23 +33,19 @@ class FakeCommentTextFieldWidget extends GetView<FakeLiveController> {
               padding: const EdgeInsets.only(left: 15, right: 5),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: AppColor.white.withValues(alpha: 0.2),
+                color: AppColor.black.withValues(alpha: 0.2),
                 // color: AppColor.white.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    height: 22,
-                    width: 22,
-                    AppAssets.icMessageBorder,
-                  ),
+                  Assets.images.liveMsg.image(width: 22),
                   5.width,
                   VerticalDivider(
                     indent: 12,
                     endIndent: 12,
-                    color: AppColor.white.withValues(alpha: 0.5),
+                    color: HexColor('#B9BCC1'),
                   ),
                   5.width,
                   Expanded(
@@ -60,7 +59,7 @@ class FakeCommentTextFieldWidget extends GetView<FakeLiveController> {
                         border: InputBorder.none,
                         contentPadding: const EdgeInsets.only(bottom: 3),
                         hintText: EnumLocal.txtTypeComment.name.tr,
-                        hintStyle: AppFontStyle.styleW400(AppColor.white.withValues(alpha: 0.5), 12),
+                        hintStyle: AppFontStyle.styleW400(HexColor('#B9BCC1'), 12),
                       ),
                     ),
                   ),
@@ -87,50 +86,21 @@ class FakeCommentTextFieldWidget extends GetView<FakeLiveController> {
               ),
             ),
           ),
-          // IconButtonWidget(
-          //   icon: AppAssets.icChatGift,
-          //   circleSize: 42,
-          //   iconSize: 20,
-          //   margin: EdgeInsets.only(left: 15),
-          //   circleColor: AppColor.white.withValues(alpha: 0.2),
-          //   visible: controller.fakeLiveModel?.isHost == false,
-          //   callback: () => controller.onClickGift(context),
-          // ),
-
+          10.width,
           GestureDetector(
             onTap: () => GameBottomSheetWidget.onShow(),
-            child: Container(
-              height: 45,
-              width: 45,
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(left: 10),
-              decoration: BoxDecoration(
-                color: AppColor.white.withValues(alpha: 0.2),
-                shape: BoxShape.circle,
-              ),
-              child: Image.asset(AppAssets.icGame, width: 26),
-            ),
+            child: Assets.images.liveGame.image(width: 45),
           ),
-
+          10.width,
           GestureDetector(
             onTap: () {
               FocusManager.instance.primaryFocus?.unfocus();
               controller.onClickGift(context);
             },
-            child: Container(
-              height: 45,
-              width: 45,
-              margin: EdgeInsets.only(left: 10),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: AppColor.white.withValues(alpha: 0.2),
-                shape: BoxShape.circle,
-              ),
-              child: Image.asset(AppAssets.icLightPinkGift, width: 24),
-            ),
+            child: Assets.images.liveGift.image(width: 45),
           ),
         ],
       ),
-    );
+    ));
   }
 }

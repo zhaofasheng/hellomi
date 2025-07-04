@@ -26,55 +26,55 @@ class FakeLiveView extends GetView<FakeLiveController> {
       key: controller.scaffoldKey,
       backgroundColor: AppColor.black,
       endDrawer: FakeLiveViewerDrawerWidget(),
-      body: Stack(
+      body: SafeArea(top: false,child: Stack(
         alignment: Alignment.center,
         children: [
           FakeLiveCameraWidget(),
           ShadowWidget(),
           controller.fakeLiveModel?.isChannelMediaRelay == false
               ? ScrollFadeEffectWidget(
-                  axis: Axis.vertical,
+            axis: Axis.vertical,
+            child: SingleChildScrollView(
+              // physics: const NeverScrollableScrollPhysics(),
+              child: Container(
+                color: AppColor.transparent,
+                height: Get.height,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
                   child: SingleChildScrollView(
-                    // physics: const NeverScrollableScrollPhysics(),
-                    child: Container(
-                      color: AppColor.transparent,
-                      height: Get.height,
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              GetBuilder<FakeLiveController>(
-                                id: AppConstant.onToggleComment,
-                                builder: (controller) => GestureDetector(
-                                  behavior: HitTestBehavior.translucent, // Important!
-                                  // Make sure this is active
-                                  child: Container(
-                                    color: Colors.transparent, // Use Flutter's built-in transparent
-                                    height: Get.height / 3.3,
-                                    width: Get.width,
-                                    alignment: AlignmentDirectional.topStart,
-                                    child: Visibility(
-                                      visible: true,
-                                      child: Container(
-                                        height: Get.height / 3.3,
-                                        width: Get.width / 1.8,
-                                        color: Colors.transparent, // Also updated
-                                        child: FakeLiveCommentWidget(),
-                                      ),
-                                    ),
-                                  ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        GetBuilder<FakeLiveController>(
+                          id: AppConstant.onToggleComment,
+                          builder: (controller) => GestureDetector(
+                            behavior: HitTestBehavior.translucent, // Important!
+                            // Make sure this is active
+                            child: Container(
+                              color: Colors.transparent, // Use Flutter's built-in transparent
+                              height: Get.height / 3.3,
+                              width: Get.width,
+                              alignment: AlignmentDirectional.topStart,
+                              child: Visibility(
+                                visible: true,
+                                child: Container(
+                                  height: Get.height / 3.3,
+                                  width: Get.width / 1.8,
+                                  color: Colors.transparent, // Also updated
+                                  child: FakeLiveCommentWidget(),
                                 ),
                               ),
-                              70.height,
-                            ],
+                            ),
                           ),
                         ),
-                      ),
+                        (70+MediaQuery.of(context).padding.bottom).height,
+                      ],
                     ),
                   ),
-                )
+                ),
+              ),
+            ),
+          )
               : SizedBox(),
           FakePkCameraWidget(),
           FakeButtonWidget(),
@@ -94,13 +94,13 @@ class FakeLiveView extends GetView<FakeLiveController> {
           ShowReceivedGift.onShowSenderDetails(),
           FakeLiveAppBarWidget(),
           Obx(
-            () => Visibility(
+                () => Visibility(
               visible: controller.isShowPkAnimation.value,
               child: Lottie.asset(AppAssets.lottiePk, width: 200),
             ),
           ),
           Obx(
-            () => AnimatedPositioned(
+                () => AnimatedPositioned(
               duration: const Duration(seconds: 1, milliseconds: 500),
               right: controller.isShowPkAnimation.value ? 300 : -50,
               child: Padding(
@@ -110,7 +110,7 @@ class FakeLiveView extends GetView<FakeLiveController> {
             ),
           ),
           Obx(
-            () => AnimatedPositioned(
+                () => AnimatedPositioned(
               duration: const Duration(seconds: 1, milliseconds: 500),
               left: controller.isShowPkAnimation.value ? 300 : -50,
               child: Padding(
@@ -120,7 +120,7 @@ class FakeLiveView extends GetView<FakeLiveController> {
             ),
           ),
         ],
-      ),
+      ),)
     );
   }
 }
