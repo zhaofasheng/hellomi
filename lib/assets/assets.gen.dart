@@ -1049,6 +1049,13 @@ class $AssetsIconsGen {
   /// File path: assets/icons/laowo.png
   AssetGenImage get laowo => const AssetGenImage('assets/icons/laowo.png');
 
+  /// File path: assets/icons/one_empty.png
+  AssetGenImage get oneEmpty =>
+      const AssetGenImage('assets/icons/one_empty.png');
+
+  /// File path: assets/icons/one_get.png
+  AssetGenImage get oneGet => const AssetGenImage('assets/icons/one_get.png');
+
   /// File path: assets/icons/pk_flash_img.png
   AssetGenImage get pkFlashImg =>
       const AssetGenImage('assets/icons/pk_flash_img.png');
@@ -1080,6 +1087,21 @@ class $AssetsIconsGen {
   /// File path: assets/icons/third_rank_seat_frame.webp
   AssetGenImage get thirdRankSeatFrame =>
       const AssetGenImage('assets/icons/third_rank_seat_frame.webp');
+
+  /// File path: assets/icons/three_empty.png
+  AssetGenImage get threeEmpty =>
+      const AssetGenImage('assets/icons/three_empty.png');
+
+  /// File path: assets/icons/three_get.png
+  AssetGenImage get threeGet =>
+      const AssetGenImage('assets/icons/three_get.png');
+
+  /// File path: assets/icons/two_empty.png
+  AssetGenImage get twoEmpty =>
+      const AssetGenImage('assets/icons/two_empty.png');
+
+  /// File path: assets/icons/two_get.png
+  AssetGenImage get twoGet => const AssetGenImage('assets/icons/two_get.png');
 
   /// File path: assets/icons/video_more_img.png
   AssetGenImage get videoMoreImg =>
@@ -1323,6 +1345,8 @@ class $AssetsIconsGen {
     icYellowVs,
     icYellowWin,
     laowo,
+    oneEmpty,
+    oneGet,
     pkFlashImg,
     rankLevel1,
     rankLevel2,
@@ -1331,6 +1355,10 @@ class $AssetsIconsGen {
     secondRankSeatFrame,
     thirdRankEmptyFrame,
     thirdRankSeatFrame,
+    threeEmpty,
+    threeGet,
+    twoEmpty,
+    twoGet,
     videoMoreImg,
   ];
 }

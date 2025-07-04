@@ -220,7 +220,7 @@ class RechargeCoinController extends GetxController implements IAPCallback {
   }
 
   void onClickInAppPurchase({required int index}) async {
-    String productKey = "";
+    String productKey = "coinPlan1000";//仅用于测试
     List<String> kProductIds = <String>[productKey];
 
     await InAppPurchaseHelper().init(

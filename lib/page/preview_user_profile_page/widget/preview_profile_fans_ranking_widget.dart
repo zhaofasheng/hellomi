@@ -10,6 +10,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class PreviewProfileFansRankingWidget extends StatelessWidget {
   const PreviewProfileFansRankingWidget({super.key});
 
@@ -68,10 +70,7 @@ class PreviewProfileFansRankingWidget extends StatelessWidget {
                           ),
                         )
                       : Offstage(),
-                  Image.asset(
-                    controller.fansRanking[0].isNotEmpty ? AppAssets.firstRankEmptyFrame : AppAssets.firstRankSeatFrame,
-                    width: 36,
-                  ),
+                  controller.fansRanking[0].isNotEmpty ? Assets.icons.oneEmpty.image(width: 36):Assets.icons.oneGet.image(width: 36),
                 ],
               ),
             ),
@@ -97,10 +96,7 @@ class PreviewProfileFansRankingWidget extends StatelessWidget {
                           ),
                         )
                       : Offstage(),
-                  Image.asset(
-                    controller.fansRanking[0].length >= 2 ? AppAssets.secondRankEmptyFrame : AppAssets.secondRankSeatFrame,
-                    width: 36,
-                  ),
+                  controller.fansRanking[0].length >= 2 ? Assets.icons.twoEmpty.image(width: 36):Assets.icons.twoGet.image(width: 36),
                 ],
               ),
             ),
@@ -126,10 +122,8 @@ class PreviewProfileFansRankingWidget extends StatelessWidget {
                           ),
                         )
                       : Offstage(),
-                  Image.asset(
-                    controller.fansRanking[0].length >= 3 ? AppAssets.thirdRankEmptyFrame : AppAssets.thirdRankSeatFrame,
-                    width: 36,
-                  ),
+                  controller.fansRanking[0].length >= 3 ? Assets.icons.threeEmpty.image(width: 36):Assets.icons.threeGet.image(width: 36),
+
                 ],
               ),
             ),
