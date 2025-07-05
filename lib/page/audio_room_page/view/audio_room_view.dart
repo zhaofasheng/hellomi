@@ -73,7 +73,7 @@ class AudioRoomView extends GetView<AudioRoomController> {
                           AudioRoomAppbarWidget(),
                           AudioRoomSeatWidget(),
                           Container(
-                            height: (Get.height - (MediaQuery.of(context).viewPadding.top + 100 + (Get.width / 1.2) + 70)),
+                            height: (Get.height - (MediaQuery.of(context).viewPadding.top + 100 + (Get.width / 1.2) + 70)-MediaQuery.of(context).viewPadding.bottom),
                             color: AppColor.transparent,
                             width: Get.width,
                             alignment: AlignmentDirectional.topStart,

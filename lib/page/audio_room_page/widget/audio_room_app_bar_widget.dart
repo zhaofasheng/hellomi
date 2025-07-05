@@ -16,6 +16,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class AudioRoomAppbarWidget extends GetView<AudioRoomController> {
   const AudioRoomAppbarWidget({super.key});
 
@@ -56,9 +58,7 @@ class AudioRoomAppbarWidget extends GetView<AudioRoomController> {
                                 Container(
                                   height: 38,
                                   width: 38,
-                                  padding: EdgeInsets.all(1),
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: AppColor.white),
                                     shape: BoxShape.circle,
                                   ),
                                   child: Container(
@@ -87,7 +87,7 @@ class AudioRoomAppbarWidget extends GetView<AudioRoomController> {
                                         id: AppConstant.onChangeViewCount,
                                         builder: (controller) => Row(
                                           children: [
-                                            Image.asset(AppAssets.icShow, color: AppColor.white, width: 14),
+                                            Assets.images.liveLookNum.image(width: 14),
                                             5.width,
                                             Flexible(
                                               fit: FlexFit.loose,
@@ -135,11 +135,11 @@ class AudioRoomAppbarWidget extends GetView<AudioRoomController> {
                                       color: controller.audioRoomModel?.isFollow == true ? AppColor.white : AppColor.primary,
                                       shape: BoxShape.circle,
                                     ),
-                                    child: Image.asset(
+                                    child:controller.audioRoomModel?.isFollow == true? Image.asset(
                                       controller.audioRoomModel?.isFollow == true ? AppAssets.icFollowing : AppAssets.icFollow,
                                       color: controller.audioRoomModel?.isFollow == true ? AppColor.primary : AppColor.white,
                                       width: 25,
-                                    ),
+                                    ): Assets.images.liveLike.image(width: 25),
                                   ),
                                 ),
                               ),
@@ -194,7 +194,7 @@ class AudioRoomAppbarWidget extends GetView<AudioRoomController> {
                       width: 35,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: AppColor.white.withValues(alpha: 0.15),
+                        color: AppColor.black.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
                       ),
                       child: Image.asset(AppAssets.icSetting, color: AppColor.white, width: 22),
@@ -226,7 +226,7 @@ class AudioRoomAppbarWidget extends GetView<AudioRoomController> {
                     width: 35,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: AppColor.white.withValues(alpha: 0.15),
+                      color: AppColor.black.withValues(alpha: 0.2),
                       shape: BoxShape.circle,
                     ),
                     child: Image.asset(controller.audioRoomModel?.isHost == true ? AppAssets.icPowerOnOff : AppAssets.icClose, color: AppColor.white, width: 20),

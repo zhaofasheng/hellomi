@@ -34,7 +34,7 @@ class LiveView extends GetView<LiveController> {
           PkCameraWidget(),
           Positioned(
             left: 0,
-            bottom: 80,
+            bottom: MediaQuery.of(context).padding.bottom+80,
             child: Container(
               height: Get.height / 3.5,
               width: Get.width / 1.8,
@@ -48,7 +48,7 @@ class LiveView extends GetView<LiveController> {
               visible: controller.liveModel?.isChannelMediaRelay == false,
               child: Positioned(
                 bottom: 0,
-                child: CommentTextFieldWidget(),
+                child: SafeArea(child: CommentTextFieldWidget()),
               ),
             ),
           ),

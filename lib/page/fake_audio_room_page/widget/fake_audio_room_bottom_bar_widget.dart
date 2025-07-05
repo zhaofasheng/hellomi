@@ -14,6 +14,8 @@ import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class FakeAudioRoomBottomBarWidget extends GetView<FakeAudioRoomController> {
   const FakeAudioRoomBottomBarWidget({super.key});
 
@@ -38,11 +40,7 @@ class FakeAudioRoomBottomBarWidget extends GetView<FakeAudioRoomController> {
                 height: 40,
                 width: 40,
                 alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColor.white.withValues(alpha: 0.2),
-                  shape: BoxShape.circle,
-                ),
-                child: Image.asset(AppAssets.icGame, width: 26),
+                child: Assets.images.liveGame.image(width: 40),
               ),
             ),
             10.width,
@@ -55,11 +53,7 @@ class FakeAudioRoomBottomBarWidget extends GetView<FakeAudioRoomController> {
                 height: 40,
                 width: 40,
                 alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColor.white.withValues(alpha: 0.2),
-                  shape: BoxShape.circle,
-                ),
-                child: Image.asset(AppAssets.icAudioRoomEmoji, width: 35),
+                child: Assets.images.audioSmile.image(width: 40),
               ),
             ),
             10.width,
@@ -100,11 +94,8 @@ class FakeAudioRoomBottomBarWidget extends GetView<FakeAudioRoomController> {
                     height: 40,
                     width: 40,
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: AppColor.white.withValues(alpha: 0.2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Image.asset(AppAssets.icLightPinkGift, width: 24),
+
+                    child: Assets.images.liveGift.image(width: 40),
                   ),
                 ),
               ),

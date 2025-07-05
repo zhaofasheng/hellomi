@@ -9,6 +9,7 @@ import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/utils.dart';
+import '../../../assets/assets.gen.dart';
 import 'game_bottom_sheet_widget.dart';
 
 class AudioRoomBottomBarWidget extends GetView<AudioRoomController> {
@@ -32,11 +33,7 @@ class AudioRoomBottomBarWidget extends GetView<AudioRoomController> {
                 height: 40,
                 width: 40,
                 alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColor.white.withValues(alpha: 0.2),
-                  shape: BoxShape.circle,
-                ),
-                child: Image.asset(AppAssets.icGame, width: 26),
+                child: Assets.images.liveGame.image(width: 40),
               ),
             ),
             10.width,
@@ -49,11 +46,7 @@ class AudioRoomBottomBarWidget extends GetView<AudioRoomController> {
                 height: 40,
                 width: 40,
                 alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColor.white.withValues(alpha: 0.2),
-                  shape: BoxShape.circle,
-                ),
-                child: Image.asset(AppAssets.icAudioRoomEmoji, width: 35),
+                child:Assets.images.audioSmile.image(width: 40),
               ),
             ),
             10.width,
@@ -69,7 +62,7 @@ class AudioRoomBottomBarWidget extends GetView<AudioRoomController> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(right: 10),
                     decoration: BoxDecoration(
-                      color: controller.audioRoomModel?.mute == 3 ? AppColor.white.withValues(alpha: 0.5) : AppColor.white.withValues(alpha: 0.2),
+                      color: controller.audioRoomModel?.mute == 3 ? AppColor.black.withValues(alpha: 0.5) : AppColor.black.withValues(alpha: 0.2),
                       shape: BoxShape.circle,
                     ),
                     child: Image.asset(
@@ -94,11 +87,7 @@ class AudioRoomBottomBarWidget extends GetView<AudioRoomController> {
                     height: 40,
                     width: 40,
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: AppColor.white.withValues(alpha: 0.2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Image.asset(AppAssets.icLightPinkGift, width: 24),
+                    child: Assets.images.liveGift.image(width: 40),
                   ),
                 ),
               ),

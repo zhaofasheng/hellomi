@@ -11,6 +11,8 @@ import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class FakeAudioRoomSeatWidget extends GetView<FakeAudioRoomController> {
   const FakeAudioRoomSeatWidget({super.key});
 
@@ -72,7 +74,7 @@ class BlankSeatWidget extends GetView<FakeAudioRoomController> {
                   width: 18,
                 ),
                 Center(
-                  child: controller.fakeAudioRoomModel?.loadingSeatIndex == index ? LoadingWidget(size: 35, color: AppColor.white) : Image.asset(AppAssets.icSeat, width: 35),
+                  child: controller.fakeAudioRoomModel?.loadingSeatIndex == index ? LoadingWidget(size: 35, color: AppColor.white) : Assets.images.liveSeat.image(width: 35),
                 ),
                 18.height,
               ],

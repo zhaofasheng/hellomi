@@ -74,7 +74,7 @@ class LiveRoomNameCommentWidget extends StatelessWidget {
         padding: EdgeInsets.all(15),
         child: Text(
           "$roomName : ${EnumLocal.txtWelcomeToJoinTheLiveAnyContentRelated.name.tr}",
-          style: AppFontStyle.styleW500(AppColor.lightGreen, 12),
+          style: AppFontStyle.styleW500(AppColor.white, 12),
         ),
       ),
     );

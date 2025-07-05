@@ -22,13 +22,12 @@ class CreateAudioRoomView extends StatelessWidget {
       builder: (controller) => Scaffold(
         body: Stack(
           children: [
-            Image.asset(
-              AppAssets.imgCreateLiveRoomBg,
-              fit: BoxFit.cover,
+            Container(
               height: Get.height,
               width: Get.width,
+              decoration: BoxDecoration(gradient: AppColor.audioRoomGradient),
             ),
-            SizedBox(
+            SafeArea(top: false,child: SizedBox(
               height: Get.height,
               width: Get.width,
               child: Column(
@@ -44,7 +43,7 @@ class CreateAudioRoomView extends StatelessWidget {
                             10.height,
                             Text(
                               EnumLocal.txtSelectRoomImage.name.tr,
-                              style: AppFontStyle.styleW600(AppColor.white.withValues(alpha: 0.5), 15),
+                              style: AppFontStyle.styleW600(AppColor.white, 15),
                             ),
                             10.height,
                             GetBuilder<CreateAudioRoomController>(
@@ -65,14 +64,14 @@ class CreateAudioRoomView extends StatelessWidget {
                                   ),
                                   child: controller.pickImage != null
                                       ? Container(
-                                          height: 150,
-                                          width: 125,
-                                          clipBehavior: Clip.antiAlias,
-                                          decoration: BoxDecoration(
-                                            color: AppColor.white.withValues(alpha: 0.1),
-                                            borderRadius: BorderRadius.circular(14),
-                                          ),
-                                          child: Image.file(File(controller.pickImage!), fit: BoxFit.cover))
+                                      height: 150,
+                                      width: 125,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+                                        color: AppColor.white.withValues(alpha: 0.1),
+                                        borderRadius: BorderRadius.circular(14),
+                                      ),
+                                      child: Image.file(File(controller.pickImage!), fit: BoxFit.cover))
                                       : Image.asset(AppAssets.icUploadLiveRoomImage, color: AppColor.white.withValues(alpha: 0.8), width: 40),
                                 ),
                               ),
@@ -80,14 +79,14 @@ class CreateAudioRoomView extends StatelessWidget {
                             15.height,
                             Text(
                               EnumLocal.txtRoomName.name.tr,
-                              style: AppFontStyle.styleW600(AppColor.white.withValues(alpha: 0.5), 15),
+                              style: AppFontStyle.styleW600(AppColor.white, 15),
                             ),
                             10.height,
                             TextFieldWidget(controller: controller.nameController),
                             15.height,
                             Text(
                               EnumLocal.txtRoomDescription.name.tr,
-                              style: AppFontStyle.styleW600(AppColor.white.withValues(alpha: 0.5), 15),
+                              style: AppFontStyle.styleW600(AppColor.white, 15),
                             ),
                             10.height,
                             MultiLineTextFieldWidget(
@@ -97,7 +96,7 @@ class CreateAudioRoomView extends StatelessWidget {
                             15.height,
                             Text(
                               EnumLocal.txtRoomType.name.tr,
-                              style: AppFontStyle.styleW600(AppColor.white.withValues(alpha: 0.5), 15),
+                              style: AppFontStyle.styleW600(AppColor.white, 15),
                             ),
                             10.height,
                             GetBuilder<CreateAudioRoomController>(
@@ -130,7 +129,7 @@ class CreateAudioRoomView extends StatelessWidget {
                                     15.height,
                                     Text(
                                       EnumLocal.txtPassword.name.tr,
-                                      style: AppFontStyle.styleW600(AppColor.white.withValues(alpha: 0.5), 15),
+                                      style: AppFontStyle.styleW600(AppColor.white, 15),
                                     ),
                                     10.height,
                                     Container(
@@ -138,9 +137,8 @@ class CreateAudioRoomView extends StatelessWidget {
                                       padding: const EdgeInsets.only(left: 20, right: 15),
                                       alignment: Alignment.centerLeft,
                                       decoration: BoxDecoration(
-                                        color: AppColor.white.withValues(alpha: 0.15),
+                                        color: AppColor.black.withValues(alpha: 0.2),
                                         borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(color: AppColor.white.withValues(alpha: 0.2)),
                                       ),
                                       child: Row(
                                         children: [
@@ -215,7 +213,7 @@ class CreateAudioRoomView extends StatelessWidget {
                       margin: EdgeInsets.all(15),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        gradient: AppColor.coinPinkGradient,
+                        gradient: AppColor.primaryGradient,
                         borderRadius: BorderRadius.circular(100),
                       ),
                       child: Text(
@@ -226,7 +224,7 @@ class CreateAudioRoomView extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
+            ),)
           ],
         ),
       ),
@@ -255,9 +253,8 @@ class ButtonWidget extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? AppColor.white : AppColor.white.withValues(alpha: 0.15),
+          color: isSelected ? AppColor.white : AppColor.black.withValues(alpha: 0.2),
           borderRadius: BorderRadius.circular(10),
-          border: isSelected ? null : Border.all(color: AppColor.white.withValues(alpha: 0.2)),
         ),
         child: Row(
           children: [
@@ -295,9 +292,8 @@ class TextFieldWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 15, right: 5),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: AppColor.white.withValues(alpha: 0.15),
+        color: AppColor.black.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppColor.white.withValues(alpha: 0.2)),
       ),
       child: TextFormField(
         keyboardType: keyboardType,
@@ -336,9 +332,8 @@ class MultiLineTextFieldWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 15, right: 5),
       alignment: Alignment.topLeft,
       decoration: BoxDecoration(
-        color: AppColor.white.withValues(alpha: 0.1),
+        color: AppColor.black.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: AppColor.white.withValues(alpha: 0.2)),
       ),
       child: TextFormField(
         controller: controller,

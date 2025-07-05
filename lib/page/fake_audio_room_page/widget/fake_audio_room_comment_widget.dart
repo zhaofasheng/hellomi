@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
 import 'package:tingle/page/fake_audio_room_page/controller/fake_audio_room_controller.dart';
@@ -142,7 +143,7 @@ class LiveCommentTextWidget extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: AppFontStyle.styleW500(AppColor.lightBlue, 11),
+                  style: AppFontStyle.styleW500(HexColor('#08E6AA'), 11),
                 ),
                 3.height,
                 Container(
@@ -208,7 +209,7 @@ class LiveEmojiCommentWidget extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: AppFontStyle.styleW500(AppColor.lightBlue, 11),
+                  style: AppFontStyle.styleW500(HexColor('#08E6AA'), 11),
                 ),
                 3.height,
                 Container(

@@ -10,6 +10,8 @@ import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class AudioRoomSeatWidget extends GetView<AudioRoomController> {
   const AudioRoomSeatWidget({super.key});
 
@@ -85,10 +87,7 @@ class BlankSeatWidget extends GetView<AudioRoomController> {
                   Center(
                     child: controller.audioRoomModel?.loadingSeatIndex == index
                         ? LoadingWidget(size: 35, color: AppColor.white)
-                        : Image.asset(
-                            AppAssets.icSeatPlus,
-                            width: (box.maxHeight) * 0.35,
-                          ),
+                        : Assets.images.liveSeat.image(width: 30),
                   ),
                   18.height,
                 ],

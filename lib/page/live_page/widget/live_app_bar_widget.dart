@@ -12,10 +12,11 @@ import 'package:tingle/utils/api_params.dart';
 import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/constant.dart';
-import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
+
+import '../../../assets/assets.gen.dart';
 
 class LiveAppBarWidget extends StatelessWidget {
   const LiveAppBarWidget({super.key});
@@ -86,7 +87,7 @@ class LiveAppBarWidget extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(right: 5),
-                                    child: Image.asset(AppAssets.icShow, width: 16),
+                                    child: Assets.images.liveLookNum.image(width: 16),
                                   ),
                                   Flexible(
                                     fit: FlexFit.loose,
@@ -130,11 +131,11 @@ class LiveAppBarWidget extends StatelessWidget {
                                       color: controller.liveModel?.isFollow == true ? AppColor.white : AppColor.primary,
                                       shape: BoxShape.circle,
                                     ),
-                                    child: Image.asset(
+                                    child:controller.liveModel?.isFollow == true ? Image.asset(
                                       controller.liveModel?.isFollow == true ? AppAssets.icFollowing : AppAssets.icFollow,
                                       color: controller.liveModel?.isFollow == true ? AppColor.primary : AppColor.white,
                                       width: 22,
-                                    ),
+                                    ) : Assets.images.liveLike.image(width: 30),
                                   ),
                                 ),
                               ),

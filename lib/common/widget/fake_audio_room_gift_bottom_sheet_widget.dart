@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/common/api/fetch_category_wise_gift_api.dart';
@@ -122,12 +123,12 @@ class FakeAudioRoomGiftBottomSheetWidget {
           topStart: Radius.circular(25),
         ),
       ),
-      builder: (context) => Container(
+      builder: (context) => SafeArea(child: Container(
         height: 450,
         width: Get.width,
         clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(
-          color: AppColor.black,
+        decoration: BoxDecoration(
+          color: AppColor.black.withValues(alpha: 0.8),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
             topRight: Radius.circular(30),
@@ -136,16 +137,56 @@ class FakeAudioRoomGiftBottomSheetWidget {
         child: Column(
           children: [
             Container(
-              height: 0,
+              height: 60,
               width: Get.width,
               padding: EdgeInsets.symmetric(horizontal: 15),
-              decoration: const BoxDecoration(
-                color: AppColor.darkGrey,
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
                 ),
               ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  30.width,
+                  const Spacer(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 4,
+                        width: 35,
+                        decoration: BoxDecoration(
+                          color: AppColor.grayText.withValues(alpha: 0.5),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      10.height,
+                      Text(
+                        EnumLocal.txtSendGift.name.tr,
+                        style: AppFontStyle.styleW700(AppColor.white, 17),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      alignment: Alignment.center,
+                      child: Image.asset(width: 25, AppAssets.icClose, color: AppColor.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 0,
+              width: Get.width,
+              padding: EdgeInsets.symmetric(horizontal: 15),
               child: Stack(
                 children: [
                   SingleChildScrollView(
@@ -163,7 +204,7 @@ class FakeAudioRoomGiftBottomSheetWidget {
                             itemBuilder: (context, index) {
                               final indexData = controller.fakeAudioRoomModel?.seatUsers[index];
                               return Obx(
-                                () => GestureDetector(
+                                    () => GestureDetector(
                                   onTap: () => onChangeUser(indexData?.seat?.userId ?? ""),
                                   child: Container(
                                     height: 45,
@@ -206,17 +247,17 @@ class FakeAudioRoomGiftBottomSheetWidget {
                                               ),
                                               child: index == 0
                                                   ? Image.asset(
-                                                      AppAssets.icSmallHomeIcon,
-                                                      width: 8,
-                                                      color: selectedUserId.contains(indexData?.seat?.userId ?? "") ? AppColor.white : AppColor.primary,
-                                                    )
+                                                AppAssets.icSmallHomeIcon,
+                                                width: 8,
+                                                color: selectedUserId.contains(indexData?.seat?.userId ?? "") ? AppColor.white : AppColor.primary,
+                                              )
                                                   : Text(
-                                                      "${index + 1}",
-                                                      style: AppFontStyle.styleW600(
-                                                        selectedUserId.contains(indexData?.seat?.userId ?? "") ? AppColor.white : AppColor.primary,
-                                                        9,
-                                                      ),
-                                                    ),
+                                                "${index + 1}",
+                                                style: AppFontStyle.styleW600(
+                                                  selectedUserId.contains(indexData?.seat?.userId ?? "") ? AppColor.white : AppColor.primary,
+                                                  9,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -338,7 +379,7 @@ class FakeAudioRoomGiftBottomSheetWidget {
                     final indexData = FetchGiftCategoryApi.giftCategory[index];
 
                     return Obx(
-                      () => GiftTabItemWidget(
+                          () => GiftTabItemWidget(
                         name: indexData.name ?? "",
                         isSelected: selectedCategoryId.value == indexData.id,
                         callback: () => onChangeCategory(indexData.id ?? ""),
@@ -350,34 +391,34 @@ class FakeAudioRoomGiftBottomSheetWidget {
             ),
             Expanded(
               child: Obx(
-                () => isLoading.value
+                    () => isLoading.value
                     ? LoadingWidget()
                     : FetchCategoryWiseGiftApi.categoryWiseGift[selectedCategoryId.value]?.isEmpty ?? true
-                        ? NoDataFoundWidget()
-                        : SingleChildScrollView(
-                            child: GridView.builder(
-                              shrinkWrap: true,
-                              itemCount: FetchCategoryWiseGiftApi.categoryWiseGift[selectedCategoryId.value]?.length,
-                              padding: EdgeInsets.all(12),
-                              physics: NeverScrollableScrollPhysics(),
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 4,
-                                crossAxisSpacing: 8,
-                                mainAxisSpacing: 8,
-                                mainAxisExtent: 100,
-                              ),
-                              itemBuilder: (context, index) {
-                                final indexData = FetchCategoryWiseGiftApi.categoryWiseGift[selectedCategoryId.value]?[index];
-                                return Obx(
-                                  () => GiftItemWidget(
-                                    gift: indexData,
-                                    isSelected: selectedGiftIndex.value == index,
-                                    callback: () => selectedGiftIndex.value = index,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
+                    ? NoDataFoundWidget()
+                    : SingleChildScrollView(
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: FetchCategoryWiseGiftApi.categoryWiseGift[selectedCategoryId.value]?.length,
+                    padding: EdgeInsets.all(12),
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                      mainAxisExtent: 100,
+                    ),
+                    itemBuilder: (context, index) {
+                      final indexData = FetchCategoryWiseGiftApi.categoryWiseGift[selectedCategoryId.value]?[index];
+                      return Obx(
+                            () => GiftItemWidget(
+                          gift: indexData,
+                          isSelected: selectedGiftIndex.value == index,
+                          callback: () => selectedGiftIndex.value = index,
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
             ),
             Container(
@@ -403,7 +444,6 @@ class FakeAudioRoomGiftBottomSheetWidget {
                       decoration: BoxDecoration(
                         gradient: AppColor.coinPinkGradient,
                         borderRadius: BorderRadius.circular(100),
-                        border: Border.all(color: AppColor.white.withValues(alpha: 0.5)),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -411,7 +451,7 @@ class FakeAudioRoomGiftBottomSheetWidget {
                           Image.asset(AppAssets.icCoinStar, width: 20),
                           5.width,
                           Obx(
-                            () => Text(
+                                () => Text(
                               CustomFormatNumber.onConvert(FetchUserCoin.coin.value),
                               style: AppFontStyle.styleW700(AppColor.white, 15),
                             ),
@@ -431,7 +471,7 @@ class FakeAudioRoomGiftBottomSheetWidget {
                       borderRadius: BorderRadius.circular(100),
                     ),
                     child: Obx(
-                      () => Row(
+                          () => Row(
                         children: [
                           5.width,
                           for (int index = 0; index < giftCounts.length; index++)
@@ -472,7 +512,7 @@ class FakeAudioRoomGiftBottomSheetWidget {
             ),
           ],
         ),
-      ),
+      ),)
     );
   }
 }
@@ -494,12 +534,12 @@ class GiftTabItemWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
           border: Border(
-            bottom: BorderSide(color: isSelected ? AppColor.lightYellow : AppColor.white.withValues(alpha: 0.2)),
+            bottom: BorderSide(color: isSelected ? AppColor.lightYellow : HexColor('#86868F')),
           ),
         ),
         child: Text(
           name,
-          style: AppFontStyle.styleW600(isSelected ? AppColor.lightYellow : AppColor.secondary.withValues(alpha: 0.5), 14),
+          style: AppFontStyle.styleW600(isSelected ? AppColor.lightYellow :HexColor('#86868F'), 14),
         ),
       ),
     );
@@ -527,7 +567,7 @@ class GiftItemWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColor.darkGrey,
               borderRadius: BorderRadius.circular(10),
-              border: isSelected ? Border.all(color: AppColor.white.withValues(alpha: 0.5)) : null,
+              border: isSelected ? Border.all(color: HexColor('#00E3A5')) : null,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -548,7 +588,7 @@ class GiftItemWidget extends StatelessWidget {
                 ),
                 5.height,
                 Text(
-                  "Couple Ring",
+                  gift?.title ?? '',
                   style: AppFontStyle.styleW600(AppColor.white, 9),
                 ),
                 5.height,

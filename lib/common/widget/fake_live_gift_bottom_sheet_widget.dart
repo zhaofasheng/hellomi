@@ -178,7 +178,7 @@ class FakeLiveGiftBottomSheetWidget {
                       ),
                       10.height,
                       Text(
-                        "Send Gift",
+                        EnumLocal.txtSendGift.name.tr,
                         style: AppFontStyle.styleW700(AppColor.white, 17),
                       ),
                     ],

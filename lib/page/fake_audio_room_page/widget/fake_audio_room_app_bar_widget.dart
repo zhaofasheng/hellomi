@@ -17,6 +17,8 @@ import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class FakeAudioRoomAppbarWidget extends GetView<FakeAudioRoomController> {
   const FakeAudioRoomAppbarWidget({super.key});
 
@@ -114,7 +116,7 @@ class FakeAudioRoomAppbarWidget extends GetView<FakeAudioRoomController> {
                             width: 170,
                             padding: EdgeInsets.only(left: 5, right: 5, top: 0, bottom: 0),
                             decoration: BoxDecoration(
-                              color: AppColor.black.withValues(alpha: 0.3),
+                              color: AppColor.black.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(100),
                             ),
                             child: Row(
@@ -122,9 +124,7 @@ class FakeAudioRoomAppbarWidget extends GetView<FakeAudioRoomController> {
                                 Container(
                                   height: 38,
                                   width: 38,
-                                  padding: EdgeInsets.all(1),
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: AppColor.white),
                                     shape: BoxShape.circle,
                                   ),
                                   child: Container(
@@ -151,7 +151,7 @@ class FakeAudioRoomAppbarWidget extends GetView<FakeAudioRoomController> {
                                       Row(
                                         children: [
                                           5.width,
-                                          Image.asset(AppAssets.icShow, color: AppColor.white, width: 15),
+                                          Assets.images.liveLookNum.image(width: 16),
                                           5.width,
                                           GetBuilder<FakeAudioRoomController>(
                                             id: AppConstant.onChangeViewCount,
@@ -181,7 +181,7 @@ class FakeAudioRoomAppbarWidget extends GetView<FakeAudioRoomController> {
                                       margin: EdgeInsets.only(left: 8),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(color: controller.fakeAudioRoomModel?.isFollow == true ? AppColor.white : AppColor.primary, shape: BoxShape.circle, border: Border.all(color: controller.fakeAudioRoomModel?.isFollow == true ? AppColor.white : AppColor.primary)),
-                                      child: Image.asset(
+                                      child:controller.fakeAudioRoomModel?.isFollow == false ?Assets.images.liveLike.image(width: 30) : Image.asset(
                                         controller.fakeAudioRoomModel?.isFollow == true ? AppAssets.icFollowing : AppAssets.icFollow,
                                         color: controller.fakeAudioRoomModel?.isFollow == false ? AppColor.white : AppColor.primary,
                                         width: 22,

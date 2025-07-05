@@ -43,6 +43,8 @@ class FakeAudioRoomView extends GetView<FakeAudioRoomController> {
               width: Get.width,
               decoration: BoxDecoration(gradient: AppColor.audioRoomGradient),
             ),
+            
+            ///直播间评论
             SingleChildScrollView(
               child: Container(
                 color: AppColor.transparent,
@@ -74,13 +76,15 @@ class FakeAudioRoomView extends GetView<FakeAudioRoomController> {
                             ),
                           ),
                         ),
-                        70.height,
+                        (70+MediaQuery.of(context).padding.bottom).height,
                       ],
                     ),
                   ),
                 ),
               ),
             ),
+            
+            ///导航栏
             GestureDetector(
               onTap: () {
                 log("FakeAudioRoomView: onTap");
@@ -107,13 +111,13 @@ class FakeAudioRoomView extends GetView<FakeAudioRoomController> {
               child: SizedBox(
                 height: Get.height,
                 width: Get.width,
-                child: Column(
+                child: SafeArea(child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     FakeAudioRoomBottomBarWidget(),
                   ],
-                ),
+                )),
               ),
             ),
             ShowReceivedGift.onShowGift(),

@@ -1366,6 +1366,22 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/aodui_send.png
+  AssetGenImage get aoduiSend =>
+      const AssetGenImage('assets/images/aodui_send.png');
+
+  /// File path: assets/images/audio_power.png
+  AssetGenImage get audioPower =>
+      const AssetGenImage('assets/images/audio_power.png');
+
+  /// File path: assets/images/audio_set.png
+  AssetGenImage get audioSet =>
+      const AssetGenImage('assets/images/audio_set.png');
+
+  /// File path: assets/images/audio_smile.png
+  AssetGenImage get audioSmile =>
+      const AssetGenImage('assets/images/audio_smile.png');
+
   /// File path: assets/images/background_img.png
   AssetGenImage get backgroundImg =>
       const AssetGenImage('assets/images/background_img.png');
@@ -2084,6 +2100,10 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+    aoduiSend,
+    audioPower,
+    audioSet,
+    audioSmile,
     backgroundImg,
     chatCamram,
     chatEqImg,
