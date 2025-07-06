@@ -5,6 +5,7 @@ import 'package:tingle/common/widget/preview_network_image_widget.dart';
 import 'package:tingle/page/stream_page/controller/stream_controller.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/constant.dart';
+import 'package:tingle/utils/utils.dart';
 
 class BannerWidget extends StatelessWidget {
   const BannerWidget({super.key, required this.isShow, required this.margin, this.height});
@@ -72,6 +73,6 @@ class BannerWidget extends StatelessWidget {
                 ],
               ),
             ))
-        : Offstage();
+        : 15.height;
   }
 }

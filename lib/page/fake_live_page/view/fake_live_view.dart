@@ -26,7 +26,7 @@ class FakeLiveView extends GetView<FakeLiveController> {
       key: controller.scaffoldKey,
       backgroundColor: AppColor.black,
       endDrawer: FakeLiveViewerDrawerWidget(),
-      body: SafeArea(top: false,child: Stack(
+      body: SafeArea(top: false,bottom: false,child: Stack(
         alignment: Alignment.center,
         children: [
           FakeLiveCameraWidget(),

@@ -91,7 +91,7 @@ class _ItemWidget extends StatelessWidget {
                   25.height,
                   Text(
                     "${CustomFormatNumber.onConvert(coin)} ${EnumLocal.txtCoin.name.tr}",
-                    style: AppFontStyle.styleW800(textColor, 11),
+                    style: AppFontStyle.styleW800(textColor, 16),
                   ),
                   8.height,
                   Text(

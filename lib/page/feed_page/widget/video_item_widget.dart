@@ -477,13 +477,14 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
             child: Column(
               children: [
                 const Spacer(),
-                GestureDetector(
-                  onTap: (){
-                    //礼物打赏
-                  },
-                  child: Assets.images.videoLiwu.image(width: 25),
-                ),
-                12.height,
+                ///打赏
+                // GestureDetector(
+                //   onTap: (){
+                //     //礼物打赏
+                //   },
+                //   child: Assets.images.videoLiwu.image(width: 25),
+                // ),
+                // 12.height,
                 Obx(
                       () => SizedBox(
                     height: 30,

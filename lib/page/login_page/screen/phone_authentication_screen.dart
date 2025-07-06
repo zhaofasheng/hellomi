@@ -13,76 +13,86 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../withdraw_page/widget/keybord_close.dart';
+
 class PhoneAuthenticationScreen extends GetView<LoginController> {
   const PhoneAuthenticationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.dark);
-    return PopScope(
-      canPop: true,
-      onPopInvokedWithResult: (didPop, result) => controller.phoneNumberController.clear(),
-      child: Scaffold(
-        body: Stack(
-          children: [
-            const CustomLightBackgroundWidget(),
-            GetBuilder<LoginController>(
-              builder: (controller) => SizedBox(
-                height: Get.height,
-                width: Get.width,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BackAppBarWidget(),
-                    30.height,
-                    Expanded(
-                      child: SingleChildScrollView(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              EnumLocal.txtLogInWithMobileNumber.name.tr,
-                              style: AppFontStyle.styleW900(AppColor.black, 30),
-                            ),
-                            Text(
-                              EnumLocal.txtLetsGetStartedEnter.name.tr,
-                              style: AppFontStyle.styleW400(HexColor('#86868F'), 14),
-                            ),
-                            30.height,
-                            GetBuilder<LoginController>(
-                              id: ApiParams.onPhoneNumber,
-                              builder: (controller) => CustomPhoneTextFieldWidget(
-                                hintText: EnumLocal.txtEnterYourPhoneNumber.name.tr,
-                                controller: controller.phoneNumberController,
-                                keyboardType: TextInputType.phone,
-                                suffixIcon: const Offstage(),
-                                onCountryChanged: (value) => controller.onGetPhoneNumber(
-                                  // phoneNumber: controller.phoneNumberController.text,
-                                  code: value,
+    // ✅ 确保只初始化一次
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      KeyboardDoneOverlay().attach(context);
+    });
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () => FocusScope.of(context).unfocus(), // ✅ 收起键盘
+      child: PopScope(
+        canPop: true,
+        onPopInvokedWithResult: (didPop, result) => controller.phoneNumberController.clear(),
+        child: Scaffold(
+            body: Stack(
+              children: [
+                const CustomLightBackgroundWidget(),
+                GetBuilder<LoginController>(
+                  builder: (controller) => SizedBox(
+                    height: Get.height,
+                    width: Get.width,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BackAppBarWidget(),
+                        30.height,
+                        Expanded(
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  EnumLocal.txtLogInWithMobileNumber.name.tr,
+                                  style: AppFontStyle.styleW900(AppColor.black, 30),
                                 ),
-                                onChange: (p0) {
-                                  controller.update([ApiParams.onPhoneNumber]);
-                                },
-                              ),
+                                Text(
+                                  EnumLocal.txtLetsGetStartedEnter.name.tr,
+                                  style: AppFontStyle.styleW400(HexColor('#86868F'), 14),
+                                ),
+                                30.height,
+                                GetBuilder<LoginController>(
+                                  id: ApiParams.onPhoneNumber,
+                                  builder: (controller) => CustomPhoneTextFieldWidget(
+                                    hintText: EnumLocal.txtEnterYourPhoneNumber.name.tr,
+                                    controller: controller.phoneNumberController,
+                                    keyboardType: TextInputType.phone,
+                                    suffixIcon: const Offstage(),
+                                    onCountryChanged: (value) => controller.onGetPhoneNumber(
+                                      // phoneNumber: controller.phoneNumberController.text,
+                                      code: value,
+                                    ),
+                                    onChange: (p0) {
+                                      controller.update([ApiParams.onPhoneNumber]);
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+            backgroundColor: AppColor.white,
+            bottomNavigationBar: SafeArea(top: false,child: AppButtonUi(
+              title: EnumLocal.txtSubmit.name.tr,
+              gradient: AppColor.primaryGradient,
+              margin: const EdgeInsets.all(15),
+              callback: () => controller.onPhoneSendOtp(),
+            ),)
         ),
-        backgroundColor: AppColor.white,
-        bottomNavigationBar: SafeArea(top: false,child: AppButtonUi(
-          title: EnumLocal.txtSubmit.name.tr,
-          gradient: AppColor.primaryGradient,
-          margin: const EdgeInsets.all(15),
-          callback: () => controller.onPhoneSendOtp(),
-        ),)
       ),
     );
   }

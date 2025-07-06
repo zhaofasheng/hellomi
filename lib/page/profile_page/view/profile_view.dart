@@ -47,7 +47,7 @@ class ProfileView extends GetView<ProfileController> {
                                 children: [
                                   SizedBox(
                                     width: double.infinity,
-                                    height: Get.width / 375 * 350-20,// - MediaQuery.of(context).padding.top - kToolbarHeight+8,
+                                    height: 350-20,// - MediaQuery.of(context).padding.top - kToolbarHeight+8,
                                     child: Stack(
                                       children: [
                                         ClipRRect(
@@ -59,7 +59,7 @@ class ProfileView extends GetView<ProfileController> {
                                             Assets.images.mineBackImg.path,
                                             fit: BoxFit.cover,
                                             width: double.infinity,
-                                            height: Get.width / 375 * 350-20,
+                                            height: 350-20,
                                           ),
                                         ),
                                         Column(

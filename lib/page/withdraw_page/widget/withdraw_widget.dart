@@ -141,11 +141,11 @@ class EnterCoinFieldUi extends GetView<WithdrawController> {
               Expanded(
                 child: TextFormField(
                   maxLines: 1,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text, // 普通文本键盘，iOS有完成按钮
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   controller: controller.coinController,
                   style: AppFontStyle.styleW700(AppColor.black, 16),
                   cursorColor: AppColor.grayText,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: EnumLocal.txtEnterWithdrawCoin.name.tr,

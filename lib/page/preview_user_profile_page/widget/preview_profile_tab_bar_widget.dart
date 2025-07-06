@@ -75,6 +75,7 @@ class _TabItemWidget extends StatelessWidget {
             Center(
               child: Text(
                 title,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: isSelected ? HexColor('#00E4A6') : Colors.grey,
                   fontSize: 14,

@@ -83,7 +83,7 @@ class LoginOtherAuthWidget extends StatelessWidget {
                     ),
                   ),
                   child:Center(
-                    child: Assets.images.socketLoginImg.image(width: 24,height: 24),
+                    child: Assets.images.socketLoginImg.image(width: 36,height: 36),
                   ),
                 ),
               ),
