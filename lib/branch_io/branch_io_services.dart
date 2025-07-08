@@ -25,9 +25,11 @@ class BranchIoServices {
   // Call In Main...
   static Future<void> onInitializeBranchIo() async {
     try {
-      await FlutterBranchSdk.init(enableLogging: true).then(
+      await FlutterBranchSdk.init(enableLogging: false).then(
         (value) {
-          FlutterBranchSdk.validateSDKIntegration();
+
+          ///上线版本不应该调用
+          //FlutterBranchSdk.validateSDKIntegration();
           Utils.showLog("Branch Io Initialize Success");
         },
       );

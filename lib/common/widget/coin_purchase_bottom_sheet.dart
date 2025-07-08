@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
@@ -136,7 +138,7 @@ class CoinPurchaseBottomSheet {
                       children: [
                         GestureDetector(
                           onTap: () => Get.back(),
-                          child: Container(
+                          child: SizedBox(
                             height: 30,
                             width: 30,
                             child: Center(
@@ -176,7 +178,7 @@ class CoinPurchaseBottomSheet {
                             5.height,
                             purchaseCoinWidget(),
                             15.height,
-                            paymentGetWayWidget(),
+                            if (Platform.isAndroid)paymentGetWayWidget(),
                             const SizedBox(height: 15),
                             SafeArea(child: Visibility(
                               visible: true,
@@ -268,6 +270,10 @@ class CoinPurchaseBottomSheet {
   }
   
   static void onClickPayNow({required int index, required BuildContext context}) async {
+    if (Platform.isIOS){
+      onClickInAppPurchase(index: index);
+      return;
+    }
     switch (selectedPaymentIndex.value) {
       case 1:
         onClickStripePay(index: index);
