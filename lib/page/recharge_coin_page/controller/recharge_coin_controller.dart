@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -22,7 +23,9 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/net_logger.dart';
 import 'package:tingle/utils/utils.dart';
 
-class RechargeCoinController extends GetxController implements IAPCallback {
+import '../../../payment/newPay/new_pay.dart';
+
+class RechargeCoinController extends GetxController{
   bool isLoading = false;
   List<Data> coinPlans = [];
 
@@ -41,9 +44,6 @@ class RechargeCoinController extends GetxController implements IAPCallback {
   void onInit() {
     init();
 
-    InAppPurchaseHelper().getAlreadyPurchaseItems(this);
-    purchases = InAppPurchaseHelper().getPurchases();
-    InAppPurchaseHelper().clearTransactions();
     super.onInit();
   }
 
@@ -78,9 +78,13 @@ class RechargeCoinController extends GetxController implements IAPCallback {
   }
 
   void onClickPayNow({required int index, required BuildContext context}) async {
+    if (Platform.isIOS){
+      onClickInAppPurchase(index: index);
+      return;
+    }
     switch (selectedPaymentIndex) {
       case 0:
-        onClickRazorPay(index: index);
+        onClickStripePay(index: index);
         break;
       case 1:
         onClickStripePay(index: index);
@@ -88,8 +92,6 @@ class RechargeCoinController extends GetxController implements IAPCallback {
       case 2:
         onClickInAppPurchase(index: index);
         break;
-      case 3:
-        onClickFlutterWave(index: index, context: context);
       default:
         Utils.showToast(text: EnumLocal.txtPleaseSelectPaymentGateway.name.tr);
     }
@@ -101,178 +103,65 @@ class RechargeCoinController extends GetxController implements IAPCallback {
     update([AppConstant.onGetCoinPlan]);
   }
 
+  void onClickNewPay({required int index}) async {
+
+    try {
+      Utils.showLog("Start NewPay Payment...");
+
+      await NewPayService().init();
+      // 👉 正式调用支付
+      await NewPayService().newPay(coinPlanId:coinPlans[index].id ?? "");
+
+    } catch (e) {
+      Utils.showLog("NewPay 调用失败 => $e");
+      Utils.showToast(text: "发生异常：$e");
+    }
+  }
+
   void onClickStripePay({required int index}) async {
+
     try {
       Utils.showLog("Stripe Payment Working...");
-      Get.dialog(const LoadingWidget(), barrierDismissible: false); // Start Loading...
+      Get.dialog(const LoadingWidget(), barrierDismissible: false);
+
       await StripeService().init(isTest: true);
       await 1.seconds.delay();
-      StripeService().stripePay(
-          amount: ((coinPlans[index].amount ?? 1) * 100).toInt(),
-          callback: () async {
-            Utils.showLog("Stripe Payment Success Method Called....");
 
-            Get.dialog(const LoadingWidget(), barrierDismissible: false); // Start Loading...
+      await StripeService().stripePay(
+        coinPlanId: coinPlans[index].id ?? "",
+        callback: () async {
+          Utils.showLog("Stripe Payment Success Method Called....");
+          FetchUserCoin.coin;
+          FetchUserCoin.init();
+        },
+      );
 
-            final uid = FirebaseUid.onGet() ?? "";
-            final token = await FirebaseAccessToken.onGet() ?? "";
-
-            createCoinPlanHistoryModel = await CreateCoinPlanHistoryApi.callApi(
-              token: token,
-              uid: uid,
-              coinPlanId: coinPlans[index].id ?? "",
-              paymentGateway: "Stripe",
-            );
-
-            Get.back(); // Stop Loading...
-
-            if (createCoinPlanHistoryModel?.status == true) {
-              Utils.showToast(text: EnumLocal.txtCoinRechargeSuccess.name.tr);
-            } else {
-              Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
-            }
-          });
       Get.back(); // Stop Loading...
     } catch (e) {
-      Get.back(); // Stop Loading...
+      Get.back();
       Utils.showLog("Stripe Payment Failed !! => $e");
     }
   }
 
-  void onClickRazorPay({required int index}) async {
-    Utils.showLog("Razorpay Payment Working....");
-
-    try {
-      Get.dialog(const LoadingWidget(), barrierDismissible: false); // Start Loading...
-      RazorPayService().init(
-        razorKey: Utils.razorpayTestKey,
-        callback: () async {
-          Utils.showLog("Stripe Payment Success Method Called....");
-
-          Get.dialog(const LoadingWidget(), barrierDismissible: false); // Start Loading...
-
-          final uid = FirebaseUid.onGet() ?? "";
-          final token = await FirebaseAccessToken.onGet() ?? "";
-
-          createCoinPlanHistoryModel = await CreateCoinPlanHistoryApi.callApi(
-            token: token,
-            uid: uid,
-            coinPlanId: coinPlans[index].id ?? "",
-            paymentGateway: "Stripe",
-          );
-
-          Get.back(); // Stop Loading...
-
-          if (createCoinPlanHistoryModel?.status == true) {
-            Utils.showToast(text: EnumLocal.txtCoinRechargeSuccess.name.tr);
-          } else {
-            Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
-          }
-        },
-      );
-      await 1.seconds.delay();
-      RazorPayService().razorPayCheckout(((coinPlans[index].amount ?? 0) * 100).toInt());
-      Get.back(); // Stop Loading...
-    } catch (e) {
-      Get.back(); // Stop Loading...
-      Utils.showLog("RazorPay Payment Failed => $e");
-    }
-  }
-
-  void onClickFlutterWave({required int index, required BuildContext context}) async {
-    Utils.showLog("Flutter Wave Payment Working....");
-
-    try {
-      Get.dialog(const LoadingWidget(), barrierDismissible: false); // Start Loading...
-      await FlutterWaveService.init(
-        amount: (coinPlans[index].amount ?? 0).toString(),
-        context: context,
-        onPaymentComplete: () async {
-          Utils.showLog("Flutter Wave Payment Successfully");
-
-          Get.dialog(const LoadingWidget(), barrierDismissible: false); // Start Loading...
-
-          final uid = FirebaseUid.onGet() ?? "";
-          final token = await FirebaseAccessToken.onGet() ?? "";
-
-          createCoinPlanHistoryModel = await CreateCoinPlanHistoryApi.callApi(
-            token: token,
-            uid: uid,
-            coinPlanId: coinPlans[index].id ?? "",
-            paymentGateway: "Flutter Wave",
-          );
-          Get.back(); // Stop Loading...
-
-          if (createCoinPlanHistoryModel?.status == true) {
-            Utils.showToast(text: EnumLocal.txtCoinRechargeSuccess.name.tr);
-            Get.close(2);
-          } else {
-            Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
-          }
-        },
-      );
-
-      Get.back(); // Stop Loading...
-    } catch (e) {
-      Get.back(); // Stop Loading...
-      Utils.showLog("Flutter Wave Payment Failed => $e");
-    }
-  }
 
   void onClickInAppPurchase({required int index}) async {
-    String productKey = "coinPlan1000";//仅用于测试
+    String productKey = coinPlans[index].productKey ?? "";
     List<String> kProductIds = <String>[productKey];
 
-    await InAppPurchaseHelper().init(
-      paymentType: "In App Purchase",
-      userId: Database.loginUserId,
-      productKey: kProductIds,
-      rupee: (coinPlans[index].amount ?? 0).toDouble(),
-      callBack: () async {
-        Utils.showLog("In App Purchase Payment Successfully");
-
-        Get.dialog(const LoadingWidget(), barrierDismissible: false); // Start Loading...
-
-        final uid = FirebaseUid.onGet() ?? "";
-        final token = await FirebaseAccessToken.onGet() ?? "";
-
-        createCoinPlanHistoryModel = await CreateCoinPlanHistoryApi.callApi(
-          token: token,
-          uid: uid,
-          coinPlanId: coinPlans[index].id ?? "",
-          paymentGateway: "Flutter Wave",
-        );
-        Get.back(); // Stop Loading...
-
-        if (createCoinPlanHistoryModel?.status == true) {
-          Utils.showToast(text: EnumLocal.txtCoinRechargeSuccess.name.tr);
-          Get.close(2);
-        } else {
-          Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
-        }
+    InAppPurchaseHelper().init(
+      productIds: kProductIds, // 这里可以传多个产品id，初始化时用，但buyProduct只传一个
+      onSuccess: () {
+        print("支付成功，刷新UI或提示用户");
+        FetchUserCoin.coin;
+        FetchUserCoin.init();
+      },
+      onError: () {
+        print("支付失败或取消");
+        // 这里处理失败或取消逻辑
       },
     );
 
-    InAppPurchaseHelper().initStoreInfo();
-
-    await Future.delayed(const Duration(seconds: 1));
-
-    ProductDetails? product = InAppPurchaseHelper().getProductDetail(productKey);
-
-    if (product != null) {
-      InAppPurchaseHelper().buySubscription(product, purchases!);
-    }
+    // 发起支付，传入单个产品id
+    InAppPurchaseHelper().buyProduct(kProductIds[0]);
   }
-
-  @override
-  void onBillingError(error) {}
-
-  @override
-  void onLoaded(bool initialized) {}
-
-  @override
-  void onPending(PurchaseDetails product) {}
-
-  @override
-  void onSuccessPurchase(PurchaseDetails product) {}
 }

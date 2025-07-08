@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/widget/simple_app_bar_widget.dart';
@@ -56,7 +58,8 @@ class RechargeCoinView extends GetView<RechargeCoinController> {
                           15.height,
                           PurchaseCoinWidget(),
                           15.height,
-                          PaymentGatewayWidget(),
+
+                          if (Platform.isAndroid)PaymentGatewayWidget(),
 
                           30.height,
                         ],

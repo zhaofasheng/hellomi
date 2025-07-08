@@ -178,4 +178,7 @@ abstract class Api {
 
   static const stopAudioRoomSession = "${baseUrl}api/client/liveStreamer/stopAudioSession?";
   static const checkAudioSession = "${baseUrl}api/client/liveStreamer/exitAudioSession";
+  static const stripPayUri = "${baseUrl}api/client/payOrder/fetchCreateStripeOrder";
+  static const applyPayAuth = "${baseUrl}api/client/payNotification/iosPaymentCallbackV2";
+  static const newPayUri = "${baseUrl}api/client/payOrder/fetchCreateNewPayOrder";
 }

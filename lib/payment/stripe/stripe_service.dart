@@ -8,49 +8,63 @@ import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../common/api_service.dart';
+import '../../utils/api.dart';
+
+
 class StripeService {
+  /// ✅ 单例模式实现
+  static final StripeService _instance = StripeService._internal();
+  factory StripeService() => _instance;
+  StripeService._internal();
+
   bool isTest = false;
 
-  init({
-    required bool isTest,
-  }) async {
+  Future<void> init({required bool isTest}) async {
     Stripe.publishableKey = Utils.stripeTestPublicKey;
-    Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
-
+    Stripe.merchantIdentifier = 'merchant.flutter.stripe.test'; // 可保留但不会用到
     await Stripe.instance.applySettings().catchError((e) {
       log("Stripe Apply Settings => $e");
       throw e.toString();
     });
-
     this.isTest = isTest;
   }
 
-  Future<dynamic> stripePay({required int amount, required Callback callback}) async {
+  Future<dynamic> stripePay({
+    required String coinPlanId,
+    required Callback callback,
+  }) async {
+
+    final url = Api.stripPayUri;
+    Utils.showLog("Fetch Coin Plan Api Url => $url");
+
     try {
-      Map<String, dynamic> body = {
-        'amount': amount.toString(),
-        'currency': Utils.currencyCode,
-        'description': 'Name: ${Database.fetchLoginUserProfile()?.user?.name ?? ""} - Email: ${Database.fetchLoginUserProfile()?.user?.email ?? ""}',
-      };
+      // 注意：headers 会自动由 ApiService 拦截器添加
+      final response = await ApiService().post(
+        url,
+        queryParameters:{
+          'coinPlanId':coinPlanId,
+        },
+      );
 
-      log("Start Payment Intent Http Request.....");
+      if (response?.statusCode == 200) {
+        final jsonResponse = response?.data;
 
-      var response = await http.post(Uri.parse(Utils.stripeUrl), body: body, headers: {"Authorization": "Bearer ${Utils.stripeTestSecretKey}", "Content-Type": 'application/x-www-form-urlencoded'});
+        Utils.showLog("Fetch Coin Plan Api Response => ${response?.data}");
 
-      log("End Payment Intent Http Request.....");
+        final clientSecret = jsonResponse["data"]["clientSecret"];
+        log("Stripe Payment Response => $clientSecret");
 
-      log("Payment Intent Http Response => ${response.body}");
-
-      if (response.statusCode == 200) {
-        StripePayModel result = StripePayModel.fromJson(jsonDecode(response.body));
-
-        log("Stripe Payment Response => $result");
-
-        SetupPaymentSheetParameters setupPaymentSheetParameters = SetupPaymentSheetParameters(
-          paymentIntentClientSecret: result.clientSecret,
-          appearance: PaymentSheetAppearance(colors: PaymentSheetAppearanceColors(primary: AppColor.primary)),
-          applePay: PaymentSheetApplePay(merchantCountryCode: Utils.countryCode),
-          googlePay: PaymentSheetGooglePay(merchantCountryCode: Utils.countryCode, testEnv: isTest),
+        final setupParams = SetupPaymentSheetParameters(
+          paymentIntentClientSecret: clientSecret,
+          appearance: PaymentSheetAppearance(
+            colors: PaymentSheetAppearanceColors(primary: AppColor.primary),
+          ),
+          // ❌ 不再包含 applePay
+          googlePay: PaymentSheetGooglePay(
+            merchantCountryCode: Utils.countryCode,
+            testEnv: isTest,
+          ),
           merchantDisplayName: Database.fetchLoginUserProfile()?.user?.name ?? "",
           customerId: Database.loginUserId,
           billingDetails: BillingDetails(
@@ -59,8 +73,10 @@ class StripeService {
           ),
         );
 
-        await Stripe.instance.initPaymentSheet(paymentSheetParameters: setupPaymentSheetParameters).then((value) async {
-          await Stripe.instance.presentPaymentSheet().then((value) async {
+        await Stripe.instance.initPaymentSheet(
+          paymentSheetParameters: setupParams,
+        ).then((_) async {
+          await Stripe.instance.presentPaymentSheet().then((_) async {
             log("***** Payment Done *****");
             callback.call();
             Utils.showLog("Stripe Payment Success Method Called....");
@@ -71,12 +87,13 @@ class StripeService {
         }).catchError((e) {
           log("Something Went Wrong => $e");
         });
-      } else if (response.statusCode == 401) {
-        log("Error During Stripe Payment");
+      }else {
+        Utils.showLog("Fetch Coin Plan Api StatusCode Error => ${response?.statusCode}");
+        return response;
       }
-      return jsonDecode(response.body);
-    } catch (e) {
-      log('Error Charging User: ${e.toString()}');
+    } catch (error) {
+      Utils.showLog("Fetch Coin Plan Api Error => $error");
+      return null;
     }
   }
 }

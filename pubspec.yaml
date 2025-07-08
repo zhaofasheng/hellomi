@@ -115,7 +115,7 @@ dependencies:
   in_app_purchase: ^3.2.0
   in_app_purchase_android: any
   in_app_purchase_storekit: any
-
+  shared_preferences: ^2.5.3
   date_picker_plus: ^4.2.0
 
 

@@ -5,7 +5,7 @@ class IAPCallback {
 
   void onPending(PurchaseDetails product) {}
 
-  void onSuccessPurchase(PurchaseDetails product) {}
+  void onSuccessPurchase(bool success) {}
 
   void onBillingError(dynamic error) {}
 }

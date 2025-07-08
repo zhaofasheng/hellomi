@@ -21,6 +21,8 @@ import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/internet_connection.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../payment/in_app_purchase/in_app_purchase_helper.dart';
+
 class BottomBarController extends GetxController {
   PreloadPageController preloadPageController = PreloadPageController();
 
@@ -52,8 +54,10 @@ class BottomBarController extends GetxController {
     await BannerServices.onGetTypeWiseBanner(bannerType: 4); // Game Banner
     BannerServices.onInit();
     onInitPayment();
-
     BranchIoServices.onChangeRoutes(isBottomBarRoutes: true);
+
+    /// 如果你的 uid 已经缓存（比如用 shared_preferences），可以直接读取后调用
+    InAppPurchaseHelper().tryValidateCachedReceipt();
   }
 
   void onChangeBottomBar(int index) {

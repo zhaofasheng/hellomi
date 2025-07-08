@@ -21,10 +21,7 @@ class PhoneAuthenticationScreen extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.dark);
-    // ✅ 确保只初始化一次
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      KeyboardDoneOverlay().attach(context);
-    });
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () => FocusScope.of(context).unfocus(), // ✅ 收起键盘

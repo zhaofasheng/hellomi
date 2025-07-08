@@ -29,26 +29,19 @@ class PaymentGatewayWidget extends StatelessWidget {
           15.height,
           Column(
             children: [
-              _ListItemWidget(
-                icon: Assets.images.payNewPay.image(width: 32,height: 32),
-                title: 'newpay', // 替换成 EnumLocal.txtNewPay.tr 如有定义
-                isSelected: controller.selectedPaymentIndex == 0,
-                onTap: () => controller.onChangePayment(0),
-                visible: true,
-              ),
+              // _ListItemWidget(
+              //   icon: Assets.images.payNewPay.image(width: 32,height: 32),
+              //   title: 'newpay', // 替换成 EnumLocal.txtNewPay.tr 如有定义
+              //   isSelected: controller.selectedPaymentIndex == 0,
+              //   onTap: () => controller.onChangePayment(0),
+              //   visible: true,
+              // ),
               _ListItemWidget(
                 icon: Assets.images.payStripe.image(width: 32,height: 32),
                 title: 'stripe',
                 isSelected: controller.selectedPaymentIndex == 1,
                 onTap: () => controller.onChangePayment(1),
                 visible: Utils.isShowStripePaymentMethod,
-              ),
-              _ListItemWidget(
-                icon: Assets.images.payApple.image(width: 32,height: 32),
-                title: 'Appple pay', // 替换成 EnumLocal.txtApplePay.tr 如有定义
-                isSelected: controller.selectedPaymentIndex == 2,
-                onTap: () => controller.onChangePayment(2),
-                visible: Utils.isShowInAppPurchasePaymentMethod,
               ),
             ],
           ),
