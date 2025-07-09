@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/widget/new_preview_frame.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
@@ -25,13 +26,12 @@ class AvtarThemeView extends GetView<ThemeController> {
 
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color(0xFFF3EDFF),
       body: GetBuilder<ThemeController>(
         id: AppConstant.onSelectTheme,
         builder: (controller) => Stack(
           children: [
             CustomLightBackgroundWidget(),
-            Container(
+            SizedBox(
               height: Get.height,
               width: Get.width,
               child: Column(
@@ -41,7 +41,7 @@ class AvtarThemeView extends GetView<ThemeController> {
                   ),
                   SizedBox(height: size.height * 0.02),
                   Center(
-                    child: Container(
+                    child: SizedBox(
                         height: 120,
                         width: 120,
                         child: PreviewProfileWithSVGAWidget(
@@ -55,27 +55,23 @@ class AvtarThemeView extends GetView<ThemeController> {
                         )),
                   ),
                   const SizedBox(height: 30),
-                  Container(
-                    color: AppColor.white,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              EnumLocal.txtAvtarTheme.name.tr,
-                              style: AppFontStyle.styleW700(AppColor.black, 16),
-                            ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            EnumLocal.txtAvtarTheme.name.tr,
+                            style: AppFontStyle.styleW700(AppColor.black, 16),
                           ),
                         ),
-                        10.height
-                      ],
-                    ),
+                      ),
+                      10.height
+                    ],
                   ),
                   Expanded(
                     child: Container(
-                      color: AppColor.white,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: GridView.builder(
@@ -188,21 +184,12 @@ class AvtarThemeView extends GetView<ThemeController> {
           ],
         ),
       ),
-      bottomNavigationBar: GetBuilder<ThemeController>(
+      bottomNavigationBar: SafeArea(child: GetBuilder<ThemeController>(
         id: AppConstant.onSelectTheme,
         builder: (controller) => Container(
+          color: HexColor('#F5F5F5'),
           height: 70,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: AppColor.white,
-            boxShadow: [
-              BoxShadow(
-                color: AppColor.extraLightGray,
-                blurRadius: 10,
-                offset: const Offset(0, -2),
-              )
-            ],
-          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -254,7 +241,7 @@ class AvtarThemeView extends GetView<ThemeController> {
             ],
           ),
         ),
-      ),
+      ),)
     );
   }
 }

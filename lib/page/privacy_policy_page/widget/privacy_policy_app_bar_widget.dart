@@ -7,41 +7,57 @@ import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
 class PrivacyPolicyAppBarWidget {
-  static PreferredSizeWidget onShow(BuildContext context) {
+  static PreferredSizeWidget onShow(BuildContext context, {String? title}) {
+    final topPadding = MediaQuery.of(context).viewPadding.top;
+
     return PreferredSize(
-      preferredSize: Size.fromHeight(MediaQuery.of(context).viewPadding.top + 50),
+      preferredSize: Size.fromHeight(topPadding + 50),
       child: Container(
-        height: MediaQuery.of(context).viewPadding.top + 50,
-        padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
+        height: topPadding + 50,
+        padding: EdgeInsets.only(top: topPadding),
         alignment: Alignment.center,
         width: Get.width,
         decoration: BoxDecoration(
           color: AppColor.white,
           boxShadow: [
-            BoxShadow(color: AppColor.secondary.withValues(alpha: 0.15), spreadRadius: 2, blurRadius: 2),
+            BoxShadow(
+              color: AppColor.secondary.withOpacity(0.15),
+              spreadRadius: 2,
+              blurRadius: 2,
+            ),
           ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // 返回按钮
             GestureDetector(
               onTap: Get.back,
               child: Container(
                 height: 45,
                 width: 45,
                 alignment: Alignment.center,
-                decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.transparent),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColor.transparent,
+                ),
                 child: Image.asset(
                   AppAssets.icArrowLeft,
                   width: 10,
                 ),
               ),
             ),
-            Text(
-              EnumLocal.txtPrivacyPolicy.name.tr,
-              style: AppFontStyle.styleW600(AppColor.black, 16),
+            // 标题
+            Expanded(
+              child: Text(
+                title ?? EnumLocal.txtPrivacyPolicy.name.tr,
+                style: AppFontStyle.styleW600(AppColor.black, 16),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-            45.width,
+            // 占位符
+            const SizedBox(width: 45),
           ],
         ),
       ),

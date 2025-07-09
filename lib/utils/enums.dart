@@ -480,5 +480,5 @@ enum EnumLocal {
   txtStop,
   txtClose,
   txtAreYouSureYouWantToCloseTheAudioRoom,
-  txtCloseAudioRoom,
+  txtCloseAudioRoom, txtLiveAgreement, txtRechargeAgreement, txtChildProtectionPolicy,
 }

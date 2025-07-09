@@ -1,3 +1,4 @@
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
@@ -13,7 +14,8 @@ class SearchTextFieldWidget extends StatelessWidget {
     required this.controller,
     required this.onChanged,
     required this.isShowClearIcon,
-    required this.onTap, required this.hintText,
+    required this.onTap,
+    required this.hintText,
   });
 
   final Callback onClickClear;
@@ -31,7 +33,7 @@ class SearchTextFieldWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 12, right: 12),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: AppColor.secondary.withValues(alpha: 0.15),
+        color: AppColor.white, // ✅ 背景改为白色
         borderRadius: BorderRadius.circular(100),
       ),
       child: Row(
@@ -56,7 +58,7 @@ class SearchTextFieldWidget extends StatelessWidget {
                 contentPadding: const EdgeInsets.only(bottom: 5),
                 border: InputBorder.none,
                 hintText: hintText,
-                hintStyle: AppFontStyle.styleW500(AppColor.secondary, 15),
+                hintStyle: AppFontStyle.styleW500(HexColor('#86868F'), 13), // ✅ hint颜色为 #86868F
               ),
             ),
           ),
@@ -66,7 +68,7 @@ class SearchTextFieldWidget extends StatelessWidget {
               height: 22,
               width: 22,
               decoration: BoxDecoration(
-                color: isShowClearIcon ? AppColor.red : AppColor.secondary.withValues(alpha: 0.8),
+                color: isShowClearIcon ? AppColor.red : HexColor('#86868F'),
                 shape: BoxShape.circle,
               ),
               child: Center(

@@ -124,7 +124,7 @@ class RechargeCoinController extends GetxController{
       Utils.showLog("Stripe Payment Working...");
       Get.dialog(const LoadingWidget(), barrierDismissible: false);
 
-      await StripeService().init(isTest: true);
+      await StripeService().init(isTest: false);
       await 1.seconds.delay();
 
       await StripeService().stripePay(

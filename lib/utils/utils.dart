@@ -93,6 +93,12 @@ abstract class Utils {
   static final String privacyPolicyLink = FetchSettingApi.fetchSettingModel?.data?.privacyPolicyLink ?? "";
   static final String termsOfUseLink = FetchSettingApi.fetchSettingModel?.data?.termsOfUsePolicyLink ?? "";
 
+  static final String liveBroadcastAgreementPolicyLink = FetchSettingApi.fetchSettingModel?.data?.liveBroadcastAgreementPolicyLink ?? "";
+  static final String userRechargeAgreementPolicyLink = FetchSettingApi.fetchSettingModel?.data?.userRechargeAgreementPolicyLink ?? "";
+  static final String noChildHarmPolicyLink = FetchSettingApi.fetchSettingModel?.data?.noChildHarmPolicyLink ?? "";
+
+
+
   // >>>>> >>>>> VIDEO UPLOAD DURATION <<<<< <<<<<
   static final int shortsDuration = FetchSettingApi.fetchSettingModel?.data?.durationOfShorts ?? 0;
 
@@ -123,7 +129,7 @@ abstract class Utils {
   // >>>>> >>>>> STRIPE PAYMENT CREDENTIAL <<<<< <<<<<
   static const String stripeUrl = "https://api.stripe.com/v1/payment_intents";
   static String stripeTestSecretKey = FetchSettingApi.fetchSettingModel?.data?.stripeSecretKey ?? "";
-  static String stripeTestPublicKey = FetchSettingApi.fetchSettingModel?.data?.stripePublishableKey ?? "";
+  static String stripeTestPublicKey = FetchSettingApi.fetchSettingModel?.data?.stripePublishableKey ?? "24356789";
 
   // >>>>> >>>>> FLUTTER WAVE CREDENTIAL <<<<< <<<<<
   static String flutterWaveId = FetchSettingApi.fetchSettingModel?.data?.flutterWaveId ?? "";

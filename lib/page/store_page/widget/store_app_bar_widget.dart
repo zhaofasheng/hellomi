@@ -7,6 +7,8 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class StoreAppBarWidget extends StatelessWidget {
   const StoreAppBarWidget({super.key});
 
@@ -31,13 +33,13 @@ class StoreAppBarWidget extends StatelessWidget {
               child: Image.asset(
                 AppAssets.icArrowLeft,
                 width: 10,
-                color: AppColor.white,
+                color: AppColor.black,
               ),
             ),
           ),
           Text(
             EnumLocal.txtMyStore.name.tr,
-            style: AppFontStyle.styleW700(AppColor.white, 18),
+            style: AppFontStyle.styleW500(AppColor.black, 18),
           ),
           GestureDetector(
             onTap: () => Get.toNamed(AppRoutes.backpackPage)?.then(
@@ -50,11 +52,7 @@ class StoreAppBarWidget extends StatelessWidget {
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
               ),
-              child: Image.asset(
-                AppAssets.icBag,
-                width: 25,
-                color: AppColor.white,
-              ),
+              child: Assets.images.verctorRight.image(width: 25),
             ),
           ),
         ],

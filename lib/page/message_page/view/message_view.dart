@@ -15,6 +15,8 @@ import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class MessageView extends GetView<MessageController> {
   const MessageView({super.key});
 
@@ -38,78 +40,81 @@ class MessageView extends GetView<MessageController> {
                     return RefreshIndicator(
                       color: AppColor.primary,
                       onRefresh: () async => await controller.onRefresh(millisecondsDelay: 0),
-                      child: SingleChildScrollView(
-                        child: SizedBox(
-                          height: box.maxHeight + 1, // USE TO ACTIVE REFRESH INDICATOR...
-                          child: RefreshIndicator(
-                            color: AppColor.primary,
-                            onRefresh: () async => await controller.onRefresh(millisecondsDelay: 0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  GetBuilder<MessageController>(
-                                    id: AppConstant.onFetchMessageUser,
-                                    builder: (controller) => controller.isLoading
-                                        ? UserListShimmerWidget()
-                                        : controller.messageUsers.isEmpty
-                                            ? SizedBox(
-                                                height: Get.height / 1.5,
-                                                child: NoDataFoundWidget(title: EnumLocal.txtNoChatsYetStartAConversation.name.tr),
-                                              )
-                                            : ListView.builder(
-                                                shrinkWrap: true,
-                                                itemCount: controller.messageUsers.length,
-                                                padding: EdgeInsets.zero,
-                                                physics: const NeverScrollableScrollPhysics(),
-                                                itemBuilder: (context, index) {
-                                                  final indexData = controller.messageUsers[index];
-                                                  return GetBuilder<MessageController>(
-                                                    id: AppConstant.onChangeAnimation,
-                                                    builder: (controller) => AnimatedContainer(
-                                                      width: Get.width,
-                                                      curve: Curves.easeInOut,
-                                                      transform: Matrix4.translationValues(controller.isStartAnimation ? 0 : Get.width, 0, 0),
-                                                      duration: Duration(milliseconds: 150 + (index * 100)),
-                                                      child: MessageUserWidget(
-                                                        title: indexData.name ?? "",
-                                                        subTitle: indexData.message ?? "",
-                                                        leading: indexData.image ?? "",
-                                                        dateTime: (indexData.time?.trim().isEmpty ?? true) ? (CustomMessageTimeFormat.convert(Random().nextInt(1000).toDouble())) : indexData.time,
-                                                        messageCount: indexData.unreadCount ?? 0,
-                                                        isVerified: indexData.isVerified ?? false,
-                                                        isProfileImageBanned: indexData.isProfilePicBanned ?? false,
-                                                        avatarFrameImage: indexData.avatarFrameImage ?? "",
-                                                        avatarFrameType: indexData.avatarFrameType ?? 0,
-                                                        callback: () => indexData.isFake ?? true
-                                                            ? Get.toNamed(
-                                                                AppRoutes.fakeChatPage,
-                                                                arguments: {
-                                                                  ApiParams.roomId: indexData.id ?? "",
-                                                                  ApiParams.receiverUserId: indexData.userId ?? "",
-                                                                  ApiParams.name: indexData.name ?? "",
-                                                                  ApiParams.image: indexData.image ?? "",
-                                                                  ApiParams.isBanned: indexData.isProfilePicBanned ?? false,
-                                                                  ApiParams.isVerify: indexData.isVerified ?? false,
-                                                                },
-                                                              )?.then((value) => controller.onRefresh(millisecondsDelay: 1000))
-                                                            : Get.toNamed(
-                                                                AppRoutes.chatPage,
-                                                                arguments: {
-                                                                  ApiParams.roomId: indexData.id ?? "",
-                                                                  ApiParams.receiverUserId: indexData.userId ?? "",
-                                                                  ApiParams.name: indexData.name ?? "",
-                                                                  ApiParams.image: indexData.image ?? "",
-                                                                  ApiParams.isBanned: indexData.isProfilePicBanned ?? false,
-                                                                  ApiParams.isVerify: indexData.isVerified ?? false,
-                                                                },
-                                                              )?.then((value) => controller.onRefresh(millisecondsDelay: 1000)),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
+                      child: Container(
+                        color: AppColor.white,
+                        child: SingleChildScrollView(
+                          child: SizedBox(
+                            height: box.maxHeight + 1, // USE TO ACTIVE REFRESH INDICATOR...
+                            child: RefreshIndicator(
+                              color: AppColor.primary,
+                              onRefresh: () async => await controller.onRefresh(millisecondsDelay: 0),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    GetBuilder<MessageController>(
+                                      id: AppConstant.onFetchMessageUser,
+                                      builder: (controller) => controller.isLoading
+                                          ? UserListShimmerWidget()
+                                          : controller.messageUsers.isEmpty
+                                          ? SizedBox(
+                                        height: Get.height / 1.5,
+                                        child: NoDataFoundWidget(imageWidget: Assets.images.msgDefalut.image(width: 200),title: EnumLocal.txtNoChatsYetStartAConversation.name.tr),
+                                      )
+                                          : ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: controller.messageUsers.length,
+                                        padding: EdgeInsets.zero,
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        itemBuilder: (context, index) {
+                                          final indexData = controller.messageUsers[index];
+                                          return GetBuilder<MessageController>(
+                                            id: AppConstant.onChangeAnimation,
+                                            builder: (controller) => AnimatedContainer(
+                                              width: Get.width,
+                                              curve: Curves.easeInOut,
+                                              transform: Matrix4.translationValues(controller.isStartAnimation ? 0 : Get.width, 0, 0),
+                                              duration: Duration(milliseconds: 150 + (index * 100)),
+                                              child: MessageUserWidget(
+                                                title: indexData.name ?? "",
+                                                subTitle: indexData.message ?? "",
+                                                leading: indexData.image ?? "",
+                                                dateTime: (indexData.time?.trim().isEmpty ?? true) ? (CustomMessageTimeFormat.convert(Random().nextInt(1000).toDouble())) : indexData.time,
+                                                messageCount: indexData.unreadCount ?? 0,
+                                                isVerified: indexData.isVerified ?? false,
+                                                isProfileImageBanned: indexData.isProfilePicBanned ?? false,
+                                                avatarFrameImage: indexData.avatarFrameImage ?? "",
+                                                avatarFrameType: indexData.avatarFrameType ?? 0,
+                                                callback: () => indexData.isFake ?? true
+                                                    ? Get.toNamed(
+                                                  AppRoutes.fakeChatPage,
+                                                  arguments: {
+                                                    ApiParams.roomId: indexData.id ?? "",
+                                                    ApiParams.receiverUserId: indexData.userId ?? "",
+                                                    ApiParams.name: indexData.name ?? "",
+                                                    ApiParams.image: indexData.image ?? "",
+                                                    ApiParams.isBanned: indexData.isProfilePicBanned ?? false,
+                                                    ApiParams.isVerify: indexData.isVerified ?? false,
+                                                  },
+                                                )?.then((value) => controller.onRefresh(millisecondsDelay: 1000))
+                                                    : Get.toNamed(
+                                                  AppRoutes.chatPage,
+                                                  arguments: {
+                                                    ApiParams.roomId: indexData.id ?? "",
+                                                    ApiParams.receiverUserId: indexData.userId ?? "",
+                                                    ApiParams.name: indexData.name ?? "",
+                                                    ApiParams.image: indexData.image ?? "",
+                                                    ApiParams.isBanned: indexData.isProfilePicBanned ?? false,
+                                                    ApiParams.isVerify: indexData.isVerified ?? false,
+                                                  },
+                                                )?.then((value) => controller.onRefresh(millisecondsDelay: 1000)),
                                               ),
-                                  ),
-                                ],
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

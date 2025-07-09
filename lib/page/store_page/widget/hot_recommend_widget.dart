@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
+import 'package:tingle/assets/assets.gen.dart';
 import 'package:tingle/common/widget/new_preview_frame.dart';
 import 'package:tingle/custom/widget/custom_coinday_txt_widget.dart';
 import 'package:tingle/page/store_page/controller/store_controller.dart';
@@ -41,16 +43,14 @@ class HotRecommendWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              AppAssets.ic_store_poster,
-              fit: BoxFit.cover,
-            ),
+
+            Assets.images.shopBanner.image(fit: BoxFit.cover),
             10.height,
             logic.topFramesModel == null
                 ? 0.height
                 : Text(
                     EnumLocal.txtHotRecommendation.name.tr,
-                    style: AppFontStyle.styleW700(AppColor.black, 18),
+                    style: AppFontStyle.styleW500(AppColor.black, 14),
                   ),
             14.height,
             logic.topFramesModel == null
@@ -169,38 +169,75 @@ class FrameRecommendationCard extends StatelessWidget {
             // Foreground content
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-              child: Column(
+              child:Stack(
                 children: [
-                  SizedBox(
-                    height: height * 0.1,
-                  ),
-                  itemType == ItemType.THEME.name
-                      ? SizedBox(
-                          height: (height * 0.3),
-                          width: (height * 0.3),
-                        )
-                      : SizedBox(
-                          height: (height * 0.3),
-                          width: (height * 0.3),
-                          child: CustomSVGAFrameWidget(
-                            type: frameData.type ?? 1,
-                            itemType: itemType,
-                            imagePath: frameData.image!,
-                            framePath: frameData.svgaImage,
-                            svgapadding: EdgeInsets.all(0),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        height: height * 0.1,
+                      ),
+                      itemType == ItemType.THEME.name
+                          ? SizedBox(
+                        height: (height * 0.3),
+                        width: (height * 0.3),
+                      )
+                          : SizedBox(
+                        height: (height * 0.3),
+                        width: (height * 0.3),
+                        child: CustomSVGAFrameWidget(
+                          type: frameData.type ?? 1,
+                          itemType: itemType,
+                          imagePath: frameData.image!,
+                          framePath: frameData.svgaImage,
+                          svgapadding: EdgeInsets.all(0),
+                        ),
+                      ),
+                      2.height,
+                      Container(
+                        width: 120,
+                        child: Text(
+                          frameData.name ?? "",
+                          textAlign: TextAlign.center,
+                          style: AppFontStyle.styleW400(itemType == ItemType.THEME.name ? AppColor.white : AppColor.black, 14),
+                        ),
+                      ),
+                      (height * 0.03).height,
+                      (height * 0.03).height,
+                      frameData.isPurchased
+                          ? Container(
+                        height: 40,
+                        width: width,
+                        // margin: EdgeInsets.symmetric(horizontal: 5),
+                        decoration: BoxDecoration(
+                          color: AppColor.deepLightGray,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Center(
+                          child: Text(
+                            EnumLocal.txtPurchased.name.tr,
+                            style: AppFontStyle.styleW500(AppColor.white, 16),
                           ),
                         ),
-                  2.height,
-                  Container(
-                    width: 120,
-                    child: Text(
-                      frameData.name ?? "",
-                      textAlign: TextAlign.center,
-                      style: AppFontStyle.styleW600(itemType == ItemType.THEME.name ? AppColor.white : AppColor.black, 14),
-                    ),
+                      )
+                          : Container(
+                        height: 40,
+                        width: width,
+                        // margin: EdgeInsets.symmetric(horizontal: 5),
+                        decoration: BoxDecoration(
+                          color: HexColor('#00E4A6'),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Center(
+                          child: Text(
+                            EnumLocal.txtPurchase.name.tr,
+                            style: AppFontStyle.styleW500(AppColor.white, 14),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  (height * 0.03).height,
-                  Container(
+                  Positioned(right: 3,child: Container(
                     decoration: BoxDecoration(
                       color: AppColor.lightestYellow,
                       borderRadius: BorderRadius.circular(15),
@@ -221,39 +258,8 @@ class FrameRecommendationCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                  (height * 0.03).height,
-                  frameData.isPurchased
-                      ? Container(
-                          height: 40,
-                          width: width,
-                          // margin: EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                            color: AppColor.deepLightGray,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: Text(
-                              EnumLocal.txtPurchased.name.tr,
-                              style: AppFontStyle.styleW500(AppColor.white, 16),
-                            ),
-                          ),
-                        )
-                      : Container(
-                          height: 40,
-                          width: width,
-                          // margin: EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                            gradient: AppColor.lightDarkPinkGradient,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: Text(
-                              EnumLocal.txtPurchase.name.tr,
-                              style: AppFontStyle.styleW500(AppColor.white, 16),
-                            ),
-                          ),
-                        ),
+                  ),),
+
                 ],
               ),
             ),

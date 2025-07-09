@@ -16,7 +16,6 @@ class BackpackAppbar extends StatelessWidget {
       padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
       alignment: Alignment.topLeft,
       width: Get.width,
-      color: AppColor.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

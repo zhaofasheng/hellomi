@@ -14,8 +14,7 @@ class MessageAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).viewPadding.top + 105,
-      padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top, left: 15, right: 15),
+      padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
       alignment: Alignment.center,
       width: Get.width,
       decoration: BoxDecoration(
@@ -63,6 +62,7 @@ class MessageAppBarWidget extends StatelessWidget {
               ],
             ),
           ),
+          10.height,
           const MessageTabBarWidget(),
         ],
       ),

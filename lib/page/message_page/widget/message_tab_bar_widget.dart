@@ -1,98 +1,127 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/page/message_page/controller/message_controller.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/enums.dart';
-import 'package:tingle/utils/font_style.dart';
-import 'package:tingle/utils/utils.dart';
 
 class MessageTabBarWidget extends StatelessWidget {
   const MessageTabBarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List messageTypes = [
+    final messageTypes = [
       EnumLocal.txtAll.name.tr,
       EnumLocal.txtOnline.name.tr,
       EnumLocal.txtUnread.name.tr,
-      // EnumLocal.txtOfficial.name.tr,
-      // EnumLocal.txtGroupChat.name.tr,
     ];
+
     return GetBuilder<MessageController>(
       id: AppConstant.onChangeMessageType,
-      builder: (controller) => Container(
-        height: 35,
-        color: AppColor.transparent,
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: messageTypes.length,
-              padding: EdgeInsets.zero,
-              scrollDirection: Axis.horizontal,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return MessageTabItemWidget(
-                  title: messageTypes[index],
-                  count: null,
-                  isSelected: controller.selectedMessageType == index,
-                  callback: () => controller.onChangeMessageType(index),
-                );
-              },
-            ),
-          ),
+      builder: (controller) => SizedBox(
+        height: 40,
+        child: Row(
+          children: List.generate(messageTypes.length, (index) {
+            return Expanded(
+              child: _TabItemWidget(
+                title: messageTypes[index],
+                isSelected: controller.selectedMessageType == index,
+                callback: () => controller.onChangeMessageType(index),
+              ),
+            );
+          }),
         ),
       ),
     );
   }
 }
 
-class MessageTabItemWidget extends StatelessWidget {
-  const MessageTabItemWidget({super.key, required this.title, this.count, required this.isSelected, required this.callback});
+class _TabItemWidget extends StatelessWidget {
+  const _TabItemWidget({
+    required this.title,
+    required this.isSelected,
+    required this.callback,
+  });
 
   final String title;
-  final int? count;
   final bool isSelected;
-  final Callback callback;
+  final VoidCallback callback;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: callback,
-      child: Container(
-        margin: const EdgeInsets.only(right: 10),
-        padding: const EdgeInsets.only(left: 18, right: 10),
-        decoration: BoxDecoration(
-          color: isSelected ? HexColor('#00E4A6') : Colors.transparent,
-          borderRadius: BorderRadius.circular(100),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+      child: SizedBox(
+        height: 40,
+        child: Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.center,
           children: [
-            Text(
-              title,
-              style: isSelected ? AppFontStyle.styleW600(AppColor.white, 14) : AppFontStyle.styleW500(AppColor.black, 14),
+            if (isSelected)
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: CustomPaint(
+                  size: const Size(double.infinity, 60),
+                  painter: _TabBackgroundPainter(color: Colors.white),
+                ),
+              ),
+            Center(
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: isSelected ? AppColor.black : Colors.grey,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
-            count != null
-                ? Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(6),
-                    margin: const EdgeInsets.only(left: 8, right: 3),
-                    decoration: const BoxDecoration(color: AppColor.pink, shape: BoxShape.circle),
-                    child: Text(
-                      count.toString(),
-                      style: AppFontStyle.styleW600(AppColor.white, 14),
-                    ),
-                  )
-                : 8.width,
           ],
         ),
       ),
     );
   }
+}
+
+class _TabBackgroundPainter extends CustomPainter {
+  final Color color;
+
+  _TabBackgroundPainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    final double arcHeight = 28.0;
+    final double arcWidth = 64.0;
+    final double topRadius = 16.0;
+
+    final path = Path();
+
+    path.moveTo(0, topRadius);
+    path.quadraticBezierTo(0, 0, topRadius, 0);
+    path.lineTo(size.width - topRadius, 0);
+    path.quadraticBezierTo(size.width, 0, size.width, topRadius);
+    path.lineTo(size.width, size.height - arcHeight);
+    path.quadraticBezierTo(
+      size.width + arcWidth, size.height + arcHeight,
+      size.width - arcWidth, size.height + arcHeight,
+    );
+    path.lineTo(arcWidth, size.height + arcHeight);
+    path.quadraticBezierTo(
+      -arcWidth, size.height + arcHeight,
+      0, size.height - arcHeight,
+    );
+    path.lineTo(0, topRadius);
+    path.close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

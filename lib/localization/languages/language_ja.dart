@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> jaJP = {
+  EnumLocal.txtLiveAgreement.name: 'ライブ配信規約',
+  EnumLocal.txtRechargeAgreement.name: 'ユーザー課金規約',
+  EnumLocal.txtChildProtectionPolicy.name: '児童虐待防止ポリシー',
   EnumLocal.txtAppName.name: "チクチクする",
   EnumLocal.txtNoInternetConnection.name: "インターネット接続なし",
   EnumLocal.txtReportSending.name: "レポートを送信しています...",

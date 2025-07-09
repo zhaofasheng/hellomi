@@ -26,10 +26,12 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.isObscure = false,
     this.fillColor,
     this.borderColor,
-    this.enabled,
     this.textColor,
+    this.enabled,
     this.onEditingComplete,
     this.leftImage,
+    this.backgroundColor, // ✅ 新增背景色参数
+    this.borderRadius,     // ✅ 新增圆角参数
   });
 
   final String? title;
@@ -50,9 +52,14 @@ class CustomTextFieldWidget extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool? enabled;
   final Widget? leftImage;
+  final Color? backgroundColor; // ✅ 背景色参数
+  final double? borderRadius;   // ✅ 圆角参数
 
   @override
   Widget build(BuildContext context) {
+    final double effectiveRadius = borderRadius ?? 20.0; // ✅ 默认20
+    final Color effectiveBgColor = backgroundColor ?? Colors.white; // ✅ 默认白色
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -72,14 +79,14 @@ class CustomTextFieldWidget extends StatelessWidget {
         Container(
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            color: effectiveBgColor, // ✅ 使用传入背景色
+            borderRadius: BorderRadius.circular(effectiveRadius), // ✅ 使用传入圆角
           ),
           child: Row(
             children: [
               if (leftImage != null)
                 Padding(
-                  padding: const EdgeInsets.only(left: 10,),
+                  padding: const EdgeInsets.only(left: 10),
                   child: leftImage!,
                 ),
               Expanded(
@@ -96,7 +103,7 @@ class CustomTextFieldWidget extends StatelessWidget {
                   validator: validator,
                   style: AppFontStyle.styleW600(textColor ?? AppColor.black, 15),
                   decoration: InputDecoration(
-                    filled: false, // 关闭内置填充，避免覆盖外层背景
+                    filled: false,
                     fillColor: null,
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -104,11 +111,7 @@ class CustomTextFieldWidget extends StatelessWidget {
                     focusedBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
                     hintText: hintText,
-                    hintStyle: hintStyle ??
-                        AppFontStyle.styleW500(
-                          const Color(0xFFD2D6DB),
-                          15,
-                        ),
+                    hintStyle: hintStyle ?? AppFontStyle.styleW500(const Color(0xFFD2D6DB), 15),
                     suffixIcon: isPassword
                         ? GestureDetector(
                       onTap: onChangeIsObscure,
@@ -116,8 +119,10 @@ class CustomTextFieldWidget extends StatelessWidget {
                         color: AppColor.transparent,
                         alignment: Alignment.center,
                         width: 50,
-                        margin: EdgeInsets.only(right: 5),
-                        child: isObscure?Assets.images.loginNoShow.image(width: 24,height: 25):Assets.images.loginShow.image(width: 24,height: 25),
+                        margin: const EdgeInsets.only(right: 5),
+                        child: isObscure
+                            ? Assets.images.loginNoShow.image(width: 24, height: 25)
+                            : Assets.images.loginShow.image(width: 24, height: 25),
                       ),
                     )
                         : suffixIcon,

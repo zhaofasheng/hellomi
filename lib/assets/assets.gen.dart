@@ -1366,6 +1366,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/account_delete.png
+  AssetGenImage get accountDelete =>
+      const AssetGenImage('assets/images/account_delete.png');
+
   /// File path: assets/images/aodui_send.png
   AssetGenImage get aoduiSend =>
       const AssetGenImage('assets/images/aodui_send.png');
@@ -1381,6 +1385,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/audio_smile.png
   AssetGenImage get audioSmile =>
       const AssetGenImage('assets/images/audio_smile.png');
+
+  /// File path: assets/images/avater_img.png
+  AssetGenImage get avaterImg =>
+      const AssetGenImage('assets/images/avater_img.png');
 
   /// File path: assets/images/background_img.png
   AssetGenImage get backgroundImg =>
@@ -1453,6 +1461,10 @@ class $AssetsImagesGen {
   AssetGenImage get fansRankingBg =>
       const AssetGenImage('assets/images/fans_ranking_bg.webp');
 
+  /// File path: assets/images/friend_defalut.png
+  AssetGenImage get friendDefalut =>
+      const AssetGenImage('assets/images/friend_defalut.png');
+
   /// File path: assets/images/get_jinbi.png
   AssetGenImage get getJinbi =>
       const AssetGenImage('assets/images/get_jinbi.png');
@@ -1479,6 +1491,17 @@ class $AssetsImagesGen {
   /// File path: assets/images/ground_share_img.png
   AssetGenImage get groundShareImg =>
       const AssetGenImage('assets/images/ground_share_img.png');
+
+  /// File path: assets/images/host_code.png
+  AssetGenImage get hostCode =>
+      const AssetGenImage('assets/images/host_code.png');
+
+  /// File path: assets/images/host_daili.png
+  AssetGenImage get hostDaili =>
+      const AssetGenImage('assets/images/host_daili.png');
+
+  /// File path: assets/images/host_id.png
+  AssetGenImage get hostId => const AssetGenImage('assets/images/host_id.png');
 
   /// File path: assets/images/ic_live_choice.png
   AssetGenImage get icLiveChoice =>
@@ -1793,6 +1816,9 @@ class $AssetsImagesGen {
   AssetGenImage get imgYouWin =>
       const AssetGenImage('assets/images/img_you_win.webp');
 
+  /// File path: assets/images/jin_pai.png
+  AssetGenImage get jinPai => const AssetGenImage('assets/images/jin_pai.png');
+
   /// File path: assets/images/jinbi_back.png
   AssetGenImage get jinbiBack =>
       const AssetGenImage('assets/images/jinbi_back.png');
@@ -1864,6 +1890,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/login_no_show.png
   AssetGenImage get loginNoShow =>
       const AssetGenImage('assets/images/login_no_show.png');
+
+  /// File path: assets/images/login_out.png
+  AssetGenImage get loginOut =>
+      const AssetGenImage('assets/images/login_out.png');
 
   /// File path: assets/images/login_passwd_img.png
   AssetGenImage get loginPasswdImg =>
@@ -1979,6 +2009,10 @@ class $AssetsImagesGen {
   AssetGenImage get mineYbBack =>
       const AssetGenImage('assets/images/mine_yb_back.png');
 
+  /// File path: assets/images/msg_defalut.png
+  AssetGenImage get msgDefalut =>
+      const AssetGenImage('assets/images/msg_defalut.png');
+
   /// File path: assets/images/number_one.png
   AssetGenImage get numberOne =>
       const AssetGenImage('assets/images/number_one.png');
@@ -2046,6 +2080,18 @@ class $AssetsImagesGen {
   /// File path: assets/images/rich_2.png
   AssetGenImage get rich2 => const AssetGenImage('assets/images/rich_2.png');
 
+  /// File path: assets/images/shop_banner.png
+  AssetGenImage get shopBanner =>
+      const AssetGenImage('assets/images/shop_banner.png');
+
+  /// File path: assets/images/shop_game.png
+  AssetGenImage get shopGame =>
+      const AssetGenImage('assets/images/shop_game.png');
+
+  /// File path: assets/images/shop_party.png
+  AssetGenImage get shopParty =>
+      const AssetGenImage('assets/images/shop_party.png');
+
   /// File path: assets/images/socket_login_img.png
   AssetGenImage get socketLoginImg =>
       const AssetGenImage('assets/images/socket_login_img.png');
@@ -2053,6 +2099,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/splash_screen.png
   AssetGenImage get splashScreen =>
       const AssetGenImage('assets/images/splash_screen.png');
+
+  /// File path: assets/images/tong_pai.png
+  AssetGenImage get tongPai =>
+      const AssetGenImage('assets/images/tong_pai.png');
 
   /// File path: assets/images/tuijian_back.png
   AssetGenImage get tuijianBack =>
@@ -2078,6 +2128,10 @@ class $AssetsImagesGen {
   AssetGenImage get tuijianShare =>
       const AssetGenImage('assets/images/tuijian_share.png');
 
+  /// File path: assets/images/verctor_right.png
+  AssetGenImage get verctorRight =>
+      const AssetGenImage('assets/images/verctor_right.png');
+
   /// File path: assets/images/video_com_img.png
   AssetGenImage get videoComImg =>
       const AssetGenImage('assets/images/video_com_img.png');
@@ -2094,16 +2148,21 @@ class $AssetsImagesGen {
   AssetGenImage get ybjioayiHistory =>
       const AssetGenImage('assets/images/ybjioayi_history.png');
 
+  /// File path: assets/images/yin_pai.png
+  AssetGenImage get yinPai => const AssetGenImage('assets/images/yin_pai.png');
+
   /// File path: assets/images/yiongbi_jy.png
   AssetGenImage get yiongbiJy =>
       const AssetGenImage('assets/images/yiongbi_jy.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
+    accountDelete,
     aoduiSend,
     audioPower,
     audioSet,
     audioSmile,
+    avaterImg,
     backgroundImg,
     chatCamram,
     chatEqImg,
@@ -2122,6 +2181,7 @@ class $AssetsImagesGen {
     dongtaiNomer,
     editImg,
     fansRankingBg,
+    friendDefalut,
     getJinbi,
     goLive,
     goParty,
@@ -2129,6 +2189,9 @@ class $AssetsImagesGen {
     groundComImg,
     groundLikeImg,
     groundShareImg,
+    hostCode,
+    hostDaili,
+    hostId,
     icLiveChoice,
     icLiveNomer,
     imgActivityBg,
@@ -2208,6 +2271,7 @@ class $AssetsImagesGen {
     imgYouAreBattleWinner,
     imgYouLose,
     imgYouWin,
+    jinPai,
     jinbiBack,
     liveGame,
     liveGift,
@@ -2226,6 +2290,7 @@ class $AssetsImagesGen {
     loginMan,
     loginName,
     loginNoShow,
+    loginOut,
     loginPasswdImg,
     loginRock,
     loginShow,
@@ -2255,6 +2320,7 @@ class $AssetsImagesGen {
     mineWhiteRight,
     mineYb,
     mineYbBack,
+    msgDefalut,
     numberOne,
     numberThree,
     numberTwo,
@@ -2273,18 +2339,24 @@ class $AssetsImagesGen {
     rice3,
     rich1,
     rich2,
+    shopBanner,
+    shopGame,
+    shopParty,
     socketLoginImg,
     splashScreen,
+    tongPai,
     tuijianBack,
     tuijianCode,
     tuijianCopy,
     tuijianGold,
     tuijianHistory,
     tuijianShare,
+    verctorRight,
     videoComImg,
     videoGsImg,
     videoLiwu,
     ybjioayiHistory,
+    yinPai,
     yiongbiJy,
   ];
 }

@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> idID = {
+  EnumLocal.txtLiveAgreement.name: 'Perjanjian Siaran Langsung',
+  EnumLocal.txtRechargeAgreement.name: 'Perjanjian Pengisian Ulang Pengguna',
+  EnumLocal.txtChildProtectionPolicy.name: 'Kebijakan Perlindungan Anak',
   EnumLocal.txtAppName.name: "Menggelenyar",
   EnumLocal.txtNoInternetConnection.name: "Tidak Ada Koneksi Internet",
   EnumLocal.txtReportSending.name: "Laporkan pengiriman...",

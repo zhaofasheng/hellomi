@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> trTR = {
+  EnumLocal.txtLiveAgreement.name: 'Canlı Yayın Anlaşması',
+  EnumLocal.txtRechargeAgreement.name: 'Kullanıcı Yükleme Sözleşmesi',
+  EnumLocal.txtChildProtectionPolicy.name: 'Çocuklara Zarar Vermeme Politikası',
   EnumLocal.txtAppName.name: "karıncalanma",
   EnumLocal.txtNoInternetConnection.name: "İnternet Bağlantısı Yok",
   EnumLocal.txtReportSending.name: "Rapor gönderiliyor...",

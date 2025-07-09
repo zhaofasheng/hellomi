@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> itIn = {
+  EnumLocal.txtLiveAgreement.name: 'Accordo di trasmissione in diretta',
+  EnumLocal.txtRechargeAgreement.name: 'Accordo di ricarica utente',
+  EnumLocal.txtChildProtectionPolicy.name: 'Politica di tutela dei minori',
   EnumLocal.txtAppName.name: "Formicolare",
   EnumLocal.txtNoInternetConnection.name: "Nessuna connessione Internet",
   EnumLocal.txtReportSending.name: "Segnala invio in corso...",

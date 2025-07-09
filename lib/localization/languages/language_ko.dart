@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> koKR = {
+  EnumLocal.txtLiveAgreement.name: '라이브 스트리밍 약관',
+  EnumLocal.txtRechargeAgreement.name: '사용자 충전 약관',
+  EnumLocal.txtChildProtectionPolicy.name: '아동 학대 방지 정책',
   EnumLocal.txtAppName.name: "얼얼함",
   EnumLocal.txtNoInternetConnection.name: "인터넷 연결 없음",
   EnumLocal.txtReportSending.name: "보고서를 보냅니다...",

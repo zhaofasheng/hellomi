@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> ruRU = {
+  EnumLocal.txtLiveAgreement.name: 'Соглашение о прямой трансляции',
+  EnumLocal.txtRechargeAgreement.name: 'Соглашение о пополнении счета пользователя',
+  EnumLocal.txtChildProtectionPolicy.name: 'Политика защиты детей',
   EnumLocal.txtAppName.name: "Покалывание",
   EnumLocal.txtNoInternetConnection.name: "Нет подключения к Интернету",
   EnumLocal.txtReportSending.name: "Отчет отправляется...",

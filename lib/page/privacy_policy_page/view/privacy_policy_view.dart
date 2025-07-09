@@ -13,14 +13,20 @@ class PrivacyPolicyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PrivacyPolicyAppBarWidget.onShow(context),
-      body: Utils.privacyPolicyLink.trim().isEmpty
-          ? NoDataFoundWidget()
-          : GetBuilder<PrivacyPolicyController>(
-              id: AppConstant.onInitializeWebView,
-              builder: (controller) => controller.webViewController != null ? WebViewWidget(controller: controller.webViewController!) : const LoadingWidget(),
-            ),
+    return GetBuilder<PrivacyPolicyController>(
+      builder: (controller) {
+        return Scaffold(
+          appBar: PrivacyPolicyAppBarWidget.onShow(context, title: controller.title),
+          body: controller.url.trim().isEmpty
+              ? NoDataFoundWidget()
+              : GetBuilder<PrivacyPolicyController>(
+            id: AppConstant.onInitializeWebView,
+            builder: (controller) => controller.webViewController != null
+                ? WebViewWidget(controller: controller.webViewController!)
+                : const LoadingWidget(),
+          ),
+        );
+      },
     );
   }
 }

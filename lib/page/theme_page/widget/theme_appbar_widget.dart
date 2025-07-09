@@ -30,13 +30,13 @@ class ThemeAppBarWidget extends StatelessWidget {
               child: Image.asset(
                 AppAssets.icArrowLeft,
                 width: 10,
-                color: AppColor.white,
+                color: AppColor.black,
               ),
             ),
           ),
           Text(
             title,
-            style: AppFontStyle.styleW700(AppColor.white, 20),
+            style: AppFontStyle.styleW500(AppColor.black, 20),
           ),
           35.width
         ],

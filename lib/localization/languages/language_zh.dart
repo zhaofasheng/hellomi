@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> zhCN = {
+  EnumLocal.txtLiveAgreement.name: '直播协议',
+  EnumLocal.txtRechargeAgreement.name: '用户充值协议',
+  EnumLocal.txtChildProtectionPolicy.name: '无儿童伤害政策',
   EnumLocal.txtAppName.name: "刺痛",
   EnumLocal.txtNoInternetConnection.name: "没有互联网连接",
   EnumLocal.txtReportSending.name: "报告正在发送...",

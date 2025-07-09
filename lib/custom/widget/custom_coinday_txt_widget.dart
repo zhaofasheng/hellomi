@@ -50,7 +50,7 @@ class CoinValidityText extends StatelessWidget {
       sortLabel != null && sortLabel == true
           ? "${CustomFormatNumber.onConvert(int.parse(coin ?? "0")) ?? ""}/${validity ?? ""}${getShortValidityLabel()}"
           : "${CustomFormatNumber.onConvert(int.parse(coin ?? "0")) ?? ""}/${validity ?? ""}${getValidityLabel()}",
-      style: style ?? AppFontStyle.styleW600(AppColor.darkYellow, 14),
+      style: style ?? AppFontStyle.styleW400(AppColor.darkYellow, 12),
     );
   }
 }
@@ -83,7 +83,7 @@ class TimeValidityText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       "${validity ?? ""}${getValidityLabel()}",
-      style: AppFontStyle.styleW600(textColor ?? AppColor.darkYellow, 14),
+      style: AppFontStyle.styleW400(textColor ?? AppColor.darkYellow, 12),
     );
   }
 }

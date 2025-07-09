@@ -81,6 +81,9 @@ class Data {
     List<Game>? game,
     String? agoraAppCertificate,
     String? agoraAppId,
+    String? liveBroadcastAgreementPolicyLink,
+    String? userRechargeAgreementPolicyLink,
+    String? noChildHarmPolicyLink,
   }) {
     _id = id;
     _currency = currency;
@@ -119,6 +122,9 @@ class Data {
     _game = game;
     _agoraAppCertificate = agoraAppCertificate;
     _agoraAppId = agoraAppId;
+    _liveBroadcastAgreementPolicyLink = liveBroadcastAgreementPolicyLink;
+    _userRechargeAgreementPolicyLink = userRechargeAgreementPolicyLink;
+    _noChildHarmPolicyLink = noChildHarmPolicyLink;
   }
 
   Data.fromJson(dynamic json) {
@@ -164,6 +170,9 @@ class Data {
     }
     _agoraAppCertificate = json['agoraAppCertificate'];
     _agoraAppId = json['agoraAppId'];
+    _liveBroadcastAgreementPolicyLink = json['liveBroadcastAgreementPolicyLink'];
+    _userRechargeAgreementPolicyLink = json['userRechargeAgreementPolicyLink'];
+    _noChildHarmPolicyLink = json['noChildHarmPolicyLink'];
   }
   String? _id;
   Currency? _currency;
@@ -202,6 +211,9 @@ class Data {
   List<Game>? _game;
   String? _agoraAppCertificate;
   String? _agoraAppId;
+  String? _liveBroadcastAgreementPolicyLink;
+  String? _userRechargeAgreementPolicyLink;
+  String? _noChildHarmPolicyLink;
   Data copyWith({
     String? id,
     Currency? currency,
@@ -240,6 +252,9 @@ class Data {
     List<Game>? game,
     String? agoraAppCertificate,
     String? agoraAppId,
+    String? liveBroadcastAgreementPolicyLink,
+    String? userRechargeAgreementPolicyLink,
+    String? noChildHarmPolicyLink,
   }) =>
       Data(
         id: id ?? _id,
@@ -279,6 +294,9 @@ class Data {
         game: game ?? _game,
         agoraAppCertificate: agoraAppCertificate ?? _agoraAppCertificate,
         agoraAppId: agoraAppId ?? _agoraAppId,
+        liveBroadcastAgreementPolicyLink: liveBroadcastAgreementPolicyLink ?? _liveBroadcastAgreementPolicyLink,
+        userRechargeAgreementPolicyLink: userRechargeAgreementPolicyLink ?? _userRechargeAgreementPolicyLink,
+        noChildHarmPolicyLink: noChildHarmPolicyLink ?? _noChildHarmPolicyLink,
       );
   String? get id => _id;
   Currency? get currency => _currency;
@@ -317,7 +335,9 @@ class Data {
   List<Game>? get game => _game;
   String? get agoraAppCertificate => _agoraAppCertificate;
   String? get agoraAppId => _agoraAppId;
-
+  String? get liveBroadcastAgreementPolicyLink => _liveBroadcastAgreementPolicyLink;
+  String? get userRechargeAgreementPolicyLink => _userRechargeAgreementPolicyLink;
+  String? get noChildHarmPolicyLink => _noChildHarmPolicyLink;
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['_id'] = _id;
@@ -363,6 +383,9 @@ class Data {
     }
     map['agoraAppCertificate'] = _agoraAppCertificate;
     map['agoraAppId'] = _agoraAppId;
+    map['liveBroadcastAgreementPolicyLink'] = _liveBroadcastAgreementPolicyLink;
+    map['userRechargeAgreementPolicyLink'] = _userRechargeAgreementPolicyLink;
+    map['noChildHarmPolicyLink'] = _noChildHarmPolicyLink;
     return map;
   }
 }

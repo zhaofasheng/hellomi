@@ -86,42 +86,7 @@ class SearchHistoryWidget extends GetView<search.SearchController> {
                   ],
                 )
               : Offstage(),
-          // Text(
-          //   EnumLocal.txtRecommendedTopics.name.tr,
-          //   style: AppFontStyle.styleW700(AppColor.black, 16),
-          // ),
-          // 15.height,
-          // Container(
-          //   color: AppColor.transparent,
-          //   width: Get.width,
-          //   child: Wrap(
-          //     spacing: 15,
-          //     alignment: WrapAlignment.start,
-          //     children: [
-          //       for (int index = 0; index < 5; index++)
-          //         GestureDetector(
-          //           onTap: () {},
-          //           child: Chip(
-          //             padding: const EdgeInsets.only(right: 10, left: 10),
-          //             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-          //             deleteIconColor: AppColor.black,
-          //             elevation: 0,
-          //             autofocus: false,
-          //             deleteIcon: Padding(
-          //               padding: const EdgeInsets.only(right: 4),
-          //               child: Image.asset(AppAssets.icClose, color: AppColor.lightGrayBg),
-          //             ),
-          //             backgroundColor: AppColor.lightGrayBg,
-          //             side: BorderSide(width: 0, color: AppColor.transparent),
-          //             label: Text(
-          //               "Music",
-          //               style: AppFontStyle.styleW500(AppColor.grayText, 13),
-          //             ),
-          //           ),
-          //         ),
-          //     ],
-          //   ),
-          // )
+
         ],
       ),
     );

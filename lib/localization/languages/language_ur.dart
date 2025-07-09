@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> urPK = {
+  EnumLocal.txtLiveAgreement.name: 'لائیو اسٹریمنگ معاہدہ',
+  EnumLocal.txtRechargeAgreement.name: 'صارف ریچارج معاہدہ',
+  EnumLocal.txtChildProtectionPolicy.name: 'بچوں کو نقصان نہ پہنچانے کی پالیسی',
   EnumLocal.txtAppName.name: "ٹنگل",
   EnumLocal.txtNoInternetConnection.name: "کوئی انٹرنیٹ کنکشن نہیں ہے۔",
   EnumLocal.txtReportSending.name: "رپورٹ بھیجی جا رہی ہے...",

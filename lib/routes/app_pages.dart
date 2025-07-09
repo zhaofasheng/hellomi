@@ -1,3 +1,9 @@
+import 'package:tingle/page/nohunt_agree_page/view/nohunt_agree_view.dart';
+import 'package:tingle/page/nohunt_agree_page/binding/nohunt_agree_binding.dart';
+import 'package:tingle/page/rechageagree_page/view/rechageagree_view.dart';
+import 'package:tingle/page/rechageagree_page/binding/rechageagree_binding.dart';
+import 'package:tingle/page/liveagree_page/view/liveagree_view.dart';
+import 'package:tingle/page/liveagree_page/binding/liveagree_binding.dart';
 
 
 import 'package:get/get.dart';
@@ -139,6 +145,21 @@ import 'app_routes.dart';
 
 class AppPages {
   static var list = [
+    GetPage(
+      name: AppRoutes.nohunt_agreePage,
+      page: () => const NoHuntAgreeView(),
+      binding: NoHuntAgreeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.rechageagreePage,
+      page: () => const RechageAgreeView(),
+      binding: RechageAgreeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.liveagreePage,
+      page: () => const LiveAgreeView(),
+      binding: LiveAgreeBinding(),
+    ),
 
     GetPage(
       name: AppRoutes.splashScreenPage,

@@ -10,49 +10,61 @@ import 'package:tingle/page/other_user_profile_bottom_sheet/view/other_user_prof
 
 import 'package:tingle/utils/constant.dart';
 
+import '../../../assets/assets.gen.dart';
+
 class FriendsWidget extends StatelessWidget {
   const FriendsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ConnectionController>(
-      id: AppConstant.onChangeFollowUpdate,
-      builder: (controller) => controller.isLoading
-          ? UserListShimmerWidget()
-          : controller.friends.isEmpty
-              ? NoDataFoundWidget()
-              : SingleChildScrollView(
-                  padding: EdgeInsets.zero,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: controller.friends.length,
-                    itemBuilder: (context, index) {
-                      final indexData = controller.friends[index];
+    return Container(
+      color: Colors.white, // ✅ 设置白色背景
+      child: GetBuilder<ConnectionController>(
+        id: AppConstant.onChangeFollowUpdate,
+        builder: (controller) {
+          if (controller.isLoading) {
+            return const UserListShimmerWidget();
+          }
 
-                      return UserListTileWidget(
-                        id: indexData.id ?? "",
-                        title: indexData.name ?? "",
-                        subTitle: indexData.userName ?? "",
-                        leading: indexData.image ?? "",
-                        isVerified: indexData.isVerified ?? false,
-                        isFollow: indexData.isFollow ?? true,
-                        age: indexData.age ?? 18,
-                        coin: indexData.coin ?? 0,
-                        isProfileImageBanned: indexData.isProfilePicBanned ?? false,
-                        avtarFrame: indexData.avtarFrame ?? "",
-                        avtarFrameType: indexData.avtarFrameType ?? 0,
-                        callback: () {
-                          log("User ID: ${indexData.id}");
-                          OtherUserProfileBottomSheet.show(context: context, userID: indexData.id ?? "");
-                        },
-                        wealthLevelImage: indexData.wealthLevelImage ?? "",
-                        isOnline: indexData.isOnline ?? false,
-                        uniqueId: indexData.uniqueId ?? "",
-                      );
-                    },
-                  ),
-                ),
+          if (controller.friends.isEmpty) {
+            return NoDataFoundWidget(
+              imageWidget: Assets.images.friendDefalut.image(width: 200),
+            );
+          }
+
+          return ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: controller.friends.length,
+            itemBuilder: (context, index) {
+              final indexData = controller.friends[index];
+              return UserListTileWidget(
+                id: indexData.id ?? "",
+                title: indexData.name ?? "",
+                subTitle: indexData.userName ?? "",
+                leading: indexData.image ?? "",
+                isVerified: indexData.isVerified ?? false,
+                isFollow: indexData.isFollow ?? true,
+                age: indexData.age ?? 18,
+                coin: indexData.coin ?? 0,
+                isProfileImageBanned: indexData.isProfilePicBanned ?? false,
+                avtarFrame: indexData.avtarFrame ?? "",
+                avtarFrameType: indexData.avtarFrameType ?? 0,
+                callback: () {
+                  log("User ID: ${indexData.id}");
+                  OtherUserProfileBottomSheet.show(
+                    context: context,
+                    userID: indexData.id ?? "",
+                  );
+                },
+                wealthLevelImage: indexData.wealthLevelImage ?? "",
+                isOnline: indexData.isOnline ?? false,
+                uniqueId: indexData.uniqueId ?? "",
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

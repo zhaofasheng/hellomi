@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> swKE = {
+  EnumLocal.txtLiveAgreement.name: 'Mkataba wa Matangazo ya Moja kwa Moja',
+  EnumLocal.txtRechargeAgreement.name: 'Mkataba wa Kujaza Salio la Mtumiaji',
+  EnumLocal.txtChildProtectionPolicy.name: 'Sera ya Kutowadhuru Watoto',
   EnumLocal.txtAppName.name: "Kuungua",
   EnumLocal.txtNoInternetConnection.name: "Hakuna Muunganisho wa Mtandao",
   EnumLocal.txtReportSending.name: "Ripoti kutuma...",

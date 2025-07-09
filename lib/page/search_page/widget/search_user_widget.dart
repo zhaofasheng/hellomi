@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/common/api/follow_unfollow_user_api.dart';
@@ -231,7 +232,7 @@ class _UserListTileWidgetState extends State<UserListTileWidget> {
                   Text(
                     "${EnumLocal.txtID.name.tr} ${widget.uniqueId}",
                     maxLines: 1,
-                    style: AppFontStyle.styleW600(AppColor.lightGreyPurple, 10),
+                    style: AppFontStyle.styleW600(HexColor('#86868F'), 10),
                   ),
                 ],
               ),
@@ -245,8 +246,8 @@ class _UserListTileWidgetState extends State<UserListTileWidget> {
                   color: AppColor.transparent,
                   alignment: Alignment.center,
                   child: Container(
-                    height: 35,
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    height: 30,
+                    padding: EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       color: isFollow.value ? AppColor.transparent : AppColor.primary,
                       border: Border.all(color: isFollow.value ? AppColor.primary : AppColor.white),

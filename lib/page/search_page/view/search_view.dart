@@ -8,6 +8,8 @@ import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../custom/widget/custom_light_background_widget.dart';
+
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
 
@@ -15,11 +17,23 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.dark);
     return Scaffold(
-      backgroundColor: AppColor.white,
-      appBar: SearchAppBarWidget.onShow(context),
-      body: GetBuilder<controller.SearchController>(
-        id: AppConstant.onChangeSearchHistory,
-        builder: (controller) => controller.isShowSearchHistory ? SearchHistoryWidget() : SearchUserWidget(),
+      body: Stack(
+        children: [
+          const CustomLightBackgroundWidget(),
+          Column(
+            children: [
+              const SearchAppBarWidget(),
+              Expanded(
+                child: GetBuilder<controller.SearchController>(
+                  id: AppConstant.onChangeSearchHistory,
+                  builder: (controller) => controller.isShowSearchHistory
+                      ? const SearchHistoryWidget()
+                      : const SearchUserWidget(),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

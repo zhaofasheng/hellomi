@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> taIN = {
+  EnumLocal.txtLiveAgreement.name: 'நேரலை ஒப்பந்தம்',
+  EnumLocal.txtRechargeAgreement.name: 'பயனர் ரீசார்ஜ் ஒப்பந்தம்',
+  EnumLocal.txtChildProtectionPolicy.name: 'குழந்தைகளுக்கு சேதம் விளைவிக்கக்கூடாது என்ற கொள்கை',
   EnumLocal.txtAppName.name: "கூச்சம்",
   EnumLocal.txtNoInternetConnection.name: "இணைய இணைப்பு இல்லை",
   EnumLocal.txtReportSending.name: "அறிக்கை அனுப்புகிறது...",

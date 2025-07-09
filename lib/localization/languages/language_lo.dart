@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> loLA = {
+  EnumLocal.txtLiveAgreement.name: 'ຂໍ້ຕົກລົງການຖ່າຍທອດສົດ',
+  EnumLocal.txtRechargeAgreement.name: 'ຂໍ້ຕົກລົງການເຕີມເງິນຂອງຜູ້ໃຊ້',
+  EnumLocal.txtChildProtectionPolicy.name: 'ນະໂຍບາຍບໍ່ໃຫ້ມີຄວາມຮຸນແຮງຕໍ່ເດັກນ້ອຍ',
   EnumLocal.txtAppName.name: "Halomi",
   EnumLocal.txtNoInternetConnection.name: "ບໍ່ໄດ້ເຊື່ອມຕໍ່ອິນເຕີເນັດ",
   EnumLocal.txtReportSending.name: "ກຳລັງສົ່ງລາຍງານ...",

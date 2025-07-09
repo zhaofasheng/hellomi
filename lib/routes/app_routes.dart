@@ -1,4 +1,7 @@
 class AppRoutes {
+  static const String nohunt_agreePage = '/nohunt_agree_page';
+  static const String rechageagreePage = '/rechageagree_page';
+  static const String liveagreePage = '/liveagree_page';
 
   static const String initial = splashScreenPage;
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+import 'package:tingle/assets/assets.gen.dart';
 import 'package:tingle/routes/app_routes.dart';
 import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/color.dart';
@@ -23,6 +25,7 @@ class StoreEventBoxWidget extends StatelessWidget {
           Row(
             children: [
               ItemWidget(
+                imageWidget: Assets.images.avaterImg.image(width: 30),
                 title: EnumLocal.txtAvtarTheme.name.tr,
                 image: AppAssets.icAvtarFrame,
                 callback: () {
@@ -30,6 +33,7 @@ class StoreEventBoxWidget extends StatelessWidget {
                 },
               ),
               ItemWidget(
+                imageWidget: Assets.images.shopParty.image(width: 30),
                 title: EnumLocal.txtPartyTheme.name.tr,
                 image: AppAssets.icTheme,
                 callback: () {
@@ -37,6 +41,7 @@ class StoreEventBoxWidget extends StatelessWidget {
                 },
               ),
               ItemWidget(
+                imageWidget: Assets.images.shopGame.image(width: 30),
                 title: EnumLocal.txtRides.name.tr,
                 image: AppAssets.icRide,
                 callback: () {
@@ -56,11 +61,12 @@ class ItemWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.image,
-    required this.callback,
+    required this.callback, this.imageWidget,
   });
 
   final String title;
   final String image;
+  final Widget? imageWidget;
   final Callback callback;
 
   @override
@@ -88,7 +94,7 @@ class ItemWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Image.asset(
+                child: imageWidget ?? Image.asset(
                   image,
                   width: 30,
                 ),
@@ -96,7 +102,7 @@ class ItemWidget extends StatelessWidget {
               4.height,
               Text(
                 title,
-                style: AppFontStyle.styleW500(AppColor.white, 12),
+                style: AppFontStyle.styleW500(HexColor('#86868F'), 12),
               )
             ],
           ),

@@ -46,7 +46,7 @@ class StoreView extends GetView<StoreController> {
                                       15.height,
                                       MonthHottestPage(),
                                       18.height,
-                                      HotRecommendWidget(),
+                                      SafeArea(top: false,child: HotRecommendWidget(),),
                                       15.height,
                                     ],
                                   ),

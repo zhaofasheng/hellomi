@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> mrIN = {
+  EnumLocal.txtLiveAgreement.name: 'थेट प्रक्षेपण करार',
+  EnumLocal.txtRechargeAgreement.name: 'वापरकर्ता रिचार्ज करार',
+  EnumLocal.txtChildProtectionPolicy.name: 'बालहिंसा विरोधी धोरण',
   EnumLocal.txtAppName.name: "मुंग्या येणे",
   EnumLocal.txtNoInternetConnection.name: "इंटरनेट कनेक्शन नाही",
   EnumLocal.txtReportSending.name: "अहवाल पाठवत आहे...",

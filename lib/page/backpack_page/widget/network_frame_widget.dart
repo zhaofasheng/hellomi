@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/custom/widget/custum_frame_image.dart';
@@ -49,10 +50,10 @@ class NetworkFrameWidget extends StatelessWidget {
                   children: [
                     Text(
                       ownedCount == 0 ? EnumLocal.txtNotYetOwned.name.tr : "${EnumLocal.txtOwn.name.tr} $ownedCount",
-                      style: AppFontStyle.styleW600(AppColor.secondary, 10),
+                      style: AppFontStyle.styleW600(HexColor('#86868F'), 10),
                     ),
                     5.width,
-                    Image.asset(AppAssets.icArrowRight, width: 5, color: AppColor.secondary),
+                    Image.asset(AppAssets.icArrowRight, width: 5, color: HexColor('#86868F')),
                   ],
                 )
               ],

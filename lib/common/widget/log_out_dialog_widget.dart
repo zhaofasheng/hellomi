@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/color.dart';
@@ -6,6 +7,8 @@ import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
+
+import '../../assets/assets.gen.dart';
 
 class LogOutDialogWidget {
   static Future<void> onShow() async {
@@ -28,7 +31,7 @@ class LogOutDialogWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   10.height,
-                  Image.asset(AppAssets.icLogOut, width: 90),
+                  Assets.images.loginOut.image(width: 90),
                   10.height,
                   Text(
                     EnumLocal.txtLogOut.name.tr,
@@ -49,7 +52,7 @@ class LogOutDialogWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
-                        color: AppColor.red.withValues(alpha: 0.05),
+                        color: HexColor('#F5F5F5'),
                       ),
                       height: 52,
                       width: Get.width,
@@ -59,7 +62,7 @@ class LogOutDialogWidget {
                           children: [
                             Text(
                               EnumLocal.txtLogOut.name.tr,
-                              style: AppFontStyle.styleW600(AppColor.red, 15),
+                              style: AppFontStyle.styleW600(HexColor('#86868F'), 15),
                             ),
                           ],
                         ),
@@ -82,7 +85,7 @@ class LogOutDialogWidget {
                           children: [
                             Text(
                               EnumLocal.txtCancel.name.tr,
-                              style: AppFontStyle.styleW600(AppColor.secondary, 15),
+                              style: AppFontStyle.styleW600(HexColor('#00E4A6'), 15),
                             ),
                           ],
                         ),

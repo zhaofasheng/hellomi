@@ -1,6 +1,9 @@
 import 'package:tingle/utils/enums.dart';
 
 final Map<String, String> arDZ = {
+  EnumLocal.txtLiveAgreement.name: 'بروتوكول البث المباشر',
+  EnumLocal.txtRechargeAgreement.name: 'اتفاقية شحن المستخدم',
+  EnumLocal.txtChildProtectionPolicy.name: 'سياسة عدم إيذاء الأطفال',
   EnumLocal.txtAppName.name: "ارتعش",
   EnumLocal.txtNoInternetConnection.name: "لا يوجد اتصال بالإنترنت",
   EnumLocal.txtReportSending.name: "جاري إرسال التقرير...",

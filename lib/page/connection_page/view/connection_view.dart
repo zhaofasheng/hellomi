@@ -9,37 +9,45 @@ import 'package:tingle/page/connection_page/widget/visiter_widget.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/constant.dart';
 
+import '../../../custom/widget/custom_light_background_widget.dart';
+
 class ConnectionView extends StatelessWidget {
   const ConnectionView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.white,
-      appBar: ConnectionAppBarWidget.onShow(context),
-      body: GetBuilder<ConnectionController>(
-        builder: (controller) => RefreshIndicator(
-          onRefresh: () async {
-            await controller.onGetData();
-            // await controller.onSearchData();
-          },
-          child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(), // Ensures pull-to-refresh works
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height, // Ensures full height for scrolling
-              child: TabBarView(
-                physics: ClampingScrollPhysics(),
-                controller: controller.tabController,
-                children: [
-                  FriendsWidget(),
-                  FollowsWidget(),
-                  FollowersWidget(),
-                  VisitorsWidget(),
-                ],
+      body: Stack(
+        children: [
+          const CustomLightBackgroundWidget(),
+          Column(
+            children: [
+              const ConnectionAppBarWidget(),
+              Expanded(
+                child: Container(
+                  color: AppColor.white,
+                  child: GetBuilder<ConnectionController>(
+                    builder: (controller) => RefreshIndicator(
+                      onRefresh: () async {
+                        await controller.onGetData();
+                      },
+                      child: TabBarView(
+                        physics: const ClampingScrollPhysics(),
+                        controller: controller.tabController,
+                        children: const [
+                          FriendsWidget(),
+                          FollowsWidget(),
+                          FollowersWidget(),
+                          VisitorsWidget(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ),
+        ],
       ),
       bottomNavigationBar: GetBuilder<ConnectionController>(
         id: AppConstant.onPagination,

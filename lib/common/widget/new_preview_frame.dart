@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/api/follow_unfollow_user_api.dart';
 import 'package:tingle/common/function/fetch_user_coin.dart';
@@ -89,11 +90,6 @@ class PreviewSVGADaiLog {
                           height: 30,
                           width: 30,
                           margin: const EdgeInsets.only(right: 20, top: 20),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.transparent,
-                            border: Border.all(color: AppColor.black),
-                          ),
                           child: Center(
                             child: Image.asset(
                               AppAssets.icClose,
@@ -121,7 +117,7 @@ class PreviewSVGADaiLog {
                     10.height,
                     Text(
                       frameData!.name ?? "",
-                      style: AppFontStyle.styleW700(AppColor.colorLightBlue, 18),
+                      style: AppFontStyle.styleW400(HexColor('#86868F'), 12),
                     ),
                     10.height,
                     Padding(
@@ -129,7 +125,7 @@ class PreviewSVGADaiLog {
                       child: Text(
                         textAlign: TextAlign.center,
                         EnumLocal.txtSureBuyThisFrame.name.tr,
-                        style: AppFontStyle.styleW700(AppColor.black, 20),
+                        style: AppFontStyle.styleW500(AppColor.black, 14),
                       ),
                     ),
                     Row(
@@ -143,7 +139,7 @@ class PreviewSVGADaiLog {
                           borderColor: AppColor.primary,
                         ),
                         5.width,
-                        Text(EnumLocal.txtWearDirectly.name.tr, style: AppFontStyle.styleW500(AppColor.colorLightBlue, 14)),
+                        Text(EnumLocal.txtWearDirectly.name.tr, style:AppFontStyle.styleW400(HexColor('#86868F'), 12),),
                       ],
                     ),
                     GetBuilder<StoreController>(builder: (logic) {

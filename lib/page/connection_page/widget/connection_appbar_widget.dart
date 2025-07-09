@@ -8,130 +8,192 @@ import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 
-class ConnectionAppBarWidget {
-  static PreferredSizeWidget onShow(BuildContext context, {String? title, int? count}) {
-    return PreferredSize(
-      preferredSize: Size.fromHeight(MediaQuery.of(context).viewPadding.top + 82),
-      child: GetBuilder<ConnectionController>(
-          id: AppConstant.onTabBarTap,
-          builder: (controller) {
-            return Container(
-              width: Get.width,
-              padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: AppColor.white,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: Get.back,
-                        child: Container(
-                          height: 45,
-                          width: 45,
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.transparent),
-                          child: Image.asset(AppAssets.icArrowLeft, width: 10),
+class ConnectionAppBarWidget extends StatelessWidget {
+  const ConnectionAppBarWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final statusBarHeight = MediaQuery.of(context).viewPadding.top;
+
+    return GetBuilder<ConnectionController>(
+      id: AppConstant.onTabBarTap,
+      builder: (controller) {
+        final tabTitles = [
+          EnumLocal.txtFriends.name.tr,
+          EnumLocal.txtFollow.name.tr,
+          EnumLocal.txtFollowers.name.tr,
+          EnumLocal.txtVisitors.name.tr,
+        ];
+
+        return Container(
+          width: Get.width,
+          padding: EdgeInsets.only(top: statusBarHeight),
+
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // 顶部导航栏 Row
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: Get.back,
+                      child: const SizedBox(
+                        height: 60,
+                        width: 45,
+                        child: Center(
+                          child: Image(
+                            image: AssetImage(AppAssets.icArrowLeft),
+                            width: 10,
+                          ),
                         ),
                       ),
-                      Text(
-                        controller.selectedCount.value == 0 ? controller.mainTitle.value : "${controller.mainTitle.value}(${controller.selectedCount})",
+                    ),
+                    Expanded(
+                      child: Text(
+                        controller.selectedCount.value == 0
+                            ? controller.mainTitle.value
+                            : "${controller.mainTitle.value}(${controller.selectedCount})",
                         style: AppFontStyle.styleW700(AppColor.black, 18),
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          controller.onSearchData();
-                          Get.toNamed(AppRoutes.searchConnectionPage);
-                        },
-                        child: Container(
-                          height: 45,
-                          width: 45,
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: Image.asset(
-                            AppAssets.icSearch,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        controller.onSearchData();
+                        Get.toNamed(AppRoutes.searchConnectionPage);
+                      },
+                      child: const SizedBox(
+                        height: 45,
+                        width: 45,
+                        child: Center(
+                          child: Image(
+                            image: AssetImage(AppAssets.icSearch),
                             width: 25,
                             color: AppColor.black,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  GetBuilder<ConnectionController>(
-                      id: AppConstant.onTabBarTap,
-                      builder: (controller) => Container(
-                            height: 50,
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(0),
-                              color: AppColor.colorBorder.withValues(alpha: 0.4),
-                            ),
-                            child: TabBar(
-                              padding: EdgeInsets.zero,
-                              isScrollable: true,
-                              controller: controller.tabController,
-                              indicator: BoxDecoration(
-                                color: AppColor.primary,
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              unselectedLabelColor: AppColor.secondary,
-                              labelColor: AppColor.white,
-                              dividerColor: Colors.transparent,
-                              labelPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                              indicatorPadding: EdgeInsets.symmetric(vertical: 7),
-                              labelStyle: AppFontStyle.styleW600(AppColor.white, 13),
-                              unselectedLabelStyle: AppFontStyle.styleW500(AppColor.white, 13),
-                              onTap: (value) {
-                                // controller.onTabChange(value);
-                              },
-                              tabAlignment: TabAlignment.start,
-                              tabs: [
-                                Tab(
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 15),
-                                    child: Text(
-                                      EnumLocal.txtFriends.name.tr,
-                                    ),
-                                  ),
-                                ),
-                                Tab(
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 15),
-                                    child: Text(
-                                      EnumLocal.txtFollow.name.tr,
-                                    ),
-                                  ),
-                                ),
-                                Tab(
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 20),
-                                    child: Text(
-                                      EnumLocal.txtFollowers.name.tr,
-                                    ),
-                                  ),
-                                ),
-                                Tab(
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 15),
-                                    child: Text(
-                                      EnumLocal.txtVisitors.name.tr,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )),
-                ],
+                    ),
+                  ],
+                ),
               ),
-            );
-          }),
+              // TabBar 样式
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0),
+                child: SizedBox(
+                  height: 40,
+                  child: Row(
+                    children: List.generate(tabTitles.length, (index) {
+                      return Expanded(
+                        child: _TabItemWidget(
+                          title: tabTitles[index],
+                          isSelected: controller.tabController?.index == index,
+                          callback: () {
+                            controller.tabController?.animateTo(index);
+                          },
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
+}
+
+class _TabItemWidget extends StatelessWidget {
+  const _TabItemWidget({
+    required this.title,
+    required this.isSelected,
+    required this.callback,
+  });
+
+  final String title;
+  final bool isSelected;
+  final VoidCallback callback;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: callback,
+      child: SizedBox(
+        height: 40,
+        child: Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.center,
+          children: [
+            if (isSelected)
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: CustomPaint(
+                  size: const Size(double.infinity, 60),
+                  painter: _TabBackgroundPainter(color: Colors.white),
+                ),
+              ),
+            Center(
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: isSelected ? AppColor.black : Colors.grey,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TabBackgroundPainter extends CustomPainter {
+  final Color color;
+
+  _TabBackgroundPainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    const double arcHeight = 28.0;
+    const double arcWidth = 64.0;
+    const double topRadius = 16.0;
+
+    final path = Path();
+    path.moveTo(0, topRadius);
+    path.quadraticBezierTo(0, 0, topRadius, 0);
+    path.lineTo(size.width - topRadius, 0);
+    path.quadraticBezierTo(size.width, 0, size.width, topRadius);
+    path.lineTo(size.width, size.height - arcHeight);
+    path.quadraticBezierTo(
+      size.width + arcWidth, size.height + arcHeight,
+      size.width - arcWidth, size.height + arcHeight,
+    );
+    path.lineTo(arcWidth, size.height + arcHeight);
+    path.quadraticBezierTo(
+      -arcWidth, size.height + arcHeight,
+      0, size.height - arcHeight,
+    );
+    path.lineTo(0, topRadius);
+    path.close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
