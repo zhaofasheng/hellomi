@@ -138,18 +138,23 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     }
   }
 
+  Locale? _appLocale;
+
   @override
   void didChangeDependencies() {
     getLocale().then((locale) async {
       await Future.delayed(const Duration(milliseconds: 200));
       if (mounted) {
         setState(() {
-          Get.updateLocale(locale);
+          _appLocale = locale;
+          Get.updateLocale(locale); // 刷新 GetX 的翻译系统
         });
       }
     });
     super.didChangeDependencies();
   }
+
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -159,8 +164,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       getPages: AppPages.list,
       initialRoute: AppRoutes.initial,
       translations: AppLanguages(),
-      fallbackLocale: const Locale(AppConstant.languageEn, AppConstant.countryCodeEn),
-      locale: const Locale(AppConstant.languageEn),
+      locale: _appLocale ?? const Locale(AppConstant.languageLo, AppConstant.countryCodeLa), // 👈 加入默认值
+      fallbackLocale: const Locale(AppConstant.languageLo, AppConstant.countryCodeLa),
       unknownRoute: GetPage(
         name: AppRoutes.splashScreenPage,
         page: () => const SplashScreenView(),

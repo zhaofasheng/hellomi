@@ -363,12 +363,12 @@ class ItemWidget extends StatelessWidget {
                   children: [
                     25.height,
                     Text(
-                      "${CustomFormatNumber.onConvert(coin)} ${EnumLocal.txtCoin.name.tr}",
+                      "$coin ${EnumLocal.txtCoin.name.tr}",
                       style: AppFontStyle.styleW800(textColor, 16),
                     ),
                     8.height,
                     Text(
-                      "${Utils.currencySymbol} ${CustomFormatNumber.onConvert(amount.toInt())}",
+                      "${Utils.currencySymbol} ${amount.toStringAsFixed(2)}",
                       style: AppFontStyle.styleW500(subTextColor, 12),
                     ),
                   ],

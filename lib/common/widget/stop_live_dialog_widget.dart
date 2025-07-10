@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/utils/assets.dart';
@@ -6,6 +7,8 @@ import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
+
+import '../../assets/assets.gen.dart';
 
 class StopLiveDialogWidget {
   static Future<void> onShow({required String title, required Callback callBack}) async {
@@ -28,11 +31,7 @@ class StopLiveDialogWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   10.height,
-                  Image.asset(
-                    AppAssets.icLogOut,
-                    width: 90,
-                    color: AppColor.red,
-                  ),
+                  Assets.images.loginOut.image(width: 90),
                   10.height,
                   Text(
                     textAlign: TextAlign.center,
@@ -45,7 +44,7 @@ class StopLiveDialogWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
-                        color: AppColor.red.withValues(alpha: 0.05),
+                        color: HexColor('#F5F5F5'),
                       ),
                       height: 52,
                       width: Get.width,
@@ -55,7 +54,7 @@ class StopLiveDialogWidget {
                           children: [
                             Text(
                               EnumLocal.txtStop.name.tr,
-                              style: AppFontStyle.styleW700(AppColor.red, 16),
+                              style: AppFontStyle.styleW700(HexColor('#86868F'), 16),
                             ),
                           ],
                         ),
@@ -78,7 +77,7 @@ class StopLiveDialogWidget {
                           children: [
                             Text(
                               EnumLocal.txtCancel.name.tr,
-                              style: AppFontStyle.styleW700(AppColor.grayText, 16),
+                              style: AppFontStyle.styleW700(HexColor('#00E4A6'), 16),
                             ),
                           ],
                         ),

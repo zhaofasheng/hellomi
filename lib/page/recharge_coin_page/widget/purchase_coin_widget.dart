@@ -41,7 +41,7 @@ class PurchaseCoinWidget extends StatelessWidget {
                 final indexData = controller.coinPlans[index];
                 return _ItemWidget(
                   callback: () => controller.onChoiceProduct(index: index, context: context),
-                  amount: (indexData.amount ?? 0).toDouble(),
+                  amount: (indexData.amount ?? 0).toDouble(), // ✅ 传 double 类型
                   coin: (indexData.coin ?? 0).toInt(),
                   isPopular: indexData.isPopular ?? false,
                   isSelected: controller.selectedProductIndex == index,
@@ -52,6 +52,7 @@ class PurchaseCoinWidget extends StatelessWidget {
       ),
     );
   }
+
 }
 
 class _ItemWidget extends StatelessWidget {
@@ -90,12 +91,12 @@ class _ItemWidget extends StatelessWidget {
                 children: [
                   25.height,
                   Text(
-                    "${CustomFormatNumber.onConvert(coin)} ${EnumLocal.txtCoin.name.tr}",
+                    "$coin ${EnumLocal.txtCoin.name.tr}",
                     style: AppFontStyle.styleW800(textColor, 16),
                   ),
                   8.height,
                   Text(
-                    "${Utils.currencySymbol} ${CustomFormatNumber.onConvert(amount.toInt())}",
+                    "${Utils.currencySymbol} ${amount.toStringAsFixed(2)}",
                     style: AppFontStyle.styleW500(subTextColor, 12),
                   ),
                 ],

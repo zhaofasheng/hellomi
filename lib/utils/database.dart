@@ -64,8 +64,8 @@ class Database {
 
   // >>>>> >>>>> LANGUAGE DATABASE <<<<< <<<<<
 
-  static String get selectedLanguage => localStorage.read("language") ?? AppConstant.languageEn;
-  static String get selectedCountryCode => localStorage.read("countryCode") ?? AppConstant.countryCodeEn;
+  static String get selectedLanguage => localStorage.read("language") ?? AppConstant.languageLo;
+  static String get selectedCountryCode => localStorage.read("countryCode") ?? AppConstant.countryCodeLa;
 
   static onSetSelectedLanguage(String language) async => await localStorage.write("language", language);
   static onSetSelectedCountryCode(String countryCode) async => await localStorage.write("countryCode", countryCode);

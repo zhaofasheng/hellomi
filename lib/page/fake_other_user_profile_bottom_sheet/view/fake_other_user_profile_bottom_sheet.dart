@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/model/fetch_other_user_profile_model.dart';
 
@@ -115,9 +116,9 @@ class FakeOtherUserProfileBottomSheet {
 
               return Container(
                   height: MediaQuery.of(context).size.height * 0.9,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                  decoration: BoxDecoration(
+                    color: HexColor('#F5F5F5'),
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                   ),
                   child: Column(
                     children: [
@@ -139,44 +140,61 @@ class FakeOtherUserProfileBottomSheet {
                                                     fetchOtherUserProfileModel: fetchOtherUserProfileModel,
                                                   ),
                                                   15.height,
-                                                  Container(
-                                                    height: 50,
-                                                    width: Get.width,
-                                                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                                                    color: AppColor.colorBorder.withValues(alpha: 0.5),
+                                                  SizedBox(
+                                                    height: 40,
                                                     child: Row(
-                                                      children: [
-                                                        TabItemWidget(
-                                                          title: EnumLocal.txtData.name.tr,
-                                                          isSelected: selectedTabIndex == 0,
-                                                          onTap: () {
-                                                            setState(() {
-                                                              selectedTabIndex = 0;
-                                                            });
-                                                          },
-                                                        ),
-                                                        TabItemWidget(
-                                                          title: EnumLocal.txtMoments.name.tr,
-                                                          isSelected: selectedTabIndex == 1,
-                                                          onTap: () {
-                                                            setState(() {
-                                                              selectedTabIndex = 1;
-                                                            });
-                                                          },
-                                                        ),
-                                                        TabItemWidget(
-                                                          title: EnumLocal.txtWonderfulMoments.name.tr,
-                                                          isSelected: selectedTabIndex == 2,
-                                                          onTap: () {
-                                                            setState(() {
-                                                              selectedTabIndex = 2;
-                                                            });
-                                                          },
-                                                        ),
-                                                      ],
+                                                      children: List.generate(3, (index) {
+                                                        final titles = [
+                                                          EnumLocal.txtData.name.tr,
+                                                          EnumLocal.txtMoments.name.tr,
+                                                          EnumLocal.txtWonderfulMoments.name.tr,
+                                                        ];
+                                                        return Expanded(
+                                                          child: GestureDetector(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                selectedTabIndex = index;
+                                                              });
+                                                            },
+                                                            child: SizedBox(
+                                                              height: 60,
+                                                              child: Stack(
+                                                                clipBehavior: Clip.none,
+                                                                alignment: Alignment.center,
+                                                                children: [
+                                                                  if (selectedTabIndex == index)
+                                                                    Positioned(
+                                                                      top: 0,
+                                                                      left: 0,
+                                                                      right: 0,
+                                                                      child: CustomPaint(
+                                                                        size: const Size(double.infinity, 60),
+                                                                        painter: _TabBackgroundPainter(color: Colors.white),
+                                                                      ),
+                                                                    ),
+                                                                  Center(
+                                                                    child: Text(
+                                                                      titles[index],
+                                                                      textAlign: TextAlign.center,
+                                                                      maxLines: 2,
+                                                                      overflow: TextOverflow.ellipsis,
+                                                                      style: TextStyle(
+                                                                        color: selectedTabIndex == index
+                                                                            ? HexColor('#00E4A6')
+                                                                            : Colors.grey,
+                                                                        fontSize: 14,
+                                                                        fontWeight: FontWeight.w600,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
                                                     ),
                                                   ),
-                                                  15.height,
                                                   selectedTabIndex == 0
                                                       ? FakeOtherUserProfileDataTabWidget(
                                                           userID: userId,
@@ -375,4 +393,46 @@ class FakeOtherUserProfileBottomSheet {
       _isDialogOpen = false;
     }
   }
+}
+
+
+class _TabBackgroundPainter extends CustomPainter {
+  final Color color;
+
+  _TabBackgroundPainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    final double arcHeight = 28.0;
+    final double arcWidth = 64.0;
+    final double topRadius = 16.0;
+
+    final path = Path();
+
+    path.moveTo(0, topRadius);
+    path.quadraticBezierTo(0, 0, topRadius, 0);
+    path.lineTo(size.width - topRadius, 0);
+    path.quadraticBezierTo(size.width, 0, size.width, topRadius);
+    path.lineTo(size.width, size.height - arcHeight);
+    path.quadraticBezierTo(
+      size.width + arcWidth, size.height + arcHeight,
+      size.width - arcWidth, size.height + arcHeight,
+    );
+    path.lineTo(arcWidth, size.height + arcHeight);
+    path.quadraticBezierTo(
+      -arcWidth, size.height + arcHeight,
+      0, size.height - arcHeight,
+    );
+    path.lineTo(0, topRadius);
+    path.close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

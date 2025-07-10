@@ -33,7 +33,7 @@ class LoginView extends GetView<LoginController> {
                       TitleWidget(
                         image: AppAssets.icLogo,
                         title: Utils.appName,
-                        subtitle: EnumLocal.txtLoveBeginsHereLogInToConnect.name.tr,
+                        subtitle: '',
                         iconSize: 65,
                       ),
                       40.height,

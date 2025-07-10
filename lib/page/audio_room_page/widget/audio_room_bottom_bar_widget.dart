@@ -18,9 +18,9 @@ class AudioRoomBottomBarWidget extends GetView<AudioRoomController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 70,
+      height: 90,
       child: Container(
-        height: 50,
+        height: 90,
         width: Get.width,
         margin: EdgeInsets.all(10),
         child: Row(

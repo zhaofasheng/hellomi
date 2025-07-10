@@ -506,7 +506,8 @@ class LoginController extends GetxController {
         Database.onSetLoginUserId(FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.id ?? "");
         Database.onSetLoginType(FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.loginType ?? 0);
 
-        Get.toNamed(AppRoutes.fillProfilePage)?.then((value) => Utils.onChangeStatusBar(brightness: Brightness.light));
+        //Get.toNamed(AppRoutes.fillProfilePage)?.then((value) => Utils.onChangeStatusBar(brightness: Brightness.light));
+        Get.offAllNamed(AppRoutes.bottomBarPage);
       }
     }
   }

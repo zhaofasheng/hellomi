@@ -31,7 +31,7 @@ class ThemeOutfitController extends GetxController with GetTickerProviderStateMi
   onTabChange(int index) async {
     currentIndex = index;
     update();
-    update([AppConstant.onTabBarTap]);
+    update([AppConstant.onTabBarTap,ApiParams.outfitUpdate]);
   }
 
   int tabIndex = 0;
@@ -68,11 +68,12 @@ class ThemeOutfitController extends GetxController with GetTickerProviderStateMi
     tabIndex = Get.arguments[ApiParams.tabIndex] ?? 0;
     outfitTabController = await TabController(length: 3, vsync: this, initialIndex: tabIndex);
 
-    outfitTabController!.addListener(
-      () {
+    outfitTabController!.addListener(() {
+      if (outfitTabController!.indexIsChanging == false) {
+        // 只在用户切换完成后触发，避免多次刷新
         onTabChange(outfitTabController!.index);
-      },
-    );
+      }
+    });
 
     onGetData();
     isLoading.value = false;

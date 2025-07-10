@@ -17,6 +17,8 @@ import 'package:tingle/utils/constant.dart';
 
 import 'package:tingle/utils/utils.dart';
 
+import '../../../utils/enums.dart';
+
 class FakeAudioRoomView extends GetView<FakeAudioRoomController> {
   const FakeAudioRoomView({super.key});
 
@@ -28,7 +30,7 @@ class FakeAudioRoomView extends GetView<FakeAudioRoomController> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) => controller.fakeAudioRoomModel?.isHost == true
           ? StopLiveDialogWidget.onShow(
-              title: "Are you sure you want to stop the audio broadcast?",
+              title: EnumLocal.txtAreYouSureYouWantToStopTheAudioBroadcast.name.tr,
               callBack: () => Get.close(2),
             )
           : Get.back(),

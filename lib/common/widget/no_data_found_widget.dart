@@ -6,6 +6,8 @@ import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 
+import '../../assets/assets.gen.dart';
+
 class NoDataFoundWidget extends StatelessWidget {
   const NoDataFoundWidget({super.key, this.title, this.iconSize, this.titleSize, this.color, this.backColor, this.imageWidget});
 
@@ -24,11 +26,7 @@ class NoDataFoundWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            imageWidget ?? Image.asset(
-              height: iconSize ?? 200,
-              width: iconSize ?? 200,
-              AppAssets.imgNoDataFoundPlaceHolder,
-            ),
+            imageWidget ?? Assets.images.friendDefalut.image(width: 200),
             Text(
               title ?? EnumLocal.txtNoDataFound.name.tr,
               style: AppFontStyle.styleW500(color ?? HexColor('#86868F'), titleSize ?? 14),

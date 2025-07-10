@@ -21,7 +21,7 @@ class AudioRoomView extends GetView<AudioRoomController> {
     Utils.onChangeStatusBar(brightness: Brightness.light);
     return SafeArea(
       top: false,
-      bottom: true,
+      bottom: false,
       right: false,
       left: false,
       child: Scaffold(

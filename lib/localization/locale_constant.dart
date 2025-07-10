@@ -12,5 +12,6 @@ Future<Locale> getLocale() async {
 }
 
 Locale _locale(String languageCode, String countryCode) {
-  return languageCode.isNotEmpty ? Locale(languageCode, countryCode) : const Locale(AppConstant.languageEn, AppConstant.countryCodeEn);
+  print("Selected Language from DB => '$languageCode' >>> '$countryCode'");
+  return languageCode.isNotEmpty ? Locale(languageCode, countryCode) : const Locale('lo', 'LA');
 }

@@ -1,8 +1,10 @@
 import 'dart:io';
 
 abstract class AppConstant {
-  static const String languageEn = "en";
-  static const String countryCodeEn = "US";
+
+  // 默认语言设为老挝语
+  static const String languageLo = "lo"; // 👈 改成老挝语
+  static const String countryCodeLa = "LA"; // 👈 改成老挝国家码
 
   static const String appFontLight = "InterLight";
   static const String appFontRegular = "InterRegular";
