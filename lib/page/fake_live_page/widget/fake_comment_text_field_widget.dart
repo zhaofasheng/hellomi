@@ -86,11 +86,11 @@ class FakeCommentTextFieldWidget extends GetView<FakeLiveController> {
               ),
             ),
           ),
-          10.width,
-          GestureDetector(
-            onTap: () => GameBottomSheetWidget.onShow(),
-            child: Assets.images.liveGame.image(width: 45),
-          ),
+          // 10.width,
+          // GestureDetector(
+          //   onTap: () => GameBottomSheetWidget.onShow(),
+          //   child: Assets.images.liveGame.image(width: 45),
+          // ),
           10.width,
           GestureDetector(
             onTap: () {

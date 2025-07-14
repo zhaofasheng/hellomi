@@ -25,68 +25,70 @@ class LoginOtherAuthWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GestureDetector(
+              Expanded(child: GestureDetector(
                 onTap: (){
                   Get.to(PhoneAuthenticationScreen());
                 },
                 child: Container(
-                  width: 75,
                   height: 50,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20), // 圆角半径
-                    border: Border.all(
-                      color: HexColor('#EBEBEB'), // 边框颜色
-                      width: 1,           // 边框宽度
-                    ),
                   ),
-                  child:Center(
-                    child: Assets.icons.icMobile.image(width: 24,height: 24),
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Assets.icons.icMobile.image(width: 24,height: 24),
+                      ),
+                      Text(EnumLocal.txtMobile.name.tr,style: TextStyle(fontSize: 16,color: AppColor.black),),
+                    ],
                   ),
                 ),
-              ),
+              ),),
               10.width,
-              GestureDetector(
+              Expanded(child: GestureDetector(
                 onTap: (){
                   controller.onGoogleLogin();
                 },
                 child: Container(
-                  width: 75,
                   height: 50,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20), // 圆角半径
-                    border: Border.all(
-                      color: HexColor('#EBEBEB'), // 边框颜色
-                      width: 1,           // 边框宽度
-                    ),
                   ),
-                  child:Center(
-                    child: Assets.images.googleLoginImg.image(width: 24,height: 24),
-                  ),
-                ),
-              ),
-              10.width,
-              GestureDetector(
-                onTap: (){
-                  controller.onQuickLogin();
-                },
-                child: Container(
-                  width: 75,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20), // 圆角半径
-                    border: Border.all(
-                      color: HexColor('#EBEBEB'), // 边框颜色
-                      width: 1,           // 边框宽度
-                    ),
-                  ),
-                  child:Center(
-                    child: Assets.images.socketLoginImg.image(width: 36,height: 36),
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Assets.images.googleLoginImg.image(width: 24,height: 24),
+                      ),
+                      Text(EnumLocal.txtGoogle.name.tr,style: TextStyle(fontSize: 16,color: AppColor.black),),
+                    ],
                   ),
                 ),
-              ),
+              ),),
+              //10.width,
+              // GestureDetector(
+              //   onTap: (){
+              //     controller.onQuickLogin();
+              //   },
+              //   child: Container(
+              //     width: 75,
+              //     height: 50,
+              //     decoration: BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.circular(20), // 圆角半径
+              //       border: Border.all(
+              //         color: HexColor('#EBEBEB'), // 边框颜色
+              //         width: 1,           // 边框宽度
+              //       ),
+              //     ),
+              //     child:Center(
+              //       child: Assets.images.socketLoginImg.image(width: 36,height: 36),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           10.height,

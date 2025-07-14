@@ -96,7 +96,7 @@ class CustomPhoneTextFieldWidget extends StatelessWidget {
             hintText: hintText,
             hintStyle: AppFontStyle.styleW500(const Color(0xFF86868F), 15),
           ),
-          initialCountryCode: "IN",
+          initialCountryCode: "LA",
           onChanged: onChange,
           onCountryChanged: onCountryChanged,
         ),

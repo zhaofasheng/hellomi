@@ -51,7 +51,7 @@ android {
         release {
             storeFile file("halomi.jks")  // 你的 keystore 文件路径
             storePassword "123456"    // keystore 密码
-            keyAlias "halomi-key"             // key 别名
+            keyAlias "key0"             // key 别名
             keyPassword "123456"        // key 密码
         }
     }

@@ -92,11 +92,11 @@ class CommentTextFieldWidget extends GetView<LiveController> {
           //   visible: false,
           // ),
 
-          10.width,
-          GestureDetector(
-            onTap: () => GameBottomSheetWidget.onShow(),
-            child: Assets.images.liveGame.image(width: 40),
-          ),
+          // 10.width,
+          // GestureDetector(
+          //   onTap: () => GameBottomSheetWidget.onShow(),
+          //   child: Assets.images.liveGame.image(width: 40),
+          // ),
 
           10.width,
           GestureDetector(

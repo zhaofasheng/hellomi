@@ -17,8 +17,8 @@ import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/utils.dart';
 
 class PartyController extends GetxController {
-  List<Widget> pages = [PartyPartyTabWidget(), PartyFollowTabWidget(), PartyGamesTabWidget()];
-
+  // List<Widget> pages = [PartyPartyTabWidget(), PartyFollowTabWidget(), PartyGamesTabWidget()];
+  List<Widget> pages = [PartyPartyTabWidget(), PartyFollowTabWidget()];
   ScrollController partyScrollController = ScrollController();
   ScrollController followScrollController = ScrollController();
 

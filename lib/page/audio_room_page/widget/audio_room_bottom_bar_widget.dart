@@ -26,16 +26,16 @@ class AudioRoomBottomBarWidget extends GetView<AudioRoomController> {
         child: Row(
           children: [
             GetBuilder<AudioRoomController>(id: AppConstant.onChangeTextField, builder: (controller) => AudioRoomTextFieldWidget()),
-            10.width,
-            GestureDetector(
-              onTap: () => GameBottomSheetWidget.onShow(),
-              child: Container(
-                height: 40,
-                width: 40,
-                alignment: Alignment.center,
-                child: Assets.images.liveGame.image(width: 40),
-              ),
-            ),
+            // 10.width,
+            // GestureDetector(
+            //   onTap: () => GameBottomSheetWidget.onShow(),
+            //   child: Container(
+            //     height: 40,
+            //     width: 40,
+            //     alignment: Alignment.center,
+            //     child: Assets.images.liveGame.image(width: 40),
+            //   ),
+            // ),
             10.width,
             GestureDetector(
               onTap: () {

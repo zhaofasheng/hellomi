@@ -17,10 +17,14 @@ class PartyAppBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // List tabTitles = [
+    //   EnumLocal.txtParty.name.tr,
+    //   EnumLocal.txtFollow.name.tr,
+    //   EnumLocal.txtGames.name.tr,
+    // ];
     List tabTitles = [
       EnumLocal.txtParty.name.tr,
       EnumLocal.txtFollow.name.tr,
-      EnumLocal.txtGames.name.tr,
     ];
     return Container(
       height: MediaQuery.of(context).viewPadding.top + 55,

@@ -152,7 +152,7 @@ class GiftTabBarWidget extends StatelessWidget {
       id: AppConstant.onChangeGiftTabBar,
       builder: (controller) => Container(
         height: 40,
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        margin: EdgeInsets.symmetric(horizontal: 10),
         padding: EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
           color: AppColor.white.withOpacity(0.1), // 背景色
@@ -203,7 +203,7 @@ class _GiftTabItemWidget extends StatelessWidget {
       onTap: callback,
       child: AnimatedContainer(
         duration: Duration(milliseconds: 200),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
           color: isSelected ? AppColor.white : AppColor.white.withOpacity(0.4),
           borderRadius: BorderRadius.circular(16),

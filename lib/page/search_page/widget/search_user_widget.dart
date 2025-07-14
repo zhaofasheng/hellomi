@@ -137,7 +137,7 @@ class _UserListTileWidgetState extends State<UserListTileWidget> {
       child: Container(
         height: 80,
         width: Get.width,
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           color: AppColor.transparent,
           border: Border(
@@ -208,6 +208,7 @@ class _UserListTileWidgetState extends State<UserListTileWidget> {
                       5.width,
                       PreviewWealthLevelImage(image: widget.wealthLevelImage),
                       5.width,
+
                       Container(
                         height: 18,
                         padding: const EdgeInsets.only(left: 5, right: 8),
@@ -237,7 +238,7 @@ class _UserListTileWidgetState extends State<UserListTileWidget> {
                 ],
               ),
             ),
-            12.width,
+
             GestureDetector(
               onTap: onClickFollow,
               child: Obx(
@@ -247,7 +248,7 @@ class _UserListTileWidgetState extends State<UserListTileWidget> {
                   alignment: Alignment.center,
                   child: Container(
                     height: 30,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 5),
                     decoration: BoxDecoration(
                       color: isFollow.value ? AppColor.transparent : AppColor.primary,
                       border: Border.all(color: isFollow.value ? AppColor.primary : AppColor.white),

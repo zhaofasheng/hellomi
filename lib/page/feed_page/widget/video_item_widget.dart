@@ -666,32 +666,29 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
                                         child: Obx(
                                               () => GestureDetector(
                                             onTap: onToggleFollow,
-                                            child: SizedBox(
-                                              width: 100,
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    height: 28,
-                                                    padding: EdgeInsets.symmetric(horizontal: 10),
-                                                    decoration: BoxDecoration(
-                                                      color: isFollow.value ? AppColor.transparent : HexColor('#00E4A6'),
-                                                      border: isFollow.value ? Border.all(color: AppColor.white) : null,
-                                                      borderRadius: BorderRadius.circular(100),
-                                                    ),
-                                                    child: Row(
-                                                      children: [
-                                                        Image.asset(isFollow.value ? AppAssets.icFollowing : AppAssets.icFollow, width: 18, color: AppColor.white),
-                                                        3.width,
-                                                        Text(
-                                                          isFollow.value ? EnumLocal.txtFollowing.name.tr : EnumLocal.txtFollow.name.tr,
-                                                          style: AppFontStyle.styleW600(AppColor.white, 11.5),
-                                                        ),
-                                                      ],
-                                                    ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  height: 28,
+                                                  padding: EdgeInsets.symmetric(horizontal: 5),
+                                                  decoration: BoxDecoration(
+                                                    color: isFollow.value ? AppColor.transparent : HexColor('#00E4A6'),
+                                                    border: isFollow.value ? Border.all(color: AppColor.white) : null,
+                                                    borderRadius: BorderRadius.circular(100),
                                                   ),
-                                                ],
-                                              ),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(isFollow.value ? AppAssets.icFollowing : AppAssets.icFollow, width: 18, color: AppColor.white),
+                                                      3.width,
+                                                      Text(
+                                                        isFollow.value ? EnumLocal.txtFollowing.name.tr : EnumLocal.txtFollow.name.tr,
+                                                        style: AppFontStyle.styleW600(AppColor.white, 11.5),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),

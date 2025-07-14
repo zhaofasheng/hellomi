@@ -33,16 +33,16 @@ class FakeAudioRoomBottomBarWidget extends GetView<FakeAudioRoomController> {
         child: Row(
           children: [
             GetBuilder<FakeAudioRoomController>(id: AppConstant.onChangeTextField, builder: (controller) => FakeAudioRoomTextFieldWidget()),
-            10.width,
-            GestureDetector(
-              onTap: () => GameBottomSheetWidget.onShow(),
-              child: Container(
-                height: 40,
-                width: 40,
-                alignment: Alignment.center,
-                child: Assets.images.liveGame.image(width: 40),
-              ),
-            ),
+            // 10.width,
+            // GestureDetector(
+            //   onTap: () => GameBottomSheetWidget.onShow(),
+            //   child: Container(
+            //     height: 40,
+            //     width: 40,
+            //     alignment: Alignment.center,
+            //     child: Assets.images.liveGame.image(width: 40),
+            //   ),
+            // ),
             10.width,
             GestureDetector(
               onTap: () {
