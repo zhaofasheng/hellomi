@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
+	<string>1.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -31,13 +31,14 @@
 			<string>com.incodes.tingle</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>com.halomi.video.chathappylive</string>
 				<string>com.googleusercontent.apps.339822122231-s5n5avchoqofritk3bhal8b5531f8174</string>
 				<string>halomi.app.link</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -48,11 +49,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Take a photo for display</string>
+	<string>Used to take profile photos or record videos for posting</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Take a video for display</string>
+	<string>Used for live streaming and sending voice messages in chat</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Read your photos for display</string>
+	<string>Used to select photos or videos for posting content</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>My description about why I need this capability</string>
 	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>

@@ -38,6 +38,8 @@ dependencies:
 #  FIREBASE PACKAGES
   firebase_core: ^3.11.0
   google_sign_in: ^6.2.2
+  sign_in_with_apple: ^7.0.1
+  crypto: ^3.0.0
   firebase_auth: ^5.4.2
   firebase_messaging: ^15.2.2
   device_info_plus: ^11.3.0
@@ -102,7 +104,7 @@ dependencies:
   flutter_local_notifications: ^18.0.1
 
 # BRANCH IO
-  flutter_branch_sdk: ^7.3.0
+  flutter_branch_sdk: ^8.5.0
 
 # WEB_VIEW (PRIVACY POLICY/GAME)
   webview_flutter: ^4.11.0

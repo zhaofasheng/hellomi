@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/countries.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:tingle/common/api/fetch_setting_api.dart';
 import 'package:tingle/common/api/user_exists_for_reset_api.dart';
 import 'package:tingle/common/api/verify_mail_api.dart';
@@ -130,6 +131,24 @@ class LoginController extends GetxController {
     }
   }
 
+  Future<UserCredential?> signInWithApple() async {
+    try {
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [AppleIDAuthorizationScopes.email, AppleIDAuthorizationScopes.fullName],
+      );
+
+      final oauthCredential = OAuthProvider("apple.com").credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
+      );
+
+      return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+    } catch (e) {
+      debugPrint("Apple Login Error: $e");
+      return null;
+    }
+  }
+
   void onGoogleLogin() async {
     FocusManager.instance.primaryFocus?.unfocus();
     if (isCheckedConditions == false) {
@@ -148,10 +167,6 @@ class LoginController extends GetxController {
 
     final uid = FirebaseUid.onGet();
     final token = await FirebaseAccessToken.onGet();
-    // if User Link accounts that use the same email User this condition
-    // userCredential?.user?.email != null
-    // if  accounts are not Linking  that use the same email User this condition
-    // userCredential?.additionalUserInfo?.profile?[ApiParams.email] != null
 
     if ((userCredential?.additionalUserInfo?.profile?[ApiParams.email] != null || userCredential?.user?.email != null) && userCredential?.user?.displayName != null && userCredential?.user?.photoURL != null) {
       loginModel = (userCredential?.additionalUserInfo?.isNewUser == false)
@@ -188,6 +203,67 @@ class LoginController extends GetxController {
     } else {
       Utils.showToast(text: EnumLocal.txtGoogleLoginFailed.name.tr);
       Get.back(); // Stop Loading...
+    }
+  }
+
+  void onAppleLogin() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    if (isCheckedConditions == false) {
+      Utils.showToast(text: EnumLocal.txtPleaseAcceptTermsAndConditions.name.tr);
+      return;
+    }
+
+    Get.dialog(
+      PopScope(
+        canPop: false,
+        child: const LoadingWidget(),
+      ),
+      barrierDismissible: false,
+    );
+
+    UserCredential? userCredential = await signInWithApple();
+
+    final uid = FirebaseUid.onGet();
+    final token = await FirebaseAccessToken.onGet();
+
+    if (userCredential?.user != null) {
+      final isNewUser = userCredential?.additionalUserInfo?.isNewUser ?? false;
+
+      final email = userCredential?.user?.email ?? "";
+      final displayName = userCredential?.user?.displayName ?? "";
+      final image = userCredential?.user?.photoURL ?? "";
+
+      loginModel = isNewUser
+          ? await LoginApi.callApi(
+        loginType: 5, // Apple 登录
+        identity: Database.identity,
+        fcmToken: Database.fcmToken,
+        email: email,
+        uid: uid ?? "",
+        token: token ?? "",
+        name: displayName,
+        userName: "@${displayName.replaceAll(' ', '').trim().toLowerCase()}",
+        image: image,
+      )
+          : await LoginApi.callApi(
+        loginType: 5,
+        identity: Database.identity,
+        fcmToken: Database.fcmToken,
+        email: email,
+        uid: uid ?? "",
+        token: token ?? "",
+      );
+
+      Get.back();
+
+      if (loginModel?.status == true) {
+        onGetProfile(token: token ?? "", uid: uid ?? "");
+      } else {
+        Utils.showToast(text: loginModel?.message ?? "");
+      }
+    } else {
+      debugPrint('苹果登录失败');
+      Get.back();
     }
   }
 

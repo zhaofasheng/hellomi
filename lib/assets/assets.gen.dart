@@ -1374,6 +1374,10 @@ class $AssetsImagesGen {
   AssetGenImage get aoduiSend =>
       const AssetGenImage('assets/images/aodui_send.png');
 
+  /// File path: assets/images/appleid_button.png
+  AssetGenImage get appleidButton =>
+      const AssetGenImage('assets/images/appleid_button.png');
+
   /// File path: assets/images/audio_power.png
   AssetGenImage get audioPower =>
       const AssetGenImage('assets/images/audio_power.png');
@@ -2159,6 +2163,7 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
     accountDelete,
     aoduiSend,
+    appleidButton,
     audioPower,
     audioSet,
     audioSmile,

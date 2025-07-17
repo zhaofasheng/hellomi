@@ -103,8 +103,8 @@ class Database {
     final identity = await PlatformDeviceId.getDeviceId ?? "";
     final fcmToken = await FirebaseMessaging.instance.getToken() ?? "";
 
-    onSetFcmToken(identity);
-    onSetIdentity(fcmToken);
+    onSetFcmToken(fcmToken);
+    onSetIdentity(identity);
 
     await FirebaseLogoutAuthentication.onLogout();
 
@@ -121,8 +121,8 @@ class Database {
     final identity = await PlatformDeviceId.getDeviceId ?? "";
     final fcmToken = await FirebaseMessaging.instance.getToken() ?? "";
 
-    onSetFcmToken(identity);
-    onSetIdentity(fcmToken);
+    onSetFcmToken(fcmToken);
+    onSetIdentity(identity);
 
     await Utils.onGetRandomFakeImage();
 

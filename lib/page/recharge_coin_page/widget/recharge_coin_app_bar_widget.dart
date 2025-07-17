@@ -47,41 +47,41 @@ class RechargeCoinAppBarWidget {
                 EnumLocal.txtTopUpCoins.name.tr,
                 style: AppFontStyle.styleW700(AppColor.black, 18),
               ),
-              GestureDetector(
-                onTap: () => Get.toNamed(AppRoutes.withdrawPage),
-                child: Container(
-                  height: 35,
-                  width: 110,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    color: AppColor.red,
-                    borderRadius: BorderRadius.circular(100),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColor.black.withValues(alpha: 0.3),
-                        blurRadius: 2,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        AppAssets.icWithdraw,
-                        height: 17,
-                        width: 17,
-                      ),
-                      5.width,
-                      Text(
-                        EnumLocal.txtWithdraw.name.tr,
-                        style: AppFontStyle.styleW700(AppColor.white, 12),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () => Get.toNamed(AppRoutes.withdrawPage),
+              //   child: Container(
+              //     height: 35,
+              //     width: 110,
+              //     alignment: Alignment.center,
+              //     padding: const EdgeInsets.symmetric(horizontal: 10),
+              //     decoration: BoxDecoration(
+              //       color: AppColor.red,
+              //       borderRadius: BorderRadius.circular(100),
+              //       boxShadow: [
+              //         BoxShadow(
+              //           color: AppColor.black.withValues(alpha: 0.3),
+              //           blurRadius: 2,
+              //           offset: Offset(0, 2),
+              //         ),
+              //       ],
+              //     ),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         Image.asset(
+              //           AppAssets.icWithdraw,
+              //           height: 17,
+              //           width: 17,
+              //         ),
+              //         5.width,
+              //         Text(
+              //           EnumLocal.txtWithdraw.name.tr,
+              //           style: AppFontStyle.styleW700(AppColor.white, 12),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

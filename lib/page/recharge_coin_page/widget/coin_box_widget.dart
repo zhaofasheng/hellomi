@@ -85,38 +85,38 @@ class CoinBoxWidget extends StatelessWidget {
                               ],
                             ),
                             Spacer(),
-                            GestureDetector(
-                              onTap: () {
-                                final profileController = Get.find<ProfileController>();
-                                if (Utils.isDemoApp || profileController.fetchUserProfileModel?.user?.wealthLevel?.permissions?.redeemCashout == true) {
-                                  Get.toNamed(AppRoutes.withdrawPage);
-                                } else {
-                                  Utils.showToast(text: EnumLocal.txtTopUpYourBalanceToReachTheNext.name.tr);
-                                }
-                              },
-                              child: IntrinsicWidth(
-                                child: Container(
-                                  height: 32,
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                                  decoration: BoxDecoration(
-                                    color: AppColor.white,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Assets.images.getJinbi.image(width: 24, height: 24),
-                                      5.width,
-                                      Text(
-                                        EnumLocal.txtWithdraw.name.tr,
-                                        style: AppFontStyle.styleW700(AppColor.orange, 13),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ),
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     final profileController = Get.find<ProfileController>();
+                            //     if (Utils.isDemoApp || profileController.fetchUserProfileModel?.user?.wealthLevel?.permissions?.redeemCashout == true) {
+                            //       Get.toNamed(AppRoutes.withdrawPage);
+                            //     } else {
+                            //       Utils.showToast(text: EnumLocal.txtTopUpYourBalanceToReachTheNext.name.tr);
+                            //     }
+                            //   },
+                            //   child: IntrinsicWidth(
+                            //     child: Container(
+                            //       height: 32,
+                            //       alignment: Alignment.center,
+                            //       padding: const EdgeInsets.symmetric(horizontal: 10),
+                            //       decoration: BoxDecoration(
+                            //         color: AppColor.white,
+                            //         borderRadius: BorderRadius.circular(100),
+                            //       ),
+                            //       child: Row(
+                            //         mainAxisAlignment: MainAxisAlignment.center,
+                            //         children: [
+                            //           Assets.images.getJinbi.image(width: 24, height: 24),
+                            //           5.width,
+                            //           Text(
+                            //             EnumLocal.txtWithdraw.name.tr,
+                            //             style: AppFontStyle.styleW700(AppColor.orange, 13),
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   )
+                            // ),
                           ],
                         ),
                       ],

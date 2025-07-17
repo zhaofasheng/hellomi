@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
@@ -25,113 +28,129 @@ class LoginOtherAuthWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(child: GestureDetector(
-                onTap: (){
-                  Get.to(PhoneAuthenticationScreen());
-                },
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20), // 圆角半径
-                  ),
-                  child:Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: Assets.icons.icMobile.image(width: 24,height: 24),
-                      ),
-                      Text(EnumLocal.txtMobile.name.tr,style: TextStyle(fontSize: 16,color: AppColor.black),),
-                    ],
+              // 手机登录
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(PhoneAuthenticationScreen());
+                  },
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(child: Assets.icons.icMobile.image(width: 24, height: 24)),
+                        Text(
+                          EnumLocal.txtMobile.name.tr,
+                          style: TextStyle(fontSize: 16, color: AppColor.black),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),),
+              ),
               10.width,
-              Expanded(child: GestureDetector(
-                onTap: (){
-                  controller.onGoogleLogin();
-                },
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20), // 圆角半径
-                  ),
-                  child:Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: Assets.images.googleLoginImg.image(width: 24,height: 24),
-                      ),
-                      Text(EnumLocal.txtGoogle.name.tr,style: TextStyle(fontSize: 16,color: AppColor.black),),
-                    ],
+
+              // Google 登录
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    controller.onGoogleLogin();
+                  },
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(child: Assets.images.googleLoginImg.image(width: 24, height: 24)),
+                        Text(
+                          EnumLocal.txtGoogle.name.tr,
+                          style: TextStyle(fontSize: 16, color: AppColor.black),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),),
-              //10.width,
-              // GestureDetector(
-              //   onTap: (){
-              //     controller.onQuickLogin();
-              //   },
-              //   child: Container(
-              //     width: 75,
-              //     height: 50,
-              //     decoration: BoxDecoration(
-              //       color: Colors.white,
-              //       borderRadius: BorderRadius.circular(20), // 圆角半径
-              //       border: Border.all(
-              //         color: HexColor('#EBEBEB'), // 边框颜色
-              //         width: 1,           // 边框宽度
-              //       ),
-              //     ),
-              //     child:Center(
-              //       child: Assets.images.socketLoginImg.image(width: 36,height: 36),
-              //     ),
-              //   ),
-              // ),
+              ),
+
+              10.width,
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    controller.onAppleLogin();
+                  },
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Assets.images.appleidButton.image(width: 24),
+                        SizedBox(width: 8),
+                        Text('Apple', style: TextStyle(fontSize: 16, color: AppColor.black)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
           10.height,
+
+          // 同意条款
           GetBuilder<LoginController>(
             id: ApiParams.onChangeIsCheckedConditions,
-            builder: (controller) => Center(child: GestureDetector(
-              onTap: () => controller.onChangeIsCheckedConditions(),
-              child: Container(
-                height: 40,
-                color: AppColor.transparent,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 20,
-                      width: 20,
-                      padding: const EdgeInsets.all(1.5),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: AppColor.black),
-                      ),
-                      child: controller.isCheckedConditions
-                          ? Container(
-                        decoration: const BoxDecoration(
+            builder: (controller) => Center(
+              child: GestureDetector(
+                onTap: () => controller.onChangeIsCheckedConditions(),
+                child: Container(
+                  height: 40,
+                  color: AppColor.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 20,
+                        width: 20,
+                        padding: const EdgeInsets.all(1.5),
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: AppColor.black,
+                          border: Border.all(color: AppColor.black),
                         ),
-                      )
-                          : Offstage(),
-                    ),
-                    10.width,
-                    Flexible(
-                      child: Text(
-                        EnumLocal.txtIHaveAcceptAllTermsAndCondition.name.tr,
-                        style: AppFontStyle.styleW500(AppColor.black, 14),
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
+                        child: controller.isCheckedConditions
+                            ? Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColor.black,
+                          ),
+                        )
+                            : Offstage(),
                       ),
-                    ),
-                  ],
+                      10.width,
+                      Flexible(
+                        child: Text(
+                          EnumLocal.txtIHaveAcceptAllTermsAndCondition.name.tr,
+                          style: AppFontStyle.styleW500(AppColor.black, 14),
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),),
+            ),
           ),
           15.height,
         ],
