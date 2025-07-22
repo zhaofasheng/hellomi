@@ -17,6 +17,7 @@ class AudioRoomBottomBarWidget extends GetView<AudioRoomController> {
 
   @override
   Widget build(BuildContext context) {
+    final isGameEnabled = Database.fetchAdminSetting()?.data?.isGameEnabled ?? false;
     return SizedBox(
       height: 90,
       child: Container(
@@ -26,16 +27,20 @@ class AudioRoomBottomBarWidget extends GetView<AudioRoomController> {
         child: Row(
           children: [
             GetBuilder<AudioRoomController>(id: AppConstant.onChangeTextField, builder: (controller) => AudioRoomTextFieldWidget()),
-            // 10.width,
-            // GestureDetector(
-            //   onTap: () => GameBottomSheetWidget.onShow(),
-            //   child: Container(
-            //     height: 40,
-            //     width: 40,
-            //     alignment: Alignment.center,
-            //     child: Assets.images.liveGame.image(width: 40),
-            //   ),
-            // ),
+            // 游戏按钮及前后间距条件渲染
+            if (isGameEnabled) ...[
+              10.width,
+              GestureDetector(
+                onTap: () => GameBottomSheetWidget.onShow(),
+                child: Container(
+                  height: 40,
+                  width: 40,
+                  alignment: Alignment.center,
+                  child: Assets.images.liveGame.image(width: 40),
+                ),
+              ),
+              10.width,
+            ],
             10.width,
             GestureDetector(
               onTap: () {

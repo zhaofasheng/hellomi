@@ -102,22 +102,25 @@ class FeedController extends GetxController {
 
     switch (selectedTab) {
       case 1:
-        if (!hasLoadedMoment) {
-          hasLoadedMoment = true;
-          await onRefreshMoment();
-        }
+        // if (!hasLoadedMoment) {
+        //   hasLoadedMoment = true;
+        //   await onRefreshMoment();
+        // }
+        await onRefreshMoment();
         break;
       case 0:
-        if (!hasLoadedVideo) {
-          hasLoadedVideo = true;
-          await onRefreshVideos();
-        }
+        // if (!hasLoadedVideo) {
+        //   hasLoadedVideo = true;
+        //   await onRefreshVideos();
+        // }
+        await onRefreshVideos();
         break;
       case 2:
-        if (!hasLoadedFollow) {
-          hasLoadedFollow = true;
-          await onRefreshFollowPost();
-        }
+        // if (!hasLoadedFollow) {
+        //   hasLoadedFollow = true;
+        //   await onRefreshFollowPost();
+        // }
+        await onRefreshFollowPost();
         break;
     }
   }

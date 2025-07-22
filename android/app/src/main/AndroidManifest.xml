@@ -17,7 +17,7 @@
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"> <!--Video Loading Issue-->
-
+        android:largeHeap="true"> <!--Video Loading Issue-->
         <activity
             android:name=".MainActivity"
             android:exported="true"

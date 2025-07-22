@@ -299,6 +299,7 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
       if (videoPlayerController != null && (videoPlayerController?.value.isInitialized ?? false)) {
         chewieController = ChewieController(
           videoPlayerController: videoPlayerController!,
+          aspectRatio: videoPlayerController!.value.aspectRatio,
           looping: true,
           allowedScreenSleep: false,
           allowMuting: false,
@@ -361,11 +362,9 @@ class _VideoItemWidgetState extends State<VideoItemWidget> with SingleTickerProv
                   : GestureDetector(
                 onTap: onClickVideo,
                 child: SizedBox.expand(
-                  child: FittedBox(
-                    fit: BoxFit.cover,
-                    child: SizedBox(
-                      width: videoPlayerController?.value.size.width ?? 0,
-                      height: videoPlayerController?.value.size.height ?? 0,
+                  child: Center(
+                    child: AspectRatio(
+                      aspectRatio: videoPlayerController?.value.aspectRatio ?? 16 / 9,
                       child: Chewie(controller: chewieController!),
                     ),
                   ),

@@ -21,7 +21,7 @@ class PartyFollowTabWidget extends GetView<PartyController> {
       builder: (context, box) {
         return GetBuilder<PartyController>(
           id: AppConstant.onGetFollowLiveUser,
-          builder: (controller) => controller.isLoadingFollow
+          builder: (controller) => controller.isLoadingFollow && !controller.hasInit
               ? PartyItemShimmerWidget()
               : RefreshIndicator(
                   color: AppColor.primary,

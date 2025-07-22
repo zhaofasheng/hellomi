@@ -16,9 +16,20 @@ import 'package:tingle/utils/api_params.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../utils/database.dart';
+
 class PartyController extends GetxController {
-  // List<Widget> pages = [PartyPartyTabWidget(), PartyFollowTabWidget(), PartyGamesTabWidget()];
-  List<Widget> pages = [PartyPartyTabWidget(), PartyFollowTabWidget()];
+  final List<Widget> pages;
+
+  PartyController() : pages = _initPages();
+
+  static List<Widget> _initPages() {
+    final isGameEnabled = Database.fetchAdminSetting()?.data?.isGameEnabled ?? false;
+    return isGameEnabled
+        ? [PartyPartyTabWidget(), PartyFollowTabWidget(), PartyGamesTabWidget()]
+        : [PartyPartyTabWidget(), PartyFollowTabWidget()];
+  }
+
   ScrollController partyScrollController = ScrollController();
   ScrollController followScrollController = ScrollController();
 
@@ -67,9 +78,6 @@ class PartyController extends GetxController {
   void onChangeTab(int value) {
     selectedTabIndex = value;
     update([AppConstant.onChangeTab]);
-    if(hasInit == true){
-      return;
-    }
     onRefresh(delay: 0);
     hasInit = true;
   }

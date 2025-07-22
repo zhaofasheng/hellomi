@@ -20,7 +20,7 @@ class PartyPartyTabWidget extends GetView<PartyController> {
       builder: (context, box) {
         return GetBuilder<PartyController>(
           id: AppConstant.onGetPartyLiveUser,
-          builder: (controller) => controller.isLoadingParty
+          builder: (controller) => controller.isLoadingParty && !controller.hasInit
               ? PartyItemShimmerWidget()
               : RefreshIndicator(
                   color: AppColor.primary,

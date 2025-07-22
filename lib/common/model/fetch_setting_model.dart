@@ -84,6 +84,7 @@ class Data {
     String? liveBroadcastAgreementPolicyLink,
     String? userRechargeAgreementPolicyLink,
     String? noChildHarmPolicyLink,
+    bool? isGameEnabled,  // 新增字段
   }) {
     _id = id;
     _currency = currency;
@@ -125,6 +126,7 @@ class Data {
     _liveBroadcastAgreementPolicyLink = liveBroadcastAgreementPolicyLink;
     _userRechargeAgreementPolicyLink = userRechargeAgreementPolicyLink;
     _noChildHarmPolicyLink = noChildHarmPolicyLink;
+    _isGameEnabled = isGameEnabled;  // 新增赋值
   }
 
   Data.fromJson(dynamic json) {
@@ -173,7 +175,9 @@ class Data {
     _liveBroadcastAgreementPolicyLink = json['liveBroadcastAgreementPolicyLink'];
     _userRechargeAgreementPolicyLink = json['userRechargeAgreementPolicyLink'];
     _noChildHarmPolicyLink = json['noChildHarmPolicyLink'];
+    _isGameEnabled = json['isGameEnabled'];  // 新增解析
   }
+
   String? _id;
   Currency? _currency;
   bool? _isGooglePlayEnabled;
@@ -214,6 +218,8 @@ class Data {
   String? _liveBroadcastAgreementPolicyLink;
   String? _userRechargeAgreementPolicyLink;
   String? _noChildHarmPolicyLink;
+  bool? _isGameEnabled;  // 新增字段私有变量
+
   Data copyWith({
     String? id,
     Currency? currency,
@@ -255,6 +261,7 @@ class Data {
     String? liveBroadcastAgreementPolicyLink,
     String? userRechargeAgreementPolicyLink,
     String? noChildHarmPolicyLink,
+    bool? isGameEnabled,  // 新增 copyWith 参数
   }) =>
       Data(
         id: id ?? _id,
@@ -297,7 +304,9 @@ class Data {
         liveBroadcastAgreementPolicyLink: liveBroadcastAgreementPolicyLink ?? _liveBroadcastAgreementPolicyLink,
         userRechargeAgreementPolicyLink: userRechargeAgreementPolicyLink ?? _userRechargeAgreementPolicyLink,
         noChildHarmPolicyLink: noChildHarmPolicyLink ?? _noChildHarmPolicyLink,
+        isGameEnabled: isGameEnabled ?? _isGameEnabled,  // 新增赋值
       );
+
   String? get id => _id;
   Currency? get currency => _currency;
   bool? get isGooglePlayEnabled => _isGooglePlayEnabled;
@@ -338,6 +347,8 @@ class Data {
   String? get liveBroadcastAgreementPolicyLink => _liveBroadcastAgreementPolicyLink;
   String? get userRechargeAgreementPolicyLink => _userRechargeAgreementPolicyLink;
   String? get noChildHarmPolicyLink => _noChildHarmPolicyLink;
+  bool? get isGameEnabled => _isGameEnabled;  // 新增 getter
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['_id'] = _id;
@@ -386,6 +397,7 @@ class Data {
     map['liveBroadcastAgreementPolicyLink'] = _liveBroadcastAgreementPolicyLink;
     map['userRechargeAgreementPolicyLink'] = _userRechargeAgreementPolicyLink;
     map['noChildHarmPolicyLink'] = _noChildHarmPolicyLink;
+    map['isGameEnabled'] = _isGameEnabled;  // 新增 toJson
     return map;
   }
 }

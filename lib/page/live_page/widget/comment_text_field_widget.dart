@@ -12,6 +12,7 @@ import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
 import '../../../assets/assets.gen.dart';
+import '../../../utils/database.dart';
 
 class CommentTextFieldWidget extends GetView<LiveController> {
   const CommentTextFieldWidget({super.key});
@@ -19,6 +20,7 @@ class CommentTextFieldWidget extends GetView<LiveController> {
   @override
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.light);
+    final isGameEnabled = Database.fetchAdminSetting()?.data?.isGameEnabled ?? false;
     return Container(
       width: Get.width,
       padding: EdgeInsets.all(20),
@@ -92,11 +94,13 @@ class CommentTextFieldWidget extends GetView<LiveController> {
           //   visible: false,
           // ),
 
-          // 10.width,
-          // GestureDetector(
-          //   onTap: () => GameBottomSheetWidget.onShow(),
-          //   child: Assets.images.liveGame.image(width: 40),
-          // ),
+          if (isGameEnabled) ...[
+            10.width,
+            GestureDetector(
+              onTap: () => GameBottomSheetWidget.onShow(),
+              child: Assets.images.liveGame.image(width: 45),
+            ),
+          ],
 
           10.width,
           GestureDetector(

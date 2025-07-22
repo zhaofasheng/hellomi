@@ -24,6 +24,9 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../utils/api.dart';
+import '../../preview_user_profile_page/widget/profile_image_preview_page.dart';
+
 //ignore: must_be_immutable
 class OtherUserProfileDetailsWidget extends StatelessWidget {
   const OtherUserProfileDetailsWidget({
@@ -45,7 +48,9 @@ class OtherUserProfileDetailsWidget extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
                 child: PreviewProfileImageWidget(
-                  image: OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.image ?? "",
+                  image: OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.bgImage?.isNotEmpty == true
+                      ? OtherUserProfileBottomSheet.fetchOtherUserProfileModel!.user!.bgImage!
+                      : (OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.image ?? ""),
                   isBanned: OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.isProfilePicBanned ?? false,
                   fit: BoxFit.cover,
                 ),
@@ -132,26 +137,55 @@ class OtherUserProfileDetailsWidget extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 80,
-                          width: 80,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.transparent,
-                            border: (OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.activeAvtarFrame?.image?.trim().isEmpty ?? true) ? Border.all(color: AppColor.white, width: 2) : null,
-                          ),
-                          child: Container(
+                        GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: () {
+                            final user = OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user;
+
+                            // 优先展示头像，如果头像为空则展示头像框
+                            final imagePath = user?.image?.trim().isNotEmpty == true
+                                ? user!.image!
+                                : (user?.activeAvtarFrame?.image?.trim().isNotEmpty == true
+                                ? user!.activeAvtarFrame!.image!
+                                : null);
+
+                            if (imagePath != null) {
+                              Navigator.of(context).push(
+                                PageRouteBuilder(
+                                  opaque: false,
+                                  pageBuilder: (_, __, ___) => ProfileImagePreviewPage(
+                                    imageUrl: Api.baseUrl + imagePath,
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                          child: Hero(tag: 'profile_image_preview', child: Container(
+                            height: 80,
+                            width: 80,
                             clipBehavior: Clip.antiAlias,
-                            decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.transparent),
-                            child: PreviewProfileImageWithFrameWidget(
-                              image: OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.image ?? "",
-                              isBanned: OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.isProfilePicBanned ?? false,
-                              frame: OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.activeAvtarFrame?.image ?? "",
-                              type: OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.activeAvtarFrame?.type ?? 0,
-                              margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColor.transparent,
+                              border: (OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.activeAvtarFrame?.image?.trim().isEmpty ?? true)
+                                  ? Border.all(color: AppColor.white, width: 2)
+                                  : null,
                             ),
-                          ),
+                            child: Container(
+                              clipBehavior: Clip.antiAlias,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColor.transparent,
+                              ),
+                              child: PreviewProfileImageWithFrameWidget(
+                                image: OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.image ?? "",
+                                isBanned: OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.isProfilePicBanned ?? false,
+                                frame: OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.activeAvtarFrame?.image ?? "",
+                                type: OtherUserProfileBottomSheet.fetchOtherUserProfileModel?.user?.activeAvtarFrame?.type ?? 0,
+                                margin: const EdgeInsets.all(10),
+                              ),
+                            ),
+                          ),),
                         ),
                         Spacer(),
                         Container(

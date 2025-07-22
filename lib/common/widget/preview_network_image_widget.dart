@@ -31,10 +31,7 @@ class PreviewProfileImageWidget extends StatelessWidget {
                 fit: fit ?? BoxFit.cover,
                 errorWidget: (context, url, error) => isShowPlaceHolder == false ? Offstage() : ProfileImagePlaceHolder(),
                 placeholder: (context, url) => isShowPlaceHolder == false ? Offstage() : ProfileImagePlaceHolder(),
-                memCacheWidth: 120,
-                memCacheHeight: 120,
-                maxWidthDiskCache: 120,
-                maxHeightDiskCache: 120,
+
               )
             : Database.networkImage(Api.baseUrl + image!) != null
                 ? Stack(
@@ -45,10 +42,7 @@ class PreviewProfileImageWidget extends StatelessWidget {
                         fit: fit ?? BoxFit.cover,
                         errorWidget: (context, url, error) => isShowPlaceHolder == false ? Offstage() : ProfileImagePlaceHolder(),
                         placeholder: (context, url) => isShowPlaceHolder == false ? Offstage() : ProfileImagePlaceHolder(),
-                        memCacheWidth: 120,
-                        memCacheHeight: 120,
-                        maxWidthDiskCache: 120,
-                        maxHeightDiskCache: 120,
+
                       ),
                       Visibility(
                         visible: isBanned ?? false,
@@ -75,10 +69,7 @@ class PreviewProfileImageWidget extends StatelessWidget {
                             fit: fit ?? BoxFit.cover,
                             placeholder: (context, url) => isShowPlaceHolder == false ? Offstage() : ProfileImagePlaceHolder(),
                             errorWidget: (context, url, error) => isShowPlaceHolder == false ? Offstage() : ProfileImagePlaceHolder(),
-                            memCacheWidth: 120,
-                            memCacheHeight: 120,
-                            maxWidthDiskCache: 120,
-                            maxHeightDiskCache: 120,
+
                           );
                         } else {
                           return isShowPlaceHolder == false ? Offstage() : ProfileImagePlaceHolder();

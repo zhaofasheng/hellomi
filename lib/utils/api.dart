@@ -367,4 +367,5 @@ abstract class Api {
   static const stripPayUri = "${baseUrl}api/client/payOrder/fetchCreateStripeOrder";
   static const applyPayAuth = "${baseUrl}api/client/payNotification/iosPaymentCallbackV2";
   static const newPayUri = "${baseUrl}api/client/payOrder/fetchCreateNewPayOrder";
+  static const appupbackGroundUrl = "${baseUrl}api/client/user/updateBgImage";
 }

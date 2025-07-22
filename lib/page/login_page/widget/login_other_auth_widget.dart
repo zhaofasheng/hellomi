@@ -81,8 +81,9 @@ class LoginOtherAuthWidget extends StatelessWidget {
                 ),
               ),
 
-              10.width,
-              Expanded(
+
+              if (!Platform.isAndroid)10.width,
+              if (!Platform.isAndroid)Expanded(
                 child: GestureDetector(
                   onTap: () {
                     controller.onAppleLogin();
@@ -104,6 +105,7 @@ class LoginOtherAuthWidget extends StatelessWidget {
                   ),
                 ),
               ),
+
             ],
           ),
           10.height,

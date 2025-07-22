@@ -218,7 +218,26 @@ class AudioRoomAppbarWidget extends GetView<AudioRoomController> {
                         },
                       );
                     } else {
-                      Get.back();
+                      Get.dialog(
+                        AlertDialog(
+                          title: const Text("Exit Live"),
+                          content: const Text("Are you sure you want to exit the live room?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Get.back(), // Dismiss dialog
+                              child: const Text("Cancel"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Get.back(); // Close dialog
+                                Get.back(); // Exit page
+                              },
+                              child: const Text("Confirm"),
+                            ),
+                          ],
+                        ),
+                        barrierDismissible: false,
+                      );
                     }
                   },
                   child: Container(

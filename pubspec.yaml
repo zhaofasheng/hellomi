@@ -44,7 +44,8 @@ dependencies:
   firebase_messaging: ^15.2.2
   device_info_plus: ^11.3.0
   flutter_keyboard_visibility: ^6.0.0
-
+  mime: ^1.0.4
+  http_parser: ^4.0.2
   #  VIDEO RELATED
   camera: ^0.11.1
   video_player: ^2.9.2

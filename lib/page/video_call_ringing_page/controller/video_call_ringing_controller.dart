@@ -63,18 +63,23 @@ class VideoCallRingingController extends GetxController with WidgetsBindingObser
       isLoading = true;
       update([AppConstant.onInitializeCamera]);
 
+      // 获取设备上所有摄像头
+      final cameras = await availableCameras();
+      final frontCamera = cameras.firstWhere(
+            (camera) => camera.lensDirection == CameraLensDirection.front,
+        orElse: () => cameras.first,
+      );
+
+      // 使用真实设备返回的 camera 描述
       cameraController = CameraController(
-        const CameraDescription(
-          name: "0",
-          sensorOrientation: 90,
-          lensDirection: CameraLensDirection.front,
-        ),
+        frontCamera,
         ResolutionPreset.medium,
+        enableAudio: true,
       );
 
       await cameraController?.initialize();
 
-      if (cameraController != null && cameraController?.value.isInitialized == true) {
+      if (cameraController != null && cameraController!.value.isInitialized) {
         isLoading = false;
         update([AppConstant.onInitializeCamera]);
       }

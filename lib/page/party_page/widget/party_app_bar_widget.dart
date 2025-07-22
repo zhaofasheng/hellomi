@@ -11,18 +11,22 @@ import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
 import '../../../assets/assets.gen.dart';
+import '../../../utils/database.dart';
 
 class PartyAppBarWidget extends StatelessWidget {
   const PartyAppBarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // List tabTitles = [
-    //   EnumLocal.txtParty.name.tr,
-    //   EnumLocal.txtFollow.name.tr,
-    //   EnumLocal.txtGames.name.tr,
-    // ];
-    List tabTitles = [
+    final isGameEnabled = Database.fetchAdminSetting()?.data?.isGameEnabled ?? false;
+
+    final List<String> tabTitles = isGameEnabled
+        ? [
+      EnumLocal.txtParty.name.tr,
+      EnumLocal.txtFollow.name.tr,
+      EnumLocal.txtGames.name.tr,
+    ]
+        : [
       EnumLocal.txtParty.name.tr,
       EnumLocal.txtFollow.name.tr,
     ];

@@ -164,8 +164,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       getPages: AppPages.list,
       initialRoute: AppRoutes.initial,
       translations: AppLanguages(),
-      locale: _appLocale ?? const Locale(AppConstant.languageLo, AppConstant.countryCodeLa), // 👈 加入默认值
-      fallbackLocale: const Locale(AppConstant.languageLo, AppConstant.countryCodeLa),
+      locale: _appLocale ?? const Locale(AppConstant.languageEn, AppConstant.countryCodeUs), // 👈 加入默认值
+      fallbackLocale: const Locale(AppConstant.languageEn, AppConstant.countryCodeUs),
       unknownRoute: GetPage(
         name: AppRoutes.splashScreenPage,
         page: () => const SplashScreenView(),

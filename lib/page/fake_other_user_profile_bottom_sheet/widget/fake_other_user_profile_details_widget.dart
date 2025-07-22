@@ -13,6 +13,9 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+import '../../../utils/api.dart';
+import '../../preview_user_profile_page/widget/profile_image_preview_page.dart';
+
 //ignore: must_be_immutable
 class FakeOtherUserProfileDetailsWidget extends StatelessWidget {
   FakeOtherUserProfileDetailsWidget({
@@ -32,7 +35,9 @@ class FakeOtherUserProfileDetailsWidget extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
                 child: PreviewPostImageWidget(
-                  image: fetchOtherUserProfileModel?.user?.image ?? "",
+                  image: fetchOtherUserProfileModel?.user?.bgImage?.isNotEmpty == true
+                      ? fetchOtherUserProfileModel!.user!.bgImage!
+                      : (fetchOtherUserProfileModel?.user?.image ?? ""),
                   isBanned: fetchOtherUserProfileModel?.user?.isProfilePicBanned ?? false,
                   fit: BoxFit.cover,
                 ),
@@ -73,23 +78,42 @@ class FakeOtherUserProfileDetailsWidget extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 80,
-                          width: 80,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.transparent,
-                            border: Border.all(color: AppColor.white, width: 2),
-                          ),
-                          child: Container(
+                        GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: () {
+                            final user = fetchOtherUserProfileModel?.user;
+                            if (user != null && (user.image?.isNotEmpty ?? false)) {
+                              Navigator.of(context).push(
+                                PageRouteBuilder(
+                                  opaque: false,
+                                  pageBuilder: (_, __, ___) => ProfileImagePreviewPage(
+                                    imageUrl: user.image!,
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                          child: Hero(tag: 'profile_image_preview', child: Container(
+                            height: 80,
+                            width: 80,
                             clipBehavior: Clip.antiAlias,
-                            decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.transparent),
-                            child: PreviewProfileImageWidget(
-                              image: fetchOtherUserProfileModel?.user?.image ?? "",
-                              isBanned: fetchOtherUserProfileModel?.user?.isProfilePicBanned ?? false,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColor.transparent,
+                              border: Border.all(color: AppColor.white, width: 2),
                             ),
-                          ),
+                            child: Container(
+                              clipBehavior: Clip.antiAlias,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColor.transparent,
+                              ),
+                              child: PreviewProfileImageWidget(
+                                image: fetchOtherUserProfileModel?.user?.image ?? "",
+                                isBanned: fetchOtherUserProfileModel?.user?.isProfilePicBanned ?? false,
+                              ),
+                            ),
+                          ),),
                         ),
                         Spacer(),
                         Container(

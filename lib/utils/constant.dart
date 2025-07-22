@@ -2,9 +2,9 @@ import 'dart:io';
 
 abstract class AppConstant {
 
-  // 默认语言设为老挝语
-  static const String languageLo = "lo"; // 👈 改成老挝语
-  static const String countryCodeLa = "LA"; // 👈 改成老挝国家码
+// 默认语言设为英文
+  static const String languageEn = "en"; // 👈 英语语言码
+  static const String countryCodeUs = "US"; // 👈 美国国家码
 
   static const String appFontLight = "InterLight";
   static const String appFontRegular = "InterRegular";

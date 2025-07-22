@@ -1398,6 +1398,10 @@ class $AssetsImagesGen {
   AssetGenImage get backgroundImg =>
       const AssetGenImage('assets/images/background_img.png');
 
+  /// File path: assets/images/change_langeue.png
+  AssetGenImage get changeLangeue =>
+      const AssetGenImage('assets/images/change_langeue.png');
+
   /// File path: assets/images/chat_camram.png
   AssetGenImage get chatCamram =>
       const AssetGenImage('assets/images/chat_camram.png');
@@ -2169,6 +2173,7 @@ class $AssetsImagesGen {
     audioSmile,
     avaterImg,
     backgroundImg,
+    changeLangeue,
     chatCamram,
     chatEqImg,
     chatMore,

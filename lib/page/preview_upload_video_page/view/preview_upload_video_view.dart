@@ -39,7 +39,7 @@ class PreviewUploadVideoView extends StatelessWidget {
                       ? LoadingWidget()
                       : SizedBox.expand(
                           child: FittedBox(
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                             child: SizedBox(
                               width: controller.videoPlayerController?.value.size.width ?? 0,
                               height: controller.videoPlayerController?.value.size.height ?? 0,

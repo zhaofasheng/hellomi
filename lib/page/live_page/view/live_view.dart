@@ -22,7 +22,7 @@ class LiveView extends GetView<LiveController> {
   @override
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.light);
-    return Scaffold(
+    return WillPopScope(child: Scaffold(
       key: controller.scaffoldKey,
       backgroundColor: AppColor.black,
       endDrawer: LiveViewerDrawerWidget(),
@@ -57,13 +57,13 @@ class LiveView extends GetView<LiveController> {
           ShowReceivedGift.onShowLuckyWin(),
           ShowEntryRide.onShowRide(),
           Obx(
-            () => Visibility(
+                () => Visibility(
               visible: controller.isShowPkAnimation.value,
               child: Lottie.asset(AppAssets.lottiePk, width: 200),
             ),
           ),
           Obx(
-            () => AnimatedPositioned(
+                () => AnimatedPositioned(
               duration: const Duration(seconds: 1, milliseconds: 500),
               right: controller.isShowPkAnimation.value ? 300 : -50,
               child: Padding(
@@ -73,7 +73,7 @@ class LiveView extends GetView<LiveController> {
             ),
           ),
           Obx(
-            () => AnimatedPositioned(
+                () => AnimatedPositioned(
               duration: const Duration(seconds: 1, milliseconds: 500),
               left: controller.isShowPkAnimation.value ? 300 : -50,
               child: Padding(
@@ -86,6 +86,6 @@ class LiveView extends GetView<LiveController> {
           LiveAppBarWidget(),
         ],
       ),
-    );
+    ), onWillPop:  () async => false);
   }
 }

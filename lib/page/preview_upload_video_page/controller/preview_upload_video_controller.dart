@@ -118,7 +118,7 @@ class PreviewUploadVideoController extends GetxController {
 
   @override
   void onClose() async {
-    await 500.milliseconds.delay();
+
     onDisposeVideoPlayer();
     super.onClose();
   }

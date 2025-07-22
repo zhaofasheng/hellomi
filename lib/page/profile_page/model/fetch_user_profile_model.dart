@@ -68,6 +68,7 @@ class User {
     int? totalFollowing,
     int? totalFriends,
     int? totalVisitors,
+    String? bgImage, // ✅ 新增参数
   }) {
     _id = id;
     _name = name;
@@ -93,6 +94,7 @@ class User {
     _totalFollowing = totalFollowing;
     _totalFriends = totalFriends;
     _totalVisitors = totalVisitors;
+    _bgImage = bgImage; // ✅ 新增赋值
   }
 
   User.fromJson(dynamic json) {
@@ -120,7 +122,9 @@ class User {
     _totalFollowing = json['totalFollowing'];
     _totalFriends = json['totalFriends'];
     _totalVisitors = json['totalVisitors'];
+    _bgImage = json['bgImage']; // ✅ 新增字段
   }
+
   String? _id;
   String? _name;
   String? _userName;
@@ -145,6 +149,8 @@ class User {
   int? _totalFollowing;
   int? _totalFriends;
   int? _totalVisitors;
+  String? _bgImage; // ✅ 新增字段
+
   User copyWith({
     String? id,
     String? name,
@@ -170,6 +176,7 @@ class User {
     int? totalFollowing,
     int? totalFriends,
     int? totalVisitors,
+    String? bgImage, // ✅ 新增参数
   }) =>
       User(
         id: id ?? _id,
@@ -196,7 +203,9 @@ class User {
         totalFollowing: totalFollowing ?? _totalFollowing,
         totalFriends: totalFriends ?? _totalFriends,
         totalVisitors: totalVisitors ?? _totalVisitors,
+        bgImage: bgImage ?? _bgImage, // ✅ 新增赋值
       );
+
   String? get id => _id;
   String? get name => _name;
   String? get userName => _userName;
@@ -221,6 +230,7 @@ class User {
   int? get totalFollowing => _totalFollowing;
   int? get totalFriends => _totalFriends;
   int? get totalVisitors => _totalVisitors;
+  String? get bgImage => _bgImage; // ✅ 新增 getter
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -252,9 +262,11 @@ class User {
     map['totalFollowing'] = _totalFollowing;
     map['totalFriends'] = _totalFriends;
     map['totalVisitors'] = _totalVisitors;
+    map['bgImage'] = _bgImage; // ✅ 新增字段
     return map;
   }
 }
+
 
 class ActiveAvtarFrame {
   ActiveAvtarFrame({

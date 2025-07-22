@@ -9,6 +9,7 @@ import 'package:tingle/common/widget/preview_network_image_widget.dart';
 import 'package:tingle/common/widget/user_role_widget.dart';
 import 'package:tingle/custom/function/custom_format_number.dart';
 import 'package:tingle/page/preview_user_profile_page/controller/preview_user_profile_controller.dart';
+import 'package:tingle/page/preview_user_profile_page/widget/profile_image_preview_page.dart';
 import 'package:tingle/routes/app_routes.dart';
 import 'package:tingle/utils/api_params.dart';
 import 'package:tingle/utils/assets.dart';
@@ -19,30 +20,41 @@ import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
 import '../../../assets/assets.gen.dart';
+import '../../../utils/api.dart';
+
 
 class PreviewProfileDetailsWidget extends StatelessWidget {
   const PreviewProfileDetailsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+
     return GetBuilder<PreviewUserProfileController>(
       id: AppConstant.onGetProfile,
       builder: (controller) => Column(
         children: [
-          Container(
-            height: 350,
-            width: Get.width,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppAssets.imgCreateLiveRoomBg),
-                fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              controller.onPickImage(context: context);
+            },
+            child: Container(
+              height: 350,
+              width: Get.width,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(AppAssets.imgCreateLiveRoomBg), // 背景图不变
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            child: PreviewPostImageWidget(
-              image: controller.fetchUserProfileModel?.user?.image ?? "",
-              isBanned: controller.fetchUserProfileModel?.user?.isProfilePicBanned ?? false,
-              fit: BoxFit.cover,
-              isShowPlaceHolder: false,
+              child: PreviewPostImageWidget(
+                image: (controller.fetchUserProfileModel?.user?.bgImage?.isNotEmpty ?? false)
+                    ? controller.fetchUserProfileModel!.user!.bgImage!
+                    : controller.fetchUserProfileModel?.user?.image ?? "",
+                isBanned: controller.fetchUserProfileModel?.user?.isProfilePicBanned ?? false,
+                fit: BoxFit.cover,
+                isShowPlaceHolder: false,
+              ),
             ),
           ),
           Transform.translate(
@@ -66,47 +78,59 @@ class PreviewProfileDetailsWidget extends StatelessWidget {
                       children: [
                         15.width,
                         ///头像
-                        controller.fetchUserProfileModel?.user?.activeAvtarFrame?.image == null
-                            ? Container(
-                          height: 60,
-                          width: 60,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.transparent,
-                            border: Border.all(color: HexColor('##00E4A6'), width: 2),
-                          ),
-                          child: Container(
-                            clipBehavior: Clip.antiAlias,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColor.transparent,
+                        GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: () {
+                            final user = controller.fetchUserProfileModel?.user;
+                            if (user != null) {
+                              Navigator.of(context).push(
+                                PageRouteBuilder(
+                                  opaque: false,
+                                  pageBuilder: (_, __, ___) => ProfileImagePreviewPage(imageUrl: Api.baseUrl + (controller.fetchUserProfileModel?.user?.image ?? ""),),
+                                ),
+                              );
+                            }
+                          },
+                          child: Hero(
+                            tag: 'profile_image_preview',
+                            child: controller.fetchUserProfileModel?.user?.activeAvtarFrame == null
+                                ? Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: HexColor('#00E4A6'), width: 2),
+                                color: AppColor.transparent,
+                              ),
+                              child: ClipOval(  // 这里裁剪图片为圆形，避免裁剪边框
+                                child: PreviewProfileImageWidget(
+                                  image: controller.fetchUserProfileModel?.user?.image,
+                                  isBanned: controller.fetchUserProfileModel?.user?.isProfilePicBanned,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )
+                                : Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: HexColor('#00E4A6'), width: 2),
+                                color: AppColor.transparent,
+                              ),
+                              child: ClipOval(  // 同样裁剪图片为圆形
+                                child: PreviewProfileImageWithFrameWidget(
+                                  image: controller.fetchUserProfileModel?.user?.image,
+                                  isBanned: controller.fetchUserProfileModel?.user?.isProfilePicBanned,
+                                  fit: BoxFit.cover,
+                                  frame: controller.fetchUserProfileModel?.user?.activeAvtarFrame?.image,
+                                  type: controller.fetchUserProfileModel?.user?.activeAvtarFrame?.type ?? 1,
+                                  margin: const EdgeInsets.all(5),
+                                ),
+                              ),
                             ),
-                            child: PreviewProfileImageWidget(
-                              image: controller.fetchUserProfileModel?.user?.image ?? "",
-                              isBanned: controller.fetchUserProfileModel?.user?.isProfilePicBanned ?? false,
-                            ),
-                          ),
-                        )
-                            : Container(
-                          height: 60,
-                          width: 60,
-                          clipBehavior: Clip.none,
-                          decoration: BoxDecoration(
-                            color: AppColor.transparent,
-                            shape: BoxShape.circle,
-                            border: Border.all(color: HexColor('##00E4A6'), width: 2),
-                          ),
-                          child: PreviewProfileImageWithFrameWidget(
-                            image: controller.fetchUserProfileModel?.user?.image,
-                            isBanned: controller.fetchUserProfileModel?.user?.isProfilePicBanned ?? false,
-                            fit: BoxFit.cover,
-                            frame: controller.fetchUserProfileModel?.user?.activeAvtarFrame?.image ?? "",
-                            type: controller.fetchUserProfileModel?.user?.activeAvtarFrame?.type ?? 1,
-                            margin: EdgeInsets.all(5),
                           ),
                         ),
-
                         5.width,
                         ///昵称等信息
                         Column(

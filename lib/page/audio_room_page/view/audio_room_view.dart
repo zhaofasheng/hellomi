@@ -19,7 +19,7 @@ class AudioRoomView extends GetView<AudioRoomController> {
   @override
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.light);
-    return SafeArea(
+    return WillPopScope(child: SafeArea(
       top: false,
       bottom: false,
       right: false,
@@ -99,7 +99,7 @@ class AudioRoomView extends GetView<AudioRoomController> {
           ],
         ),
       ),
-    );
+    ), onWillPop: () async => false);
   }
 }
 

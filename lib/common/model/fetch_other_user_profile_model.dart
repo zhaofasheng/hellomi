@@ -51,6 +51,7 @@ class User {
     String? bio,
     int? age,
     String? image,
+    String? bgImage, // 新增参数
     bool? isProfilePicBanned,
     String? countryFlagImage,
     String? country,
@@ -77,6 +78,7 @@ class User {
     _bio = bio;
     _age = age;
     _image = image;
+    _bgImage = bgImage;
     _isProfilePicBanned = isProfilePicBanned;
     _countryFlagImage = countryFlagImage;
     _country = country;
@@ -105,6 +107,7 @@ class User {
     _bio = json['bio'];
     _age = json['age'];
     _image = json['image'];
+    _bgImage = json['bgImage']; // 新增字段解析
     _isProfilePicBanned = json['isProfilePicBanned'];
     _countryFlagImage = json['countryFlagImage'];
     _country = json['country'];
@@ -124,6 +127,7 @@ class User {
     _totalVisitors = json['totalVisitors'];
     _isFollowed = json['isFollowed'];
   }
+
   String? _id;
   String? _name;
   String? _userName;
@@ -131,6 +135,7 @@ class User {
   String? _bio;
   int? _age;
   String? _image;
+  String? _bgImage; // 新增字段
   bool? _isProfilePicBanned;
   String? _countryFlagImage;
   String? _country;
@@ -149,6 +154,7 @@ class User {
   int? _totalFriends;
   int? _totalVisitors;
   bool? _isFollowed;
+
   User copyWith({
     String? id,
     String? name,
@@ -157,6 +163,7 @@ class User {
     String? bio,
     int? age,
     String? image,
+    String? bgImage, // 新增
     bool? isProfilePicBanned,
     String? countryFlagImage,
     String? country,
@@ -184,6 +191,7 @@ class User {
         bio: bio ?? _bio,
         age: age ?? _age,
         image: image ?? _image,
+        bgImage: bgImage ?? _bgImage, // 新增
         isProfilePicBanned: isProfilePicBanned ?? _isProfilePicBanned,
         countryFlagImage: countryFlagImage ?? _countryFlagImage,
         country: country ?? _country,
@@ -203,6 +211,7 @@ class User {
         totalVisitors: totalVisitors ?? _totalVisitors,
         isFollowed: isFollowed ?? _isFollowed,
       );
+
   String? get id => _id;
   String? get name => _name;
   String? get userName => _userName;
@@ -210,6 +219,7 @@ class User {
   String? get bio => _bio;
   int? get age => _age;
   String? get image => _image;
+  String? get bgImage => _bgImage; // 新增 getter
   bool? get isProfilePicBanned => _isProfilePicBanned;
   String? get countryFlagImage => _countryFlagImage;
   String? get country => _country;
@@ -238,6 +248,7 @@ class User {
     map['bio'] = _bio;
     map['age'] = _age;
     map['image'] = _image;
+    map['bgImage'] = _bgImage; // 新增
     map['isProfilePicBanned'] = _isProfilePicBanned;
     map['countryFlagImage'] = _countryFlagImage;
     map['country'] = _country;

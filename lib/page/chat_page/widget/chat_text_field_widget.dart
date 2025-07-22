@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color/flutter_color.dart';
 import 'package:get/get.dart';
@@ -348,10 +349,36 @@ class ChatTextFieldWidget extends GetView<ChatController> {
                         controller.choiceCameraImage();
                       }),
 
+                      //拨打视频
                       MoreOption(icon: Assets.images.chatVideo.image(width: 32,height: 32),  onTap: () {
                         final profileController = Get.find<ProfileController>();
                         if (Utils.isDemoApp || profileController.fetchUserProfileModel?.user?.wealthLevel?.permissions?.freeCall == true) {
-                          controller.onClickVideoCall();
+
+                          Get.dialog(
+                            CupertinoAlertDialog(
+                              title: const Text("Paid Feature"),
+                              content: const Padding(
+                                padding: EdgeInsets.only(top: 8.0),
+                                child: Text("This is a paid feature. Do you want to continue?"),
+                              ),
+                              actions: [
+                                CupertinoDialogAction(
+                                  isDefaultAction: true,
+                                  onPressed: () => Get.back(),
+                                  child: const Text("Cancel"),
+                                ),
+                                CupertinoDialogAction(
+                                  isDestructiveAction: true,
+                                  onPressed: () {
+                                    Get.back();
+                                    controller.onClickVideoCall();
+                                  },
+                                  child: const Text("Continue"),
+                                ),
+                              ],
+                            ),
+                            barrierDismissible: false,
+                          );
                         } else {
                           Utils.showToast(text: EnumLocal.txtTopUpYourBalanceToReachTheNext.name.tr);
                         }

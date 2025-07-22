@@ -12,6 +12,7 @@ import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
 import '../../../assets/assets.gen.dart';
+import '../../../utils/database.dart';
 
 //ignore: must_be_immutable
 class FakeCommentTextFieldWidget extends GetView<FakeLiveController> {
@@ -20,7 +21,7 @@ class FakeCommentTextFieldWidget extends GetView<FakeLiveController> {
   @override
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.light);
-
+    final isGameEnabled = Database.fetchAdminSetting()?.data?.isGameEnabled ?? false;
     return SafeArea(child: Container(
       width: Get.width,
       decoration: ispklive == false ? BoxDecoration(color: AppColor.transparent) : BoxDecoration(gradient: AppColor.audioRoomGradient),
@@ -86,11 +87,13 @@ class FakeCommentTextFieldWidget extends GetView<FakeLiveController> {
               ),
             ),
           ),
-          // 10.width,
-          // GestureDetector(
-          //   onTap: () => GameBottomSheetWidget.onShow(),
-          //   child: Assets.images.liveGame.image(width: 45),
-          // ),
+          if (isGameEnabled) ...[
+            10.width,
+            GestureDetector(
+              onTap: () => GameBottomSheetWidget.onShow(),
+              child: Assets.images.liveGame.image(width: 45),
+            ),
+          ],
           10.width,
           GestureDetector(
             onTap: () {
