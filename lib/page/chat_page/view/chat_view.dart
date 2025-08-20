@@ -22,6 +22,14 @@ import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
+// 消息类型常量
+class MessageType {
+  static const int text = 1;
+  static const int image = 2;
+  static const int videoCall = 3;
+  static const int audio = 4;
+}
+
 class ChatView extends GetView<ChatController> {
   const ChatView({super.key});
 
@@ -39,11 +47,16 @@ class ChatView extends GetView<ChatController> {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(
+          // 背景图优化为decoration
+          Container(
             height: Get.height,
             width: Get.width,
-            AppAssets.imgChatBg,
-            fit: BoxFit.cover,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(AppAssets.imgChatBg),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           SizedBox(
             height: Get.height,
@@ -53,92 +66,40 @@ class ChatView extends GetView<ChatController> {
                 Expanded(
                   child: GetBuilder<ChatController>(
                     id: AppConstant.onFetchUserChat,
-                    builder: (controller) => controller.isLoading
-                        ? LoadingWidget()
-                        : SingleChildScrollView(
-                            controller: controller.scrollController,
-                            padding: const EdgeInsets.only(left: 15, right: 15),
-                            child: Column(
-                              children: [
-                                GetBuilder<ChatController>(
-                                  id: AppConstant.onPaginationUserChat,
-                                  builder: (controller) => Visibility(
-                                    visible: controller.isPagination,
-                                    child: LinearProgressIndicator(color: AppColor.primary),
-                                  ),
-                                ),
-                                ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: controller.chatList.length,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  padding: const EdgeInsets.only(top: 15),
-                                  itemBuilder: (context, index) {
-                                    final indexData = controller.chatList[index];
-
-                                    return indexData.senderId == Database.loginUserId
-                                        ? indexData.messageType == 1 // TEXT MESSAGE
-                                            ? SenderMessageWidget(
-                                                message: indexData.message ?? "",
-                                                time: indexData.createdAt ?? "",
-                                              )
-                                            : indexData.messageType == 2 // IMAGE MESSAGE
-                                                ? SenderImageWidget(
-                                                    image: indexData.image ?? "",
-                                                    time: indexData.createdAt ?? "",
-                                                    isBanned: indexData.isMediaBanned ?? false,
-                                                  )
-                                                : indexData.messageType == 3 // VIDEO CALL MESSAGE
-                                                    ? SenderVideoCallWidget(
-                                                        time: indexData.createdAt ?? "",
-                                                        type: indexData.callType ?? 0,
-                                                        callDuration: indexData.callDuration ?? "",
-                                                      )
-                                                    : indexData.messageType == 4
-                                                        ? SenderAudioWidget(
-                                                            id: indexData.id ?? "",
-                                                            audio: Api.baseUrl + (indexData.audio ?? ""),
-                                                            time: indexData.createdAt ?? "",
-                                                          )
-                                                        : UploadAudioWidget()
-                                        : indexData.messageType == 1 // TEXT MESSAGE
-                                            ? ReceiverMessageWidget(
-                                                message: indexData.message ?? "",
-                                                time: indexData.createdAt ?? "",
-                                                profileImage: controller.image,
-                                                profileImageIsBanned: controller.isBanned,
-                                              )
-                                            : indexData.messageType == 2 // IMAGE MESSAGE
-                                                ? ReceiverImageWidget(
-                                                    image: indexData.image ?? "",
-                                                    time: indexData.createdAt ?? "",
-                                                    isBanned: indexData.isMediaBanned ?? false,
-                                                    receiverImage: controller.image,
-                                                    receiverImageIsBanned: controller.isBanned,
-                                                  )
-                                                : indexData.messageType == 3 // VIDEO CALL MESSAGE
-                                                    ? ReceiverVideoCallWidget(
-                                                        callDuration: indexData.callDuration ?? "",
-                                                        type: indexData.callType ?? 0,
-                                                        time: indexData.createdAt ?? "",
-                                                      )
-                                                    : indexData.messageType == 4
-                                                        ? ReceiverAudioWidget(
-                                                            id: indexData.id ?? "",
-                                                            audio: Api.baseUrl + (indexData.audio ?? ""),
-                                                            time: indexData.createdAt ?? "", receiverImage: controller.image, receiverImageIsBanned: controller.isBanned,
-                                                          )
-                                                        : Offstage();
-                                  },
-                                ),
-                              ],
+                    builder: (controller) {
+                      if (controller.isLoading) {
+                        return const LoadingWidget();
+                      }
+                      return Column(
+                        children: [
+                          GetBuilder<ChatController>(
+                            id: AppConstant.onPaginationUserChat,
+                            builder: (controller) => Visibility(
+                              visible: controller.isPagination,
+                              child: LinearProgressIndicator(color: AppColor.primary),
                             ),
                           ),
+                          Expanded(
+                            child: ListView.builder(
+                              controller: controller.scrollController,
+                              itemCount: controller.chatList.length,
+                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                              itemBuilder: (context, index) {
+                                final indexData = controller.chatList[index];
+                                return _buildChatItem(indexData, controller);
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
                 const ChatTextFieldWidget(),
               ],
             ),
           ),
+          // 录音提示条
           Positioned(
             top: 20,
             child: GetBuilder<ChatController>(
@@ -148,7 +109,7 @@ class ChatView extends GetView<ChatController> {
                 child: Container(
                   height: 40,
                   width: 110,
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                     color: AppColor.colorBorder.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(8),
@@ -160,7 +121,7 @@ class ChatView extends GetView<ChatController> {
                         color: AppColor.primary,
                         width: 20,
                       ),
-                      5.width,
+                      const SizedBox(width: 5),
                       Text(
                         CustomFormatAudioTime.convert(controller.countTime),
                         style: AppFontStyle.styleW500(AppColor.black, 13),
@@ -174,5 +135,67 @@ class ChatView extends GetView<ChatController> {
         ],
       ),
     );
+  }
+
+  // 消息渲染逻辑提取为私有方法
+  Widget _buildChatItem(dynamic indexData, ChatController controller) {
+    final bool isSender = indexData.senderId == Database.loginUserId;
+    switch (indexData.messageType) {
+      case MessageType.text:
+        return isSender
+            ? SenderMessageWidget(
+                message: indexData.message ?? "",
+                time: indexData.createdAt ?? "",
+              )
+            : ReceiverMessageWidget(
+                message: indexData.message ?? "",
+                time: indexData.createdAt ?? "",
+                profileImage: controller.image,
+                profileImageIsBanned: controller.isBanned,
+              );
+      case MessageType.image:
+        return isSender
+            ? SenderImageWidget(
+                image: indexData.image ?? "",
+                time: indexData.createdAt ?? "",
+                isBanned: indexData.isMediaBanned ?? false,
+              )
+            : ReceiverImageWidget(
+                image: indexData.image ?? "",
+                time: indexData.createdAt ?? "",
+                isBanned: indexData.isMediaBanned ?? false,
+                receiverImage: controller.image,
+                receiverImageIsBanned: controller.isBanned,
+              );
+      case MessageType.videoCall:
+        return isSender
+            ? SenderVideoCallWidget(
+                time: indexData.createdAt ?? "",
+                type: indexData.callType ?? 0,
+                callDuration: indexData.callDuration ?? "",
+              )
+            : ReceiverVideoCallWidget(
+                callDuration: indexData.callDuration ?? "",
+                type: indexData.callType ?? 0,
+                time: indexData.createdAt ?? "",
+              );
+      case MessageType.audio:
+        return isSender
+            ? SenderAudioWidget(
+                id: indexData.id ?? "",
+                audio: Api.baseUrl + (indexData.audio ?? ""),
+                time: indexData.createdAt ?? "",
+              )
+            : ReceiverAudioWidget(
+                id: indexData.id ?? "",
+                audio: Api.baseUrl + (indexData.audio ?? ""),
+                time: indexData.createdAt ?? "",
+                receiverImage: controller.image,
+                receiverImageIsBanned: controller.isBanned,
+              );
+      default:
+        // 其他类型如上传中音频
+        return isSender ? UploadAudioWidget() : const Offstage();
+    }
   }
 }
